@@ -1,0 +1,118 @@
+<div class="container">
+  <h2>Search</h2>
+
+  <form #searchForm>
+    <div class="form-group">
+      <label for="searchTerm">Search Term (author or title):</label>
+      <input
+        type="text"
+        class="form-control"
+        name="searchTerm"
+        id="searchTerm"
+      />
+    </div>
+    <button
+      type="submit"
+      class="btn btn-secondary"
+      (click)="search(searchForm)"
+    >
+      Search
+    </button>
+  </form>
+
+  <!-- Search Results: -->
+  <div *ngIf="articleResults">
+    <h3>Results:</h3>
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th>Title</th>
+          <th></th>
+          <th>Author(s)</th>
+          <th>Journal</th>
+          <th>Vol</th>
+          <th>Year</th>
+          <th>DOI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Row Displaying Article Entity (with logic) -->
+        <tr *ngFor="let ja of articleResults">
+          <!-- Title -->
+          <td *ngIf="ja !== editJa" style="min-width: 250px">{{ ja.title }}</td>
+
+          <td *ngIf="ja === editJa">
+            <textarea
+              class="form-control"
+              rows="5"
+              name="fred"
+              [(ngModel)]="editJa.title"
+            ></textarea>
+            <!-- <textarea class="form-control" rows="5" value="{{editJa.title}}"></textarea> -->
+          </td>
+
+          <!-- Button -->
+          <td *ngIf="ja !== editJa" class="text-nowrap">
+            <button
+              class="btn btn-success btn-sm mt-2 mb-2 mr-2"
+              (click)="setEdit(ja)"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn-danger btn-sm mt-2 mb-2 mr-2"
+              (click)="delete(ja.id)"
+            >
+              X
+            </button>
+          </td>
+
+          <td *ngIf="ja === editJa">
+            <button
+              class="btn btn-success btn-sm mt-2 mb-2"
+              (click)="update(editJa)"
+            >
+              Submit
+            </button>
+
+            <button
+              class="btn btn-secondary btn-sm mt-2 mb-2"
+              (click)="cancelEdit()"
+            >
+              Cancel
+            </button>
+          </td>
+
+          <!-- Author(s) -->
+          <td>
+            {{ ja.authors | authorFormat }}
+          </td>
+
+          <!-- Journal Name -->
+          <td>{{ ja.journal.name }}</td>
+
+          <!-- Volume -->
+          <td>{{ ja.volumeNum }}</td>
+
+          <!-- Year -->
+          <td>{{ ja.yearPublished }}</td>
+
+          <!-- DOI -->
+          <td style="max-width: 150px; word-wrap: 'break-word;'">
+            {{ ja.doi }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--
+  <form #formFindById>
+    <div class="form-inline">
+      <label for="id"><h4>Search by ID:</h4> </label>
+      <input class="ml-2 form-control" type="text" name="id" />
+      <button class="ml-2 btn btn-secondary" (click)="show(formFindById)">
+        Search
+      </button>
+    </div>
+  </form> -->
+</div>

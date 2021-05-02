@@ -1,0 +1,27 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { CreateComponent } from './components/create/create.component';
+import { ListAllComponent } from './components/list-all/list-all.component';
+import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
+import { NaviComponent } from './components/navi/navi.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { SearchComponent } from './components/search/search.component';
+
+const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'list-all' },
+  // { path: 'home', component: HomeComponent },
+  { path: 'nav', component: NaviComponent },
+  { path: 'list-all', component: ListAllComponent },
+  { path: 'create', component: CreateComponent },
+  { path: 'my-collections', component: MyCollectionsComponent },
+  { path: 'search', component: SearchComponent },
+  { path: '**', component: NotFoundComponent }
+
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

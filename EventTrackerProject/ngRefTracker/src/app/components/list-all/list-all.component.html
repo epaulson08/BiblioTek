@@ -1,0 +1,114 @@
+<div class="container">
+  <!-- SEE ALL ARTICLES -->
+  <table class="table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th>Title</th>
+        <th></th>
+        <th>Author(s)</th>
+        <th>Journal</th>
+        <th>Vol</th>
+        <th>Year</th>
+        <th>DOI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Row Displaying Article Entity (with logic) -->
+      <tr *ngFor="let ja of journalArticles">
+        <!-- Title -->
+        <td *ngIf="ja !== editJa" style="min-width: 250px">{{ ja.title }}</td>
+
+        <td *ngIf="ja === editJa">
+          <textarea
+            class="form-control"
+            rows="5"
+            name="fred"
+            [(ngModel)]="editJa.title"
+          ></textarea>
+          <!-- <textarea class="form-control" rows="5" value="{{editJa.title}}"></textarea> -->
+        </td>
+
+        <!-- Button -->
+        <td *ngIf="ja !== editJa" class="text-nowrap">
+          <button
+            class="btn btn-success btn-sm mt-2 mb-2 mr-2"
+            (click)="setEdit(ja)"
+          >
+            Edit
+          </button>
+          <button
+            class="btn btn-danger btn-sm mt-2 mb-2 mr-2"
+            (click)="delete(ja.id)"
+          >
+            X
+          </button>
+        </td>
+
+        <td *ngIf="ja === editJa">
+          <button
+            class="btn btn-success btn-sm mt-2 mb-2"
+            (click)="update(editJa)"
+          >
+            Submit
+          </button>
+
+          <button
+            class="btn btn-secondary btn-sm mt-2 mb-2"
+            (click)="cancelEdit()"
+          >
+            Cancel
+          </button>
+        </td>
+
+        <!-- Author(s) -->
+        <td>
+          {{ ja.authors | authorFormat }}
+        </td>
+
+        <!-- Journal Name -->
+        <td>{{ ja.journal.name }}</td>
+
+        <!-- Volume -->
+        <td *ngIf="ja !== editJa">{{ ja.volumeNum }}</td>
+        <td *ngIf="ja === editJa">
+          <input
+            type="text"
+            class="form-control"
+            name="editVol"
+            [(ngModel)]="editJa.volumeNum"
+          />
+        </td>
+
+        <!-- Year -->
+        <td *ngIf="ja !== editJa">{{ ja.yearPublished }}</td>
+        <td *ngIf="ja === editJa">
+          <input
+            type="text"
+            class="form-control"
+            name="editVol"
+            [(ngModel)]="editJa.yearPublished"
+          />
+        </td>
+
+        <!-- DOI -->
+        <td
+          *ngIf="ja !== editJa"
+          style="max-width: 150px; word-wrap: 'break-word;'"
+        >
+          {{ ja.doi }}
+        </td>
+        <td
+          *ngIf="ja === editJa"
+          style="max-width: 150px; word-wrap: 'break-word;'"
+        >
+          <input
+            type="text"
+            class="form-control"
+            name="editDoi"
+            [(ngModel)]="editJa.doi"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

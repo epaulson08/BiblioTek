@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>RefTracker</title>
+    <script src="js/script.js"></script>
+
+    <!-- Bootstrap: -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <!-- Custom CSS: -->
+    <!-- <link rel="stylesheet" href="styles.css" type="text/css"> -->
+  </head>
+
+  <body>
+    <main id="main">
+      <div class="container">
+        <div id="errors"></div>
+
+        <h1>RefTracker</h1>
+        <div id="countDiv"></div>
+        <hr />
+        <h2>Create</h2>
+        <form name="createArticleForm">
+          Title: <input name="title" type="text" /> <br />
+          <br />
+          Author:<br />
+          First Name: <input name="firstName" type="text" /> <br />
+          Middle Name: <input name="middleName" type="text" /> <br />
+          Last Name: <input name="lastName" type="text" /> <br />
+          Suffix: <input name="suffix" type="text" /> <br />
+          <br />
+          <!-- TODO: multiple authors -->
+          Volume Number: <input name="volNum" type="text" /> <br />
+          Year Published: <input name="yrPub" type="text" /> <br />
+          DOI: <input name="doi" type="text" /> <br />
+          Journal:
+          <select id="chooseJournal" name="chooseJournal"></select>
+          <br />
+          <button
+            class="btn btn-secondary"
+            name="createArticleBtn"
+            id="createArticleBtn"
+          >
+            Create
+          </button>
+        </form>
+
+        <h3><div id="createArticleOutput"></div></h3>
+
+        <hr />
+        <h2>Read</h2>
+        <h3>See All:</h3>
+        <form name="seeAllForm">
+          <button class="btn btn-secondary" name="seeAllBtn" id="seeAllBtn">
+            See All Articles
+          </button>
+        </form>
+        <div id="allArticles"></div>
+
+        <h3>Find By Id:</h3>
+        <form name="findArticleByIdForm">
+          ID: <input name="id" type="text" />
+          <button
+            class="btn btn-secondary"
+            name="findArticleByIdBtn"
+            id="findArticleByIdBtn"
+          >
+            Find
+          </button>
+        </form>
+
+        <div id="articleByIdOutput"></div>
+        <hr />
+
+        <h2>Update</h2>
+        <form name="updateArticleForm">
+          ID: <input name="id" type="text" /> <br />
+          New Title: <input name="title" type="text" /> <br />
+          New Volume Number: <input name="volNum" type="text" /> <br />
+          New Year Published: <input name="yrPub" type="text" /> <br />
+          New DOI: <input name="doi" type="text" /> <br />
+          New Journal:
+          <select id="chooseJournalUpdate" name="chooseJournalUpdate"></select
+          ><br />
+          <!-- TODO journal field -->
+          <button class="btn btn-secondary" id="updateArticleBtn" type="submit">
+            Update
+          </button>
+        </form>
+
+        <div id="updateArticleOutput"></div>
+
+        <hr />
+        <h2>Delete</h2>
+        <form name="deleteArticleForm">
+          ID: <input type="text" name="id" />
+          <button class="btn btn-secondary" id="deleteArticleBtn" type="submit">
+            Delete
+          </button>
+        </form>
+        <div id="deleteArticleOutput"></div>
+      </div>
+      <!-- ^ close container -->
+    </main>
+  </body>
+</html>
