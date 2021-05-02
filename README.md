@@ -10,7 +10,7 @@ Part 2: Built an (ugly) front end using Javascript and XMLHttpRequest objects to
 Part 3: Converted the front end to a (beautiful) Angular project.
 
 ### How to Run
-* Currently the app is hosted on a local server, but it will soon be deployed on AWS.
+* Navigate to URL: --in progress--
 
 ### Topics and Technologies Used
 Part 1:
