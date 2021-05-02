@@ -1,4 +1,4 @@
-# EventTrackerProject
+# AcademicReferenceManager
 
 ### Description
 This is a an academic reference management application built with Angular, JPA, Spring Boot, Spring Data, and Spring REST. The user can enter bibliographic information about journal articles, with full CRUD functionality. Future directions will include citation generation in various formats (AMA, APA, Chicago, IEEE, MLA, etc.).
