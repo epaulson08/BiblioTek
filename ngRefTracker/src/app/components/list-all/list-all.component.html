@@ -66,7 +66,13 @@
         </td>
 
         <!-- Journal Name -->
-        <td>{{ ja.journal.name }}</td>
+        <td *ngIf="ja !== editJa">{{ ja.journal.name }}</td>
+
+        <td *ngIf="ja === editJa">
+        <select class="form-control" [(ngModel)]="editJournal" name="editJournal">
+          <option [(ngModel)]="editJa.journal" selected>{{editJa.journal.name}}</option>
+          <option *ngFor="let j of allJournals" [ngValue]="j">{{ j.name }}</option>
+        </select>
 
         <!-- Volume -->
         <td *ngIf="ja !== editJa">{{ ja.volumeNum }}</td>

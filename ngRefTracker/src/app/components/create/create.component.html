@@ -43,13 +43,17 @@
 
     <!-- Journal Dropdown Menu -->
 
-      Journal:
-      <select class="form-control" [(ngModel)]="newJournal" name="newJournal">
-   <option value="" selected></option>
-        <option *ngFor="let j of journals" [ngValue]="j">{{ j.name }}</option>
-      </select>
+    Journal:
+    <select class="form-control" [(ngModel)]="newJournal" name="newJournal">
+      <option value="" selected></option>
+      <option *ngFor="let j of journals" [ngValue]="j">{{ j.name }}</option>
+    </select>
 
-    <button type="submit" class="btn btn-success mt-3 mb-3" (click)="create(createForm)">
+    <button
+      type="submit"
+      class="btn btn-success mt-3 mb-3"
+      (click)="create(createForm)"
+    >
       Submit
     </button>
   </form>

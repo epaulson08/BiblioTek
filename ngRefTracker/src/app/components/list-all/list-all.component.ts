@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
 import { JournalService } from 'src/app/services/journal.service';
@@ -16,7 +17,10 @@ export class ListAllComponent implements OnInit {
   journalArticles: JournalArticle[] = [];
   ja: JournalArticle = new JournalArticle;
   editJa: JournalArticle;
+  editJournal: Journal = new Journal;
   selected: JournalArticle;
+
+  allJournals: Journal[] = [];
 
   //////// init
   constructor(
@@ -28,6 +32,7 @@ export class ListAllComponent implements OnInit {
     console.warn("************************** Loaded");
     // console.warn("**debug: JournalArticleComponent: ja.title=" + this.ja.title);
     this.loadJournalArticles();
+    this.loadJournals();
   }
 
   //////// CRUD
@@ -43,11 +48,25 @@ export class ListAllComponent implements OnInit {
     return null;
   }
 
+  loadJournals(): Journal[] {
+    this.journalServ.index().subscribe(
+      success => {
+        this.allJournals = success;
+        return success;
+      },
+      failure => {
+        console.error("JournalArticleComponent.loadJournals() failed: ");
+        console.error(failure);
+      });
+    return null;
+  }
+
 
   update(ja: JournalArticle) {
-    if (ja != null) {
+    ja.journal = this.editJournal;
+    if (ja != null && ja.journal != null) {
       this.jaServ.update(ja).subscribe(
-        data => { this.loadJournalArticles(); },
+        data => { this.loadJournalArticles();},
         err => { console.error("Observer got an error: " + err); });
     }
     else {
