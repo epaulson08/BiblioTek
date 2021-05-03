@@ -1,8 +1,8 @@
 package com.skilldistillery.reftracker.services;
 
 import java.util.List;
-import java.util.Set;
 
+import com.skilldistillery.reftracker.controllers.PayloadUtility;
 import com.skilldistillery.reftracker.entities.JournalArticle;
 
 public interface JournalArticleService {
@@ -13,7 +13,7 @@ public interface JournalArticleService {
 
 	JournalArticle findById(int id);
 	
-	JournalArticle create(JournalArticle ja);
+	JournalArticle create(PayloadUtility payload);
 	
 	JournalArticle update(int id, JournalArticle newJa);
 	

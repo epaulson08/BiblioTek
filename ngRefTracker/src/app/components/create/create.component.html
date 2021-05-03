@@ -2,30 +2,12 @@
   <h4>New Journal Article:</h4>
 
   <form #createForm>
+    <!-- Non-object fields -->
     <div class="form-group">
       <label for="title"> Title: </label>
-      <input type="text" class="form-control" name="title" id="title" />
+      <textarea class="form-control" name="title" id="title"></textarea>
     </div>
 
-    Author: <br />
-    <div class="form-group form-inline">
-      <label for="authorFirstName">First name: </label>
-      <input type="text" class="form-control ml-2" id="fname" name="fname" />
-    </div>
-    <div class="form-group form-inline">
-      <label for="authorMiddleName">Middle name: </label>
-      <input type="text" class="form-control ml-2" id="mid" name="mid" />
-    </div>
-    <div class="form-group form-inline">
-      <label for="authorLastName">Last name: </label>
-      <input type="text" class="form-control ml-2" id="lname" name="lname" />
-    </div>
-    <div class="form-group form-inline">
-      <label for="authorSuffix">Suffix: </label>
-      <input type="text" class="form-control ml-2" id="suffix" name="suffix" />
-    </div>
-
-    <!-- Non-object fields -->
     <div class="form-group form-inline">
       <label for="volumeNum">Volume Number: </label>
       <input type="text" class="form-control ml-2" id="vol" name="vol" />
@@ -42,13 +24,56 @@
     </div>
 
     <!-- Journal Dropdown Menu -->
-
     Journal:
     <select class="form-control" [(ngModel)]="newJournal" name="newJournal">
       <option value="" selected></option>
       <option *ngFor="let j of journals" [ngValue]="j">{{ j.name }}</option>
     </select>
+    <hr />
 
+    <!-- Authors -->
+    <div class="row">
+      <div class="col-6">
+        Authors:
+        <div *ngIf="true">(You must enter one or more authors)</div>
+      </div>
+
+      <div class="col-6">
+        Create an Author:
+        <div class="form-group form-inline">
+          <label for="authorFirstName">First name: </label>
+          <input
+            type="text"
+            class="form-control ml-2"
+            id="fname"
+            name="fname"
+          />
+        </div>
+        <div class="form-group form-inline">
+          <label for="authorMiddleName">Middle name: </label>
+          <input type="text" class="form-control ml-2" id="mid" name="mid" />
+        </div>
+        <div class="form-group form-inline">
+          <label for="authorLastName">Last name: </label>
+          <input
+            type="text"
+            class="form-control ml-2"
+            id="lname"
+            name="lname"
+          />
+        </div>
+        <div class="form-group form-inline">
+          <label for="authorSuffix">Suffix: </label>
+          <input
+            type="text"
+            class="form-control ml-2"
+            id="suffix"
+            name="suffix"
+          />
+        </div>
+      </div>
+    </div>
+    <hr />
     <button
       type="submit"
       class="btn btn-success mt-3 mb-3"

@@ -1,5 +1,6 @@
 package com.skilldistillery.reftracker.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +37,7 @@ public class JournalArticleController {
 	public List<JournalArticle> index() {
 		return jaServ.index();
 	}
-	
+
 	@GetMapping("articles/{id}")
 	public JournalArticle findById(@PathVariable Integer id, HttpServletResponse resp) {
 		JournalArticle ja = jaServ.findById(id);
@@ -45,12 +46,11 @@ public class JournalArticleController {
 		}
 		return ja;
 	}
-	
+
 	@GetMapping("articles/search/{searchTerm}")
-	public List<JournalArticle> search(@PathVariable String searchTerm) {	
+	public List<JournalArticle> search(@PathVariable String searchTerm) {
 		return jaServ.search(searchTerm);
 	}
-	
 
 	@GetMapping("articles/aggregates/count")
 	public long count() {
@@ -58,41 +58,33 @@ public class JournalArticleController {
 	}
 
 	@PostMapping("articles")
-	public JournalArticle create(@RequestBody PayloadUtility pcu, HttpServletRequest req, HttpServletResponse resp) {
-		JournalArticle ja = null;
-		Author author = null;
+	public JournalArticle create(@RequestBody PayloadUtility payload, HttpServletRequest req,
+			HttpServletResponse resp) {
+		System.out.println(payload);
+		System.out.println(payload.getAuthors());
 		
+		
+		if (payload == null || payload.getAuthors() == null || payload.getJa() == null) {
+			resp.setStatus(400);
+			return null;
+		}
+
 		try {
-			ja = pcu.getJa();
-			author = pcu.getAuthor();
-			System.out.println("author: " + author);
-			System.out.println("ja: " + ja);
-			
-			author = authorServ.create(author);
-			ja = jaServ.create(ja);
-			
-			System.out.println("author: " + author);
-			System.out.println("ja: " + ja);
-
-			if (ja != null && author != null) {
-				jaServ.addAuthor(ja.getId(), author.getId());
-				resp.setStatus(201);
-			}
-
-			if (ja == null || author == null) {
-				resp.setStatus(400);
-			}
+			JournalArticle managedJA = jaServ.create(payload);
+			resp.setStatus(201);
 			
 			StringBuffer url = req.getRequestURL();
-			url.append("/").append(ja.getId());
+			url.append("/").append(managedJA.getId());
 			resp.setHeader("Location", url.toString());
+			
+			return managedJA;
+			
 		} catch (Exception e) {
 			System.err.println(e);
 			e.printStackTrace();
 			resp.setStatus(400);
-			ja = null;
+			return null;
 		}
-		return ja;
 	}
 
 	@PutMapping("articles/{id}")

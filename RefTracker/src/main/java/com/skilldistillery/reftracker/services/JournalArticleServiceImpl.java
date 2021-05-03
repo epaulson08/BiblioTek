@@ -3,13 +3,13 @@ package com.skilldistillery.reftracker.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.reftracker.controllers.PayloadUtility;
 import com.skilldistillery.reftracker.entities.Author;
 import com.skilldistillery.reftracker.entities.JournalArticle;
 import com.skilldistillery.reftracker.repositories.AuthorRepository;
@@ -24,6 +24,8 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 
 	@Autowired
 	private AuthorRepository authorRepo;
+	
+	@Autowired AuthorService authorServ;
 
 	@Override
 	public List<JournalArticle> index() {
@@ -51,9 +53,32 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 	}
 
 	@Override
-	public JournalArticle create(JournalArticle ja) {
-		ja = jaRepo.saveAndFlush(ja);
-		return ja;
+	public JournalArticle create(PayloadUtility payload) {
+		JournalArticle payloadJA, managedJA;
+		Author managedAuthor;
+		List<Author> payloadAuthors;
+		List<Author> managedAuthors = new ArrayList<>();
+		
+		payloadJA = payload.getJa();		
+		payloadAuthors = payload.getAuthors();
+
+		// Persist journal article:
+		managedJA = jaRepo.saveAndFlush(payloadJA);
+		int managedJAId = managedJA.getId();
+
+		// Persist each author:
+		for (Author a : payloadAuthors) {
+			managedAuthor = authorServ.create(a);
+			managedAuthors.add(managedAuthor);
+			managedAuthor = null;
+		}
+		
+		// Add each author to the journal article:
+		for (Author ma : managedAuthors) {
+			addAuthor(managedJAId, ma.getId());				
+		}
+		
+		return managedJA;
 	}
 
 	@Override
