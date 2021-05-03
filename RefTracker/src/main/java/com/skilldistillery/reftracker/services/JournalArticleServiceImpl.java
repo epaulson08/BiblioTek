@@ -143,4 +143,9 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 		return ja;
 	}
 
+	@Override
+	public List<JournalArticle> findArticlesByJournalId(int journalId) {
+		return jaRepo.findByJournalId(journalId);
+	}
+	
 }

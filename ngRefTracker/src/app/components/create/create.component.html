@@ -3,33 +3,52 @@
 
   <form #createForm>
     <!-- Non-object fields -->
-    <div class="form-group">
-      <label for="title"> Title: </label>
-      <textarea class="form-control" name="title" id="title"></textarea>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="title"> Title: </label>
+          <textarea class="form-control" name="title" id="title"></textarea>
+        </div>
+        <!-- Journal Dropdown Menu -->
+        Journal:
+        <select
+          class="form-control mb-3"
+          [(ngModel)]="newJournal"
+          name="newJournal"
+        >
+          <option value="" selected></option>
+          <option *ngFor="let j of journals" [ngValue]="j">{{ j.name }}</option>
+        </select>
+      </div>
+      <div class="col-6">
+        <table>
+          <tr>
+            <td>
+              <label for="volumeNum">Vol.: </label>
+            </td>
+            <td>
+              <input type="text" class="form-control" id="vol" name="vol" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="year">Year: </label>
+            </td>
+            <td>
+              <input type="text" class="form-control" id="year" name="year" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="doi">DOI: </label>
+            </td>
+            <td>
+              <input type="text" class="form-control" id="doi" name="doi" />
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
-
-    <div class="form-group form-inline">
-      <label for="volumeNum">Volume Number: </label>
-      <input type="text" class="form-control ml-2" id="vol" name="vol" />
-    </div>
-
-    <div class="form-group form-inline">
-      <label for="year">Year: </label>
-      <input type="text" class="form-control ml-2" id="year" name="year" />
-    </div>
-
-    <div class="form-group form-inline">
-      <label for="doi">DOI: </label>
-      <input type="text" class="form-control ml-2" id="doi" name="doi" />
-    </div>
-
-    <!-- Journal Dropdown Menu -->
-    Journal:
-    <select class="form-control" [(ngModel)]="newJournal" name="newJournal">
-      <option value="" selected></option>
-      <option *ngFor="let j of journals" [ngValue]="j">{{ j.name }}</option>
-    </select>
-    <hr />
 
     <!-- Authors -->
     <div class="row">
@@ -45,7 +64,14 @@
                 {{ a.firstName }} {{ a.middleName }} {{ a.lastName }}
                 {{ a.suffix }}
               </td>
-              <td><button class="btn btn-danger btn-sm ml-3" (click)="removeAuthor(a)">Remove >></button></td>
+              <td>
+                <button
+                  class="btn btn-danger btn-sm ml-3"
+                  (click)="removeAuthor(a)"
+                >
+                  Remove >>
+                </button>
+              </td>
             </tr>
           </table>
         </div>
@@ -122,7 +148,6 @@
         </table>
       </div>
     </div>
-    <hr />
     <button
       type="submit"
       class="btn btn-success mt-3 mb-3"

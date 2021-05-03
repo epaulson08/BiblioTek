@@ -22,4 +22,6 @@ public interface JournalArticleService {
 	JournalArticle addAuthor(int jaId, int authorId);
 
 	List<JournalArticle> search(String searchTerm);
+	
+	List<JournalArticle> findArticlesByJournalId(int journalId);
 }

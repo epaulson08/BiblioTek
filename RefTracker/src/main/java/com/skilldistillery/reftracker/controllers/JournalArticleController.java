@@ -30,9 +30,6 @@ public class JournalArticleController {
 	@Autowired
 	private JournalArticleService jaServ;
 
-	@Autowired
-	private AuthorService authorServ;
-
 	@GetMapping("articles")
 	public List<JournalArticle> index() {
 		return jaServ.index();
@@ -45,6 +42,19 @@ public class JournalArticleController {
 			resp.setStatus(404);
 		}
 		return ja;
+	}
+	
+	@GetMapping("articles/journals/{journalId}")
+	public List<JournalArticle> findAllByJournalId(@PathVariable int journalId, HttpServletResponse resp) {
+		if (journalId < 0) {
+			resp.setStatus(400);
+			return null;
+		}
+		
+		List<JournalArticle> results = null;
+		results = jaServ.findArticlesByJournalId(journalId);
+		resp.setStatus(200);
+		return results;
 	}
 
 	@GetMapping("articles/search/{searchTerm}")
@@ -122,27 +132,6 @@ public class JournalArticleController {
 		}
 		return ja;
 	}
-
-//	@PostMapping("articles/authors")
-//	public JournalArticle createArticleWithAuthor(@RequestBody JournalArticle ja, @RequestBody Author author,
-//			HttpServletResponse resp) {
-//		try {
-//			author = authorServ.create(author);
-//			ja = jaServ.create(ja);
-//			if (ja != null && author != null) jaServ.addAuthor(ja.getId(), author.getId());
-//
-//			if (ja == null || author == null) {
-//				resp.setStatus(400);
-//			}
-//			
-//		} catch (Exception e) {
-//			System.err.println(e);
-//			resp.setStatus(400);
-//			ja = null;
-//		}
-//		
-//		return ja;
-//	}
 
 	@DeleteMapping("articles/{id}")
 	public boolean delete(@PathVariable Integer id, HttpServletResponse resp) {
