@@ -69,8 +69,9 @@
         <td *ngIf="ja !== editJa">{{ ja.journal.name }}</td>
 
         <td *ngIf="ja === editJa">
+          DEBUG {{editJournal.name}}
         <select class="form-control" [(ngModel)]="editJournal" name="editJournal">
-          <option [(ngModel)]="editJa.journal" selected>{{editJa.journal.name}}</option>
+          <option [ngValue]="editJournal" selected>{{editJournal.name}}</option>
           <option *ngFor="let j of allJournals" [ngValue]="j">{{ j.name }}</option>
         </select>
 

@@ -15,9 +15,9 @@ export class ListAllComponent implements OnInit {
 
   //////// fields
   journalArticles: JournalArticle[] = [];
-  ja: JournalArticle = new JournalArticle;
+  ja: JournalArticle = new JournalArticle();
   editJa: JournalArticle;
-  editJournal: Journal = new Journal;
+  editJournal: Journal = new Journal();
   selected: JournalArticle;
 
   allJournals: Journal[] = [];
@@ -66,7 +66,10 @@ export class ListAllComponent implements OnInit {
     ja.journal = this.editJournal;
     if (ja != null && ja.journal != null) {
       this.jaServ.update(ja).subscribe(
-        data => { this.loadJournalArticles();},
+        data => { this.loadJournalArticles();
+          this.loadJournals();
+          this.editJa = null;
+          this.editJournal = null;},
         err => { console.error("Observer got an error: " + err); });
     }
     else {
@@ -79,6 +82,7 @@ export class ListAllComponent implements OnInit {
     this.jaServ.delete(id).subscribe(
       data => {
         this.loadJournalArticles();
+        this.loadJournals();
       },
       err => {
         console.error("Observer got an error: " + err);
@@ -87,9 +91,10 @@ export class ListAllComponent implements OnInit {
   }
 
 
-//////// utilities:
+  //////// utilities:
   setEdit(ja: JournalArticle): void {
     this.editJa = ja;
+    this.editJournal = ja.journal;
   }
 
   cancelEdit(): void {
