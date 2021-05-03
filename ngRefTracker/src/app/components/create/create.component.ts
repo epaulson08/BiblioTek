@@ -68,6 +68,10 @@ export class CreateComponent implements OnInit {
     this.newAuthor = new Author();
   }
 
+  removeAuthor(a: Author) {
+    this.authorsList.splice(this.authorsList.indexOf(a), 1);
+  }
+
   // Load journals for <select>
   loadJournals(): Journal[] {
     this.journalServ.index().subscribe(

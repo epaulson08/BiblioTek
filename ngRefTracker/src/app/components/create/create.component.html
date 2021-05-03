@@ -35,12 +35,19 @@
     <div class="row">
       <div class="col-6">
         <h5>Authors:</h5>
-        <div *ngIf="this.authorsList.length === 0">(You must enter one or more authors)</div>
+        <div *ngIf="this.authorsList.length === 0">
+          (You must enter one or more authors)
+        </div>
         <div *ngIf="this.authorsList.length !== 0">
-          <div *ngFor="let a of authorsList">
-            {{a.firstName}} {{a.middleName}} {{a.lastName}} {{a.suffix}}
-          </div>
-
+          <table>
+            <tr *ngFor="let a of authorsList">
+              <td>
+                {{ a.firstName }} {{ a.middleName }} {{ a.lastName }}
+                {{ a.suffix }}
+              </td>
+              <td><button class="btn btn-danger btn-sm ml-3" (click)="removeAuthor(a)">Remove >></button></td>
+            </tr>
+          </table>
         </div>
       </div>
 
@@ -106,7 +113,7 @@
           </tr>
           <tr>
             <td>
-              <button (click)="addAuthor()" class="btn btn-success">
+              <button (click)="addAuthor()" class="btn btn-success btn-sm">
                 &#60;&#60; Add Author
               </button>
             </td>
@@ -121,7 +128,7 @@
       class="btn btn-success mt-3 mb-3"
       (click)="create(createForm)"
     >
-      Submit
+      Submit Journal Article
     </button>
   </form>
 </div>
