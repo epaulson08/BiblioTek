@@ -1,6 +1,7 @@
 <div class="container">
   <h2>Search</h2>
 
+  <!-- Search by author or title -->
   <form #searchForm>
     <div class="form-group">
       <label for="searchTerm">Search Term (author or title):</label>
@@ -15,6 +16,28 @@
       type="submit"
       class="btn btn-secondary"
       (click)="search(searchForm)"
+    >
+      Search
+    </button>
+  </form>
+
+  <!-- Show all articles for a given journal -->
+  <form>
+
+  Journal:
+  <select
+    class="form-control mb-3"
+    [(ngModel)]="selectedJournal"
+    name="selectedJournal"
+  >
+    <option value="" selected></option>
+    <option *ngFor="let j of allJournals" [ngValue]="j">{{ j.name }}</option>
+  </select>
+
+    <button
+      type="submit"
+      class="btn btn-secondary"
+      (click)="showAllByJournal()"
     >
       Search
     </button>
@@ -36,7 +59,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Row Displaying Article Entity (with logic) -->
+        <!-- Row Displaying Article Entity -->
         <tr *ngFor="let ja of articleResults">
           <!-- Title -->
           <td *ngIf="ja !== editJa" style="min-width: 250px">{{ ja.title }}</td>
@@ -48,7 +71,6 @@
               name="fred"
               [(ngModel)]="editJa.title"
             ></textarea>
-            <!-- <textarea class="form-control" rows="5" value="{{editJa.title}}"></textarea> -->
           </td>
 
           <!-- Button -->

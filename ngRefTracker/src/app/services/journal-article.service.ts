@@ -35,6 +35,15 @@ export class JournalArticleService {
       );
   }
 
+  showAllByJournal(journal: Journal) : Observable<JournalArticle[]> {
+    return this.http.get<JournalArticle[]>(`${this.url}/journals/${journal.id}`)
+    .pipe(
+      catchError((err: any) => {
+        return throwError(err);
+      })
+    );
+  }
+
   search(searchTerm: string): Observable<JournalArticle[]> {
     return this.http.get<JournalArticle[]>(this.url + "search/" + searchTerm)
       .pipe(

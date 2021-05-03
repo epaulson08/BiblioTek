@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
+import { JournalService } from 'src/app/services/journal.service';
 
 @Component({
   selector: 'app-search',
@@ -9,19 +11,21 @@ import { JournalArticleService } from 'src/app/services/journal-article.service'
 })
 export class SearchComponent implements OnInit {
 
-  ja : JournalArticle = new JournalArticle();
-  selected : JournalArticle = new JournalArticle();
-  articleResults : JournalArticle[];
+  ja: JournalArticle = new JournalArticle();
+  selected: JournalArticle = new JournalArticle();
+  articleResults: JournalArticle[];
   editJa: JournalArticle;
+  allJournals: Journal[];
+  selectedJournal: Journal = new Journal();
 
-  constructor(private jaServ : JournalArticleService) { }
+  constructor(private jaServ: JournalArticleService, private journalServ: JournalService) { }
 
   ngOnInit(): void {
+    this.loadJournals();
   }
 
 
   show(form): void {
-    // console.warn("**debug: in journal-article.component, show(form), form.value=" + form.id.value);
     this.jaServ.show(form.id.value).subscribe(
       dataReceived => {
         this.ja = dataReceived;
@@ -29,18 +33,29 @@ export class SearchComponent implements OnInit {
         this.selected = Object.assign({}, this.ja);
       },
       failure => {
-        console.error("JournalArticleComponent.loadJournalArticles() failed: ");
+        console.error("show() failed: ");
         console.error(failure);
       });
   }
 
-  search(form) : void {
+  search(form): void {
     this.jaServ.search(form.searchTerm.value).subscribe(
       dataReceived => {
         this.articleResults = dataReceived;
       },
       failure => {
-        console.error("JournalArticleComponent.loadJournalArticles() failed: ");
+        console.error("search() failed: ");
+        console.error(failure);
+      });
+  }
+
+  showAllByJournal(): void {
+    this.jaServ.showAllByJournal(this.selectedJournal).subscribe(
+      dataReceived => {
+        this.articleResults = dataReceived;
+      },
+      failure => {
+        console.error("showAllByJournal() failed: ");
         console.error(failure);
       });
   }
@@ -68,8 +83,21 @@ export class SearchComponent implements OnInit {
     );
   }
 
+  // Load journals for <select>
+  loadJournals(): Journal[] {
+    this.journalServ.index().subscribe(
+      success => {
+        this.allJournals = success;
+        return success;
+      },
+      failure => {
+        console.error("loadJournals() failed: ");
+        console.error(failure);
+      });
+    return null;
+  }
 
-//////// utilities:
+  //////// utilities:
   setEdit(ja: JournalArticle): void {
     this.editJa = ja;
   }

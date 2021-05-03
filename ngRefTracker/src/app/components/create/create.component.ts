@@ -80,7 +80,7 @@ export class CreateComponent implements OnInit {
         return success;
       },
       failure => {
-        console.error("JournalArticleComponent.loadJournals() failed: ");
+        console.error("loadJournals() failed: ");
         console.error(failure);
       });
     return null;
