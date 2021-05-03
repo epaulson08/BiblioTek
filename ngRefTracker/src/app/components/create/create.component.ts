@@ -17,6 +17,7 @@ export class CreateComponent implements OnInit {
   newJournal: Journal = new Journal();
   newJa: JournalArticle = new JournalArticle();
   newAuthor: Author = new Author();
+  authorsList: Author[] = [];
   newPayload: PayloadUtility = new PayloadUtility();
   journals: Journal[] = [];
 
@@ -42,15 +43,9 @@ export class CreateComponent implements OnInit {
     // Select Journal
     this.newJa.journal = this.newJournal;
 
-    // Create Author object
-    this.newAuthor.firstName = form.fname.value;
-    this.newAuthor.middleName = form.mid.value;
-    this.newAuthor.lastName = form.lname.value;
-    this.newAuthor.suffix = form.suffix.value;
-
-    // Package article and author in payload
+    // Package article and authorList in payload
     this.newPayload.ja = this.newJa;
-    this.newPayload.author = this.newAuthor;
+    this.newPayload.authors = this.authorsList;
 
     // Fire missile of academe
     this.jaServ.create(this.newPayload).subscribe(
@@ -58,6 +53,7 @@ export class CreateComponent implements OnInit {
         this.newJa = new JournalArticle();
         this.newAuthor = new Author();
         this.newJournal = new Journal();
+        this.authorsList = [];
         this.newPayload = new PayloadUtility();
         form.reset();
       },
@@ -65,6 +61,11 @@ export class CreateComponent implements OnInit {
         console.error("Observer got an error: " + err);
       }
     );
+  }
+
+  addAuthor() {
+    this.authorsList.push(this.newAuthor);
+    this.newAuthor = new Author();
   }
 
   // Load journals for <select>

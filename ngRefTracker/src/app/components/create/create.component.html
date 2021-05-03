@@ -34,43 +34,85 @@
     <!-- Authors -->
     <div class="row">
       <div class="col-6">
-        Authors:
-        <div *ngIf="true">(You must enter one or more authors)</div>
+        <h5>Authors:</h5>
+        <div *ngIf="this.authorsList.length === 0">(You must enter one or more authors)</div>
+        <div *ngIf="this.authorsList.length !== 0">
+          <div *ngFor="let a of authorsList">
+            {{a.firstName}} {{a.middleName}} {{a.lastName}} {{a.suffix}}
+          </div>
+
+        </div>
       </div>
 
       <div class="col-6">
-        Create an Author:
-        <div class="form-group form-inline">
-          <label for="authorFirstName">First name: </label>
-          <input
-            type="text"
-            class="form-control ml-2"
-            id="fname"
-            name="fname"
-          />
-        </div>
-        <div class="form-group form-inline">
-          <label for="authorMiddleName">Middle name: </label>
-          <input type="text" class="form-control ml-2" id="mid" name="mid" />
-        </div>
-        <div class="form-group form-inline">
-          <label for="authorLastName">Last name: </label>
-          <input
-            type="text"
-            class="form-control ml-2"
-            id="lname"
-            name="lname"
-          />
-        </div>
-        <div class="form-group form-inline">
-          <label for="authorSuffix">Suffix: </label>
-          <input
-            type="text"
-            class="form-control ml-2"
-            id="suffix"
-            name="suffix"
-          />
-        </div>
+        <h5>Create an Author:</h5>
+
+        <table>
+          <tr>
+            <td>
+              <label for="authorFirstName">First name: </label>
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="newAuthor.firstName"
+                class="form-control"
+                id="fname"
+                name="fname"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="authorMiddleName">Middle name: </label>
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="newAuthor.middleName"
+                class="form-control"
+                id="mid"
+                name="mid"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="authorLastName">Last name: </label>
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="newAuthor.lastName"
+                class="form-control"
+                id="lname"
+                name="lname"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="authorSuffix">Suffix: </label>
+            </td>
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="newAuthor.suffix"
+                class="form-control"
+                id="suffix"
+                name="suffix"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button (click)="addAuthor()" class="btn btn-success">
+                &#60;&#60; Add Author
+              </button>
+            </td>
+            <td></td>
+          </tr>
+        </table>
       </div>
     </div>
     <hr />
