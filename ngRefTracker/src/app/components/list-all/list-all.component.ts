@@ -15,10 +15,10 @@ export class ListAllComponent implements OnInit {
 
   //////// fields
   journalArticles: JournalArticle[] = [];
-  ja: JournalArticle = new JournalArticle();
   editJa: JournalArticle;
-  editJournal: Journal = new Journal();
+  editJournal: Journal;
   selected: JournalArticle;
+  deleted: boolean = false;
 
   allJournals: Journal[] = [];
 
@@ -29,8 +29,6 @@ export class ListAllComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    console.warn("************************** Loaded");
-    // console.warn("**debug: JournalArticleComponent: ja.title=" + this.ja.title);
     this.loadJournalArticles();
     this.loadJournals();
   }
@@ -83,6 +81,9 @@ export class ListAllComponent implements OnInit {
       data => {
         this.loadJournalArticles();
         this.loadJournals();
+        this.editJa = null;
+        this.editJournal = null;
+        this.deleted = true;
       },
       err => {
         console.error("Observer got an error: " + err);
@@ -92,13 +93,25 @@ export class ListAllComponent implements OnInit {
 
 
   //////// utilities:
-  setEdit(ja: JournalArticle): void {
-    this.editJa = ja;
-    this.editJournal = ja.journal;
+  setSelected(ja: JournalArticle): void {
+    this.selected = ja;
+  }
+
+  clearSelected() : void {
+    this.selected = null;
+    this.editJa = null;
+    this.editJournal = null;
+    this.deleted = false;
+  }
+
+  setEdit(): void {
+    this.editJa = this.selected;
+    this.editJournal = this.selected.journal;
   }
 
   cancelEdit(): void {
     this.editJa = null;
+    this.editJournal = null;
   }
 
 }

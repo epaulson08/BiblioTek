@@ -61,12 +61,7 @@ CREATE TABLE IF NOT EXISTS `journal_article` (
   `journal_id` INT(11) NOT NULL,
   `pages` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_journal_article_journal1_idx` (`journal_id` ASC),
-  CONSTRAINT `fk_journal_article_journal1`
-    FOREIGN KEY (`journal_id`)
-    REFERENCES `journal` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  INDEX `fk_journal_article_journal1_idx` (`journal_id` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
@@ -82,17 +77,7 @@ CREATE TABLE IF NOT EXISTS `author_article` (
   `author_id` INT(11) NOT NULL,
   PRIMARY KEY (`journal_article_id`, `author_id`),
   INDEX `fk_journal_article_has_author_author1_idx` (`author_id` ASC),
-  INDEX `fk_journal_article_has_author_journal_article_idx` (`journal_article_id` ASC),
-  CONSTRAINT `fk_journal_article_has_author_author1`
-    FOREIGN KEY (`author_id`)
-    REFERENCES `author` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_journal_article_has_author_journal_article`
-    FOREIGN KEY (`journal_article_id`)
-    REFERENCES `journal_article` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  INDEX `fk_journal_article_has_author_journal_article_idx` (`journal_article_id` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -124,12 +109,7 @@ CREATE TABLE IF NOT EXISTS `article_collection` (
   `description` TEXT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_article_collection_user1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_article_collection_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  INDEX `fk_article_collection_user1_idx` (`user_id` ASC))
 ENGINE = InnoDB;
 
 
@@ -156,17 +136,7 @@ CREATE TABLE IF NOT EXISTS `tag_article` (
   `journal_article_id` INT(11) NOT NULL,
   PRIMARY KEY (`tag_id`, `journal_article_id`),
   INDEX `fk_tag_has_journal_article_journal_article1_idx` (`journal_article_id` ASC),
-  INDEX `fk_tag_has_journal_article_tag1_idx` (`tag_id` ASC),
-  CONSTRAINT `fk_tag_has_journal_article_tag1`
-    FOREIGN KEY (`tag_id`)
-    REFERENCES `tag` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tag_has_journal_article_journal_article1`
-    FOREIGN KEY (`journal_article_id`)
-    REFERENCES `journal_article` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  INDEX `fk_tag_has_journal_article_tag1_idx` (`tag_id` ASC))
 ENGINE = InnoDB;
 
 
@@ -180,17 +150,7 @@ CREATE TABLE IF NOT EXISTS `article_article_collection` (
   `journal_article_id` INT(11) NOT NULL,
   PRIMARY KEY (`article_collection_id`, `journal_article_id`),
   INDEX `fk_article_collection_has_journal_article_journal_article1_idx` (`journal_article_id` ASC),
-  INDEX `fk_article_collection_has_journal_article_article_collectio_idx` (`article_collection_id` ASC),
-  CONSTRAINT `fk_article_collection_has_journal_article_article_collection1`
-    FOREIGN KEY (`article_collection_id`)
-    REFERENCES `article_collection` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_article_collection_has_journal_article_journal_article1`
-    FOREIGN KEY (`journal_article_id`)
-    REFERENCES `journal_article` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  INDEX `fk_article_collection_has_journal_article_article_collectio_idx` (`article_collection_id` ASC))
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
@@ -199,10 +159,6 @@ SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DAT
 CREATE USER 'user'@'localhost' IDENTIFIED BY 'user';
 
 GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE * TO 'user'@'localhost';
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
 -- Data for table `user`
@@ -223,3 +179,7 @@ INSERT INTO `article_collection` (`id`, `name`, `description`, `user_id`) VALUES
 
 COMMIT;
 
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

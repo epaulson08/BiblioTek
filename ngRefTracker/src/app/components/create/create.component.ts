@@ -34,7 +34,7 @@ export class CreateComponent implements OnInit {
     console.warn("journal = " + this.newJournal.name);
     console.warn("journal = " + this.newJournal.id);
 
-    // Set article's non-object fields
+    // Set article's scalar fields
     this.newJa.title = form.title.value;
     this.newJa.volumeNum = form.vol.value;
     this.newJa.yearPublished = form.year.value;
