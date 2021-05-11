@@ -1,5 +1,6 @@
-<div class="container">
+<div class="container-fluid">
   <!-- SEE ALL ARTICLES -->
+  <h2 *ngIf="!selected">All Articles:</h2>
   <table *ngIf="!selected" class="table table-hover">
     <thead class="thead-light">
       <tr>

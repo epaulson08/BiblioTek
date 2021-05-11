@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <h2>Search</h2>
 
   <!-- Search by author or title -->
@@ -23,16 +23,15 @@
 
   <!-- Show all articles for a given journal -->
   <form>
-
-  Journal:
-  <select
-    class="form-control mb-3"
-    [(ngModel)]="selectedJournal"
-    name="selectedJournal"
-  >
-    <option value="" selected></option>
-    <option *ngFor="let j of allJournals" [ngValue]="j">{{ j.name }}</option>
-  </select>
+    Journal:
+    <select
+      class="form-control mb-3"
+      [(ngModel)]="selectedJournal"
+      name="selectedJournal"
+    >
+      <option value="" selected></option>
+      <option *ngFor="let j of allJournals" [ngValue]="j">{{ j.name }}</option>
+    </select>
 
     <button
       type="submit"
@@ -73,38 +72,6 @@
             ></textarea>
           </td>
 
-          <!-- Button -->
-          <td *ngIf="ja !== editJa" class="text-nowrap">
-            <button
-              class="btn btn-success btn-sm mt-2 mb-2 mr-2"
-              (click)="setEdit(ja)"
-            >
-              Edit
-            </button>
-            <button
-              class="btn btn-danger btn-sm mt-2 mb-2 mr-2"
-              (click)="delete(ja.id)"
-            >
-              X
-            </button>
-          </td>
-
-          <td *ngIf="ja === editJa">
-            <button
-              class="btn btn-success btn-sm mt-2 mb-2"
-              (click)="update(editJa)"
-            >
-              Submit
-            </button>
-
-            <button
-              class="btn btn-secondary btn-sm mt-2 mb-2"
-              (click)="cancelEdit()"
-            >
-              Cancel
-            </button>
-          </td>
-
           <!-- Author(s) -->
           <td>
             {{ ja.authors | authorFormat }}
@@ -127,14 +94,4 @@
       </tbody>
     </table>
   </div>
-  <!--
-  <form #formFindById>
-    <div class="form-inline">
-      <label for="id"><h4>Search by ID:</h4> </label>
-      <input class="ml-2 form-control" type="text" name="id" />
-      <button class="ml-2 btn btn-secondary" (click)="show(formFindById)">
-        Search
-      </button>
-    </div>
-  </form> -->
 </div>
