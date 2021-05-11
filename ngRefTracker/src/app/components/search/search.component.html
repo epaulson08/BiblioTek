@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h2>Search</h2>
+  <h4>Search</h4>
 
   <!-- Search by author or title -->
   <form #searchForm>
@@ -49,7 +49,6 @@
       <thead class="thead-light">
         <tr>
           <th>Title</th>
-          <th></th>
           <th>Author(s)</th>
           <th>Journal</th>
           <th>Vol</th>
@@ -62,15 +61,6 @@
         <tr *ngFor="let ja of articleResults">
           <!-- Title -->
           <td *ngIf="ja !== editJa" style="min-width: 250px">{{ ja.title }}</td>
-
-          <td *ngIf="ja === editJa">
-            <textarea
-              class="form-control"
-              rows="5"
-              name="fred"
-              [(ngModel)]="editJa.title"
-            ></textarea>
-          </td>
 
           <!-- Author(s) -->
           <td>

@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <!-- SEE ALL ARTICLES -->
-  <h2 *ngIf="!selected">All Articles:</h2>
+  <h4 *ngIf="!selected">All Articles:</h4>
   <table *ngIf="!selected" class="table table-hover">
     <thead class="thead-light">
       <tr>
@@ -17,7 +17,7 @@
       <!-- Row Displaying Article Entity -->
       <tr *ngFor="let ja of journalArticles">
         <td>
-          <button (click)="setSelected(ja)" class="btn btn-info">
+          <button (click)="setSelected(ja)" class="btn btn-warning">
             Examine
           </button>
         </td>
