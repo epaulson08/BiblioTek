@@ -44,18 +44,18 @@ public class JournalTest {
 	@Test
 	void test_Journal_entity_mapping() {
 		assertNotNull(journal);
-		assertEquals("The Fake Journal of Medical Oddities", journal.getName());
+		assertEquals("New England Journal of Medicine", journal.getName());
 	
-	/*
-	 * 
+/*
 mysql> select * from journal where id = 1;
-+----+--------------------------------------+----------------+
-| id | name                                 | abbreviation   |
-+----+--------------------------------------+----------------+
-|  1 | The Fake Journal of Medical Oddities | Fake J Med Odd |
-+----+--------------------------------------+----------------+
++----+---------------------------------+--------------+
+| id | name                            | abbreviation |
++----+---------------------------------+--------------+
+|  1 | New England Journal of Medicine | NEJM         |
++----+---------------------------------+--------------+
 1 row in set (0.00 sec)
-	 */
+
+*/
 	}
 	
 	@Test

@@ -2,6 +2,7 @@ package com.skilldistillery.reftracker.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -45,6 +46,12 @@ public class MyCollectionTest {
 	void test_MyCollection_entity_mapping() {
 		assertNotNull(myCollection);
 		assertEquals("Rapid response paper", myCollection.getName());
+	}
+	
+	@Test
+	void test_MyCollection_to_JournalArticle_mapping() {
+		assertNotNull(myCollection);
+		assertTrue(myCollection.getArticles().size() > 0);
 	}
 
 }

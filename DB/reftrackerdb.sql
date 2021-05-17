@@ -334,6 +334,18 @@ INSERT INTO `my_collection` (`id`, `name`, `description`, `user_id`) VALUES (1, 
 COMMIT;
 
 
+-- -----------------------------------------------------
+-- Data for table `my_collection_journal_article`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `reftrackerdb`;
+INSERT INTO `my_collection_journal_article` (`my_collection_id`, `journal_article_id`) VALUES (1, 1);
+INSERT INTO `my_collection_journal_article` (`my_collection_id`, `journal_article_id`) VALUES (1, 2);
+INSERT INTO `my_collection_journal_article` (`my_collection_id`, `journal_article_id`) VALUES (1, 5);
+
+COMMIT;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

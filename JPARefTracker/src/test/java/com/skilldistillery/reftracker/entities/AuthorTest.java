@@ -32,7 +32,7 @@ public class AuthorTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		author = em.find(Author.class, 1);
+		author = em.find(Author.class, 4);
 	}
 
 	@AfterEach
@@ -44,17 +44,17 @@ public class AuthorTest {
 	@Test
 	void test_Author_entity_mapping() {
 		assertNotNull(author);
-		assertEquals("Billy", author.getFirstName());
-		assertEquals("Kid", author.getLastName());
+		assertEquals("Ryobojad", author.getLastName());
 /*
- * mysql> select * from author where id = 1;
+mysql> select * from author where id = 4;
 +----+------------+-----------+-------------+--------+
 | id | first_name | last_name | middle_name | suffix |
 +----+------------+-----------+-------------+--------+
-|  1 | Billy      | Kid       | The         | Jr.    |
+|  4 | B          | Ryobojad  |             |        |
 +----+------------+-----------+-------------+--------+
 1 row in set (0.00 sec)
- */
+
+*/
 	}
 	
 	@Test

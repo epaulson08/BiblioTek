@@ -45,7 +45,17 @@ class JournalArticleTest {
 	@Test
 	void test_JournalArticle_entity_mapping() {
 		assertNotNull(ja);
-		assertEquals("A Review of Earwax Removal", ja.getTitle());
+		assertEquals("Reduction in hospital-wide mortality after implementation of a rapid response team: a long-term cohort study", ja.getTitle());
+/*
+mysql> select * from journal_article where id = 1;
++----+--------------------------------------------------------------------------------------------------------------+------------+----------------+------+------------+-------+
+| id | title                                                                                                        | volume_num | year_published | doi  | journal_id | pages |
++----+--------------------------------------------------------------------------------------------------------------+------------+----------------+------+------------+-------+
+|  1 | Reduction in hospital-wide mortality after implementation of a rapid response team: a long-term cohort study |         15 |           2011 |      |          5 | R269  |
++----+--------------------------------------------------------------------------------------------------------------+------------+----------------+------+------------+-------+
+1 row in set (0.00 sec)
+  
+*/		
 	}
 	
 	@Test
@@ -57,8 +67,7 @@ class JournalArticleTest {
 	@Test
 	void test_JournalArticle_to_Journal_mapping() {
 		assertNotNull(ja);
-		assertEquals(1, ja.getJournal().getId	());
-		assertEquals("The Fake Journal of Medical Oddities", ja.getJournal().getName());
+		assertEquals(5, ja.getJournal().getId());
 	}
 
 }
