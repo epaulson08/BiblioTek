@@ -16,11 +16,11 @@ export class MyCollectionsComponent implements OnInit {
   constructor(private collServ : MyCollectionService) { }
 
   ngOnInit(): void {
-    this.showMyCollection(1); // FIXME: Hardcoding userId = 1 pending User build
+    this.loadMyCollections(1); // FIXME: load collections by userId once User build complete
   }
 
-  showMyCollection(userId) : void {
-      this.collServ.show(userId).subscribe(
+  showMyCollection(cid : number) : void {
+      this.collServ.show(cid).subscribe(
         success => {
           this.myCollection = success;
           return success;
@@ -31,16 +31,17 @@ export class MyCollectionsComponent implements OnInit {
       return null;
     }
 
-  // loadMyCollections(userId) : void {
-  //     this.collServ.index().subscribe(
-  //       success => {
-  //         this.myCollections = success;
-  //         return success;
-  //       },
-  //       failure => {
-  //         console.error(failure);
-  //       });
-  //     return null;
-  //   }
+  loadMyCollections(userId) : void {
+    // FIXME: load collections by userId once User build complete
+    this.collServ.index().subscribe(
+        success => {
+          this.myCollections = success;
+          return success;
+        },
+        failure => {
+          console.error(failure);
+        });
+      return null;
+    }
 
 }

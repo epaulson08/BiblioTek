@@ -1,11 +1,21 @@
 <div class="container-fluid">
   <h4>My Collections</h4>
-  <!-- <div *ngFor="coll of this.myCollections">
-  </div> -->
-
-{{this.myCollection.id}}
-{{this.myCollection.name}}
-{{this.myCollection.description}}
-
-
+  <table class="table table-light table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Created</th>
+        <th>Updated</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let coll of this.myCollections">
+        <td><a href=""><h5>{{ coll.name }}</h5></a></td>
+        <td>{{ coll.description }}</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

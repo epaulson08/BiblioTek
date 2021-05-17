@@ -12,7 +12,16 @@ export class MyCollectionService {
 
   constructor(private http: HttpClient) { }
 
-  show(id: number): Observable<MyCollection> {
+  index() : Observable<MyCollection[]> {
+    return this.http.get<MyCollection[]>(this.baseUrl + "api/collections/")
+      .pipe(
+        catchError((err: any) => {
+          return throwError(err);
+        })
+      );
+  }
+
+  show(id : number): Observable<MyCollection> {
     return this.http.get<MyCollection>(this.baseUrl + "api/collections/" + id)
       .pipe(
         catchError((err: any) => {
@@ -20,4 +29,5 @@ export class MyCollectionService {
         })
       );
   }
+
 }
