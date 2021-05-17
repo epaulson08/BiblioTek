@@ -6,11 +6,13 @@ import { MyCollectionsComponent } from './components/my-collections/my-collectio
 import { NaviComponent } from './components/navi/navi.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SearchComponent } from './components/search/search.component';
+import { ShowArticleComponent } from './components/show-article/show-article.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'list-articles' },
   { path: 'nav', component: NaviComponent },
   { path: 'list-articles', component: ListArticlesComponent },
+  { path: 'show-article/:articleId', component: ShowArticleComponent },
   { path: 'create', component: CreateComponent },
   { path: 'my-collections', component: MyCollectionsComponent },
   { path: 'search', component: SearchComponent },

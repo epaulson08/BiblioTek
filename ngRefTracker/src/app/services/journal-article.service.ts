@@ -26,7 +26,7 @@ export class JournalArticleService {
   }
 
 
-  show(id: string): Observable<JournalArticle> {
+  show(id: number): Observable<JournalArticle> {
     return this.http.get<JournalArticle>(this.url + id)
       .pipe(
         catchError((err: any) => {

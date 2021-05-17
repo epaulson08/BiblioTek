@@ -14,7 +14,7 @@ import { CreateComponent } from './components/create/create.component';
 import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
 import { SearchComponent } from './components/search/search.component';
 import { DisplayArticleSearchResultsPipe } from './pipes/display-article-search-results.pipe';
-import { ShowArticleComponent } from './show-article/show-article.component';
+import { ShowArticleComponent } from './components/show-article/show-article.component';
 
 @NgModule({
   declarations: [

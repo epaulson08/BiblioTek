@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Journal } from 'src/app/models/journal';
+import { Router } from '@angular/router';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
-import { JournalService } from 'src/app/services/journal.service';
 
 
 @Component({
@@ -14,23 +12,19 @@ import { JournalService } from 'src/app/services/journal.service';
 export class ListArticlesComponent implements OnInit {
 
   //////// fields
-  journalArticles: JournalArticle[] = [];
-  editJa: JournalArticle;
-  editJournal: Journal;
-  selected: JournalArticle;
-  deleted: boolean = false;
-
-  allJournals: Journal[] = [];
+  journalArticles : JournalArticle[] = [];
+  searchTerm : string;
+  deleted : boolean = false;
 
   //////// init
   constructor(
-    private jaServ: JournalArticleService, private journalServ: JournalService, private route: ActivatedRoute
+    private jaServ: JournalArticleService,
+    private router : Router
   ) {
 
   }
   ngOnInit(): void {
     this.loadJournalArticles();
-    this.loadJournals();
   }
 
   //////// CRUD
@@ -46,72 +40,10 @@ export class ListArticlesComponent implements OnInit {
     return null;
   }
 
-  loadJournals(): Journal[] {
-    this.journalServ.index().subscribe(
-      success => {
-        this.allJournals = success;
-        return success;
-      },
-      failure => {
-        console.error("JournalArticleComponent.loadJournals() failed: ");
-        console.error(failure);
-      });
-    return null;
-  }
+  //////// navigation:
 
-
-  update(ja: JournalArticle) {
-    ja.journal = this.editJournal;
-    if (ja != null && ja.journal != null) {
-      this.jaServ.update(ja).subscribe(
-        data => { this.loadJournalArticles();
-          this.loadJournals();
-          this.editJa = null;
-          this.editJournal = null;},
-        err => { console.error("Observer got an error: " + err); });
-    }
-    else {
-      console.error("problem occurred in component.ts, in update()");
-    }
-  }
-
-
-  delete(id: number): void {
-    this.jaServ.delete(id).subscribe(
-      data => {
-        this.loadJournalArticles();
-        this.loadJournals();
-        this.editJa = null;
-        this.editJournal = null;
-        this.deleted = true;
-      },
-      err => {
-        console.error("Observer got an error: " + err);
-      }
-    );
-  }
-
-
-  //////// utilities:
-  setSelected(ja: JournalArticle): void {
-    this.selected = ja;
-  }
-
-  clearSelected() : void {
-    this.selected = null;
-    this.editJa = null;
-    this.editJournal = null;
-    this.deleted = false;
-  }
-
-  setEdit(): void {
-    this.editJa = this.selected;
-    this.editJournal = this.selected.journal;
-  }
-
-  cancelEdit(): void {
-    this.editJa = null;
-    this.editJournal = null;
+  goTo(id : number) : void {
+    this.router.navigateByUrl('show-article/' + id);
   }
 
 }
