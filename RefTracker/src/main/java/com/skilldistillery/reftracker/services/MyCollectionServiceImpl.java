@@ -1,5 +1,6 @@
 package com.skilldistillery.reftracker.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -25,5 +26,9 @@ public class MyCollectionServiceImpl implements MyCollectionService {
 			coll = opt.get();
 		return coll;
 	}
-
+	
+	@Override
+	public List<MyCollection> index() {
+		return collRepo.findAll();
+	}
 }

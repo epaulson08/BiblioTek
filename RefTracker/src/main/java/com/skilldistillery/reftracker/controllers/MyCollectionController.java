@@ -1,5 +1,7 @@
 package com.skilldistillery.reftracker.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,11 @@ public class MyCollectionController {
 
 	@Autowired
 	private MyCollectionService collServ;
+
+	@GetMapping("collections")
+	public List<MyCollection> index() {
+		return collServ.index();
+	}
 
 	@GetMapping("collections/{id}")
 	public MyCollection findById(@PathVariable Integer id, HttpServletResponse resp) {
