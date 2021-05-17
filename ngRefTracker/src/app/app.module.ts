@@ -15,6 +15,7 @@ import { MyCollectionsComponent } from './components/my-collections/my-collectio
 import { SearchComponent } from './components/search/search.component';
 import { DisplayArticleSearchResultsPipe } from './pipes/display-article-search-results.pipe';
 import { ShowArticleComponent } from './components/show-article/show-article.component';
+import { ShowCollectionComponent } from './components/show-collection/show-collection.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ShowArticleComponent } from './components/show-article/show-article.com
     MyCollectionsComponent,
     SearchComponent,
     DisplayArticleSearchResultsPipe,
-    ShowArticleComponent
+    ShowArticleComponent,
+    ShowCollectionComponent
   ],
   imports: [
     BrowserModule,
