@@ -8,10 +8,10 @@ import { JournalService } from 'src/app/services/journal.service';
 
 @Component({
   selector: 'app-list-all',
-  templateUrl: './list-all.component.html',
-  styleUrls: ['./list-all.component.css']
+  templateUrl: './list-articles.component.html',
+  styleUrls: ['./list-articles.component.css']
 })
-export class ListAllComponent implements OnInit {
+export class ListArticlesComponent implements OnInit {
 
   //////// fields
   journalArticles: JournalArticle[] = [];
