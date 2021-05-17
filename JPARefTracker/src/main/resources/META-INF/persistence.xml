@@ -9,9 +9,10 @@
     </provider>
     
     <!-- Entities -->
-    <class>com.skilldistillery.reftracker.entities.JournalArticle</class>
     <class>com.skilldistillery.reftracker.entities.Author</class>
     <class>com.skilldistillery.reftracker.entities.Journal</class>
+    <class>com.skilldistillery.reftracker.entities.JournalArticle</class>
+    <class>com.skilldistillery.reftracker.entities.MyCollection</class>
     <!-- End entities -->
 
     <properties>

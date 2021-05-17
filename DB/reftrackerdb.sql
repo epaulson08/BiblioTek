@@ -99,11 +99,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `article_collection`
+-- Table `my_collection`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `article_collection` ;
+DROP TABLE IF EXISTS `my_collection` ;
 
-CREATE TABLE IF NOT EXISTS `article_collection` (
+CREATE TABLE IF NOT EXISTS `my_collection` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(2000) NULL,
   `description` TEXT NULL,
@@ -141,11 +141,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `article_article_collection`
+-- Table `my_collection_journal_article`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `article_article_collection` ;
+DROP TABLE IF EXISTS `my_collection_journal_article` ;
 
-CREATE TABLE IF NOT EXISTS `article_article_collection` (
+CREATE TABLE IF NOT EXISTS `my_collection_journal_article` (
   `article_collection_id` INT NOT NULL,
   `journal_article_id` INT(11) NOT NULL,
   PRIMARY KEY (`article_collection_id`, `journal_article_id`),
@@ -325,11 +325,11 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `article_collection`
+-- Data for table `my_collection`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `reftrackerdb`;
-INSERT INTO `article_collection` (`id`, `name`, `description`, `user_id`) VALUES (1, 'Rapid response paper', 'Articles for rapid response team review project', 1);
+INSERT INTO `my_collection` (`id`, `name`, `description`, `user_id`) VALUES (1, 'Rapid response paper', 'Articles for rapid response team review project', 1);
 
 COMMIT;
 
