@@ -146,11 +146,11 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `my_collection_journal_article` ;
 
 CREATE TABLE IF NOT EXISTS `my_collection_journal_article` (
-  `article_collection_id` INT NOT NULL,
-  `journal_article_id` INT(11) NOT NULL,
-  PRIMARY KEY (`article_collection_id`, `journal_article_id`),
+  `my_collection_id` INT NOT NULL,
+  `journal_article_id` INT NOT NULL,
+  PRIMARY KEY (`my_collection_id`, `journal_article_id`),
   INDEX `fk_article_collection_has_journal_article_journal_article1_idx` (`journal_article_id` ASC),
-  INDEX `fk_article_collection_has_journal_article_article_collectio_idx` (`article_collection_id` ASC))
+  INDEX `fk_article_collection_has_journal_article_article_collectio_idx` (`my_collection_id` ASC))
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
@@ -319,7 +319,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `reftrackerdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`) VALUES (1, 'testuser', 'testuser', NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`) VALUES (1, 'testuser', 'wombat1', 'tester@test.com', 'Testy', 'Tester');
 
 COMMIT;
 
@@ -329,7 +329,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `reftrackerdb`;
-INSERT INTO `my_collection` (`id`, `name`, `description`, `user_id`) VALUES (1, 'Rapid response paper', 'Articles for rapid response team review project', 1);
+INSERT INTO `my_collection` (`id`, `name`, `description`, `user_id`) VALUES (1, 'Rapid response paper', 'Articles for rapid response team review project, fall 2020', 1);
 
 COMMIT;
 

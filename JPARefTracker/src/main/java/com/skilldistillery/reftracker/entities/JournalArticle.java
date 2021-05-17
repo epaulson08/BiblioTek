@@ -33,15 +33,13 @@ public class JournalArticle {
 
 	private String doi;
 
-//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "journal_id")
 	private Journal journal;
 
-//	@JsonIgnore
 	@ManyToMany(mappedBy = "articles")
 	private List<Author> authors;
-
+	
 //////// Constructors: 
 	public JournalArticle() {
 	}
