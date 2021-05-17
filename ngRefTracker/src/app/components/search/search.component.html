@@ -2,12 +2,12 @@
   <h4>Search</h4>
 
   <!-- Search by author or title -->
-  <form #searchForm>
+  <form #searchForm class="form-inline">
     <div class="form-group">
       <label for="searchTerm">Search Term (author or title):</label>
       <input
         type="text"
-        class="form-control"
+        class="form-control mr-2 ml-2"
         name="searchTerm"
         id="searchTerm"
       />
@@ -20,12 +20,13 @@
       Search
     </button>
   </form>
+  <br />
 
   <!-- Show all articles for a given journal -->
-  <form>
+  <form class="form-inline">
     Journal:
     <select
-      class="form-control mb-3"
+      class="form-control ml-2 mr-2"
       [(ngModel)]="selectedJournal"
       name="selectedJournal"
     >
