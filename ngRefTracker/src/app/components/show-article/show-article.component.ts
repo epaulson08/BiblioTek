@@ -12,14 +12,14 @@ import { JournalService } from 'src/app/services/journal.service';
 })
 export class ShowArticleComponent implements OnInit {
 
-  articleId : number;
-  selected : JournalArticle;
-  editJa : JournalArticle;
-  editJournal : Journal;
-  deleted : boolean = false;
-  allJournals : Journal [];
+  articleId: number;
+  selected: JournalArticle;
+  editJa: JournalArticle;
+  editJournal: Journal;
+  deleted: boolean = false;
+  allJournals: Journal[];
 
-  constructor(private route : ActivatedRoute, private jaServ : JournalArticleService, private journalServ: JournalService) { }
+  constructor(private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService) { }
 
   ngOnInit(): void {
     this.articleId = +this.route.snapshot.paramMap.get('articleId');
@@ -27,16 +27,16 @@ export class ShowArticleComponent implements OnInit {
   }
 
   loadArticle() {
-      this.jaServ.show(this.articleId).subscribe(
-        success => {
-          this.selected = success;
-          return success;
-        },
-        failure => {
-          console.error(failure);
-        });
-      return null;
-    }
+    this.jaServ.show(this.articleId).subscribe(
+      success => {
+        this.selected = success;
+        return success;
+      },
+      failure => {
+        console.error(failure);
+      });
+    return null;
+  }
 
   loadJournals(): Journal[] {
     this.journalServ.index().subscribe(
@@ -51,22 +51,22 @@ export class ShowArticleComponent implements OnInit {
     return null;
   }
 
-
   update(ja: JournalArticle) {
     ja.journal = this.editJournal;
     if (ja != null && ja.journal != null) {
       this.jaServ.update(ja).subscribe(
-        data => { this.loadArticle();
+        data => {
+          this.loadArticle();
           this.loadJournals();
           this.editJa = null;
-          this.editJournal = null;},
+          this.editJournal = null;
+        },
         err => { console.error("Observer got an error: " + err); });
     }
     else {
       console.error("problem occurred in component.ts, in update()");
     }
   }
-
 
   delete(id: number): void {
     this.jaServ.delete(id).subscribe(
@@ -83,11 +83,11 @@ export class ShowArticleComponent implements OnInit {
     );
   }
 
-goBack() : void {
-  // TODO
-}
+  goBack(): void {
+    // TODO
+  }
 
-    setEdit(): void {
+  setEdit(): void {
     this.editJa = this.selected;
     this.editJournal = this.selected.journal;
   }
