@@ -10,11 +10,12 @@ import { Journal } from '../models/journal';
   providedIn: 'root'
 })
 export class JournalArticleService {
-
+  
   private baseUrl: string = "http://localhost:8084/";
   private url = this.baseUrl + "api/articles/";
-
-
+  
+  constructor(private http: HttpClient) { }
+  
   index(): Observable<JournalArticle[]> {
     return this.http.get<JournalArticle[]>(this.baseUrl + 'api/articles')
       .pipe(
@@ -24,7 +25,6 @@ export class JournalArticleService {
         })
       );
   }
-
 
   show(id: number): Observable<JournalArticle> {
     return this.http.get<JournalArticle>(this.url + id)
@@ -92,7 +92,6 @@ export class JournalArticleService {
   }
 
 
-  constructor(private http: HttpClient) { }
-
+  
 
 }

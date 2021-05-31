@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
@@ -18,7 +19,7 @@ export class SearchComponent implements OnInit {
   allJournals: Journal[];
   selectedJournal: Journal = new Journal();
 
-  constructor(private jaServ: JournalArticleService, private journalServ: JournalService) { }
+  constructor(private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadJournals();
@@ -29,7 +30,6 @@ export class SearchComponent implements OnInit {
     this.jaServ.show(form.id.value).subscribe(
       dataReceived => {
         this.ja = dataReceived;
-        console.warn("**debug: JournalArticleService, show(), dataReceived.title=" + dataReceived.title);
         this.selected = Object.assign({}, this.ja);
       },
       failure => {
@@ -39,6 +39,8 @@ export class SearchComponent implements OnInit {
   }
 
   search(form): void {
+    console.warn("hello");
+
     this.jaServ.search(form.searchTerm.value).subscribe(
       dataReceived => {
         this.articleResults = dataReceived;
@@ -106,6 +108,8 @@ export class SearchComponent implements OnInit {
     this.editJa = null;
   }
 
-
+  goTo(id: number): void {
+    this.router.navigateByUrl('show-article/' + id);
+  }
 
 }

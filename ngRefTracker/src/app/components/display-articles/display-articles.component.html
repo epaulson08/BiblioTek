@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <!-- SEE ALL ARTICLES -->
+  <h4 *ngIf="!searchTerm">All Articles:</h4>
+  <h4 *ngIf="searchTerm">Search Results:</h4>
+
+  <table class="table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Author(s)</th>
+        <th>Journal</th>
+        <th>Vol</th>
+        <th>Year</th>
+        <th>DOI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Row Displaying Article Entity -->
+      <tr *ngFor="let ja of articlesToDisplay">
+        <td>
+          <button (click)="goTo(ja.id)" class="btn btn-warning">Examine</button>
+        </td>
+
+        <!-- Title -->
+        <td style="min-width: 250px">{{ ja.title }}</td>
+
+        <!-- Author(s) -->
+        <td>
+          {{ ja.authors | authorFormat }}
+        </td>
+
+        <!-- Journal Name -->
+        <td>{{ ja.journal.name }}</td>
+
+        <!-- Volume -->
+        <td>{{ ja.volumeNum }}</td>
+
+        <!-- Year -->
+        <td>{{ ja.yearPublished }}</td>
+
+        <!-- DOI -->
+        <td style="max-width: 150px; word-wrap: 'break-word;'">
+          {{ ja.doi }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

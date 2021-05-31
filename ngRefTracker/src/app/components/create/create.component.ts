@@ -30,9 +30,6 @@ export class CreateComponent implements OnInit {
 
   //////// methods:
   create(form) {
-    console.warn("**DEBUG: in COMPONENT, create()");
-    console.warn("journal = " + this.newJournal.name);
-    console.warn("journal = " + this.newJournal.id);
 
     // Set article's scalar fields
     this.newJa.title = form.title.value;

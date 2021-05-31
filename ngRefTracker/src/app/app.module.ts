@@ -20,6 +20,8 @@ import { ApaCitationPipe } from './pipes/apa-citation.pipe';
 import { ApaCitationAuthorsPipe } from './pipes/apa-citation-authors.pipe';
 import { ApaCitationAuthorPipe } from './pipes/apa-citation-author.pipe';
 import { AuthorEtAlHandlerPipe } from './pipes/author-et-al-handler.pipe';
+import { HomeComponent } from './components/home/home.component';
+import { DisplayArticlesComponent } from './components/display-articles/display-articles.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { AuthorEtAlHandlerPipe } from './pipes/author-et-al-handler.pipe';
     ApaCitationPipe,
     ApaCitationAuthorsPipe,
     ApaCitationAuthorPipe,
-    AuthorEtAlHandlerPipe
+    AuthorEtAlHandlerPipe,
+    HomeComponent,
+    DisplayArticlesComponent
   ],
   imports: [
     BrowserModule,

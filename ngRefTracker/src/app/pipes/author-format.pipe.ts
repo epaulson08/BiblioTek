@@ -8,7 +8,6 @@ import { AuthorEtAlHandlerPipe } from './author-et-al-handler.pipe';
 export class AuthorFormatPipe implements PipeTransform {
 
   transform(authors: Author[]): string {
-    // console.warn("**debug: pokemons="+pokemons + "\npokeCategory=" + pokeCategory)
     let outputStr: string = "";
 
     if (authors.length === 0) return "None";
