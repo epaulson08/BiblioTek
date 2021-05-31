@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateComponent } from './components/create/create.component';
 import { HomeComponent } from './components/home/home.component';
-import { ListArticlesComponent } from './components/list-articles/list-articles.component';
+import { ListAllComponent } from './components/list-all/list-all.component';
 import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
 import { NaviComponent } from './components/navi/navi.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent},
   { path: 'nav', component: NaviComponent },
-  { path: 'list-articles', component: ListArticlesComponent },
+  { path: 'list-articles', component: ListAllComponent },
   { path: 'show-article/:articleId', component: ShowArticleComponent },
   { path: 'create', component: CreateComponent },
   { path: 'my-collections', component: MyCollectionsComponent },
