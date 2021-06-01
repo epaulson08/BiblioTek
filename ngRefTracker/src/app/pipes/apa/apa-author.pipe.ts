@@ -3,9 +3,9 @@ import { Author } from '../../models/author';
 import { AuthorService } from '../../services/author.service';
 
 @Pipe({
-  name: 'author'
+  name: 'apaAuthor'
 })
-export class AuthorPipe implements PipeTransform {
+export class ApaAuthorPipe implements PipeTransform {
 
   transform(author: Author): string {
     let outputStr: string = "";

@@ -4,7 +4,6 @@ import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
 import { JournalService } from 'src/app/services/journal.service';
-import { AuthorsPipe } from 'src/app/pipes/apa/authors.pipe';
 
 @Component({
   selector: 'app-show-article',

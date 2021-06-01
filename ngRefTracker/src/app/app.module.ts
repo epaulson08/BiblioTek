@@ -12,14 +12,14 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CreateComponent } from './components/create/create.component';
 import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
 import { SearchComponent } from './components/search/search.component';
-import { DisplayArticleSearchResultsPipe } from './pipes/display-article-search-results.pipe';
 import { ShowArticleComponent } from './components/show-article/show-article.component';
 import { ShowCollectionComponent } from './components/show-collection/show-collection.component';
 import { HomeComponent } from './components/home/home.component';
 import { DisplayArticlesComponent } from './components/display-articles/display-articles.component';
-import { AuthorPipe } from './pipes/apa/author.pipe';
-import { AuthorsPipe } from './pipes/apa/authors.pipe';
-import { FullCitationPipe } from './pipes/apa/full-citation.pipe';
+import { ApaAuthorPipe } from './pipes/apa/apa-author.pipe';
+import { ApaAuthorsPipe } from './pipes/apa/apa-authors.pipe';
+import { AmaAuthorPipe } from './pipes/ama/ama-author.pipe';
+import { AmaAuthorsPipe } from './pipes/ama/ama-authors.pipe';
 
 @NgModule({
   declarations: [
@@ -31,14 +31,14 @@ import { FullCitationPipe } from './pipes/apa/full-citation.pipe';
     CreateComponent,
     MyCollectionsComponent,
     SearchComponent,
-    DisplayArticleSearchResultsPipe,
     ShowArticleComponent,
     ShowCollectionComponent,
     HomeComponent,
     DisplayArticlesComponent,
-    AuthorPipe,
-    AuthorsPipe,
-    FullCitationPipe
+    ApaAuthorPipe,
+    ApaAuthorsPipe,
+    AmaAuthorPipe,
+    AmaAuthorsPipe
   ],
   imports: [
     BrowserModule,

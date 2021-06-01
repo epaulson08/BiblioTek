@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Author } from '../../models/author';
 import { AuthorEtAlHandlerPipe } from '../author-et-al-handler.pipe';
-import { AuthorPipe } from './author.pipe';
+import { ApaAuthorPipe } from './apa-author.pipe';
 
 @Pipe({
-  name: 'authors'
+  name: 'apaAuthors'
 })
-export class AuthorsPipe implements PipeTransform {
+export class ApaAuthorsPipe implements PipeTransform {
 
   // https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/reference_list_articles_in_periodicals.html
   // Author, A. A., Author, B. B., & Author, C. C. (Year). Title of article. Title of Periodical, volume number(issue number), pages. https://doi.org/xx.xxx/yyyy
@@ -22,7 +22,7 @@ export class AuthorsPipe implements PipeTransform {
     // SINGLE AUTHOR
     // Ahmed, S. (2012). On being included: Racism and diversity in institutional life. Duke University Press.
     else if (authors.length === 1) {
-      return new AuthorPipe()
+      return new ApaAuthorPipe()
         .transform(authors[0]);
     }
 
@@ -36,7 +36,7 @@ export class AuthorsPipe implements PipeTransform {
           outputStr += "& "
         }
 
-        outputStr += new AuthorPipe()
+        outputStr += new ApaAuthorPipe()
           .transform(authors[i]);
 
         if (i !== authors.length - 1) {
