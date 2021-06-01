@@ -88,8 +88,8 @@
       </table>
       <!-- TODO: retrieve citation styles from database instead of hardcoding -->
       <div *ngIf="viewCite">
-        <button class="btn btn-warning mr-2" (click)="showAma()">AMA</button>
-        <button class="btn btn-warning mr-2" (click)="showApa()">APA</button>
+        <button class="btn btn-warning mr-2 mb-2" (click)="showAma()">AMA</button>
+        <button class="btn btn-warning mr-2 mb-2" (click)="showApa()">APA</button>
 
         <!-- <a href="">ACS</a> ·
         <a href="">AMA</a> ·
@@ -105,8 +105,11 @@
       </div>
 
       <div *ngIf="ama">test ama</div>
-      <div *ngIf="apa">test apa</div>
-
+      <div *ngIf="apa">
+        <h5>APA Citation:</h5>
+        citation here
+        <br /><button class="btn btn-warning btn-sm mr-2 mt-2">📋 Copy</button>
+      </div>
     </div>
   </div>
   <div *ngIf="deleted"><h2>Deleted.</h2></div>
@@ -143,5 +146,3 @@
     </div>
   </div>
 </div>
-
-<!-- <button class="btn btn-warning mr-2">📋 Copy</button> -->
