@@ -89,10 +89,12 @@
       <!-- TODO: retrieve citation styles from database instead of hardcoding -->
       <div *ngIf="viewCite">
         <hr />
-        <button class="btn btn-warning mr-2 mb-2" (click)="showAma()">
+        <button class="btn btn-warning mr-2 mb-2" [class.active]="this.ama"
+        (click)="showAma()">
           AMA
         </button>
-        <button class="btn btn-warning mr-2 mb-2" (click)="showApa()">
+        <button class="btn btn-warning mr-2 mb-2" [class.active]="this.apa"
+        (click)="showApa()">
           APA
         </button>
         <!-- <a href="">ACS</a> ·
