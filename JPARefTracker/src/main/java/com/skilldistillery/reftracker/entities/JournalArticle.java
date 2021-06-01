@@ -42,6 +42,9 @@ public class JournalArticle {
 	
 	private String pages;
 	
+	@Column(name = "issue_num")
+	private String issueNum;
+	
 //////// Constructors: 
 	public JournalArticle() {
 	}
@@ -109,6 +112,14 @@ public class JournalArticle {
 
 	public void setPages(String pages) {
 		this.pages = pages;
+	}
+
+	public String getIssueNum() {
+		return issueNum;
+	}
+
+	public void setIssueNum(String issueNum) {
+		this.issueNum = issueNum;
 	}
 
 	//////// add, remove Author

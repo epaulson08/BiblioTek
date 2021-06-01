@@ -112,7 +112,7 @@
           <h5>APA Citation:</h5>
           {{ this.selected.authors | authors }}&nbsp;
           <em>{{ this.selected.title }}, {{ this.selected.volumeNum }}</em
-          ><span *ngIf="this.selected.pages"
+          ><span *ngIf="this.selected.issueNum">({{this.selected.issueNum}})</span><span *ngIf="this.selected.pages"
             >,&nbsp;{{ this.selected.pages }}</span
           >.
 

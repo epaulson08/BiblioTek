@@ -11,5 +11,6 @@ export class JournalArticle {
   journal: Journal;
   authors: Author[];
   pages: string;
+  issueNum: string;
 
 }
