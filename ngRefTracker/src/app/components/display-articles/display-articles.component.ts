@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { JournalArticle } from 'src/app/models/journal-article';
 
 @Component({
@@ -7,13 +8,16 @@ import { JournalArticle } from 'src/app/models/journal-article';
   styleUrls: ['./display-articles.component.css']
 })
 export class DisplayArticlesComponent implements OnInit {
-  searchTerm: boolean = false;
+  showOneArticle: boolean = false;
   @Input() articlesToDisplay: JournalArticle[];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  goTo(id: number) {
+    this.router.navigateByUrl(`show-article/${id}`);
+  }
 
 }

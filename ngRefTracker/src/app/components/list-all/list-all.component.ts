@@ -25,6 +25,7 @@ export class ListAllComponent implements OnInit {
   }
   ngOnInit(): void {
     this.loadJournalArticles();
+    localStorage.setItem("lastPage", "listAll");
   }
 
   //////// CRUD

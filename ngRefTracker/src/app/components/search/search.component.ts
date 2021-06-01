@@ -23,6 +23,10 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadJournals();
+    localStorage.setItem("lastPage", "search");
+    if (localStorage.getItem("lastSearchTerm")) {
+  // TODO: load prior search on page load
+    }
   }
 
 
@@ -39,8 +43,7 @@ export class SearchComponent implements OnInit {
   }
 
   search(form): void {
-    console.warn("hello");
-
+    localStorage.setItem("lastSearchTerm", form.searchTerm.value);
     this.jaServ.search(form.searchTerm.value).subscribe(
       dataReceived => {
         this.articleResults = dataReceived;
@@ -52,6 +55,7 @@ export class SearchComponent implements OnInit {
   }
 
   showAllByJournal(): void {
+    localStorage.setItem("lastSearchJournal", this.selectedJournal.id.toString());
     this.jaServ.showAllByJournal(this.selectedJournal).subscribe(
       dataReceived => {
         this.articleResults = dataReceived;

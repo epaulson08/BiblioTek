@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
@@ -13,13 +13,14 @@ import { JournalService } from 'src/app/services/journal.service';
 export class ShowArticleComponent implements OnInit {
 
   articleId: number;
-  selected: JournalArticle;
+  selected: JournalArticle = new JournalArticle();
   editJa: JournalArticle;
   editJournal: Journal;
   deleted: boolean = false;
   allJournals: Journal[];
 
-  constructor(private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService) { }
+
+  constructor(private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
 
   ngOnInit(): void {
     this.articleId = +this.route.snapshot.paramMap.get('articleId');
@@ -84,7 +85,16 @@ export class ShowArticleComponent implements OnInit {
   }
 
   goBack(): void {
-    // TODO
+    let whereLast: string = localStorage.getItem("lastPage");
+    if (whereLast === "search") {
+      this.router.navigateByUrl("search");
+    }
+    else if (whereLast === "listAll") {
+      this.router.navigateByUrl("list-articles");
+    }
+    else {
+      this.router.navigateByUrl("list-articles");
+    }
   }
 
   setEdit(): void {
