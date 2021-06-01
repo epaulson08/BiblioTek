@@ -153,6 +153,50 @@ CREATE TABLE IF NOT EXISTS `my_collection_journal_article` (
   INDEX `fk_article_collection_has_journal_article_article_collectio_idx` (`my_collection_id` ASC))
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `citation_style`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `citation_style` ;
+
+CREATE TABLE IF NOT EXISTS `citation_style` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL,
+  `definitive_reference` VARCHAR(450) NULL,
+  `definitive_reference_url` VARCHAR(450) NULL,
+  `abbreviation` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `citation_style_link`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `citation_style_link` ;
+
+CREATE TABLE IF NOT EXISTS `citation_style_link` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `url` VARCHAR(450) NULL,
+  `comment` VARCHAR(45) NULL,
+  `citation_style_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_citation_style_link_citation_style1_idx` (`citation_style_id` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `user_citation_style`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_citation_style` ;
+
+CREATE TABLE IF NOT EXISTS `user_citation_style` (
+  `user_id` INT NOT NULL,
+  `citation_style_id` INT NOT NULL,
+  PRIMARY KEY (`user_id`, `citation_style_id`),
+  INDEX `fk_user_has_citation_style_citation_style1_idx` (`citation_style_id` ASC),
+  INDEX `fk_user_has_citation_style_user1_idx` (`user_id` ASC))
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS user@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -342,6 +386,38 @@ USE `reftrackerdb`;
 INSERT INTO `my_collection_journal_article` (`my_collection_id`, `journal_article_id`) VALUES (1, 1);
 INSERT INTO `my_collection_journal_article` (`my_collection_id`, `journal_article_id`) VALUES (1, 2);
 INSERT INTO `my_collection_journal_article` (`my_collection_id`, `journal_article_id`) VALUES (1, 5);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `citation_style`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `reftrackerdb`;
+INSERT INTO `citation_style` (`id`, `name`, `definitive_reference`, `definitive_reference_url`, `abbreviation`) VALUES (1, 'American Psychological Association', NULL, NULL, 'APA');
+INSERT INTO `citation_style` (`id`, `name`, `definitive_reference`, `definitive_reference_url`, `abbreviation`) VALUES (2, 'American Medical Association', NULL, NULL, 'AMA');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `citation_style_link`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `reftrackerdb`;
+INSERT INTO `citation_style_link` (`id`, `url`, `comment`, `citation_style_id`) VALUES (1, 'https://owl.purdue.edu/owl/research_and_citation/ama_style/index.html', NULL, 2);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_citation_style`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `reftrackerdb`;
+INSERT INTO `user_citation_style` (`user_id`, `citation_style_id`) VALUES (1, 1);
+INSERT INTO `user_citation_style` (`user_id`, `citation_style_id`) VALUES (1, 2);
 
 COMMIT;
 
