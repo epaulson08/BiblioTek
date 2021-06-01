@@ -15,12 +15,11 @@ import { SearchComponent } from './components/search/search.component';
 import { DisplayArticleSearchResultsPipe } from './pipes/display-article-search-results.pipe';
 import { ShowArticleComponent } from './components/show-article/show-article.component';
 import { ShowCollectionComponent } from './components/show-collection/show-collection.component';
-import { ApaCitationPipe } from './pipes/apa-citation.pipe';
-import { ApaCitationAuthorsPipe } from './pipes/apa-citation-authors.pipe';
-import { ApaCitationAuthorPipe } from './pipes/apa-citation-author.pipe';
-import { AuthorEtAlHandlerPipe } from './pipes/author-et-al-handler.pipe';
 import { HomeComponent } from './components/home/home.component';
 import { DisplayArticlesComponent } from './components/display-articles/display-articles.component';
+import { AuthorPipe } from './pipes/apa/author.pipe';
+import { AuthorsPipe } from './pipes/apa/authors.pipe';
+import { FullCitationPipe } from './pipes/apa/full-citation.pipe';
 
 @NgModule({
   declarations: [
@@ -35,12 +34,11 @@ import { DisplayArticlesComponent } from './components/display-articles/display-
     DisplayArticleSearchResultsPipe,
     ShowArticleComponent,
     ShowCollectionComponent,
-    ApaCitationPipe,
-    ApaCitationAuthorsPipe,
-    ApaCitationAuthorPipe,
-    AuthorEtAlHandlerPipe,
     HomeComponent,
-    DisplayArticlesComponent
+    DisplayArticlesComponent,
+    AuthorPipe,
+    AuthorsPipe,
+    FullCitationPipe
   ],
   imports: [
     BrowserModule,
