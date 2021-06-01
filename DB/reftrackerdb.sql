@@ -290,7 +290,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `reftrackerdb`;
-INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (1, 'Reduction in hospital-wide mortality after implementation of a rapid response team: a long-term cohort study', 15, 2011, '', 5, 'R269', NULL);
+INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (1, 'Reduction in hospital-wide mortality after implementation of a rapid response team: a long-term cohort study', 15, 2011, '', 5, 'R269', '6');
 INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (2, 'Clinical outcomes of patients seen by rapid response teams: a template for benchmarking international teams', 107, 2016, 'http://dx.doi.org/10.1016/j.resuscitation.2016.07.001', 4, '7-12', NULL);
 INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (3, 'Poor performance of quick-SOFA (qSOFA) score in predicting severe sepsis and mortality – a prospective study of patients admitted with infection to the emergency department', 25, 2017, '10.1186/s13049-017-0399-4', 10, '', NULL);
 INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (4, 'Evaluation and management of lower-extremity ulcers', 377, 2017, '10.1056/NEJMra1615243', 1, '1559-67', NULL);
