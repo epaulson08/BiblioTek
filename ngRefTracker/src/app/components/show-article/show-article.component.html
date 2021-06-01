@@ -111,7 +111,7 @@
         <div *ngIf="ama">
           <br />
           <h5>AMA Citation:</h5>
-          {{ this.selected.authors | amaAuthors }}&nbsp;
+          {{ this.selected.authors | amaAuthors }}
           {{ this.selected.title }}. <em>{{ this.selected.journal.name }}</em
           >. {{ this.selected.yearPublished }}; {{ this.selected.volumeNum
           }}<span *ngIf="this.selected.issueNum"
@@ -129,8 +129,10 @@
         <div *ngIf="apa">
           <br />
           <h5>APA Citation:</h5>
-          {{ this.selected.authors | apaAuthors }}&nbsp;
-          <em>{{ this.selected.title }}, {{ this.selected.volumeNum }}</em
+          {{ this.selected.authors | apaAuthors }}
+          ({{this.selected.yearPublished}}).
+          {{this.selected.title }}.
+          <em>{{ this.selected.journal.name }}, {{ this.selected.volumeNum }}</em
           ><span *ngIf="this.selected.issueNum"
             >({{ this.selected.issueNum }})</span
           ><span *ngIf="this.selected.pages"
