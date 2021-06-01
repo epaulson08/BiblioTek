@@ -19,7 +19,8 @@ export class ShowArticleComponent implements OnInit {
   deleted: boolean = false;
   allJournals: Journal[];
   viewCite: boolean = false;
-
+  apa: boolean = false;
+  ama: boolean = false;
 
   constructor(private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
 
@@ -112,9 +113,25 @@ export class ShowArticleComponent implements OnInit {
 
   cite() {
    this.viewCite = true;
+   this.apa = false;
+   this.ama = false;
   }
 
   resetCite() {
     this.viewCite = false;
+    this.apa = false;
+    this.ama = false;
+  }
+
+  // TODO: in future retrieve citation style
+  // object from database instead of hardcoding
+  showApa() {
+    this.apa = true;
+    this.ama = false;
+  }
+
+  showAma() {
+    this.ama = true;
+    this.apa = false;
   }
 }
