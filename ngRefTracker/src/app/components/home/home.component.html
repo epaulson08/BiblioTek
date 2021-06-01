@@ -1,3 +1,29 @@
-<div class="container-fluid">
-  <h1>Welcome to the Reference Tracker!</h1>
+<div class="background-image">
+  &nbsp;
+  <div class="center-content card mx-auto" style="max-width: 500px">
+    <h2 class="text-center">Welcome to</h2>
+    <h1 class="text-center">Reference Manager</h1>
+    <h4 class="ml-3">Login:</h4>
+    <table class="mx-3 mb-3">
+      <tr>
+        <td>Username:</td>
+        <td><input type="text" class="form-control" /></td>
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td><input type="password" class="form-control" /></td>
+      </tr>
+      <tr>
+        <td>
+          <button
+            class="my-3 btn btn-primary"
+            [routerLink]="['/list-articles']"
+          >
+            Login
+          </button>
+        </td>
+      </tr>
+      <tr><button class="btn btn-secondary">Register</button></tr>
+    </table>
+  </div>
 </div>
