@@ -18,6 +18,7 @@ export class ShowArticleComponent implements OnInit {
   editJournal: Journal;
   deleted: boolean = false;
   allJournals: Journal[];
+  viewCite: boolean = false;
 
 
   constructor(private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
@@ -100,11 +101,20 @@ export class ShowArticleComponent implements OnInit {
   setEdit(): void {
     this.editJa = this.selected;
     this.editJournal = this.selected.journal;
+    this.viewCite = false;
   }
 
   cancelEdit(): void {
     this.editJa = null;
     this.editJournal = null;
+    this.viewCite = false;
   }
 
+  cite() {
+   this.viewCite = true;
+  }
+
+  resetCite() {
+    this.viewCite = false;
+  }
 }

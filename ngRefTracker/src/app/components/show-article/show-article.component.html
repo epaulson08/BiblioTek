@@ -86,31 +86,53 @@
           </td>
         </tr>
       </table>
+      <div *ngIf="viewCite"><hr />
+        <a href="">ACS</a> ·
+        <a href="">AMA</a> ·
+        <a href="">AMS</a> ·
+        <a href="">APA</a> ·
+        <a href="">ASA</a> ·
+        <a href="">Bluebook</a> ·
+        <a href="">Chicago</a> ·
+        <a href="">IEEE</a> ·
+        <a href="">MLA</a> ·
+        <a href="">NLM</a> ·
+        <a href="">Vancouver</a>
+      </div>
     </div>
-    <div *ngIf="deleted"><h2>Deleted.</h2></div>
+  </div>
+  <div *ngIf="deleted"><h2>Deleted.</h2></div>
+
+  <!-- Buttons/Footer -->
+  <div *ngIf="!viewCite">
+    <div class="card-footer d-flex">
+      <div *ngIf="!deleted && !editJa">
+        <button class="btn btn-success mr-2" (click)="setEdit()">Edit</button>
+        <button class="btn btn-warning mr-2" (click)="cite()">Cite</button>
+        <button class="btn btn-info mr-2">Add to Collection</button>
+        <button class="btn btn-secondary mr-2" (click)="goBack()">Back</button>
+      </div>
+      <div *ngIf="!deleted && editJa">
+        <button class="btn btn-success mr-2" (click)="update(editJa)">
+          Submit</button
+        ><button class="btn btn-secondary mr-2" (click)="cancelEdit()">
+          Cancel
+        </button>
+      </div>
+      <div *ngIf="!deleted">
+        <button class="btn btn-danger" (click)="delete(selected.id)">
+          Delete
+        </button>
+      </div>
+    </div>
   </div>
 
-  <!-- Buttons -->
-  <div class="card-footer d-flex">
-    <div *ngIf="!deleted && !editJa">
+  <div *ngIf="viewCite">
+    <div class="card-footer d-flex">
+      <button class="btn btn-warning mr-2">📋 Copy</button>
       <button class="btn btn-success mr-2" (click)="setEdit()">Edit</button>
-      <button class="btn btn-warning mr-2">Cite</button>
       <button class="btn btn-info mr-2">Add to Collection</button>
-      <button class="btn btn-secondary mr-2" (click)="goBack()">
-        Back
-      </button>
-    </div>
-    <div *ngIf="!deleted && editJa">
-      <button class="btn btn-success mr-2" (click)="update(editJa)">
-        Submit</button
-      ><button class="btn btn-secondary mr-2" (click)="cancelEdit()">
-        Cancel
-      </button>
-    </div>
-    <div *ngIf="!deleted">
-      <button class="btn btn-danger" (click)="delete(selected.id)">
-        Delete
-      </button>
+      <button class="btn btn-secondary mr-2" (click)="resetCite()">Back</button>
     </div>
   </div>
 </div>
