@@ -10,5 +10,6 @@ export class JournalArticle {
   doi: string;
   journal: Journal;
   authors: Author[];
+  pages: string;
 
 }

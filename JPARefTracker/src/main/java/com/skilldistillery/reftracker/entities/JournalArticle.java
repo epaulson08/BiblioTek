@@ -40,6 +40,8 @@ public class JournalArticle {
 	@ManyToMany(mappedBy = "articles")
 	private List<Author> authors;
 	
+	private String pages;
+	
 //////// Constructors: 
 	public JournalArticle() {
 	}
@@ -101,6 +103,14 @@ public class JournalArticle {
 		this.journal = journal;
 	}
 	
+	public String getPages() {
+		return pages;
+	}
+
+	public void setPages(String pages) {
+		this.pages = pages;
+	}
+
 	//////// add, remove Author
 	public void addAuthor(Author author) {
 		if (authors == null) {
