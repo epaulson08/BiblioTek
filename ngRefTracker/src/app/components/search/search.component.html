@@ -8,6 +8,7 @@
       <input
         type="text"
         class="form-control mr-2 ml-2"
+        [(ngModel)]="searchTerm"
         name="searchTerm"
         id="searchTerm"
       />
@@ -15,7 +16,7 @@
     <button
       type="submit"
       class="btn btn-secondary"
-      (click)="search(searchForm)"
+      (click)="search()"
     >
       Search
     </button>

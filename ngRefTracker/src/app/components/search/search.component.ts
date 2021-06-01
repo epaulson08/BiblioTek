@@ -18,6 +18,7 @@ export class SearchComponent implements OnInit {
   editJa: JournalArticle;
   allJournals: Journal[];
   selectedJournal: Journal = new Journal();
+  searchTerm: string;
 
   constructor(private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
 
@@ -25,10 +26,10 @@ export class SearchComponent implements OnInit {
     this.loadJournals();
     localStorage.setItem("lastPage", "search");
     if (localStorage.getItem("lastSearchTerm")) {
-  // TODO: load prior search on page load
+      this.searchTerm = localStorage.getItem("lastSearchTerm");
+      this.search();
     }
   }
-
 
   show(form): void {
     this.jaServ.show(form.id.value).subscribe(
@@ -42,9 +43,9 @@ export class SearchComponent implements OnInit {
       });
   }
 
-  search(form): void {
-    localStorage.setItem("lastSearchTerm", form.searchTerm.value);
-    this.jaServ.search(form.searchTerm.value).subscribe(
+  search(): void {
+    localStorage.setItem("lastSearchTerm", this.searchTerm);
+    this.jaServ.search(this.searchTerm).subscribe(
       dataReceived => {
         this.articleResults = dataReceived;
       },
