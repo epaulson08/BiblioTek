@@ -1,12 +1,22 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Author } from 'src/app/models/author';
+import { AuthorEtAlHandlerPipe } from '../author-et-al-handler.pipe';
 
 @Pipe({
   name: 'amaAuthor'
 })
 export class AmaAuthorPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
+  transform(author: Author): string {
+    if (author != null) {
+      let outputStr: string = "";
+
+      if (author.lastName) outputStr += " " + author.lastName;
+      if (author.suffix) outputStr += " " + author.suffix;
+      if (author.firstName) outputStr += " " + author.firstName[0];
+      if (author.middleName) outputStr += author.middleName[0];
+      return outputStr;
+    }
     return null;
   }
-
 }
