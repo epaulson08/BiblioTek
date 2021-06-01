@@ -60,6 +60,7 @@ CREATE TABLE IF NOT EXISTS `journal_article` (
   `doi` VARCHAR(500) NULL DEFAULT NULL,
   `journal_id` INT(11) NOT NULL,
   `pages` VARCHAR(45) NULL,
+  `issue_num` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_journal_article_journal1_idx` (`journal_id` ASC))
 ENGINE = InnoDB
@@ -289,16 +290,16 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `reftrackerdb`;
-INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`) VALUES (1, 'Reduction in hospital-wide mortality after implementation of a rapid response team: a long-term cohort study', 15, 2011, '', 5, 'R269');
-INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`) VALUES (2, 'Clinical outcomes of patients seen by rapid response teams: a template for benchmarking international teams', 107, 2016, 'http://dx.doi.org/10.1016/j.resuscitation.2016.07.001', 4, '7-12');
-INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`) VALUES (3, 'Poor performance of quick-SOFA (qSOFA) score in predicting severe sepsis and mortality – a prospective study of patients admitted with infection to the emergency department', 25, 2017, '10.1186/s13049-017-0399-4', 10, '');
-INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`) VALUES (4, 'Evaluation and management of lower-extremity ulcers', 377, 2017, '10.1056/NEJMra1615243', 1, '1559-67');
-INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`) VALUES (5, 'Lipid emulsions in parenteral nutrition of intensive care patients: current thinking and future directions', 36, 2010, '10.1007/s00134-009-1744-5', 11, '735-749');
-INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`) VALUES (6, 'Acute lung failure--our evolving understanding of ARDS', 377, 2017, '10.1056/NEJMp1706595', 1, '507-509');
-INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`) VALUES (7, 'Aleukemic leukemia cutis', 86, 2019, '10.3949/ccjm.86a.18057', 12, '85-86');
-INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`) VALUES (8, 'Who needs to carry an epinephrine autoinjector?', 86, 2019, 'doi:10.3949/ccjm.86a.17123', 12, '66-72');
-INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`) VALUES (9, 'Dancing sternal wires: a radiologic sign of sternal dehiscence', 86, 2019, 'doi:10.3949/ccjm.86a.18091', 12, '87-88');
-INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`) VALUES (10, 'Artificial intelligence and machine learning in radiology: opportunities, challenges, pitfalls, and criteria for success', 15, 2018, 'https://doi.org/10.1016/j.jacr.2017.12.026', 13, '504-508');
+INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (1, 'Reduction in hospital-wide mortality after implementation of a rapid response team: a long-term cohort study', 15, 2011, '', 5, 'R269', NULL);
+INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (2, 'Clinical outcomes of patients seen by rapid response teams: a template for benchmarking international teams', 107, 2016, 'http://dx.doi.org/10.1016/j.resuscitation.2016.07.001', 4, '7-12', NULL);
+INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (3, 'Poor performance of quick-SOFA (qSOFA) score in predicting severe sepsis and mortality – a prospective study of patients admitted with infection to the emergency department', 25, 2017, '10.1186/s13049-017-0399-4', 10, '', NULL);
+INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (4, 'Evaluation and management of lower-extremity ulcers', 377, 2017, '10.1056/NEJMra1615243', 1, '1559-67', NULL);
+INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (5, 'Lipid emulsions in parenteral nutrition of intensive care patients: current thinking and future directions', 36, 2010, '10.1007/s00134-009-1744-5', 11, '735-749', NULL);
+INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (6, 'Acute lung failure--our evolving understanding of ARDS', 377, 2017, '10.1056/NEJMp1706595', 1, '507-509', NULL);
+INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (7, 'Aleukemic leukemia cutis', 86, 2019, '10.3949/ccjm.86a.18057', 12, '85-86', NULL);
+INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (8, 'Who needs to carry an epinephrine autoinjector?', 86, 2019, 'doi:10.3949/ccjm.86a.17123', 12, '66-72', NULL);
+INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (9, 'Dancing sternal wires: a radiologic sign of sternal dehiscence', 86, 2019, 'doi:10.3949/ccjm.86a.18091', 12, '87-88', NULL);
+INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (10, 'Artificial intelligence and machine learning in radiology: opportunities, challenges, pitfalls, and criteria for success', 15, 2018, 'https://doi.org/10.1016/j.jacr.2017.12.026', 13, '504-508', NULL);
 
 COMMIT;
 
