@@ -12,10 +12,11 @@ export class ApaCitationPipe implements PipeTransform {
   transform(ja: JournalArticle): string {
     let outputStr: string = "";
     let authorsStr = new ApaCitationAuthorsPipe().transform(ja.authors);
+    outputStr += authorsStr;
+    // TODO
 
-
-
-    return outputStr;
+    // return outputStr;
+    return "DEBUG: APA CITATION PIPE: " + authorsStr;
   }
 
 }

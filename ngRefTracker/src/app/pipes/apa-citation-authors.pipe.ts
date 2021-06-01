@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Author } from '../models/author';
 import { AuthorService } from '../services/author.service';
+import { ApaCitationAuthorPipe } from './apa-citation-author.pipe';
 import { AuthorEtAlHandlerPipe } from './author-et-al-handler.pipe';
 
 @Pipe({
@@ -22,39 +23,28 @@ export class ApaCitationAuthorsPipe implements PipeTransform {
     // SINGLE AUTHOR
     // Ahmed, S. (2012). On being included: Racism and diversity in institutional life. Duke University Press.
     else if (authors.length === 1) {
-      let fName = authors[0].firstName;
-      let mName = authors[0].middleName;
-      let lName = authors[0].lastName;
-      let suff = authors[0].suffix;
-
-      outputStr += lName;
-      outputStr += ", ";
-
-      if (fName) {
-        outputStr += fName.substr(0, 1);
-        outputStr += ". "
-      }
-
-      if (mName) {
-        outputStr += mName.substr(0, 1);
-        outputStr += ". "
-      }
-
-      // Treatment of suffixes: https://libguides.scu.edu.au/apa/author
-      // Jones, H. W., Jr., & Jones, H. W., Sr. (1941) ...
-      if (suff) {
-        outputStr += suff;
-        if (suff.substr[suff.length - 1] !== ".")
-          outputStr += ".";
-      }
+      return new ApaCitationAuthorPipe()
+        .transform(authors[0]);
     }
-
 
     // TWO AUTHORS
     // Soto, C. J., & John, O. P. (2017). The next big five inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power. Journal of Personality and Social Psychology, 113(1), 117-143. http://dx.doi.org/10.1037/pspp0000096
     // THREE TO TWENTY AUTHORS
     // Nguyen, T., Carnevale, J. J., Scholer, A. A., Miele, D. B., & Fujita, K. (2019). Metamotivational knowledge of the role of high-level and low-level construal in goal-relevant task performance. Journal of Personality and Social Psychology, 117(5), 879-899. http://dx.doi.org/10.1037/pspa0000166
-    else if (authors.length >= 2 && authors.length <= 20) { }
+    else if (authors.length >= 2 && authors.length <= 20) {
+      for (let i = 0; i < authors.length; i++) {
+        if (i === authors.length - 1) {
+          outputStr += "& "
+        }
+
+        outputStr += new ApaCitationAuthorPipe()
+          .transform(authors[i]);
+
+        if (i !== authors.length - 1) {
+          outputStr += ", ";
+        }
+      }
+    }
 
 
     // MORE THAN TWENTY AUTHORS
