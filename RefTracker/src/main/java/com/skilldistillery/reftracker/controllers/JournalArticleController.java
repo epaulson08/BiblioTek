@@ -22,7 +22,7 @@ import com.skilldistillery.reftracker.entities.JournalArticle;
 import com.skilldistillery.reftracker.services.AuthorService;
 import com.skilldistillery.reftracker.services.JournalArticleService;
 
-@CrossOrigin({ "*", "http://localhost:4300" })
+@CrossOrigin({ "*", "http://localhost:4200" })
 @RequestMapping("api")
 @RestController
 public class JournalArticleController {

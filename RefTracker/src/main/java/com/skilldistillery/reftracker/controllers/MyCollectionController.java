@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.skilldistillery.reftracker.entities.MyCollection;
 import com.skilldistillery.reftracker.services.MyCollectionService;
 
-@CrossOrigin({ "*", "http://localhost:4300" })
+@CrossOrigin({ "*", "http://localhost:4200" })
 @RequestMapping("api")
 @RestController
 public class MyCollectionController {

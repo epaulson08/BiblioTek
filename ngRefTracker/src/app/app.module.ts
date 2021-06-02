@@ -1,53 +1,61 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
+// web
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { JournalArticleService } from './services/journal-article.service';
-import { ListAllComponent } from './components/list-all/list-all.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthorFormatPipe } from './pipes/author-format.pipe';
+import { HttpClientModule } from '@angular/common/http';
+// components
+import { AppComponent } from './app.component';
+import { CreateComponent } from './components/create/create.component';
+import { DisplayArticlesComponent } from './components/display-articles/display-articles.component';
+import { HomeComponent } from './components/home/home.component';
+import { ListAllComponent } from './components/list-all/list-all.component';
+import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
 import { NaviComponent } from './components/navi/navi.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { CreateComponent } from './components/create/create.component';
-import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
+import { RegisterComponent } from './components/register/register.component';
 import { SearchComponent } from './components/search/search.component';
 import { ShowArticleComponent } from './components/show-article/show-article.component';
 import { ShowCollectionComponent } from './components/show-collection/show-collection.component';
-import { HomeComponent } from './components/home/home.component';
-import { DisplayArticlesComponent } from './components/display-articles/display-articles.component';
-import { ApaAuthorPipe } from './pipes/apa/apa-author.pipe';
-import { ApaAuthorsPipe } from './pipes/apa/apa-authors.pipe';
+// pipes
 import { AmaAuthorPipe } from './pipes/ama/ama-author.pipe';
 import { AmaAuthorsPipe } from './pipes/ama/ama-authors.pipe';
+import { ApaAuthorPipe } from './pipes/apa/apa-author.pipe';
+import { ApaAuthorsPipe } from './pipes/apa/apa-authors.pipe';
+import { AuthorFormatPipe } from './pipes/author-format.pipe';
+// services
+import { AuthService } from './services/auth.service';
+import { JournalArticleService } from './services/journal-article.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ListAllComponent,
-    AuthorFormatPipe,
-    NaviComponent,
-    NotFoundComponent,
-    CreateComponent,
-    MyCollectionsComponent,
-    SearchComponent,
-    ShowArticleComponent,
-    ShowCollectionComponent,
-    HomeComponent,
-    DisplayArticlesComponent,
+    AmaAuthorPipe,
+    AmaAuthorsPipe,
     ApaAuthorPipe,
     ApaAuthorsPipe,
-    AmaAuthorPipe,
-    AmaAuthorsPipe
+    AppComponent,
+    AuthorFormatPipe,
+    CreateComponent,
+    DisplayArticlesComponent,
+    HomeComponent,
+    ListAllComponent,
+    MyCollectionsComponent,
+    NaviComponent,
+    NotFoundComponent,
+    RegisterComponent,
+    SearchComponent,
+    ShowArticleComponent,
+    ShowCollectionComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
+    BrowserModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule
   ],
   providers: [
+    AuthService,
     JournalArticleService
   ],
   bootstrap: [AppComponent]

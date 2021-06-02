@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.skilldistillery.reftracker.entities.Journal;
 import com.skilldistillery.reftracker.services.JournalService;
 
-@CrossOrigin({ "*", "http://localhost:4300" })
+@CrossOrigin({ "*", "http://localhost:4200" })
 @RequestMapping("api")
 @RestController
 public class JournalController {

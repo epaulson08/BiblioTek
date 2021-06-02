@@ -91,7 +91,7 @@ DROP TABLE IF EXISTS `user` ;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NULL,
-  `password` VARCHAR(45) NULL,
+  `password` VARCHAR(4500) NULL,
   `email` VARCHAR(200) NULL,
   `first_name` VARCHAR(200) NULL,
   `last_name` VARCHAR(200) NULL,
