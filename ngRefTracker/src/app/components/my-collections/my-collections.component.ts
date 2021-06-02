@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MyCollection } from 'src/app/models/my-collection.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { MyCollectionService } from 'src/app/services/my-collection.service';
@@ -16,11 +17,12 @@ export class MyCollectionsComponent implements OnInit {
 
   constructor(
     private collServ: MyCollectionService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
-    this.auth.checkLogin();
+    if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
     this.loadMyCollections(1); // FIXME: load collections by userId once User build complete
   }
 

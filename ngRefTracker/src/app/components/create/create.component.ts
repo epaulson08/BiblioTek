@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Author } from 'src/app/models/author';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { PayloadUtility } from 'src/app/models/payload-utility.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
 import { JournalService } from 'src/app/services/journal.service';
 
@@ -22,9 +24,15 @@ export class CreateComponent implements OnInit {
   journals: Journal[] = [];
 
   //////// init:
-  constructor(private jaServ: JournalArticleService, private journalServ: JournalService) { }
+  constructor(
+    private jaServ: JournalArticleService,
+    private journalServ: JournalService,
+    private auth: AuthService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
+    if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
     this.loadJournals();
   }
 

@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
   }
 
   register() {

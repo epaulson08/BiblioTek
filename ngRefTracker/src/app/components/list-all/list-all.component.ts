@@ -25,7 +25,7 @@ export class ListAllComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.auth.checkLogin();
+    if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
     this.loadJournalArticles();
     localStorage.setItem("lastPage", "listAll");
   }
