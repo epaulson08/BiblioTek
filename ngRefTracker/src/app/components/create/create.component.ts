@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Author } from 'src/app/models/author';
@@ -15,7 +16,7 @@ import { JournalService } from 'src/app/services/journal.service';
 })
 export class CreateComponent implements OnInit {
 
-  //////// fields:
+  // fields:
   newJournal: Journal = new Journal();
   newJa: JournalArticle = new JournalArticle();
   newAuthor: Author = new Author();
@@ -23,20 +24,35 @@ export class CreateComponent implements OnInit {
   newPayload: PayloadUtility = new PayloadUtility();
   journals: Journal[] = [];
 
-  //////// init:
+
+  // init:
   constructor(
-    private jaServ: JournalArticleService,
-    private journalServ: JournalService,
     private auth: AuthService,
-    private router: Router
-    ) { }
+    private router: Router,
+    private journalServ: JournalService,
+    private jaServ: JournalArticleService
+  ) { }
 
   ngOnInit(): void {
-    if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
+    if (!this.auth.checkLogin()) {
+      this.router.navigateByUrl("home");
+    }
     this.loadJournals();
   }
 
-  //////// methods:
+  // methods:
+  generateHttpHeader() {
+    let credentials = this.auth.getCredentials();
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    }
+    return httpOptions;
+  }
+
+  // CRUD:
   create(form) {
 
     // Set article's scalar fields
@@ -52,7 +68,7 @@ export class CreateComponent implements OnInit {
     this.newPayload.ja = this.newJa;
     this.newPayload.authors = this.authorsList;
 
-    // Fire missile of academe
+    // POST
     this.jaServ.create(this.newPayload).subscribe(
       data => {
         this.newJa = new JournalArticle();
@@ -63,7 +79,7 @@ export class CreateComponent implements OnInit {
         form.reset();
       },
       err => {
-        console.error("Observer got an error: " + err);
+        console.error("Observer error: " + err);
       }
     );
   }
@@ -90,7 +106,5 @@ export class CreateComponent implements OnInit {
       });
     return null;
   }
-
-
 
 }

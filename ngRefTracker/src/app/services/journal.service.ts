@@ -1,19 +1,38 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Journal } from '../models/journal';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class JournalService {
+
   private baseUrl: string = "http://localhost:8084/";
-  private url = this.baseUrl + "api/journals/";
+
+  constructor(
+    private auth: AuthService,
+    private http : HttpClient,
+    ) { }
+
+  generateHttpHeader() {
+    let credentials = this.auth.getCredentials();
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    }
+    return httpOptions;
+  }
 
   index(): Observable<Journal[]> {
-    return this.http.get<Journal[]>(this.baseUrl + 'api/journals')
+    return this.http.get<Journal[]>(
+      this.baseUrl + 'api/journals',
+      this.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -22,6 +41,4 @@ export class JournalService {
       );
   }
 
-
-  constructor(private http : HttpClient) { }
 }
