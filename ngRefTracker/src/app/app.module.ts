@@ -26,6 +26,7 @@ import { AuthorFormatPipe } from './pipes/author-format.pipe';
 // services
 import { AuthService } from './services/auth.service';
 import { JournalArticleService } from './services/journal-article.service';
+import { FullApaPipe } from './pipes/apa/full-apa.pipe';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { JournalArticleService } from './services/journal-article.service';
     RegisterComponent,
     SearchComponent,
     ShowArticleComponent,
-    ShowCollectionComponent
+    ShowCollectionComponent,
+    FullApaPipe
   ],
   imports: [
     AppRoutingModule,

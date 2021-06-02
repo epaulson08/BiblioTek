@@ -133,7 +133,7 @@
         <div *ngIf="apa">
           <br />
           <h5>APA Citation:</h5>
-          {{ this.selected.authors | apaAuthors }}
+          <!-- {{ this.selected.authors | apaAuthors }}
           ({{this.selected.yearPublished}}).
           {{this.selected.title }}.
           <em>{{ this.selected.journal.name }}, {{ this.selected.volumeNum }}</em
@@ -141,7 +141,8 @@
             >({{ this.selected.issueNum }})</span
           ><span *ngIf="this.selected.pages"
             >,&nbsp;{{ this.selected.pages }}</span
-          >.
+          >. -->
+          <span [outerHTML]="this.selected | fullApa"></span>
           <br />
           <button class="btn btn-warning btn-sm mr-2 mt-2 mb-2">📋 Copy</button>
           <br /><br />
