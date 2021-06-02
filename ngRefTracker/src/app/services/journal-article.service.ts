@@ -59,7 +59,7 @@ export class JournalArticleService {
 
   showAllByJournal(journal: Journal): Observable<JournalArticle[]> {
     return this.http.get<JournalArticle[]>(
-      `${this.url}/journals/${journal.id}`,
+      `${this.url}journals/${journal.id}`,
       this.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
