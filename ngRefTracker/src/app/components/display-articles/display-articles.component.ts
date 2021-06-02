@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { JournalArticle } from 'src/app/models/journal-article';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-display-articles',
@@ -11,7 +12,9 @@ export class DisplayArticlesComponent implements OnInit {
   showOneArticle: boolean = false;
   @Input() articlesToDisplay: JournalArticle[];
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
   }
