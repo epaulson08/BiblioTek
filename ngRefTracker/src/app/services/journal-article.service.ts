@@ -22,20 +22,25 @@ export class JournalArticleService {
     private router: Router
     ) { }
 
-  index(): Observable<JournalArticle[]> {
-    if (!this.auth.checkLogin()) {
-      this.router.navigateByUrl("home");
-    }
 
+  generateHttpHeader() {
     let credentials = this.auth.getCredentials();
-    const httpOptions = {
+    let httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Basic ${credentials}`,
         'X-Requested-With': 'XMLHttpRequest'
       })
     }
+    return httpOptions;
+  }
 
-    return this.http.get<JournalArticle[]>(this.baseUrl + 'api/articles', httpOptions)
+  index(): Observable<JournalArticle[]> {
+    if (!this.auth.checkLogin()) {
+      this.router.navigateByUrl("home");
+    }
+    return this.http.get<JournalArticle[]>(
+      this.baseUrl + 'api/articles',
+      this.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -45,7 +50,9 @@ export class JournalArticleService {
   }
 
   show(id: number): Observable<JournalArticle> {
-    return this.http.get<JournalArticle>(this.url + id)
+    return this.http.get<JournalArticle>(
+      this.url + id,
+      this.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           return throwError(err);
@@ -73,8 +80,6 @@ export class JournalArticleService {
 
 
   create(payload: PayloadUtility): Observable<PayloadUtility> {
-    console.warn("**DEBUG: in SERVICE create()");
-
     return this.http.post<PayloadUtility>(this.baseUrl + "api/articles", payload)
       .pipe(
         catchError((err: any) => {

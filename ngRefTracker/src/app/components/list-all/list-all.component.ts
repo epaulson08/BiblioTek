@@ -22,10 +22,10 @@ export class ListAllComponent implements OnInit {
     private jaServ: JournalArticleService,
     private router: Router,
     private auth: AuthService
-  ) {
+  ) { }
 
-  }
   ngOnInit(): void {
+    this.auth.checkLogin();
     this.loadJournalArticles();
     localStorage.setItem("lastPage", "listAll");
   }
