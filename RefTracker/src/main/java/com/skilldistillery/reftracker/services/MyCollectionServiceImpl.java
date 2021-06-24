@@ -31,4 +31,10 @@ public class MyCollectionServiceImpl implements MyCollectionService {
 	public List<MyCollection> index() {
 		return collRepo.findAll();
 	}
+	
+	@Override
+	public MyCollection create(MyCollection coll) {
+		coll = collRepo.saveAndFlush(coll);
+		return coll;
+	}
 }

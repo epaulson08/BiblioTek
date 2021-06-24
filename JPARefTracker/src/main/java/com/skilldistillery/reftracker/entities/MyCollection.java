@@ -1,5 +1,6 @@
 package com.skilldistillery.reftracker.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -76,7 +77,7 @@ public class MyCollection {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+	
 	// Equals, hash, toString:
 	@Override
 	public int hashCode() {

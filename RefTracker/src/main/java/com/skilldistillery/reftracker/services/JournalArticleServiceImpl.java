@@ -12,8 +12,11 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.reftracker.controllers.PayloadUtility;
 import com.skilldistillery.reftracker.entities.Author;
 import com.skilldistillery.reftracker.entities.JournalArticle;
+import com.skilldistillery.reftracker.entities.MyCollection;
+import com.skilldistillery.reftracker.entities.User;
 import com.skilldistillery.reftracker.repositories.AuthorRepository;
 import com.skilldistillery.reftracker.repositories.JournalArticleRepository;
+import com.skilldistillery.reftracker.repositories.UserRepository;
 
 @Service
 @Transactional
@@ -24,8 +27,15 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 
 	@Autowired
 	private AuthorRepository authorRepo;
-	
-	@Autowired AuthorService authorServ;
+
+	@Autowired
+	private AuthorService authorServ;
+
+	@Autowired
+	private MyCollectionService collServ;
+
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override
 	public List<JournalArticle> index() {
@@ -58,9 +68,11 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 		Author managedAuthor;
 		List<Author> payloadAuthors;
 		List<Author> managedAuthors = new ArrayList<>();
-		
-		payloadJA = payload.getJa();		
+		Integer payloadUserId;
+
+		payloadJA = payload.getJa();
 		payloadAuthors = payload.getAuthors();
+		payloadUserId = payload.getUserId();
 
 		// Persist journal article:
 		managedJA = jaRepo.saveAndFlush(payloadJA);
@@ -72,11 +84,21 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 			managedAuthors.add(managedAuthor);
 			managedAuthor = null;
 		}
-		
+
 		// Add each author to the journal article:
 		for (Author ma : managedAuthors) {
-			addAuthor(managedJAId, ma.getId());				
+			addAuthor(managedJAId, ma.getId());
 		}
+
+		// Add the article to the user's all_articles_for_user
+		// TODO
+		User managedUser = null;
+		Optional<User> opt = userRepo.findById(payloadUserId);
+		if (opt.isPresent()) {
+			managedUser = opt.get();
+		} else
+			return null;		
+		// FIXME
 		
 		return managedJA;
 	}
@@ -147,5 +169,5 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 	public List<JournalArticle> findArticlesByJournalId(int journalId) {
 		return jaRepo.findByJournalId(journalId);
 	}
-	
+
 }

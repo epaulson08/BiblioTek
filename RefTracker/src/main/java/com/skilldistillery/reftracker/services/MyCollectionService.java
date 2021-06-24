@@ -10,4 +10,5 @@ public interface MyCollectionService {
 	
 	MyCollection findById(Integer id);	
 
+	MyCollection create(MyCollection myCollection);
 }

@@ -1,6 +1,5 @@
 package com.skilldistillery.reftracker.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.reftracker.entities.Author;
 import com.skilldistillery.reftracker.entities.JournalArticle;
-import com.skilldistillery.reftracker.services.AuthorService;
 import com.skilldistillery.reftracker.services.JournalArticleService;
 
 @CrossOrigin({ "*", "http://localhost:4200" })
@@ -70,9 +67,6 @@ public class JournalArticleController {
 	@PostMapping("articles")
 	public JournalArticle create(@RequestBody PayloadUtility payload, HttpServletRequest req,
 			HttpServletResponse resp) {
-		System.out.println(payload);
-		System.out.println(payload.getAuthors());
-		
 		
 		if (payload == null || payload.getAuthors() == null || payload.getJa() == null) {
 			resp.setStatus(400);

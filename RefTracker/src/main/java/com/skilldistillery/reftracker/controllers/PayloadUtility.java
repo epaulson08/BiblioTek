@@ -14,7 +14,8 @@ public class PayloadUtility {
 	private List<JournalArticle> jas;
 	private Journal journal;
 	private List<Journal> journals;
-
+	private Integer userId;
+	
 	public PayloadUtility() {
 	}
 
@@ -64,6 +65,14 @@ public class PayloadUtility {
 
 	public void setJournals(List<Journal> journals) {
 		this.journals = journals;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	
 	
