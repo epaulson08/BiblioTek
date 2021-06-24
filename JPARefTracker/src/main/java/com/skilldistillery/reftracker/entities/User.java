@@ -19,6 +19,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class User {
 
+	// All of the user's articles will be stored in a MyCollection
+	// object arbitrarily assigned an ID of 1.
+	// When a user creates an article, it should be assigned to 
+	// this MyCollection.
+	public static final int ALL_ARTICLES_COLLECTION_ID = 1;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
