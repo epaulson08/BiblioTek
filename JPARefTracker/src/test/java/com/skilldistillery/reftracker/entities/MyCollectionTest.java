@@ -54,4 +54,9 @@ public class MyCollectionTest {
 		assertTrue(myCollection.getArticles().size() > 0);
 	}
 
+	@Test
+	void test_MyCollection_to_User_mapping() {
+		assertNotNull(myCollection);
+		assertTrue(myCollection.getUser().getId() == 1);
+	}
 }

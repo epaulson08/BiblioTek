@@ -2,15 +2,19 @@ package com.skilldistillery.reftracker.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -49,6 +53,10 @@ public class User {
 	@UpdateTimestamp
 	@Column(name = "update_date")
 	private LocalDateTime updateDate;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="user")
+	private List<MyCollection> myCollections;
 
 	// ctors
 	public User() {
@@ -157,6 +165,14 @@ public class User {
 
 	public void setUpdateDate(LocalDateTime updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public List<MyCollection> getMyCollections() {
+		return myCollections;
+	}
+
+	public void setMyCollections(List<MyCollection> myCollections) {
+		this.myCollections = myCollections;
 	}
 
 	// hash, equals, toString

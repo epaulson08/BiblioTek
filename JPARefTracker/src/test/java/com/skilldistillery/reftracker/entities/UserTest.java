@@ -2,6 +2,7 @@ package com.skilldistillery.reftracker.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -55,6 +56,21 @@ public class UserTest {
 	void test_User_entity_mappings() {
 		assertNotNull(user);
 		assertEquals("testuser", user.getUsername());
+	}
+	
+	@Test
+	void test_User_to_MyCollection_mapping() {
+		assertNotNull(user);
+		assertTrue(user.getMyCollections().size() > 0);
+		/*
+mysql> select * from my_collection where user_id = 1;
++----+----------------------+------------------------------------------------------------+---------+
+| id | name                 | description                                                | user_id |
++----+----------------------+------------------------------------------------------------+---------+
+|  1 | Rapid response paper | Articles for rapid response team review project, fall 2020 |       1 |
++----+----------------------+------------------------------------------------------------+---------+
+1 row in set (0.01 sec)
+		 */
 	}
 	
 }

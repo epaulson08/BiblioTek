@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +28,10 @@ public class MyCollection {
 	@JoinTable(name = "my_collection_journal_article", joinColumns = @JoinColumn(name = "my_collection_id"), inverseJoinColumns = @JoinColumn(name = "journal_article_id"))
 	private List<JournalArticle> articles;
 
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
 	// Ctors:
 	public MyCollection() {
 	}
@@ -62,6 +67,14 @@ public class MyCollection {
 
 	public void setArticles(List<JournalArticle> articles) {
 		this.articles = articles;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	// Equals, hash, toString:
