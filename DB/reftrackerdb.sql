@@ -206,6 +206,20 @@ CREATE TABLE IF NOT EXISTS `user_citation_style` (
   INDEX `fk_user_has_citation_style_user1_idx` (`user_id` ASC))
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `all_articles_for_user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `all_articles_for_user` ;
+
+CREATE TABLE IF NOT EXISTS `all_articles_for_user` (
+  `user_id` INT NOT NULL,
+  `journal_article_id` INT(11) NOT NULL,
+  PRIMARY KEY (`user_id`, `journal_article_id`),
+  INDEX `fk_user_has_journal_article_journal_article1_idx` (`journal_article_id` ASC),
+  INDEX `fk_user_has_journal_article_user1_idx` (`user_id` ASC))
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS user@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -427,6 +441,19 @@ START TRANSACTION;
 USE `reftrackerdb`;
 INSERT INTO `user_citation_style` (`user_id`, `citation_style_id`) VALUES (1, 1);
 INSERT INTO `user_citation_style` (`user_id`, `citation_style_id`) VALUES (1, 2);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `all_articles_for_user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `reftrackerdb`;
+INSERT INTO `all_articles_for_user` (`user_id`, `journal_article_id`) VALUES (1, 1);
+INSERT INTO `all_articles_for_user` (`user_id`, `journal_article_id`) VALUES (1, 2);
+INSERT INTO `all_articles_for_user` (`user_id`, `journal_article_id`) VALUES (1, 3);
+INSERT INTO `all_articles_for_user` (`user_id`, `journal_article_id`) VALUES (1, 4);
 
 COMMIT;
 
