@@ -1,4 +1,6 @@
+import { NgLocaleLocalization } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { LocalStorageKeyList } from 'src/app/models/local-storage-key-list';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -14,6 +16,7 @@ export class NaviComponent implements OnInit {
   }
 
   logout() {
+    LocalStorageKeyList.clear();
     this.auth.logout();
   }
 

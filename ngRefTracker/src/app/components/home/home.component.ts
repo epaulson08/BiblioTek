@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalStorageKeyList } from 'src/app/models/local-storage-key-list';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
     this.auth.login(form.uname.value, form.pass.value)
       .subscribe(
         data => {
+          LocalStorageKeyList.clear();
           this.router.navigateByUrl("/list-articles");
         },
         err => {
