@@ -40,6 +40,10 @@ public class JournalArticle {
 	@ManyToMany(mappedBy = "articles")
 	private List<Author> authors;
 	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "articles")
+	private List<User> users;
+	
 	private String pages;
 	
 	@Column(name = "issue_num")
@@ -122,6 +126,14 @@ public class JournalArticle {
 		this.issueNum = issueNum;
 	}
 
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
 	//////// add, remove Author
 	public void addAuthor(Author author) {
 		if (authors == null) {
@@ -139,7 +151,25 @@ public class JournalArticle {
 			author.removeJournalArticle(this);
 		}
 	}
+	
+	// add, remove User
+	public void addUser(User user) {
+		if (users == null) {
+			users = new ArrayList<>();
+		}
+		if (!users.contains(user)) {
+			users.add(user);
+			user.addJA(this);
+		}
+	}
 
+	public void removeUser(User user) {
+		if (users != null && users.contains(user)) {
+			users.remove(user);
+			user.removeJA(this);
+		}
+	}
+	
 	//////// hash, equals, toString:
 	@Override
 	public int hashCode() {

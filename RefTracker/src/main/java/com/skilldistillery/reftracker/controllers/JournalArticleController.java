@@ -1,5 +1,6 @@
 package com.skilldistillery.reftracker.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +40,16 @@ public class JournalArticleController {
 			resp.setStatus(404);
 		}
 		return ja;
+	}
+	
+	@GetMapping("articles/users/")
+	public List<JournalArticle> findByUser(HttpServletResponse resp, Principal principal) {
+		String username = principal.getName();
+		List<JournalArticle> jas = jaServ.findArticlesByUser(username);
+		if (jas == null) {
+			resp.setStatus(404);
+		}
+		return jas;
 	}
 	
 	@GetMapping("articles/journals/{journalId}")

@@ -14,12 +14,11 @@ import { Router } from '@angular/router';
 export class JournalArticleService {
 
   private baseUrl: string = "http://localhost:8084/";
-  private url = this.baseUrl + "api/articles/";
+  private url: string = this.baseUrl + "api/articles/";
 
   constructor(
     private http: HttpClient,
     private auth: AuthService,
-    private router: Router
   ) { }
 
 
@@ -34,9 +33,21 @@ export class JournalArticleService {
     return httpOptions;
   }
 
-  index(): Observable<JournalArticle[]> {
+  allJournalArticlesAllUsers(): Observable<JournalArticle[]> {
     return this.http.get<JournalArticle[]>(
       this.baseUrl + 'api/articles',
+      this.generateHttpHeader())
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('A problem occurred.');
+        })
+      );
+  }
+
+  index(): Observable<JournalArticle[]> {
+    return this.http.get<JournalArticle[]>(
+      this.baseUrl + 'api/articles/users/',
       this.generateHttpHeader())
       .pipe(
         catchError((err: any) => {

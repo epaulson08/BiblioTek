@@ -2,6 +2,7 @@ package com.skilldistillery.reftracker.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -53,10 +57,15 @@ public class User {
 	@UpdateTimestamp
 	@Column(name = "update_date")
 	private LocalDateTime updateDate;
-	
+
 	@JsonIgnore
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy = "user")
 	private List<MyCollection> myCollections;
+
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "all_articles_for_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "journal_article_id"))
+	List<JournalArticle> articles;
 
 	// ctors
 	public User() {
@@ -173,6 +182,34 @@ public class User {
 
 	public void setMyCollections(List<MyCollection> myCollections) {
 		this.myCollections = myCollections;
+	}
+
+	public List<JournalArticle> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(List<JournalArticle> articles) {
+		this.articles = articles;
+	}
+
+	// add, remove JournalArticle
+
+	//////// add, remove Author from JournalArticle
+	public void addJA(JournalArticle ja) {
+		if (articles == null) {
+			articles = new ArrayList<>();
+		}
+		if (!articles.contains(ja)) {
+			articles.add(ja);
+			ja.addUser(this);
+		}
+	}
+
+	public void removeJA(JournalArticle ja) {
+		if (articles != null && articles.contains(ja)) {
+			articles.remove(ja);
+			ja.removeUser(this);
+		}
 	}
 
 	// hash, equals, toString

@@ -61,7 +61,14 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 	public List<JournalArticle> search(String searchTerm) {
 		return jaRepo.findDistinctByTitleContainsOrAuthors_LastNameContainsIgnoreCase(searchTerm, searchTerm);
 	}
-
+	
+	@Override
+	public List<JournalArticle> findArticlesByUser(String username) {
+		List<JournalArticle> jas = null;
+		jas = jaRepo.findByUsers_Username(username);
+		return jas;
+	}
+	
 	@Override
 	public JournalArticle create(PayloadUtility payload) {
 		JournalArticle payloadJA, managedJA;
@@ -97,8 +104,8 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 		if (opt.isPresent()) {
 			managedUser = opt.get();
 		} else
-			return null;		
-		// FIXME
+			return null;
+		// TODO
 		
 		return managedJA;
 	}

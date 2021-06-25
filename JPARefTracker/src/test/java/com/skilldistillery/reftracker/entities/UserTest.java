@@ -73,4 +73,22 @@ mysql> select * from my_collection where user_id = 1;
 		 */
 	}
 	
+	@Test
+	void test_User_to_JournalArticle_mapping() {
+		assertNotNull(user);
+		assertTrue(user.getArticles().size() > 0);
+/*
+mysql> select * from all_articles_for_user;
++---------+--------------------+
+| user_id | journal_article_id |
++---------+--------------------+
+|       1 |                  1 |
+|       1 |                  2 |
+|       1 |                  3 |
+|       1 |                  4 |
++---------+--------------------+
+4 rows in set (0.00 sec)
+*/
+	}
+	
 }

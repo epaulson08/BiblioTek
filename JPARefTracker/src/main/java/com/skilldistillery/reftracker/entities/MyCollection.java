@@ -1,6 +1,5 @@
 package com.skilldistillery.reftracker.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;

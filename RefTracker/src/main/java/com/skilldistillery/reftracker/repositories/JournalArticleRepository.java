@@ -13,4 +13,6 @@ public interface JournalArticleRepository extends JpaRepository<JournalArticle, 
 	List<JournalArticle> findDistinctByTitleContainsOrAuthors_LastNameContainsIgnoreCase(String searchTerm1, String searchTerm2);
 	
 	List<JournalArticle> findByJournalId(int journalId);
+	
+	List<JournalArticle> findByUsers_Username(String username);
 }

@@ -69,5 +69,11 @@ mysql> select * from journal_article where id = 1;
 		assertNotNull(ja);
 		assertEquals(5, ja.getJournal().getId());
 	}
+	
+	@Test
+	void test_JournalArticle_to_User_mapping() {
+		assertNotNull(ja);
+		assertTrue(ja.getUsers().size() > 0);
+	}
 
 }

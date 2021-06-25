@@ -1,1 +1,23 @@
-<p>register works!</p>
+<form #registerForm>
+<table>
+  <tr>
+    <td><label>Username:</label></td>
+    <td><input name="uname" type="text" class="form-control" /></td>
+  </tr>
+  <tr>
+    <td><label>Password:</label></td>
+    <td><input name="pass" type="password" class="form-control" /></td>
+  </tr>
+  <tr>
+    <td>
+      <button
+        class="my-3 btn btn-primary"
+        type="submit"
+        (click)="register(registerForm)"
+      >
+        Register
+      </button>
+    </td>
+  </tr>
+  </table>
+</form>
