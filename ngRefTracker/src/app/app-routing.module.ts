@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateComponent } from './components/create/create.component';
+import { DownloadCopyComponent } from './components/download-copy/download-copy.component';
 import { HomeComponent } from './components/home/home.component';
 import { ListAllComponent } from './components/list-all/list-all.component';
 import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'my-collections', component: MyCollectionsComponent },
   { path: 'search', component: SearchComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'test', component: DownloadCopyComponent},
   { path: '**', component: NotFoundComponent }
 ];
 

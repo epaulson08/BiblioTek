@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CreateComponent } from './components/create/create.component';
 import { DisplayArticlesComponent } from './components/display-articles/display-articles.component';
+import { DownloadCopyComponent } from './components/download-copy/download-copy.component';
 import { HomeComponent } from './components/home/home.component';
 import { ListAllComponent } from './components/list-all/list-all.component';
 import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
@@ -49,7 +50,8 @@ import { FullAmaPipe } from './pipes/ama/full-ama.pipe';
     ShowArticleComponent,
     ShowCollectionComponent,
     FullApaPipe,
-    FullAmaPipe
+    FullAmaPipe,
+    DownloadCopyComponent
   ],
   imports: [
     AppRoutingModule,
