@@ -82,11 +82,9 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 		Author managedAuthor;
 		List<Author> payloadAuthors;
 		List<Author> managedAuthors = new ArrayList<>();
-		Integer payloadUserId;
 
 		payloadJA = payload.getJa();
 		payloadAuthors = payload.getAuthors();
-		payloadUserId = payload.getUserId();
 
 		// Persist journal article:
 		managedJA = jaRepo.saveAndFlush(payloadJA);
@@ -107,7 +105,6 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 		// Add the article to the user's all_articles_for_user
 		User managedUser = null;
 		managedUser = userRepo.findByUsername(username);
-		System.err.println("************" + managedUser.getUsername());
 		managedUser.addJA(managedJA);
 		managedJA.addUser(managedUser);
 
@@ -124,7 +121,7 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 			oldJa.setTitle(newJa.getTitle());
 			oldJa.setVolumeNum(newJa.getVolumeNum());
 			oldJa.setYearPublished(newJa.getYearPublished());
-			jaRepo.saveAndFlush(oldJa);
+			newJa = jaRepo.saveAndFlush(oldJa);
 		}
 		return newJa;
 	}

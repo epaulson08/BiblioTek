@@ -90,12 +90,11 @@ import com.skilldistillery.reftracker.services.UserService;
 @CrossOrigin({ "*", "http://localhost:4200" })
 @RestController
 public class JournalArticleController {
-	
+
 	/*
-	 * FIXME
-	 * Update HTTP responses
+	 * FIXME Update HTTP responses
 	 */
-	
+
 	@Autowired
 	private JournalArticleService jaServ;
 
@@ -106,21 +105,12 @@ public class JournalArticleController {
 		return userServ.showByUserName(principal.getName()).getRole().equals("admin");
 	}
 
-	private boolean belongsToUser(JournalArticle ja, Principal principal) {
-		User user = userServ.showByUserName(principal.getName());
-		JournalArticle managedJa = jaServ.findById(ja.getId());
-		if (managedJa.getUsers().contains(user))
-			return true;
-		return false;
-	}
-
 	private boolean belongsToUser(int journalArticleId, Principal principal) {
 		User user = userServ.showByUserName(principal.getName());
 		JournalArticle managedJa = jaServ.findById(journalArticleId);
 		if (managedJa.getUsers().contains(user))
 			return true;
 		return false;
-
 	}
 
 	@GetMapping("api/all/articles")
@@ -230,7 +220,7 @@ public class JournalArticleController {
 	@PutMapping("api/articles/{id}")
 	public JournalArticle update(@PathVariable Integer id, @RequestBody JournalArticle ja, Principal principal,
 			HttpServletResponse resp) {
-		if (belongsToUser(ja, principal)) {
+		if (belongsToUser(id, principal)) {
 			try {
 				ja = jaServ.update(id, ja);
 				if (ja == null) {
