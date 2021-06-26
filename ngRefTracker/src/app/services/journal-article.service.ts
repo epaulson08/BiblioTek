@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 export class JournalArticleService {
 
   private baseUrl: string = "http://localhost:8084/";
-  private url: string = this.baseUrl + "api/articles/";
 
   constructor(
     private http: HttpClient,
@@ -35,7 +34,7 @@ export class JournalArticleService {
 
   allJournalArticlesAllUsers(): Observable<JournalArticle[]> {
     return this.http.get<JournalArticle[]>(
-      this.baseUrl + 'api/articles',
+      `${this.baseUrl}api/all/articles/`,
       this.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
@@ -47,7 +46,7 @@ export class JournalArticleService {
 
   index(): Observable<JournalArticle[]> {
     return this.http.get<JournalArticle[]>(
-      this.baseUrl + 'api/articles/users/',
+      `${this.baseUrl}api/articles/`,
       this.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
@@ -59,7 +58,7 @@ export class JournalArticleService {
 
   show(id: number): Observable<JournalArticle> {
     return this.http.get<JournalArticle>(
-      this.url + id,
+      `${this.baseUrl}api/articles/${id}`,
       this.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
@@ -70,7 +69,7 @@ export class JournalArticleService {
 
   showAllByJournal(journal: Journal): Observable<JournalArticle[]> {
     return this.http.get<JournalArticle[]>(
-      `${this.url}journals/${journal.id}`,
+      `${this.baseUrl}api/articles/journals/${journal.id}`,
       this.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
@@ -81,7 +80,7 @@ export class JournalArticleService {
 
   search(searchTerm: string): Observable<JournalArticle[]> {
     return this.http.get<JournalArticle[]>(
-      this.url + "search/" + searchTerm,
+      `${this.baseUrl}api/articles/search/${searchTerm}`,
       this.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
@@ -92,7 +91,7 @@ export class JournalArticleService {
 
   create(payload: PayloadUtility): Observable<PayloadUtility> {
     return this.http.post<PayloadUtility>(
-      this.baseUrl + "api/articles",
+      `${this.baseUrl}api/articles/`,
       payload,
       this.generateHttpHeader())
       .pipe(
@@ -107,7 +106,7 @@ export class JournalArticleService {
     // TODO: allow author, journal update
     // may need to change argument to PayloadUtility
     return this.http.put<JournalArticle>(
-      this.baseUrl + "api/articles/" + ja.id,
+      `${this.baseUrl}api/articles/${ja.id}`,
       ja,
       this.generateHttpHeader())
       .pipe(
@@ -120,7 +119,7 @@ export class JournalArticleService {
 
   delete(id: number): Observable<Object> {
     return this.http.delete(
-      this.baseUrl + "api/articles/" + id,
+      `${this.baseUrl}api/articles/${id}`,
       this.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
