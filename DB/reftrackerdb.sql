@@ -186,7 +186,7 @@ DROP TABLE IF EXISTS `citation_style_link` ;
 CREATE TABLE IF NOT EXISTS `citation_style_link` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `url` VARCHAR(450) NULL,
-  `comment` VARCHAR(45) NULL,
+  `comment` VARCHAR(4500) NULL,
   `citation_style_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_citation_style_link_citation_style1_idx` (`citation_style_id` ASC))
@@ -204,6 +204,20 @@ CREATE TABLE IF NOT EXISTS `user_citation_style` (
   PRIMARY KEY (`user_id`, `citation_style_id`),
   INDEX `fk_user_has_citation_style_citation_style1_idx` (`citation_style_id` ASC),
   INDEX `fk_user_has_citation_style_user1_idx` (`user_id` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `all_articles_for_user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `all_articles_for_user` ;
+
+CREATE TABLE IF NOT EXISTS `all_articles_for_user` (
+  `user_id` INT NOT NULL,
+  `journal_article_id` INT(11) NOT NULL,
+  PRIMARY KEY (`user_id`, `journal_article_id`),
+  INDEX `fk_user_has_journal_article_journal_article1_idx` (`journal_article_id` ASC),
+  INDEX `fk_user_has_journal_article_user1_idx` (`user_id` ASC))
 ENGINE = InnoDB;
 
 
@@ -418,8 +432,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `reftrackerdb`;
-INSERT INTO `citation_style` (`id`, `name`, `definitive_reference`, `definitive_reference_url`, `abbreviation`) VALUES (1, 'American Psychological Association', NULL, NULL, 'APA');
-INSERT INTO `citation_style` (`id`, `name`, `definitive_reference`, `definitive_reference_url`, `abbreviation`) VALUES (2, 'American Medical Association', NULL, NULL, 'AMA');
+INSERT INTO `citation_style` (`id`, `name`, `definitive_reference`, `definitive_reference_url`, `abbreviation`) VALUES (1, 'American Psychological Association', 'American Psychological Association APA Style Website', 'https://apastyle.apa.org/', 'APA');
+INSERT INTO `citation_style` (`id`, `name`, `definitive_reference`, `definitive_reference_url`, `abbreviation`) VALUES (2, 'American Medical Association', 'AMA Manual of Style', 'https://www.amamanualofstyle.com/', 'AMA');
 
 COMMIT;
 
@@ -429,7 +443,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `reftrackerdb`;
-INSERT INTO `citation_style_link` (`id`, `url`, `comment`, `citation_style_id`) VALUES (1, 'https://owl.purdue.edu/owl/research_and_citation/ama_style/index.html', NULL, 2);
+INSERT INTO `citation_style_link` (`id`, `url`, `comment`, `citation_style_id`) VALUES (1, 'https://owl.purdue.edu/owl/research_and_citation/ama_style/index.html', 'Purdue University\'s Online Writing Lab, AMA page', 2);
+INSERT INTO `citation_style_link` (`id`, `url`, `comment`, `citation_style_id`) VALUES (2, 'https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/general_format.html', 'Purdue University\'s Online Writing lab, APA page', 1);
+INSERT INTO `citation_style_link` (`id`, `url`, `comment`, `citation_style_id`) VALUES (3, 'https://library.tamu.edu/help/help-yourself/citing-sources/files/Using-the-AMA-Style.pdf', 'Texas A&M University AMA style guide. Warning: this is from 2009 and may contain outdated information.', 2);
+INSERT INTO `citation_style_link` (`id`, `url`, `comment`, `citation_style_id`) VALUES (4, 'https://www.scribbr.com/apa-style/format/', 'Scribbr\'s guide to APA document formatting.', 1);
 
 COMMIT;
 
