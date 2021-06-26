@@ -44,13 +44,7 @@ public class UserServiceImpl implements UserService {
 		}
 		return user;
 	}
-
-	// Handled in the AuthSvc (in order to properly set password in DB):
-	@Override
-	public User create(String username, User user) {
-		return null;
-	}
-
+	
 	@Override
 	public User update(String username, int uid, User user) {
 		User requestingUser = userRepo.findByUsername(username);

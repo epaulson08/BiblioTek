@@ -12,7 +12,8 @@ public interface UserService {
 	
 	public User showByUserName(String username);
 
-	public User create(String username, User user);
+	// CREATE functionality will be handled in the AuthService.
+//	public User create(String username, User user);
 
 	public User update(String username, int uid, User user);
 
