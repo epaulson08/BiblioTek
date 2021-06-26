@@ -61,7 +61,7 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 	public List<JournalArticle> search(String searchTerm) {
 		return jaRepo.findDistinctByTitleContainsOrAuthors_LastNameContainsIgnoreCase(searchTerm, searchTerm);
 	}
-	
+
 	@Override
 	public List<JournalArticle> findByUser(String username) {
 		List<JournalArticle> jas = null;
@@ -75,9 +75,9 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 		jas = jaRepo.findByJournalIdAndUsersUsername(id, username);
 		return jas;
 	}
-	
+
 	@Override
-	public JournalArticle create(PayloadUtility payload) {
+	public JournalArticle create(PayloadUtility payload, String username) {
 		JournalArticle payloadJA, managedJA;
 		Author managedAuthor;
 		List<Author> payloadAuthors;
@@ -105,16 +105,12 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 		}
 
 		// Add the article to the user's all_articles_for_user
-		// TODO
 		User managedUser = null;
-		Optional<User> opt = userRepo.findById(payloadUserId);
-		if (opt.isPresent()) {
-			managedUser = opt.get();
-		} else
-			return null;
-		
-		// TODO
-		
+		managedUser = userRepo.findByUsername(username);
+		System.err.println("************" + managedUser.getUsername());
+		managedUser.addJA(managedJA);
+		managedJA.addUser(managedUser);
+
 		return managedJA;
 	}
 

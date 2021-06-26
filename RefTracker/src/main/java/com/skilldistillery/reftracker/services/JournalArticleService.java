@@ -13,7 +13,7 @@ public interface JournalArticleService {
 
 	JournalArticle findById(int id);
 	
-	JournalArticle create(PayloadUtility payload);
+	JournalArticle create(PayloadUtility payload, String username);
 	
 	JournalArticle update(int id, JournalArticle newJa);
 	

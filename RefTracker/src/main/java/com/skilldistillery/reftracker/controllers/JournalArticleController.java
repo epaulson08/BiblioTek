@@ -201,7 +201,7 @@ public class JournalArticleController {
 	}
 
 	@PostMapping("api/articles")
-	public JournalArticle create(@RequestBody PayloadUtility payload, HttpServletRequest req,
+	public JournalArticle create(@RequestBody PayloadUtility payload, Principal principal, HttpServletRequest req,
 			HttpServletResponse resp) {
 
 		if (payload == null || payload.getAuthors() == null || payload.getJa() == null) {
@@ -210,7 +210,7 @@ public class JournalArticleController {
 		}
 
 		try {
-			JournalArticle managedJA = jaServ.create(payload);
+			JournalArticle managedJA = jaServ.create(payload, principal.getName());
 			resp.setStatus(201);
 
 			StringBuffer url = req.getRequestURL();
