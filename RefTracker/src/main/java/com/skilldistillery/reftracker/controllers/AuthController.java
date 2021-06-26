@@ -27,7 +27,8 @@ public class AuthController {
 		if (user == null) {
 			resp.setStatus(400);
 		}
-
+		
+		user.setRole("user");
 		user = authService.register(user);
 
 		return user;

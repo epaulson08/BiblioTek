@@ -63,9 +63,16 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 	}
 	
 	@Override
-	public List<JournalArticle> findArticlesByUser(String username) {
+	public List<JournalArticle> findByUser(String username) {
 		List<JournalArticle> jas = null;
-		jas = jaRepo.findByUsers_Username(username);
+		jas = jaRepo.findByUsersUsername(username);
+		return jas;
+	}
+
+	@Override
+	public List<JournalArticle> findByJournalIdAndUsersUsername(int id, String username) {
+		List<JournalArticle> jas = null;
+		jas = jaRepo.findByJournalIdAndUsersUsername(id, username);
 		return jas;
 	}
 	
@@ -105,6 +112,7 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 			managedUser = opt.get();
 		} else
 			return null;
+		
 		// TODO
 		
 		return managedJA;
@@ -173,7 +181,7 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 	}
 
 	@Override
-	public List<JournalArticle> findArticlesByJournalId(int journalId) {
+	public List<JournalArticle> findByJournalId(int journalId) {
 		return jaRepo.findByJournalId(journalId);
 	}
 

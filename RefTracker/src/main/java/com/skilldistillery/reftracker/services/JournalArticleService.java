@@ -23,7 +23,9 @@ public interface JournalArticleService {
 
 	List<JournalArticle> search(String searchTerm);
 	
-	List<JournalArticle> findArticlesByJournalId(int journalId);
+	List<JournalArticle> findByJournalId(int journalId);
+
+	List<JournalArticle> findByJournalIdAndUsersUsername(int journalId, String username);
 	
-	List<JournalArticle> findArticlesByUser(String username);
+	List<JournalArticle> findByUser(String username);
 }
