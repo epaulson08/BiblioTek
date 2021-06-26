@@ -61,25 +61,30 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 	public List<JournalArticle> search(String searchTerm) {
 		return jaRepo.findDistinctByTitleContainsOrAuthors_LastNameContainsIgnoreCase(searchTerm, searchTerm);
 	}
-	
+
 	@Override
-	public List<JournalArticle> findArticlesByUser(String username) {
+	public List<JournalArticle> findByUser(String username) {
 		List<JournalArticle> jas = null;
-		jas = jaRepo.findByUsers_Username(username);
+		jas = jaRepo.findByUsersUsername(username);
 		return jas;
 	}
-	
+
 	@Override
-	public JournalArticle create(PayloadUtility payload) {
+	public List<JournalArticle> findByJournalIdAndUsersUsername(int id, String username) {
+		List<JournalArticle> jas = null;
+		jas = jaRepo.findByJournalIdAndUsersUsername(id, username);
+		return jas;
+	}
+
+	@Override
+	public JournalArticle create(PayloadUtility payload, String username) {
 		JournalArticle payloadJA, managedJA;
 		Author managedAuthor;
 		List<Author> payloadAuthors;
 		List<Author> managedAuthors = new ArrayList<>();
-		Integer payloadUserId;
 
 		payloadJA = payload.getJa();
 		payloadAuthors = payload.getAuthors();
-		payloadUserId = payload.getUserId();
 
 		// Persist journal article:
 		managedJA = jaRepo.saveAndFlush(payloadJA);
@@ -98,15 +103,11 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 		}
 
 		// Add the article to the user's all_articles_for_user
-		// TODO
 		User managedUser = null;
-		Optional<User> opt = userRepo.findById(payloadUserId);
-		if (opt.isPresent()) {
-			managedUser = opt.get();
-		} else
-			return null;
-		// TODO
-		
+		managedUser = userRepo.findByUsername(username);
+		managedUser.addJA(managedJA);
+		managedJA.addUser(managedUser);
+
 		return managedJA;
 	}
 
@@ -120,7 +121,7 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 			oldJa.setTitle(newJa.getTitle());
 			oldJa.setVolumeNum(newJa.getVolumeNum());
 			oldJa.setYearPublished(newJa.getYearPublished());
-			jaRepo.saveAndFlush(oldJa);
+			newJa = jaRepo.saveAndFlush(oldJa);
 		}
 		return newJa;
 	}
@@ -173,7 +174,7 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 	}
 
 	@Override
-	public List<JournalArticle> findArticlesByJournalId(int journalId) {
+	public List<JournalArticle> findByJournalId(int journalId) {
 		return jaRepo.findByJournalId(journalId);
 	}
 

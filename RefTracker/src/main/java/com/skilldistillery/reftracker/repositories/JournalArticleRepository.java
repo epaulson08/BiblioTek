@@ -14,5 +14,7 @@ public interface JournalArticleRepository extends JpaRepository<JournalArticle, 
 	
 	List<JournalArticle> findByJournalId(int journalId);
 	
-	List<JournalArticle> findByUsers_Username(String username);
+	List<JournalArticle> findByJournalIdAndUsersUsername(int journalId, String username);
+	
+	List<JournalArticle> findByUsersUsername(String username);
 }
