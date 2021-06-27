@@ -91,4 +91,10 @@ mysql> select * from all_articles_for_user;
 */
 	}
 	
+	@Test
+	void test_User_to_CitationStyle_mapping() {
+		assertNotNull(user);
+		assertTrue(user.getCitationStyles().size() > 0);
+	}
+	
 }

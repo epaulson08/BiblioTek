@@ -66,6 +66,10 @@ public class User {
 	@ManyToMany
 	@JoinTable(name = "all_articles_for_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "journal_article_id"))
 	List<JournalArticle> articles;
+	
+	@ManyToMany
+	@JoinTable(name = "user_citation_style", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "citation_style_id"))
+	private List<CitationStyle> citationStyles;
 
 	// ctors
 	public User() {
@@ -78,6 +82,14 @@ public class User {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public List<CitationStyle> getCitationStyles() {
+		return citationStyles;
+	}
+
+	public void setCitationStyles(List<CitationStyle> citationStyles) {
+		this.citationStyles = citationStyles;
 	}
 
 	public String getUsername() {
