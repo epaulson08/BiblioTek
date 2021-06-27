@@ -1,5 +1,6 @@
 package com.skilldistillery.reftracker.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class CitationStyleController {
 	
 	// TODO: set resp
 	@GetMapping("api/users/citation-styles")
-	public List<CitationStyle> findByUsersUsername(String username) {
-		return csServ.findByUsersUsername(username);
+	public List<CitationStyle> findByUsersUsername(Principal principal) {
+		return csServ.findByUsersUsername(principal.getName());
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.reftracker.entities.User;
 import com.skilldistillery.reftracker.services.AuthService;
+import com.skilldistillery.reftracker.services.CitationStyleService;
 import com.skilldistillery.reftracker.services.JournalArticleService;
 import com.skilldistillery.reftracker.services.UserService;
 
@@ -35,6 +36,9 @@ public class UtilityCreateTestData {
 	@Autowired
 	UserService userServ;
 	
+	@Autowired
+	CitationStyleService csServ;
+	
 	@PostMapping("create-test-user")
 	public String createTestUser(HttpServletResponse resp) {
 		try {
@@ -51,6 +55,10 @@ public class UtilityCreateTestData {
 				for (int i = 1; i <= 10; i++) {
 				testUser.addJA(jaServ.findById(i));
 				}
+				
+				// add AMA and APA citation styles
+				testUser.addCS(csServ.findById(1));
+				testUser.addCS(csServ.findById(2));
 				
 				authServ.register(testUser);
 				

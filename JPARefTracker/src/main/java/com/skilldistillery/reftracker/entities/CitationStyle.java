@@ -1,5 +1,6 @@
 package com.skilldistillery.reftracker.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -99,6 +100,26 @@ public class CitationStyle {
 		this.links = links;
 	}
 
+	// add, remove User
+	public void addUser(User user) {
+		if (users == null) {
+			users = new ArrayList<>();
+		}
+		if (!users.contains(user)) {
+			users.add(user);
+			user.addCS(this);
+		}
+	}
+
+	public void removeUser(User user) {
+		if (users != null && users.contains(user)) {
+			users.remove(user);
+			user.removeCS(this);
+		}
+	}
+	
+	
+	
 	// hash, equals, toString
 	@Override
 	public int hashCode() {

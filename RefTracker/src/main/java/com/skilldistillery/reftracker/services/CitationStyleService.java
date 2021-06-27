@@ -10,4 +10,6 @@ public interface CitationStyleService {
 
 	List<CitationStyle> findByUsersUsername(String username);
 
+	CitationStyle findById(int id);
+	
 }

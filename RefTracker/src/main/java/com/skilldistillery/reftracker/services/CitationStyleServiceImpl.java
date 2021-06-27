@@ -1,6 +1,7 @@
 package com.skilldistillery.reftracker.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -16,7 +17,7 @@ public class CitationStyleServiceImpl implements CitationStyleService {
 
 	@Autowired
 	private CitationStyleRepository csRepo;
-	
+
 	@Override
 	public List<CitationStyle> index() {
 		return csRepo.findAll();
@@ -25,6 +26,14 @@ public class CitationStyleServiceImpl implements CitationStyleService {
 	@Override
 	public List<CitationStyle> findByUsersUsername(String username) {
 		return csRepo.findByUsersUsername(username);
+	}
+
+	@Override
+	public CitationStyle findById(int id) {
+		Optional<CitationStyle> opt = csRepo.findById(id);
+		if (opt.isPresent())
+			return opt.get();
+		return null;
 	}
 
 }

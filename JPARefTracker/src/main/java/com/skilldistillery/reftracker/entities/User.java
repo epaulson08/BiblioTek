@@ -204,9 +204,26 @@ public class User {
 		this.articles = articles;
 	}
 
-	// add, remove JournalArticle
+	// add, remove CitationStyle
+	public void addCS(CitationStyle cs) {
+		if (citationStyles == null) {
+			citationStyles = new ArrayList<>();
+		}
+		if (!citationStyles.contains(cs)) {
+			citationStyles.add(cs);
+			cs.addUser(this);
+		}
+	}
 
-	//////// add, remove Author from JournalArticle
+	public void removeCS(CitationStyle cs) {
+		if (citationStyles != null && citationStyles.contains(cs)) {
+			citationStyles.remove(cs);
+			cs.removeUser(this);
+		}
+	}
+
+
+	// add, remove JournalArticle
 	public void addJA(JournalArticle ja) {
 		if (articles == null) {
 			articles = new ArrayList<>();
