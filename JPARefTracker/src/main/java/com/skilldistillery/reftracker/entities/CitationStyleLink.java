@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "citation_style_link")
 public class CitationStyleLink {
@@ -20,8 +22,9 @@ public class CitationStyleLink {
 
 	private String comment;
 
+	@JsonIgnore
 	@ManyToOne
-	@JoinColumn (name = "citation_style_id")
+	@JoinColumn(name = "citation_style_id")
 	private CitationStyle citationStyle;
 
 	// ctors
