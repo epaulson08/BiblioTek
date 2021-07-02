@@ -91,43 +91,35 @@ import com.skilldistillery.reftracker.services.UserService;
 @RestController
 public class JournalArticleController {
 
-	/*
-	 * FIXME Update HTTP responses
-	 */
-
 	@Autowired
 	private JournalArticleService jaServ;
 
 	@Autowired
 	private UserService userServ;
 
-	private boolean isAdmin(Principal principal) {
-		return userServ.showByUserName(principal.getName()).getRole().equals("admin");
-	}
-
-	private boolean belongsToUser(int journalArticleId, Principal principal) {
-		User user = userServ.showByUserName(principal.getName());
-		JournalArticle managedJa = jaServ.findById(journalArticleId);
-		if (managedJa.getUsers().contains(user))
-			return true;
-		return false;
-	}
-
 	@GetMapping("api/all/articles")
-	public List<JournalArticle> index(Principal principal) {
-		if (isAdmin(principal))
-			return jaServ.index();
-		return null;
+	public List<JournalArticle> index(Principal principal, HttpServletResponse resp) {
+		if (isAdmin(principal)) {
+			List<JournalArticle> allArticles = jaServ.index();
+			resp.setStatus(200);
+			return allArticles;
+		} else {
+			resp.setStatus(403);
+			return null;
+		}
 	}
 
 	@GetMapping("api/articles/")
-	public List<JournalArticle> findByUser(HttpServletResponse resp, Principal principal) {
+	public List<JournalArticle> findByUser(Principal principal, HttpServletResponse resp) {
 		String username = principal.getName();
-		List<JournalArticle> jas = jaServ.findByUser(username);
-		if (jas == null) {
+		List<JournalArticle> jasOfUser = jaServ.findByUser(username);
+		if (jasOfUser == null) {
 			resp.setStatus(404);
+			return null;
+		} else {
+			resp.setStatus(200);
+			return jasOfUser;
 		}
-		return jas;
 	}
 
 	@GetMapping("api/all/articles/{id}")
@@ -138,8 +130,10 @@ public class JournalArticleController {
 				resp.setStatus(404);
 			}
 			return ja;
+		} else {
+			resp.setStatus(403);
+			return null;
 		}
-		return null;
 	}
 
 	@GetMapping("api/articles/{id}")
@@ -149,11 +143,20 @@ public class JournalArticleController {
 			JournalArticle ja = jaServ.findById(id);
 			if (ja == null) {
 				resp.setStatus(404);
+				return null;
 			}
-			return ja;
+			else {
+				resp.setStatus(200);
+				return ja;
+			}
 		}
-		return null;
+		else {
+			resp.setStatus(404);
+			return null;
+		}
 	}
+	
+	//FIXME: HTTP response codes are improved up to here
 
 	@GetMapping("api/articles/journals/{journalId}")
 	public List<JournalArticle> findAllByJournalIdAndUsersUsername(@PathVariable int journalId, Principal principal,
@@ -276,4 +279,28 @@ public class JournalArticleController {
 		}
 		return false;
 	}
+
+	// Utility methods for authentication checks
+	private boolean isAdmin(Principal principal) {
+		try {
+			boolean isAdmin = userServ.showByUserName(principal.getName()).getRole().equals("admin");
+			return isAdmin;
+		} catch (NullPointerException npe) {
+			npe.printStackTrace();
+			return false;
+		}
+	}
+
+	private boolean belongsToUser(int journalArticleId, Principal principal) {
+		try {
+			User user = userServ.showByUserName(principal.getName());
+			JournalArticle managedJa = jaServ.findById(journalArticleId);
+			if (managedJa.getUsers().contains(user))
+				return true;
+			return false;
+		} catch (NullPointerException npe) {
+			return false;
+		}
+	}
+
 }

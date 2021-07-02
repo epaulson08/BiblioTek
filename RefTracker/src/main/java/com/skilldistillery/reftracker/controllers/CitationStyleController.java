@@ -3,6 +3,8 @@ package com.skilldistillery.reftracker.controllers;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,16 +20,30 @@ public class CitationStyleController {
 	@Autowired
 	private CitationStyleService csServ;
 	
-	// TODO: set resp
 	@GetMapping("api/citation-styles")
-	public List<CitationStyle> index() {
-		return csServ.index();
+	public List<CitationStyle> index(HttpServletResponse resp) {
+		List<CitationStyle> allCitationStyles = csServ.index();
+		if (allCitationStyles != null) {
+			resp.setStatus(200);
+			return allCitationStyles;
+		}
+		else {
+			resp.setStatus(404);
+			return null;
+		}
 	}
 	
-	// TODO: set resp
 	@GetMapping("api/users/citation-styles")
-	public List<CitationStyle> findByUsersUsername(Principal principal) {
-		return csServ.findByUsersUsername(principal.getName());
+	public List<CitationStyle> findByUsersUsername(Principal principal, HttpServletResponse resp) {
+		List<CitationStyle> citationStylesOfUser = csServ.findByUsersUsername(principal.getName());
+		if (citationStylesOfUser != null) {
+			resp.setStatus(200);
+			return citationStylesOfUser;
+		}
+		else {
+			resp.setStatus(404);
+			return null;
+		}
 	}
 
 }

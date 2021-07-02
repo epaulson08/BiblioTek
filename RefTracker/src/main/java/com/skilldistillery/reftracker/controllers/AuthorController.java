@@ -28,16 +28,13 @@ public class AuthorController {
 		Author author = aServ.findById(id);
 		if (author == null) {
 			resp.setStatus(404);
+			return null;
 		}
-		return author;
-	}
-	
-
-	@GetMapping("authors/echo")
-	public Author echo(@RequestBody Author author) {
-		return aServ.findByFirstNameAndMiddleNameAndLastNameAndSuffix(author.getFirstName(), author.getMiddleName(), author.getLastName(), author.getSuffix());
-	}
-	
+		else {
+			resp.setStatus(200);
+			return author;
+		}
+	}	
 
 	@PostMapping("authors")
 	public Author create(@RequestBody Author author, HttpServletRequest req, HttpServletResponse resp) {
@@ -48,7 +45,7 @@ public class AuthorController {
 			url.append("/").append(author.getId());
 			resp.setHeader("Location", url.toString());
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 			resp.setStatus(400);
 			author = null;
 		}
