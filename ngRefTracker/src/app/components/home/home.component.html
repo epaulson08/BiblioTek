@@ -5,7 +5,7 @@
     <h1 class="text-center">Reference Manager</h1>
     <h4 class="ml-3">Login:</h4>
     <form #loginForm>
-    <table class="mx-3 mb-3">
+    <table class="mx-3">
       <tr>
         <td><label>Username:</label></td>
         <td><input name="uname" type="text" class="form-control" /></td>
@@ -25,7 +25,10 @@
           </button>
         </td>
       </tr>
-      <tr><button class="btn btn-secondary" [routerLink]="['/register']">Register</button></tr>
+    </table>
+    <div *ngIf="errorLoggingIn" class="text-danger ml-3 mb-3">{{ this.errorLoggingIn}} </div>
+    <table class="mx-3 mb-3">
+      <tr><td><button class="btn btn-secondary" [routerLink]="['/register']">Register</button></td></tr>
     </table>
     </form>
   </div>

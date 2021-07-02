@@ -10,6 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
+  errorLoggingIn: string;
+
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -23,7 +25,7 @@ export class HomeComponent implements OnInit {
           this.router.navigateByUrl("/list-articles");
         },
         err => {
-          // TODO: output error message to user
+          this.errorLoggingIn = "The credentials you provided do not match any in our system. Please try again!";
           console.error("Error logging in: " + err);
         }
       )

@@ -68,7 +68,7 @@ public class UtilityCreateTestData {
 
 			else {
 				resp.setStatus(405);
-				return "Test user not created: User 'tester' already exists";
+				return "Test user not created: User 'tester' already exists.\nusername = tester, password = wombat1";
 			}
 		}
 
