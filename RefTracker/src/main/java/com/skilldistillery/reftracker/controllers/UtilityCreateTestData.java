@@ -1,8 +1,5 @@
 package com.skilldistillery.reftracker.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,21 +57,35 @@ public class UtilityCreateTestData {
 			for (int i = 1; i <= 10; i++) {
 				testUser.addJA(jaServ.findById(i));
 			}
-
-			authServ.register(testUser);
-
-			// add MyCollection
-			MyCollection coll = new MyCollection("Test mycollection for testuser",
-					"great collection! Should have first 3 JA's");
-			coll.addJournalArticle(jaServ.findById(1));
-			coll.addJournalArticle(jaServ.findById(2));
-			coll.addJournalArticle(jaServ.findById(3));
-			collServ.create(2, coll);
-
+			
 			// add AMA and APA citation styles
 			testUser.addCS(csServ.findById(1));
 			testUser.addCS(csServ.findById(2));
 
+			// persist test user
+			authServ.register(testUser);
+
+			// add MyCollections
+			MyCollection coll1 = new MyCollection("Test mycollection for testuser",
+					"great collection! Should have first 3 JA's");
+			coll1.addJournalArticle(jaServ.findById(1));
+			coll1.addJournalArticle(jaServ.findById(2));
+			coll1.addJournalArticle(jaServ.findById(3));
+			collServ.create(2, coll1);
+			
+			MyCollection coll2 = new MyCollection("Here is another MyCollection",
+					"Can't think of something to write here");
+			coll2.addJournalArticle(jaServ.findById(2));
+			coll2.addJournalArticle(jaServ.findById(8));
+			coll2.addJournalArticle(jaServ.findById(9));
+			collServ.create(2, coll2);
+			
+			MyCollection coll3 = new MyCollection("A third collection",
+					"Hello");
+			coll3.addJournalArticle(jaServ.findById(10));
+			coll3.addJournalArticle(jaServ.findById(4));
+			coll3.addJournalArticle(jaServ.findById(7));
+			collServ.create(2, coll3);
 
 			resp.setStatus(201);
 			return "Test user created/updated: \nusername = tester, password = wombat1";

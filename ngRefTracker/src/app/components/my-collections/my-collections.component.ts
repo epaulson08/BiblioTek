@@ -23,7 +23,7 @@ export class MyCollectionsComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
-    this.loadMyCollections(1); // FIXME: load collections by userId once User build complete
+    this.loadMyCollections();
   }
 
   showMyCollection(cid: number): void {
@@ -38,8 +38,7 @@ export class MyCollectionsComponent implements OnInit {
     return null;
   }
 
-  loadMyCollections(userId): void {
-    // FIXME: load collections by userId once User build complete
+  loadMyCollections(): void {
     this.collServ.index().subscribe(
       success => {
         this.myCollections = success;
