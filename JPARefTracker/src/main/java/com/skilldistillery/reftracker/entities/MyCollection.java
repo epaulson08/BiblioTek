@@ -1,5 +1,6 @@
 package com.skilldistillery.reftracker.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "my_collection")
@@ -28,14 +31,20 @@ public class MyCollection {
 	@JoinTable(name = "my_collection_journal_article", joinColumns = @JoinColumn(name = "my_collection_id"), inverseJoinColumns = @JoinColumn(name = "journal_article_id"))
 	private List<JournalArticle> articles;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	// Ctors:
+	// ctors:
 	public MyCollection() {
 	}
 
+	public MyCollection(String name, String description) {
+		this.name = name;
+		this.description = description;
+	}
+	
 	// Get/set:
 	public int getId() {
 		return id;
@@ -75,6 +84,24 @@ public class MyCollection {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	// Add, remove JournalArticle
+	public void addJournalArticle(JournalArticle ja) {
+		if (articles == null) {
+			articles = new ArrayList<>();
+		}
+		if (!articles.contains(ja)) {
+			articles.add(ja);
+		}
+		ja.addMyCollection(this);
+	}
+
+	public void removeJournalArticle(JournalArticle ja) {
+		if (articles != null && articles.contains(ja)) {
+			articles.remove(ja);
+		}
+		ja.removeMyCollection(this);
 	}
 	
 	// Equals, hash, toString:

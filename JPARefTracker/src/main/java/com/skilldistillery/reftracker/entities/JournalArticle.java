@@ -49,7 +49,11 @@ public class JournalArticle {
 	@Column(name = "issue_num")
 	private String issueNum;
 	
-//////// Constructors: 
+	@JsonIgnore
+	@ManyToMany(mappedBy="articles")
+	private List<MyCollection> myCollections;
+	
+	// ctors: 
 	public JournalArticle() {
 	}
 
@@ -134,7 +138,15 @@ public class JournalArticle {
 		this.users = users;
 	}
 
-	//////// add, remove Author
+	public List<MyCollection> getMyCollections() {
+		return myCollections;
+	}
+
+	public void setMyCollections(List<MyCollection> myCollections) {
+		this.myCollections = myCollections;
+	}
+
+	// add, remove Author
 	public void addAuthor(Author author) {
 		if (authors == null) {
 			authors = new ArrayList<>();
@@ -170,7 +182,25 @@ public class JournalArticle {
 		}
 	}
 	
-	//////// hash, equals, toString:
+	// add, remove MyCollection
+	public void addMyCollection(MyCollection coll) {
+		if (myCollections == null) {
+			myCollections = new ArrayList<>();
+		}
+		if (! myCollections.contains(coll)) {
+			myCollections.add(coll);
+			coll.addJournalArticle(this);
+		}
+	}
+	
+	public void removeMyCollection(MyCollection coll) {
+		if (myCollections != null && myCollections.contains(coll)) {
+			myCollections.remove(coll);
+			coll.removeJournalArticle(this);
+		}
+	}
+	
+	// hash, equals, toString:
 	@Override
 	public int hashCode() {
 		final int prime = 31;

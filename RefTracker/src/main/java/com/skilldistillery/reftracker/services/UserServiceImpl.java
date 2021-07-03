@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.reftracker.entities.MyCollection;
 import com.skilldistillery.reftracker.entities.User;
 import com.skilldistillery.reftracker.repositories.UserRepository;
 
@@ -44,7 +45,17 @@ public class UserServiceImpl implements UserService {
 		}
 		return user;
 	}
-	
+
+	@Override
+	public User show(int uid) {
+		User user = null;
+		Optional<User> optUser = userRepo.findById(uid);
+		if (optUser.isPresent()) {
+			user = optUser.get();
+		}
+		return user;
+	}
+
 	@Override
 	public User update(String username, int uid, User user) {
 		User requestingUser = userRepo.findByUsername(username);
@@ -97,6 +108,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User addMyCollection(int userId, MyCollection coll) {
+		User user = null;
+		Optional<User> opt = userRepo.findById(userId);
+		if (opt.isPresent()) {
+			user = opt.get();
+			
+			user = userRepo.saveAndFlush(user);
+		}
+		return user;
+	}
+
+	@Override
 	public int deactivate(String username, int uid) {
 		User requestingUser = userRepo.findByUsername(username);
 		User dbUser = null;
@@ -120,5 +143,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User showByUserName(String username) {
 		return userRepo.findByUsername(username);
+	}
+
+	@Override
+	public boolean hardDelete(String username) {
+		User toDelete = userRepo.findByUsername(username);
+		userRepo.delete(toDelete);
+		if (userRepo.findByUsername(username) == null) {
+			return true;
+		}
+		return false;
 	}
 }

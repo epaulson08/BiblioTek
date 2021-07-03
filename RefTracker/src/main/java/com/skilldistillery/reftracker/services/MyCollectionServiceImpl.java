@@ -17,6 +17,9 @@ public class MyCollectionServiceImpl implements MyCollectionService {
 
 	@Autowired
 	private MyCollectionRepository collRepo;
+	
+	@Autowired
+	private UserService userServ;
 
 	@Override
 	public MyCollection findById(Integer id) {
@@ -28,12 +31,13 @@ public class MyCollectionServiceImpl implements MyCollectionService {
 	}
 	
 	@Override
-	public List<MyCollection> index() {
-		return collRepo.findAll();
+	public List<MyCollection> findByUserUsername(String username) {
+		return collRepo.findByUserUsername(username);
 	}
 	
 	@Override
-	public MyCollection create(MyCollection coll) {
+	public MyCollection create(Integer userId, MyCollection coll) {
+		coll.setUser(userServ.show(userId));
 		coll = collRepo.saveAndFlush(coll);
 		return coll;
 	}

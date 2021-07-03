@@ -118,8 +118,6 @@ public class CitationStyle {
 		}
 	}
 	
-	
-	
 	// hash, equals, toString
 	@Override
 	public int hashCode() {

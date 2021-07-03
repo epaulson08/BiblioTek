@@ -66,7 +66,7 @@ public class User {
 	@ManyToMany
 	@JoinTable(name = "all_articles_for_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "journal_article_id"))
 	List<JournalArticle> articles;
-	
+
 	@ManyToMany
 	@JoinTable(name = "user_citation_style", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "citation_style_id"))
 	private List<CitationStyle> citationStyles;
@@ -222,7 +222,6 @@ public class User {
 		}
 	}
 
-
 	// add, remove JournalArticle
 	public void addJA(JournalArticle ja) {
 		if (articles == null) {
@@ -238,6 +237,23 @@ public class User {
 		if (articles != null && articles.contains(ja)) {
 			articles.remove(ja);
 			ja.removeUser(this);
+		}
+	}
+
+	// add, remove MyCollection
+	public void addMyCollection(MyCollection coll) {
+		if (myCollections == null) {
+			myCollections = new ArrayList<>();
+		}
+		if (!myCollections.contains(coll)) {
+			myCollections.add(coll);
+		}
+		coll.setUser(this);
+	}
+
+	public void removeMyCollection(MyCollection coll) {
+		if (myCollections != null && myCollections.contains(coll)) {
+			myCollections.remove(coll);
 		}
 	}
 
