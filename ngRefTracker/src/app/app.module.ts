@@ -18,6 +18,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { SearchComponent } from './components/search/search.component';
 import { ShowArticleComponent } from './components/show-article/show-article.component';
 import { ShowCollectionComponent } from './components/show-collection/show-collection.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 // pipes
 import { AmaAuthorPipe } from './pipes/ama/ama-author.pipe';
 import { AmaAuthorsPipe } from './pipes/ama/ama-authors.pipe';
@@ -51,7 +52,8 @@ import { FullAmaPipe } from './pipes/ama/full-ama.pipe';
     ShowCollectionComponent,
     FullApaPipe,
     FullAmaPipe,
-    DownloadCopyComponent
+    DownloadCopyComponent,
+    UserDashboardComponent
   ],
   imports: [
     AppRoutingModule,

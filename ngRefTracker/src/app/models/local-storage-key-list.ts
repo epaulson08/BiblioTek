@@ -5,7 +5,8 @@ export class LocalStorageKeyList {
     "lastSearch",
     "length",
     "lastSearchTerm",
-    "lastSearchJournal"
+    "lastSearchJournal",
+    "username"
   ]
 
   constructor() {}

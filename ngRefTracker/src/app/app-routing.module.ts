@@ -10,6 +10,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SearchComponent } from './components/search/search.component';
 import { ShowArticleComponent } from './components/show-article/show-article.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'test', component: DownloadCopyComponent},
+  { path: 'user-dashboard', component: UserDashboardComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

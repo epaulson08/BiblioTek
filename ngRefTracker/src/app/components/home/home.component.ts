@@ -22,10 +22,12 @@ export class HomeComponent implements OnInit {
       .subscribe(
         data => {
           LocalStorageKeyList.clear();
-          this.router.navigateByUrl("/list-articles");
+          localStorage.setItem("username", form.uname.value);
+          this.router.navigateByUrl("/user-dashboard");
         },
+
         err => {
-          this.errorLoggingIn = "The credentials you provided do not match any in our system. Please try again!";
+          this.errorLoggingIn = "The credentials you provided appear to be incorrect. Please try again!";
           console.error("Error logging in: " + err);
         }
       )

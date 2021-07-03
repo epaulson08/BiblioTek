@@ -1,0 +1,29 @@
+<app-navi></app-navi>
+<div class="container-fluid">
+  <h4>Welcome, {{ this.username }}!</h4>
+  <h5>What would you like to do?</h5>
+    <button class="btn btn-primary my-1 mr-3" [routerLink]="['/list-articles']">
+      List All
+    </button>
+
+    <button class="btn btn-info my-1 mr-3" [routerLink]="['/my-collections']">
+      My Collections
+    </button>
+
+    <button class="btn btn-success mr-3 my-1" [routerLink]="['/create']">
+      Create
+    </button>
+    <button class="btn btn-secondary mr-3 my-1" [routerLink]="['/search']">
+      Search
+    </button>
+    <button class="btn btn-warning mr-3 my-1" (click)="clickCiteButton()">
+      Cite
+    </button>
+  <div *ngIf="this.clickedCite">
+    >>> Which article would you like to cite? Find an article above with
+    <span class="text-primary">List All</span>,
+    <span class="text-info">My Collections</span>,
+    <span class="text-success">Create</span>, or
+    <span class="text-secondary">Search</span>.
+  </div>
+</div>
