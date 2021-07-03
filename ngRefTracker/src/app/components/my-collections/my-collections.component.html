@@ -2,11 +2,22 @@
 
 <div class="container-fluid">
   <h4>My Collections:</h4>
-    <div class="card mb-3" *ngFor="let coll of this.myCollections">
-      <a href=""
+  <div class="card mb-3" style="max-width: 500px" *ngFor="let coll of this.myCollections">
+    <div class="container">
+    <div class="card-title mt-2">
+      <a [routerLink]=""
         ><h5>{{ coll.name }}</h5></a
       >
+    </div>
+    <div class="card-text mb-2">
       {{ coll.description }}
     </div>
-    <br />
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary btn-sm mr-2">View</button>
+      <button class="btn btn-success btn-sm mr-2">Edit</button>
+      <button class="btn btn-danger btn-sm float-right">Delete</button>
+    </div>
+  </div>
+  <br />
 </div>
