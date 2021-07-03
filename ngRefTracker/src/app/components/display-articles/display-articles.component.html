@@ -15,9 +15,8 @@
     <!-- Row Displaying Article Entity -->
     <tr *ngFor="let ja of articlesToDisplay">
       <td>
-        <button (click)="goTo(ja.id)" class="btn btn-warning">
-          Examine/Cite
-        </button>
+        <button (click)="goTo(ja.id)" class="btn btn-sm btn-warning">Cite</button>
+        <button (click)="goTo(ja.id)" class="btn btn-sm btn-success mt-1">Edit</button>
       </td>
 
       <!-- Title -->
