@@ -21,9 +21,6 @@ export class AuthorFormatPipe implements PipeTransform {
         if (author.middleName) outputStr += author.middleName[0];
         if (author.lastName) outputStr += " " + author.lastName;
         if (author.suffix) outputStr += " " + author.suffix;
-        if (i === authors.length - 1) {
-          outputStr += ".";
-        }
         if (i !== authors.length - 1) outputStr += ", ";
       }
 

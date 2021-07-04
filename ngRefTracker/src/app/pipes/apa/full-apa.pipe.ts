@@ -10,7 +10,7 @@ export class FullApaPipe implements PipeTransform {
   transform(ja: JournalArticle): string {
 
     let outputStr =
-      `${new ApaAuthorsPipe().transform(ja.authors)}.
+      `${new ApaAuthorsPipe().transform(ja.authors)}
     (${ja.yearPublished}).
     ${ja.title}.
     <em>${ja.journal.name}, ${ja.volumeNum}</em
