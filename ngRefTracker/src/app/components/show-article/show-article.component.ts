@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CitationStyle } from 'src/app/models/citation-style';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { AuthService } from 'src/app/services/auth.service';
+import { CitationStyleService } from 'src/app/services/citation-style.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
 import { JournalService } from 'src/app/services/journal.service';
 
@@ -22,19 +24,35 @@ export class ShowArticleComponent implements OnInit {
   viewCite: boolean = false;
   apa: boolean = false;
   ama: boolean = false;
+  citationStyles: CitationStyle[];
 
-  constructor(private auth: AuthService, private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
+  constructor(private auth: AuthService, private csServ: CitationStyleService, private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
 
   ngOnInit(): void {
     if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
     this.articleId = +this.route.snapshot.paramMap.get('articleId');
     this.loadArticle();
+    this.loadCitationStyles();
+    console.log("citation styles = " + this.citationStyles);
+
   }
 
   loadArticle() {
     this.jaServ.show(this.articleId).subscribe(
       success => {
         this.selected = success;
+        return success;
+      },
+      failure => {
+        console.error(failure);
+      });
+    return null;
+  }
+
+  loadCitationStyles() {
+    this.csServ.findAll().subscribe(
+      success => {
+        this.citationStyles = success;
         return success;
       },
       failure => {
