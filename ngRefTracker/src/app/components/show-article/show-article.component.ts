@@ -29,12 +29,10 @@ export class ShowArticleComponent implements OnInit {
   constructor(private auth: AuthService, private csServ: CitationStyleService, private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
 
   ngOnInit(): void {
-    if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
+    if (!this.auth.checkLogin()) { this.router.navigateByUrl("home"); }
     this.articleId = +this.route.snapshot.paramMap.get('articleId');
     this.loadArticle();
     this.loadCitationStyles();
-    console.log("citation styles = " + this.citationStyles);
-
   }
 
   loadArticle() {
@@ -53,6 +51,8 @@ export class ShowArticleComponent implements OnInit {
     this.csServ.findAll().subscribe(
       success => {
         this.citationStyles = success;
+        console.log(this.citationStyles[0].abbreviation);
+
         return success;
       },
       failure => {
@@ -68,7 +68,6 @@ export class ShowArticleComponent implements OnInit {
         return success;
       },
       failure => {
-        console.error("JournalArticleComponent.loadJournals() failed: ");
         console.error(failure);
       });
     return null;
