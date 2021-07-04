@@ -14,11 +14,19 @@ export class FullApaPipe implements PipeTransform {
     (${ja.yearPublished}).
     ${ja.title}.
     <em>${ja.journal.name}, ${ja.volumeNum}</em
-    ><span *ngIf="${ja.issueNum}"
-      >(${ ja.issueNum })</span
-    ><span *ngIf="${ja.pages}"
-      >,&nbsp;${ ja.pages }</span
-    >.`;
+    >`;
+
+    if (ja.issueNum) {
+      outputStr += `(${ja.issueNum})`;
+    }
+
+    outputStr += `,&nbsp;`;
+
+    if (ja.pages) {
+      outputStr += `${ja.pages}`;
+    }
+
+    outputStr += `.`;
 
     return outputStr;
   }

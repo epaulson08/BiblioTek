@@ -12,10 +12,12 @@ export class FullAmaPipe implements PipeTransform {
       `${new AmaAuthorsPipe().transform(ja.authors)}
     ${ja.title}. <em>${ja.journal.name}</em
     >. ${ja.yearPublished}; ${ja.volumeNum
-      }<span *ngIf="${ja.issueNum}"
-      >(${ja.issueNum})</span
-    ><span *ngIf="${ja.pages}">:${ja.pages}</span
-    >.`;
+      }`;
+
+    if (ja.issueNum) { outputStr += `(${ja.issueNum})` };
+    if (ja.pages) { outputStr += `:&nbsp;${ja.pages}` };
+
+    outputStr += `.`;
 
     return outputStr;
   }
