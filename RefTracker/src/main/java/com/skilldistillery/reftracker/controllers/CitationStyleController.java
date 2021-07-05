@@ -20,7 +20,7 @@ public class CitationStyleController {
 	@Autowired
 	private CitationStyleService csServ;
 	
-	@GetMapping("api/citation-styles")
+	@GetMapping("api/all/citation-styles")
 	public List<CitationStyle> index(HttpServletResponse resp) {
 		List<CitationStyle> allCitationStyles = csServ.index();
 		if (allCitationStyles != null) {
@@ -33,7 +33,7 @@ public class CitationStyleController {
 		}
 	}
 	
-	@GetMapping("api/users/citation-styles")
+	@GetMapping("api/citation-styles")
 	public List<CitationStyle> findByUsersUsername(Principal principal, HttpServletResponse resp) {
 		List<CitationStyle> citationStylesOfUser = csServ.findByUsersUsername(principal.getName());
 		if (citationStylesOfUser != null) {

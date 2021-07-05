@@ -28,7 +28,7 @@ export class CitationStyleService {
 
   findAll(): Observable<CitationStyle[]> {
     return this.http.get<CitationStyle[]>(
-      `${this.baseUrl}api/users/citation-styles/`,
+      `${this.baseUrl}api/citation-styles/`,
       this.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
