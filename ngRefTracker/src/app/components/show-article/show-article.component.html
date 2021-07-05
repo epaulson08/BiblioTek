@@ -88,29 +88,26 @@
           </td>
         </tr>
       </table>
-      <!-- TODO: retrieve citation styles from database instead of hardcoding -->
       <div *ngIf="viewCite">
         <hr />
-        <h5 style="color:red">Hardcoded:</h5>
         <button
           class="btn btn-warning mr-2 mb-2"
-          [class.active]="this.ama"
-          (click)="showAma()"
+          *ngFor="let cs of this.citationStyles"
+          (click)="chooseStyle(cs)"
         >
-          AMA
-        </button>
-        <button
-          class="btn btn-warning mr-2 mb-2"
-          [class.active]="this.apa"
-          (click)="showApa()"
-        >
-          APA
-        </button>
-
-        <h5 style="color:red">Updated:</h5>
-        <button class="btn btn-warning mr-2 mb-2" *ngFor="let cs of this.citationStyles">
           {{ cs.abbreviation }}
         </button>
+
+        <div *ngIf="citationOutput">
+          <h6 class="mt-2">{{this.chosenStyle.abbreviation}} citation:</h6>
+
+          <div *ngIf="this.switch">
+            <span [outerHTML]="this.citationOutput"></span>
+          </div>
+          <div *ngIf="! this.switch">
+            <span [outerHTML]="this.citationOutput"></span>
+          </div>
+        </div>
 
         <!-- <a href="">ACS</a> ·
         <a href="">AMA</a> ·
@@ -123,30 +120,6 @@
         <a href="">MLA</a> ·
         <a href="">NLM</a> ·
         <a href="">Vancouver</a> -->
-
-        <!-- AMA FORMAT -->
-        <div *ngIf="ama">
-          <br />
-          <h5>AMA Citation:</h5>
-          <span [outerHTML]="this.selected | fullAma"></span>
-          <br />
-          <button class="btn btn-warning btn-sm mr-2 mt-2 mb-2">📋 Copy</button>
-          <br /><br />
-          <h5>AMA Format Info:</h5>
-          [TODO: format info links]
-        </div>
-
-        <!-- APA FORMAT -->
-        <div *ngIf="apa">
-          <br />
-          <h5>APA Citation:</h5>
-          <span [outerHTML]="this.selected | fullApa"></span>
-          <br />
-          <button class="btn btn-warning btn-sm mr-2 mt-2 mb-2">📋 Copy</button>
-          <br /><br />
-          <h5>APA Format Info:</h5>
-          [TODO: format info links]
-        </div>
       </div>
     </div>
   </div>

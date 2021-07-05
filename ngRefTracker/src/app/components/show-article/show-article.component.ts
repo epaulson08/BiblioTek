@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CitationStyle } from 'src/app/models/citation-style';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
+import { FullAmaPipe } from 'src/app/pipes/ama/full-ama.pipe';
+import { FullApaPipe } from 'src/app/pipes/apa/full-apa.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { CitationStyleService } from 'src/app/services/citation-style.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
@@ -22,9 +24,10 @@ export class ShowArticleComponent implements OnInit {
   deleted: boolean = false;
   allJournals: Journal[];
   viewCite: boolean = false;
-  apa: boolean = false;
-  ama: boolean = false;
   citationStyles: CitationStyle[];
+  chosenStyle: CitationStyle;
+  citationOutput: string;
+  switch: boolean = false;
 
   constructor(private auth: AuthService, private csServ: CitationStyleService, private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
 
@@ -52,7 +55,7 @@ export class ShowArticleComponent implements OnInit {
       success => {
         this.citationStyles = success;
         // alphabetize by abbreviation:
-        this.citationStyles.sort((a,b) => a.abbreviation.localeCompare(b.abbreviation));
+        this.citationStyles.sort((a, b) => a.abbreviation.localeCompare(b.abbreviation));
         return success;
       },
       failure => {
@@ -132,25 +135,28 @@ export class ShowArticleComponent implements OnInit {
 
   cite() {
     this.viewCite = true;
-    this.apa = false;
-    this.ama = false;
   }
 
   resetCite() {
     this.viewCite = false;
-    this.apa = false;
-    this.ama = false;
   }
 
-  // TODO: in future retrieve citation style
-  // object from database instead of hardcoding
-  showApa() {
-    this.apa = true;
-    this.ama = false;
+  chooseStyle(citationStyle: CitationStyle) {
+    console.log("chosenStyle = " + citationStyle.abbreviation);
+
+    // workaround to force reload of [outerHTML] span:
+    this.switch = ! this.switch;
+
+    this.chosenStyle = citationStyle;
+    this.citationOutput = this.formatByCitationStyle(this.chosenStyle);
+
   }
 
-  showAma() {
-    this.ama = true;
-    this.apa = false;
+  private formatByCitationStyle(style: CitationStyle): string {
+    switch (style.abbreviation) {
+      case "AMA": return new FullAmaPipe().transform(this.selected);
+      case "APA": return new FullApaPipe().transform(this.selected);
+      default: return "Citation style not found.";
+    }
   }
 }
