@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CitationStyle } from 'src/app/models/citation-style';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
+import { FullAmaPipe } from 'src/app/pipes/ama/full-ama.pipe';
+import { FullApaPipe } from 'src/app/pipes/apa/full-apa.pipe';
 import { AuthService } from 'src/app/services/auth.service';
+import { CitationStyleService } from 'src/app/services/citation-style.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
 import { JournalService } from 'src/app/services/journal.service';
 
@@ -20,21 +24,39 @@ export class ShowArticleComponent implements OnInit {
   deleted: boolean = false;
   allJournals: Journal[];
   viewCite: boolean = false;
-  apa: boolean = false;
-  ama: boolean = false;
+  citationStyles: CitationStyle[];
+  chosenStyle: CitationStyle;
+  citationOutput: string;
+  switch: boolean = false;
+  moreInfo: boolean = false;
 
-  constructor(private auth: AuthService, private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
+  constructor(private auth: AuthService, private csServ: CitationStyleService, private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
 
   ngOnInit(): void {
-    if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
+    if (!this.auth.checkLogin()) { this.router.navigateByUrl("home"); }
     this.articleId = +this.route.snapshot.paramMap.get('articleId');
     this.loadArticle();
+    this.loadCitationStyles();
   }
 
   loadArticle() {
     this.jaServ.show(this.articleId).subscribe(
       success => {
         this.selected = success;
+        return success;
+      },
+      failure => {
+        console.error(failure);
+      });
+    return null;
+  }
+
+  loadCitationStyles() {
+    this.csServ.findAll().subscribe(
+      success => {
+        this.citationStyles = success;
+        // alphabetize by abbreviation:
+        this.citationStyles.sort((a, b) => a.abbreviation.localeCompare(b.abbreviation));
         return success;
       },
       failure => {
@@ -50,7 +72,6 @@ export class ShowArticleComponent implements OnInit {
         return success;
       },
       failure => {
-        console.error("JournalArticleComponent.loadJournals() failed: ");
         console.error(failure);
       });
     return null;
@@ -115,25 +136,32 @@ export class ShowArticleComponent implements OnInit {
 
   cite() {
     this.viewCite = true;
-    this.apa = false;
-    this.ama = false;
   }
 
   resetCite() {
     this.viewCite = false;
-    this.apa = false;
-    this.ama = false;
   }
 
-  // TODO: in future retrieve citation style
-  // object from database instead of hardcoding
-  showApa() {
-    this.apa = true;
-    this.ama = false;
+  chooseStyle(citationStyle: CitationStyle) {
+    this.moreInfo = false;
+
+    // workaround to force reload of [outerHTML] span:
+    this.switch = ! this.switch;
+
+    this.chosenStyle = citationStyle;
+    this.citationOutput = this.formatByCitationStyle(this.chosenStyle);
+
   }
 
-  showAma() {
-    this.ama = true;
-    this.apa = false;
+  toggleMoreInfo() : void {
+    this.moreInfo = ! this.moreInfo;
+  }
+
+  private formatByCitationStyle(style: CitationStyle): string {
+    switch (style.abbreviation) {
+      case "AMA": return new FullAmaPipe().transform(this.selected);
+      case "APA": return new FullApaPipe().transform(this.selected);
+      default: return "Citation style not found.";
+    }
   }
 }

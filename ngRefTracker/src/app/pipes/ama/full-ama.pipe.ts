@@ -7,7 +7,7 @@ import { AmaAuthorsPipe } from './ama-authors.pipe';
 })
 export class FullAmaPipe implements PipeTransform {
 
-  transform(ja: JournalArticle): unknown {
+  transform(ja: JournalArticle): string {
     let outputStr =
       `${new AmaAuthorsPipe().transform(ja.authors)}
     ${ja.title}. <em>${ja.journal.name}</em
