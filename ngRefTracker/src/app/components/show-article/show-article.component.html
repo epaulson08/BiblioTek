@@ -107,6 +107,26 @@
           <div *ngIf="! this.switch">
             <span [outerHTML]="this.citationOutput"></span>
           </div>
+          <br />
+          <button class="btn btn-secondary btn-sm mb-3" (click)="toggleMoreInfo()">More Info ▼</button>
+          <div *ngIf="moreInfo">
+            <h6>{{ chosenStyle.name }} ({{ chosenStyle.abbreviation }}) format</h6>
+            <em>Authoritative Source:</em>
+            <br />
+            {{ chosenStyle.definitiveReference }}
+            <br />
+            <a [href]="chosenStyle.definitiveReferenceUrl">{{ chosenStyle.definitiveReferenceUrl}}</a>
+            <br />
+            <br />
+            <em>Links:</em>
+            <br />
+            <div *ngFor="let link of chosenStyle.links">
+              <a href="link.url">{{ link.url }}</a><br />
+              {{ link.comment }}
+              <br />
+              <br />
+            </div>
+          </div>
         </div>
 
         <!-- <a href="">ACS</a> ·

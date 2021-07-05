@@ -28,6 +28,7 @@ export class ShowArticleComponent implements OnInit {
   chosenStyle: CitationStyle;
   citationOutput: string;
   switch: boolean = false;
+  moreInfo: boolean = false;
 
   constructor(private auth: AuthService, private csServ: CitationStyleService, private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
 
@@ -142,7 +143,7 @@ export class ShowArticleComponent implements OnInit {
   }
 
   chooseStyle(citationStyle: CitationStyle) {
-    console.log("chosenStyle = " + citationStyle.abbreviation);
+    this.moreInfo = false;
 
     // workaround to force reload of [outerHTML] span:
     this.switch = ! this.switch;
@@ -150,6 +151,10 @@ export class ShowArticleComponent implements OnInit {
     this.chosenStyle = citationStyle;
     this.citationOutput = this.formatByCitationStyle(this.chosenStyle);
 
+  }
+
+  toggleMoreInfo() : void {
+    this.moreInfo = ! this.moreInfo;
   }
 
   private formatByCitationStyle(style: CitationStyle): string {
