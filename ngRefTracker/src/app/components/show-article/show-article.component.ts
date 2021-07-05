@@ -51,8 +51,8 @@ export class ShowArticleComponent implements OnInit {
     this.csServ.findAll().subscribe(
       success => {
         this.citationStyles = success;
-        console.log(this.citationStyles[0].abbreviation);
-
+        // alphabetize by abbreviation:
+        this.citationStyles.sort((a,b) => a.abbreviation.localeCompare(b.abbreviation));
         return success;
       },
       failure => {
