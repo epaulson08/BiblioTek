@@ -54,7 +54,7 @@ public class UtilityCreateTestData {
 			testUser.setRole("user");
 
 			// add JournalArticles to this user
-			for (int i = 1; i <= 13; i++) {
+			for (int i = 1; i <= 14; i++) {
 				testUser.addJA(jaServ.findById(i));
 			}
 
@@ -74,10 +74,11 @@ public class UtilityCreateTestData {
 			MyCollection testColl3 = collServ.findById(4);
 			
 			if (testColl1 == null) {
-				testColl1 = new MyCollection("Rapid response teams",
-						"Paper for research class, spring 2021");
-				testColl1.addJournalArticle(jaServ.findById(1));
-				testColl1.addJournalArticle(jaServ.findById(2));
+				testColl1 = new MyCollection("AI in Radiology", "Applications of AI/machine learning to interpretation of radiologic images");
+				testColl1.addJournalArticle(jaServ.findById(10));
+				testColl1.addJournalArticle(jaServ.findById(11));
+				testColl1.addJournalArticle(jaServ.findById(12));
+				testColl1.addJournalArticle(jaServ.findById(13));
 				collServ.create(2, testColl1);				
 			}
 
@@ -91,8 +92,10 @@ public class UtilityCreateTestData {
 			}
 
 			if (testColl3 == null) {
-				testColl3 = new MyCollection("Medical Computing", "Practical applications of computing in healthcare delivery");
-				testColl3.addJournalArticle(jaServ.findById(10));
+				testColl3 = new MyCollection("Rapid response teams",
+						"Paper for research class, spring 2021");
+				testColl3.addJournalArticle(jaServ.findById(1));
+				testColl3.addJournalArticle(jaServ.findById(2));
 				collServ.create(2, testColl3);
 			}
 

@@ -331,6 +331,14 @@ INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) 
 INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (97, 'Satyananda', 'Kashyap', NULL, NULL);
 INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (98, 'Mehdi', 'Moradi', NULL, NULL);
 INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (99, 'Tanveer', 'Syeda-Mahmood', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (100, 'Xing', 'Song', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (101, 'Alan', 'Yu', 'S. L.', NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (102, 'John', 'Kellum', 'A', NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (103, 'Lemuel', 'Waitman', 'R', NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (104, 'Michael', 'Matheny', 'E', NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (105, 'Steven', 'Simpson', 'Q', NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (106, 'Hu', 'Yong', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (107, 'Mei', 'Liu', NULL, NULL);
 
 COMMIT;
 
@@ -380,6 +388,7 @@ INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `d
 INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (11, 'Deep-learning-assisted detection and segmentation of rib fractures from CT scans: Development and validation of FracNet', 62, 2020, 'https://doi.org/10.1016/j.ebiom.2020.103106', 14, '103106', NULL);
 INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (12, 'Deep learning for chest radiograph diagnosis: A retrospective comparison of the CheXNeXt algorithm to practicing radiologists', 15, 2018, ' https:// doi.org/10.1371/journal.pmed.1002686', 16, 'e1002686', '11');
 INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (13, 'Comparison of chest radiograph interpretations by artificial intelligence vs radiology residents', 3, 2020, '10.1001/jamanetworkopen.2020.22779', 18, 'e2022779', '10');
+INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (14, 'Cross-site transportability of an explainable\nartificial intelligence model for acute kidney\ninjury prediction', 11, 2020, 'https://doi.org/10.1038/s41467-020-19551-w | www.nature.com/naturecommunications', 15, '5668', NULL);
 
 COMMIT;
 
@@ -485,6 +494,14 @@ INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (13, 96)
 INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (13, 97);
 INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (13, 98);
 INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (13, 99);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (14, 100);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (14, 101);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (14, 102);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (14, 103);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (14, 104);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (14, 105);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (14, 106);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (14, 107);
 
 COMMIT;
 
