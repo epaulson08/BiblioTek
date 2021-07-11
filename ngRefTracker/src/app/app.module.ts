@@ -7,10 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 // components
 import { AppComponent } from './app.component';
 import { CreateComponent } from './components/create/create.component';
+import { DisplayArticleComponent } from './components/display-article/display-article.component';
 import { DisplayArticlesComponent } from './components/display-articles/display-articles.component';
 import { DownloadCopyComponent } from './components/download-copy/download-copy.component';
 import { HomeComponent } from './components/home/home.component';
 import { ListAllComponent } from './components/list-all/list-all.component';
+import { MyCollectionComponent } from './components/my-collection/my-collection.component';
 import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
 import { NaviComponent } from './components/navi/navi.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -53,7 +55,9 @@ import { FullAmaPipe } from './pipes/ama/full-ama.pipe';
     FullApaPipe,
     FullAmaPipe,
     DownloadCopyComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    DisplayArticleComponent,
+    MyCollectionComponent
   ],
   imports: [
     AppRoutingModule,

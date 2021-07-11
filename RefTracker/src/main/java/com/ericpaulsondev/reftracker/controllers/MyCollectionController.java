@@ -25,23 +25,28 @@ public class MyCollectionController {
 	public List<MyCollection> findByUserUsername(Principal principal, HttpServletResponse resp) {
 		List<MyCollection> myColls = collServ.findByUserUsername(principal.getName());
 		if (myColls != null) {
-				resp.setStatus(200);
-				return myColls;			
-				}
-		else {
+			resp.setStatus(200);
+			return myColls;
+		} else {
 			resp.setStatus(404);
 			return null;
 		}
 	}
 
-	@GetMapping("collections/{id}")
-	public MyCollection findById(@PathVariable Integer id, HttpServletResponse resp) {
+	@GetMapping("api/collections/{id}")
+	public MyCollection findById(@PathVariable Integer id, HttpServletResponse resp, Principal principal) {
 		MyCollection coll = collServ.findById(id);
-		if (coll == null)
+		if (coll == null) {
 			resp.setStatus(404);
-		else
-			resp.setStatus(200);
-		return coll;
+			return null;
+		} else {
+			if (coll.getUser().getUsername().equals(principal.getName())) {
+				resp.setStatus(200);
+				return coll;
+				}
+			resp.setStatus(403);
+			return null;
+		}
 	}
 
 }

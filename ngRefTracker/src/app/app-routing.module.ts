@@ -4,6 +4,7 @@ import { CreateComponent } from './components/create/create.component';
 import { DownloadCopyComponent } from './components/download-copy/download-copy.component';
 import { HomeComponent } from './components/home/home.component';
 import { ListAllComponent } from './components/list-all/list-all.component';
+import { MyCollectionComponent } from './components/my-collection/my-collection.component';
 import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
 import { NaviComponent } from './components/navi/navi.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -16,9 +17,10 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent},
   { path: 'nav', component: NaviComponent },
-  { path: 'list-articles', component: ListAllComponent },
   { path: 'show-article/:articleId', component: ShowArticleComponent },
+  { path: 'list-articles', component: ListAllComponent },
   { path: 'create', component: CreateComponent },
+  { path: 'my-collection/:collId', component: MyCollectionComponent },
   { path: 'my-collections', component: MyCollectionsComponent },
   { path: 'search', component: SearchComponent },
   { path: 'register', component: RegisterComponent },
