@@ -54,7 +54,7 @@ public class UtilityCreateTestData {
 			testUser.setRole("user");
 
 			// add JournalArticles to this user
-			for (int i = 1; i <= 12; i++) {
+			for (int i = 1; i <= 13; i++) {
 				testUser.addJA(jaServ.findById(i));
 			}
 
