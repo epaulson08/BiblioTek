@@ -14,6 +14,7 @@ export class DisplayAllArticlesComponent implements OnInit {
 
   // fields
   journalArticles: JournalArticle[] = [];
+  totalArticles: number;
   searchTerm: string;
   deleted: boolean = false;
 
@@ -35,6 +36,7 @@ export class DisplayAllArticlesComponent implements OnInit {
     this.jaServ.index().subscribe(
       success => {
         this.journalArticles = success;
+        this.totalArticles = this.journalArticles.length;
         return success;
       },
       failure => {
