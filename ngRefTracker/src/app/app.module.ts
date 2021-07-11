@@ -8,10 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CreateComponent } from './components/create/create.component';
 import { DisplayArticleComponent } from './components/display-article/display-article.component';
+import { DisplayAllArticlesComponent } from './components/display-all-articles/display-all-articles.component';
 import { DisplayArticlesComponent } from './components/display-articles/display-articles.component';
 import { DownloadCopyComponent } from './components/download-copy/download-copy.component';
 import { HomeComponent } from './components/home/home.component';
-import { ListAllComponent } from './components/list-all/list-all.component';
 import { MyCollectionComponent } from './components/my-collection/my-collection.component';
 import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
 import { NaviComponent } from './components/navi/navi.component';
@@ -42,9 +42,9 @@ import { FullAmaPipe } from './pipes/ama/full-ama.pipe';
     AppComponent,
     AuthorFormatPipe,
     CreateComponent,
+    DisplayAllArticlesComponent,
     DisplayArticlesComponent,
     HomeComponent,
-    ListAllComponent,
     MyCollectionsComponent,
     NaviComponent,
     NotFoundComponent,

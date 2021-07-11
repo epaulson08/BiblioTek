@@ -6,11 +6,11 @@ import { JournalArticleService } from 'src/app/services/journal-article.service'
 
 
 @Component({
-  selector: 'app-list-all',
-  templateUrl: './list-all.component.html',
-  styleUrls: ['./list-all.component.css']
+  selector: 'app-display-all-articles',
+  templateUrl: './display-all-articles.component.html',
+  styleUrls: ['./display-all-articles.component.css']
 })
-export class ListAllComponent implements OnInit {
+export class DisplayAllArticlesComponent implements OnInit {
 
   // fields
   journalArticles: JournalArticle[] = [];
