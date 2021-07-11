@@ -53,8 +53,8 @@ public class UtilityCreateTestData {
 			testUser.setPassword("demo");
 			testUser.setRole("user");
 
-			// add first 10 JournalArticles in DB to this user
-			for (int i = 1; i <= 10; i++) {
+			// add JournalArticles to this user
+			for (int i = 1; i <= 12; i++) {
 				testUser.addJA(jaServ.findById(i));
 			}
 

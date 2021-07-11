@@ -220,20 +220,6 @@ CREATE TABLE IF NOT EXISTS `all_articles_for_user` (
   INDEX `fk_user_has_journal_article_user1_idx` (`user_id` ASC))
 ENGINE = InnoDB;
 
-
--- -----------------------------------------------------
--- Table `all_articles_for_user`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `all_articles_for_user` ;
-
-CREATE TABLE IF NOT EXISTS `all_articles_for_user` (
-  `user_id` INT NOT NULL,
-  `journal_article_id` INT(11) NOT NULL,
-  PRIMARY KEY (`user_id`, `journal_article_id`),
-  INDEX `fk_user_has_journal_article_journal_article1_idx` (`journal_article_id` ASC),
-  INDEX `fk_user_has_journal_article_user1_idx` (`user_id` ASC))
-ENGINE = InnoDB;
-
 SET SQL_MODE = '';
 DROP USER IF EXISTS user@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -295,6 +281,39 @@ INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) 
 INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (47, 'Synho', 'Do', '', '');
 INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (48, 'Keith', 'Dreyer', '', '');
 INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (49, 'James', 'Brink', '', '');
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (50, 'Liang', 'Jin', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (51, 'Jiancheng', 'Yang', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (52, 'Kaiming', 'Kuang', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (53, 'Binbing', 'Ni', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (54, 'Yiyi', 'Gao', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (55, 'Yingli', 'Sun', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (56, 'Pan', 'Gao', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (57, 'Weiling', 'Ma', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (58, 'Mingyu', 'Tan', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (59, 'Hui', 'Kang', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (60, 'Jaijun', 'Chen', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (61, 'Ming', 'Li', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (62, 'Pranav', 'Rajpurkar', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (63, 'Jeremy', 'Irvin', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (64, 'Robyn', 'Ball', 'L', NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (65, 'Kaylie', 'Zhu', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (66, 'Brandon', 'Yang', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (67, 'Hershel', 'Mehta', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (68, 'Tony', 'Duan', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (69, 'Daisy', 'Ding', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (70, 'Aarti', 'Bagul', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (71, 'Curtis', 'Langlotz', 'P', NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (72, 'Bhavik', 'Patel', 'N', NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (73, 'Kristen', 'Yeom', 'W', NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (74, 'Katie', 'Shpanskaya', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (75, 'Francis', 'Blankenberg', 'G', NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (76, 'Jayne', 'Seekins', NULL, NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (77, 'Timothy', 'Amrhein', 'J', NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (78, 'David', 'Mong', 'A', NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (79, 'Safwan', 'Halabi', 'S', NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (80, 'Evan', 'Zucker', 'J', NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (81, 'Andrew', 'Ng', 'Y', NULL);
+INSERT INTO `author` (`id`, `first_name`, `last_name`, `middle_name`, `suffix`) VALUES (82, 'Matthew', 'Lungren', 'P', NULL);
 
 COMMIT;
 
@@ -317,6 +336,11 @@ INSERT INTO `journal` (`id`, `name`, `abbreviation`) VALUES (10, 'Scandanavian J
 INSERT INTO `journal` (`id`, `name`, `abbreviation`) VALUES (11, 'Intensive Care Medicine', 'Intensive Care Med');
 INSERT INTO `journal` (`id`, `name`, `abbreviation`) VALUES (12, 'Cleveland Clinic Journal of Medicine', 'Cleveland Clin J Med');
 INSERT INTO `journal` (`id`, `name`, `abbreviation`) VALUES (13, 'Journal of the American College of Radiology', 'J Am Coll Radiol');
+INSERT INTO `journal` (`id`, `name`, `abbreviation`) VALUES (14, 'EBioMedicine', NULL);
+INSERT INTO `journal` (`id`, `name`, `abbreviation`) VALUES (15, 'Nature Communications', NULL);
+INSERT INTO `journal` (`id`, `name`, `abbreviation`) VALUES (16, 'PLOS Medicine', NULL);
+INSERT INTO `journal` (`id`, `name`, `abbreviation`) VALUES (17, 'Journal of Medical Radiation Sciences', NULL);
+INSERT INTO `journal` (`id`, `name`, `abbreviation`) VALUES (18, 'JAMA Network Open', NULL);
 
 COMMIT;
 
@@ -336,6 +360,8 @@ INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `d
 INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (8, 'Who needs to carry an epinephrine autoinjector?', 86, 2019, 'doi:10.3949/ccjm.86a.17123', 12, '66-72', NULL);
 INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (9, 'Dancing sternal wires: a radiologic sign of sternal dehiscence', 86, 2019, 'doi:10.3949/ccjm.86a.18091', 12, '87-88', NULL);
 INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (10, 'Artificial intelligence and machine learning in radiology: opportunities, challenges, pitfalls, and criteria for success', 15, 2018, 'https://doi.org/10.1016/j.jacr.2017.12.026', 13, '504-508', NULL);
+INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (11, 'Deep-learning-assisted detection and segmentation of rib fractures from CT scans: Development and validation of FracNet', 62, 2020, 'https://doi.org/10.1016/j.ebiom.2020.103106', 14, '103106', NULL);
+INSERT INTO `journal_article` (`id`, `title`, `volume_num`, `year_published`, `doi`, `journal_id`, `pages`, `issue_num`) VALUES (12, 'Deep learning for chest radiograph diagnosis: A retrospective comparison of the CheXNeXt algorithm to practicing radiologists', 15, 2018, ' https:// doi.org/10.1371/journal.pmed.1002686', 16, 'e1002686', '11');
 
 COMMIT;
 
@@ -391,6 +417,39 @@ INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (10, 46)
 INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (10, 47);
 INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (10, 48);
 INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (10, 49);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (11, 50);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (11, 51);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (11, 52);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (11, 53);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (11, 54);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (11, 55);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (11, 56);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (11, 57);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (11, 58);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (11, 59);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (11, 60);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (11, 61);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 62);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 63);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 64);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 65);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 66);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 67);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 68);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 69);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 70);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 71);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 72);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 73);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 74);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 75);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 76);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 77);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 78);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 79);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 80);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 81);
+INSERT INTO `author_article` (`journal_article_id`, `author_id`) VALUES (12, 82);
 
 COMMIT;
 
