@@ -13,6 +13,8 @@ export class MyCollectionComponent implements OnInit {
 
   collId: number;
   coll: MyCollection;
+  listView: boolean = false;
+  expandedView: boolean = true;
 
   constructor(private auth: AuthService, private route: ActivatedRoute, private router: Router, private collServ: MyCollectionService) { }
 
@@ -20,7 +22,7 @@ export class MyCollectionComponent implements OnInit {
     if (!this.auth.checkLogin()) {
       this.router.navigateByUrl("home");
     }
-
+    this.setExpandedView();
     this.collId = +this.route.snapshot.paramMap.get('collId');
     this.loadColl();
 
@@ -38,4 +40,16 @@ export class MyCollectionComponent implements OnInit {
         console.error(failure);
       });
   }
+
+  setListView(): void {
+    this.listView = true;
+    this.expandedView = false;
+  }
+
+  setExpandedView(): void {
+    this.expandedView = true;
+    this.listView = false;
+  }
+
+
 }
