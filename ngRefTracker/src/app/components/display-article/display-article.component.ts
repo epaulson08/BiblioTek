@@ -29,6 +29,7 @@ export class DisplayArticleComponent implements OnInit {
   citationOutput: string;
   switch: boolean = false;
   moreInfo: boolean = false;
+  underConstructionMessage: string;
 
   constructor(private auth: AuthService, private csServ: CitationStyleService, private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
 
@@ -156,6 +157,10 @@ export class DisplayArticleComponent implements OnInit {
 
   toggleMoreInfo(): void {
     this.moreInfo = !this.moreInfo;
+  }
+
+  addToCollection(): void {
+    this.underConstructionMessage = "\"Add to Collection\" feature will be implemented soon!";
   }
 
   private formatByCitationStyle(style: CitationStyle): string {

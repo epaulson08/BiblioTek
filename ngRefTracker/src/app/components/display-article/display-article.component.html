@@ -97,29 +97,39 @@
         </button>
 
         <div *ngIf="citationOutput">
-          <h6 class="mt-2">{{this.chosenStyle.abbreviation}} citation:</h6>
+          <h6 class="mt-2">{{ this.chosenStyle.abbreviation }} citation:</h6>
 
           <div *ngIf="this.switch">
             <span [outerHTML]="this.citationOutput"></span>
           </div>
-          <div *ngIf="! this.switch">
+          <div *ngIf="!this.switch">
             <span [outerHTML]="this.citationOutput"></span>
           </div>
           <br />
-          <button class="btn btn-secondary btn-sm mb-3" (click)="toggleMoreInfo()">More Info ▼</button>
+          <button
+            class="btn btn-secondary btn-sm mb-3"
+            (click)="toggleMoreInfo()"
+          >
+            More Info ▼
+          </button>
           <div *ngIf="moreInfo">
-            <h6>{{ chosenStyle.name }} ({{ chosenStyle.abbreviation }}) format</h6>
+            <h6>
+              {{ chosenStyle.name }} ({{ chosenStyle.abbreviation }}) format
+            </h6>
             <em>Authoritative Source:</em>
             <br />
             {{ chosenStyle.definitiveReference }}
             <br />
-            <a [href]="chosenStyle.definitiveReferenceUrl">{{ chosenStyle.definitiveReferenceUrl}}</a>
+            <a [href]="chosenStyle.definitiveReferenceUrl">{{
+              chosenStyle.definitiveReferenceUrl
+            }}</a>
             <br />
             <br />
             <em>Links:</em>
             <br />
             <div *ngFor="let link of chosenStyle.links">
-              <a href="link.url">{{ link.url }}</a><br />
+              <a href="link.url">{{ link.url }}</a
+              ><br />
               {{ link.comment }}
               <br />
               <br />
@@ -143,7 +153,9 @@
       <div *ngIf="!deleted && !editJa">
         <button class="btn btn-success mr-2" (click)="setEdit()">Edit</button>
         <button class="btn btn-warning mr-2" (click)="cite()">Cite</button>
-        <button class="btn btn-info mr-2">Add to Collection</button>
+        <button class="btn btn-info mr-2" (click)="addToCollection()">
+          Add to Collection
+        </button>
         <button class="btn btn-secondary mr-2" (click)="goBack()">Back</button>
       </div>
       <div *ngIf="!deleted && editJa">
@@ -158,14 +170,22 @@
           Delete
         </button>
       </div>
+      <div class="ml-3" style="color: orange;" *ngIf="this.underConstructionMessage">
+        {{ this.underConstructionMessage }}
+      </div>
     </div>
   </div>
 
   <div *ngIf="viewCite">
     <div class="card-footer d-flex">
       <button class="btn btn-success mr-2" (click)="setEdit()">Edit</button>
-      <button class="btn btn-info mr-2">Add to Collection</button>
+      <button class="btn btn-info mr-2" (click)="addToCollection()">
+        Add to Collection
+      </button>
       <button class="btn btn-secondary mr-2" (click)="resetCite()">Back</button>
+      <div class="float-center" style="color: orange;" *ngIf="this.underConstructionMessage">
+        {{ this.underConstructionMessage }}
+      </div>
     </div>
   </div>
 </div>
