@@ -146,21 +146,25 @@ export class ShowArticleComponent implements OnInit {
     this.moreInfo = false;
 
     // workaround to force reload of [outerHTML] span:
-    this.switch = ! this.switch;
+    this.switch = !this.switch;
 
     this.chosenStyle = citationStyle;
     this.citationOutput = this.formatByCitationStyle(this.chosenStyle);
 
   }
 
-  toggleMoreInfo() : void {
-    this.moreInfo = ! this.moreInfo;
+  toggleMoreInfo(): void {
+    this.moreInfo = !this.moreInfo;
   }
 
   private formatByCitationStyle(style: CitationStyle): string {
     switch (style.abbreviation) {
       case "AMA": return new FullAmaPipe().transform(this.selected);
       case "APA": return new FullApaPipe().transform(this.selected);
+      case "NLM": return "NLM citations are not yet available.";
+      case "MLA": return "MLA citations are not yet available.";
+      case "Chicago": return "Chicago style citations are not yet available.";
+      case "IEEE": return "IEEE citations are not yet available.";
       default: return "Citation style not found.";
     }
   }

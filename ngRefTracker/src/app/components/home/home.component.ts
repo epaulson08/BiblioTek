@@ -33,4 +33,20 @@ export class HomeComponent implements OnInit {
       )
   }
 
+  loginDemo() {
+    this.auth.login("demo", "demo")
+      .subscribe(
+        data => {
+          LocalStorageKeyList.clear();
+          localStorage.setItem("username", "Demo User");
+          this.router.navigateByUrl("/user-dashboard");
+        },
+
+        err => {
+          this.errorLoggingIn = "The credentials you provided appear to be incorrect. Please try again!";
+          console.error("Error logging in: " + err);
+        }
+      )
+  }
+
 }

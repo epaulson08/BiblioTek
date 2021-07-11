@@ -57,10 +57,11 @@ public class UtilityCreateTestData {
 			for (int i = 1; i <= 10; i++) {
 				testUser.addJA(jaServ.findById(i));
 			}
-			
-			// add AMA and APA citation styles
-			testUser.addCS(csServ.findById(1));
-			testUser.addCS(csServ.findById(2));
+
+			// add citation styles
+			for (int i = 1; i <= 6; i++) {
+				testUser.addCS(csServ.findById(i));
+			}
 
 			// persist test user
 			authServ.register(testUser);
@@ -72,16 +73,15 @@ public class UtilityCreateTestData {
 			coll1.addJournalArticle(jaServ.findById(2));
 			coll1.addJournalArticle(jaServ.findById(3));
 			collServ.create(2, coll1);
-			
+
 			MyCollection coll2 = new MyCollection("Here is another MyCollection",
 					"Can't think of something to write here");
 			coll2.addJournalArticle(jaServ.findById(2));
 			coll2.addJournalArticle(jaServ.findById(8));
 			coll2.addJournalArticle(jaServ.findById(9));
 			collServ.create(2, coll2);
-			
-			MyCollection coll3 = new MyCollection("A third collection",
-					"Hello");
+
+			MyCollection coll3 = new MyCollection("A third collection", "Hello");
 			coll3.addJournalArticle(jaServ.findById(10));
 			coll3.addJournalArticle(jaServ.findById(4));
 			coll3.addJournalArticle(jaServ.findById(7));
@@ -117,8 +117,8 @@ public class UtilityCreateTestData {
 			testAdmin.addJA(jaServ.findById(9));
 			testAdmin.addJA(jaServ.findById(10));
 
-			authServ.register(testAdmin);	
-			
+			authServ.register(testAdmin);
+
 			// add a MyCollection
 			MyCollection coll = new MyCollection("Test mycollection for testuser",
 					"great collection! Should have JA's 8, 9, 10");
@@ -126,12 +126,10 @@ public class UtilityCreateTestData {
 			coll.addJournalArticle(jaServ.findById(9));
 			coll.addJournalArticle(jaServ.findById(10));
 			collServ.create(3, coll);
-			
 
 			// add AMA and APA citation styles
 			testAdmin.addCS(csServ.findById(1));
 			testAdmin.addCS(csServ.findById(2));
-
 
 			resp.setStatus(201);
 			return "Test admin created: \nusername = admin, password = wombat1";
