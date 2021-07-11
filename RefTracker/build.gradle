@@ -11,7 +11,7 @@ war {
   destinationDir = file("../")      // project root directory
 }
 
-group = 'com.example'
+group = 'com.ericpaulsondev'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 

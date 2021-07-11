@@ -9,13 +9,13 @@
     </provider>
     
     <!-- Entities -->
-    <class>com.skilldistillery.reftracker.entities.Author</class>
-    <class>com.skilldistillery.reftracker.entities.CitationStyle</class>
-    <class>com.skilldistillery.reftracker.entities.CitationStyleLink</class>
-    <class>com.skilldistillery.reftracker.entities.Journal</class>
-    <class>com.skilldistillery.reftracker.entities.JournalArticle</class>
-    <class>com.skilldistillery.reftracker.entities.MyCollection</class>
-    <class>com.skilldistillery.reftracker.entities.User</class>
+    <class>com.ericpaulsondev.reftracker.entities.Author</class>
+    <class>com.ericpaulsondev.reftracker.entities.CitationStyle</class>
+    <class>com.ericpaulsondev.reftracker.entities.CitationStyleLink</class>
+    <class>com.ericpaulsondev.reftracker.entities.Journal</class>
+    <class>com.ericpaulsondev.reftracker.entities.JournalArticle</class>
+    <class>com.ericpaulsondev.reftracker.entities.MyCollection</class>
+    <class>com.ericpaulsondev.reftracker.entities.User</class>
     <!-- End entities -->
 
     <properties>
