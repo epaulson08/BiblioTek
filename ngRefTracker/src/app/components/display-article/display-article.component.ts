@@ -116,11 +116,11 @@ export class DisplayArticleComponent implements OnInit {
     if (whereLast === "search") {
       this.router.navigateByUrl("search");
     }
-    else if (whereLast === "listAll") {
-      this.router.navigateByUrl("list-articles");
+    else if (whereLast === "display-all-articles") {
+      this.router.navigateByUrl("display-all-articles");
     }
     else {
-      this.router.navigateByUrl("list-articles");
+      this.router.navigateByUrl("display-all-articles");
     }
   }
 

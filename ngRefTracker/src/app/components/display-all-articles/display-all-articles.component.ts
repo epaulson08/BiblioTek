@@ -28,7 +28,7 @@ export class DisplayAllArticlesComponent implements OnInit {
   ngOnInit(): void {
     if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
     this.loadJournalArticles();
-    localStorage.setItem("lastPage", "listAll");
+    localStorage.setItem("lastPage", "display-all-articles");
   }
 
   // CRUD
