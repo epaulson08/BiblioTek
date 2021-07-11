@@ -49,8 +49,8 @@ public class UtilityCreateTestData {
 			}
 
 			testUser.setId(2);
-			testUser.setUsername("tester");
-			testUser.setPassword("wombat1");
+			testUser.setUsername("demo");
+			testUser.setPassword("demo");
 			testUser.setRole("user");
 
 			// add first 10 JournalArticles in DB to this user
@@ -88,7 +88,7 @@ public class UtilityCreateTestData {
 			collServ.create(2, coll3);
 
 			resp.setStatus(201);
-			return "Test user created/updated: \nusername = tester, password = wombat1";
+			return "Test user created/updated: \nusername = demo, password = demo";
 		}
 
 		catch (Exception e) {
@@ -108,7 +108,7 @@ public class UtilityCreateTestData {
 			}
 
 			testAdmin.setId(3);
-			testAdmin.setUsername("admintest");
+			testAdmin.setUsername("admin");
 			testAdmin.setPassword("wombat1");
 			testAdmin.setRole("admin");
 
@@ -134,7 +134,7 @@ public class UtilityCreateTestData {
 
 
 			resp.setStatus(201);
-			return "Test admin created: \nusername = admintest, password = wombat1";
+			return "Test admin created: \nusername = admin, password = wombat1";
 		}
 
 		catch (Exception e) {
