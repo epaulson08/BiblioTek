@@ -1,21 +1,23 @@
 <app-navi></app-navi>
 <div class="container-fluid">
   <h4>Welcome, {{ this.username }}!</h4>
+  <br />
+  <br />
   <h5>Let's get started:</h5>
     <button class="btn btn-primary my-1 mr-3" [routerLink]="['/display-all-articles']">
       List All
-    </button>
+    </button><br />
 
     <button class="btn btn-info my-1 mr-3" [routerLink]="['/my-collections']">
       My Collections
-    </button>
+    </button><br />
 
     <button class="btn btn-success mr-3 my-1" [routerLink]="['/create']">
       Create
-    </button>
+    </button> <br />
     <button class="btn btn-secondary mr-3 my-1" [routerLink]="['/search']">
       Search
-    </button>
+    </button> <br />
     <button class="btn btn-warning mr-3 my-1" (click)="clickCiteButton()">
       Cite
     </button>

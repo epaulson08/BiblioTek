@@ -17,6 +17,7 @@ export class MyCollectionsComponent implements OnInit {
   myCollection: MyCollection;
   viewColl: MyCollection;
   collJas: JournalArticle[];
+  underConstructionMessage: boolean = false;
 
   constructor(
     private collServ: MyCollectionService,
@@ -55,6 +56,16 @@ export class MyCollectionsComponent implements OnInit {
 
   viewMyCollection(coll: MyCollection): void {
     this.viewColl = coll;
+  }
+
+  editCollection(coll: MyCollection): void {
+    this.underConstructionMessage = true;
+    this.myCollection = coll;
+  }
+
+  citeAll(coll: MyCollection): void {
+    this.underConstructionMessage = true;
+    this.myCollection = coll;
   }
 
 }
