@@ -3,7 +3,7 @@
   <h4>{{ coll.name }}</h4>
   <h5>{{ coll.description }}</h5>
   <button class="btn btn-warning mb-3">Cite All</button>
-  <app-display-articles
-    [articlesToDisplay]="coll.articles"
-  ></app-display-articles>
+  <div *ngFor="let article of coll.articles">
+    <app-display-article [articleId]="article.id"></app-display-article>
+  </div>
 </div>
