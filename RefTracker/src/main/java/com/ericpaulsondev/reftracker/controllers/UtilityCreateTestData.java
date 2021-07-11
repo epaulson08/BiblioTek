@@ -63,29 +63,38 @@ public class UtilityCreateTestData {
 				testUser.addCS(csServ.findById(i));
 			}
 
+			
+			
 			// persist test user
 			authServ.register(testUser);
 
 			// add MyCollections
-			MyCollection coll1 = new MyCollection("Test mycollection for testuser",
-					"great collection! Should have first 3 JA's");
-			coll1.addJournalArticle(jaServ.findById(1));
-			coll1.addJournalArticle(jaServ.findById(2));
-			coll1.addJournalArticle(jaServ.findById(3));
-			collServ.create(2, coll1);
+			MyCollection testColl1 = collServ.findById(2);
+			MyCollection testColl2 = collServ.findById(3);
+			MyCollection testColl3 = collServ.findById(4);
+			
+			if (testColl1 == null) {
+				testColl1 = new MyCollection("Rapid response teams",
+						"Paper for research class, spring 2021");
+				testColl1.addJournalArticle(jaServ.findById(1));
+				testColl1.addJournalArticle(jaServ.findById(2));
+				collServ.create(2, testColl1);				
+			}
 
-			MyCollection coll2 = new MyCollection("Here is another MyCollection",
-					"Can't think of something to write here");
-			coll2.addJournalArticle(jaServ.findById(2));
-			coll2.addJournalArticle(jaServ.findById(8));
-			coll2.addJournalArticle(jaServ.findById(9));
-			collServ.create(2, coll2);
+			if (testColl2 == null) {
+				testColl2 = new MyCollection("CCJM",
+						"Cleveland Clinic Journal of Medicine review article collection");
+				testColl2.addJournalArticle(jaServ.findById(7));
+				testColl2.addJournalArticle(jaServ.findById(8));
+				testColl2.addJournalArticle(jaServ.findById(9));
+				collServ.create(2, testColl2);  
+			}
 
-			MyCollection coll3 = new MyCollection("A third collection", "Hello");
-			coll3.addJournalArticle(jaServ.findById(10));
-			coll3.addJournalArticle(jaServ.findById(4));
-			coll3.addJournalArticle(jaServ.findById(7));
-			collServ.create(2, coll3);
+			if (testColl3 == null) {
+				testColl3 = new MyCollection("Medical Computing", "Practical applications of computing in healthcare delivery");
+				testColl3.addJournalArticle(jaServ.findById(10));
+				collServ.create(2, testColl3);
+			}
 
 			resp.setStatus(201);
 			return "Test user created/updated: \nusername = demo, password = demo";
