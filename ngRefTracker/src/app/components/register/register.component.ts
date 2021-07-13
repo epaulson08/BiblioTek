@@ -24,9 +24,10 @@ export class RegisterComponent implements OnInit {
 
     this.auth.register(this.newUser).subscribe(
       data => {
+        localStorage.setItem('username', this.newUser.username);
         this.auth.login(this.newUser.username, this.newUser.password).subscribe(
           next => {
-            this.router.navigateByUrl('/list-articles');
+            this.router.navigateByUrl('/user-dashboard');
           },
           error => {
             console.error('RegisterComponent.register(): error logging in.');

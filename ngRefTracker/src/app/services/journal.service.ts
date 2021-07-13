@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { Journal } from '../models/journal';
 import { AuthService } from './auth.service';
 
@@ -11,7 +12,7 @@ import { AuthService } from './auth.service';
 
 export class JournalService {
 
-  private baseUrl: string = "http://localhost:8084/";
+  private baseUrl: string = environment.baseUrl;
 
   constructor(
     private auth: AuthService,

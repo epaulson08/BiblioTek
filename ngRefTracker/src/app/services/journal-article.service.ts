@@ -7,13 +7,14 @@ import { PayloadUtility } from '../models/payload-utility.model';
 import { Journal } from '../models/journal';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JournalArticleService {
 
-  private baseUrl: string = "http://localhost:8084/";
+  private baseUrl: string = environment.baseUrl;
 
   constructor(
     private http: HttpClient,

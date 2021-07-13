@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { MyCollection } from '../models/my-collection.model';
 import { AuthService } from './auth.service';
 
@@ -9,7 +10,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class MyCollectionService {
-  private baseUrl: string = "http://localhost:8084/";
+  private baseUrl: string = environment.baseUrl;
 
   constructor(
     private http: HttpClient,
