@@ -1,34 +1,71 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-info mb-3">
+<nav class="navbar navbar-expand-md navbar-dark bg-info mb-3">
   <a class="navbar-brand" [routerLink]="['/user-dashboard']"
     >Reference Manager
-    <!-- <img src="" style="max-width: 40px" /> -->
   </a>
 
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#collapseTarget"
+    aria-controls="collapseTarget"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="collapseTarget">
     <!-- Left-aligned items -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/display-all-articles']" [routerLinkActive]="['active']">List All</a>
+        <a
+          class="nav-link"
+          [routerLink]="['/display-all-articles']"
+          [routerLinkActive]="['active']"
+          >· List All</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/my-collections']" [routerLinkActive]="['active']">My Collections</a>
+        <a
+          class="nav-link"
+          [routerLink]="['/my-collections']"
+          [routerLinkActive]="['active']"
+          >· My Collections</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/create']" [routerLinkActive]="['active']">Create</a>
+        <a
+          class="nav-link"
+          [routerLink]="['/create']"
+          [routerLinkActive]="['active']"
+          >· Create</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/search']" [routerLinkActive]="['active']">Search</a>
+        <a
+          class="nav-link"
+          [routerLink]="['/search']"
+          [routerLinkActive]="['active']"
+          >· Search</a
+        >
       </li>
     </ul>
 
     <!-- Right-aligned items -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <!-- FIXME: link to a My Account page -->
-        <a class="nav-link" [routerLink]="['/user-dashboard']" [routerLinkActive]="['active']">My Dashboard</a>
+        <a
+          class="nav-link"
+          [routerLink]="['/user-dashboard']"
+          [routerLinkActive]="['active']"
+          >Dashboard</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/home']" (click)="logout()">Log Out</a>
+        <a class="nav-link" [routerLink]="['/home']" (click)="logout()"
+          >Log Out</a
+        >
       </li>
     </ul>
   </div>
