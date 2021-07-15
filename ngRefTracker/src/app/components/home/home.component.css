@@ -10,9 +10,11 @@
   left: 0;
 }
 
+/* This is necessary because of differences
+in URL paths between production and development: */
 .background-image-prod {
   /* FIXME url */
-  background-image: url('src/assets/images/library.jpg');
+  background-image: url('http://18.219.247.72:8080/RefTracker/assets/images/library.jpg');
   background-size: 100%;
   background-repeat: no-repeat;
   min-height: 100%;

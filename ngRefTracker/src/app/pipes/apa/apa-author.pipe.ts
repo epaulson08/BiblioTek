@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Author } from '../../models/author';
-import { AuthorService } from '../../services/author.service';
 
 @Pipe({
   name: 'apaAuthor'

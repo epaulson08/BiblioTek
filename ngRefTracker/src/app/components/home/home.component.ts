@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.prodEnvironment) {
-      this.backgroundPhotoEnvironment = "" // FIXME
+      this.backgroundPhotoEnvironment = "background-image-prod"
     }
     else {
       this.backgroundPhotoEnvironment = "background-image-dev";

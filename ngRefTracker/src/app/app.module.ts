@@ -31,6 +31,18 @@ import { AuthService } from './services/auth.service';
 import { JournalArticleService } from './services/journal-article.service';
 import { FullApaPipe } from './pipes/apa/full-apa.pipe';
 import { FullAmaPipe } from './pipes/ama/full-ama.pipe';
+import { ChicagoAuthorPipe } from './pipes/chicago/chicago-author.pipe';
+import { FullChicagoPipe } from './pipes/chicago/full-chicago.pipe';
+import { IeeeAuthorPipe } from './pipes/ieee/ieee-author.pipe';
+import { IeeeAuthorsPipe } from './pipes/ieee/ieee-authors.pipe';
+import { FullIeeePipe } from './pipes/ieee/full-ieee.pipe';
+import { ChicagoAuthorsPipe } from './pipes/chicago/chicago-authors.pipe';
+import { MlaAuthorPipe } from './pipes/mla/mla-author.pipe';
+import { MlaAuthorsPipe } from './pipes/mla/mla-authors.pipe';
+import { FullMlaPipe } from './pipes/mla/full-mla.pipe';
+import { NlmAuthorPipe } from './pipes/nlm/nlm-author.pipe';
+import { NlmAuthorsPipe } from './pipes/nlm/nlm-authors.pipe';
+import { FullNlmPipe } from './pipes/nlm/full-nlm.pipe';
 
 @NgModule({
   declarations: [
@@ -55,7 +67,19 @@ import { FullAmaPipe } from './pipes/ama/full-ama.pipe';
     DownloadCopyComponent,
     UserDashboardComponent,
     DisplayArticleComponent,
-    MyCollectionComponent
+    MyCollectionComponent,
+    ChicagoAuthorPipe,
+    FullChicagoPipe,
+    IeeeAuthorPipe,
+    IeeeAuthorsPipe,
+    FullIeeePipe,
+    ChicagoAuthorsPipe,
+    MlaAuthorPipe,
+    MlaAuthorsPipe,
+    FullMlaPipe,
+    NlmAuthorPipe,
+    NlmAuthorsPipe,
+    FullNlmPipe
   ],
   imports: [
     AppRoutingModule,
