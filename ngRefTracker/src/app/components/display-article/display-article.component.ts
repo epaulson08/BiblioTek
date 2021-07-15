@@ -5,6 +5,7 @@ import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { FullAmaPipe } from 'src/app/pipes/ama/full-ama.pipe';
 import { FullApaPipe } from 'src/app/pipes/apa/full-apa.pipe';
+import { FullNlmPipe } from 'src/app/pipes/nlm/full-nlm.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { CitationStyleService } from 'src/app/services/citation-style.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
@@ -167,7 +168,7 @@ export class DisplayArticleComponent implements OnInit {
     switch (style.abbreviation) {
       case "AMA": return new FullAmaPipe().transform(this.selected);
       case "APA": return new FullApaPipe().transform(this.selected);
-      case "NLM": return "NLM citations are not yet available.";
+      case "NLM": return new FullNlmPipe().transform(this.selected);
       case "MLA": return "MLA citations are not yet available.";
       case "Chicago": return "Chicago style citations are not yet available.";
       case "IEEE": return "IEEE citations are not yet available.";
