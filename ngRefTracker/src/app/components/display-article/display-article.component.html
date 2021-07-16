@@ -128,7 +128,7 @@
             <em>Links:</em>
             <br />
             <div *ngFor="let link of chosenStyle.links">
-              <a href="link.url">{{ link.url }}</a
+              <a [href]="link.url">{{ link.url }}</a
               ><br />
               {{ link.comment }}
               <br />

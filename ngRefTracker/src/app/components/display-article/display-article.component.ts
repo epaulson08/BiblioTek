@@ -5,6 +5,7 @@ import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { FullAmaPipe } from 'src/app/pipes/ama/full-ama.pipe';
 import { FullApaPipe } from 'src/app/pipes/apa/full-apa.pipe';
+import { FullIeeePipe } from 'src/app/pipes/ieee/full-ieee.pipe';
 import { FullNlmPipe } from 'src/app/pipes/nlm/full-nlm.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { CitationStyleService } from 'src/app/services/citation-style.service';
@@ -171,7 +172,7 @@ export class DisplayArticleComponent implements OnInit {
       case "NLM": return new FullNlmPipe().transform(this.selected);
       case "MLA": return "MLA citations are not yet available.";
       case "Chicago": return "Chicago style citations are not yet available.";
-      case "IEEE": return "IEEE citations are not yet available.";
+      case "IEEE": return new FullIeeePipe().transform(this.selected);
       default: return "Citation style not found.";
     }
   }
