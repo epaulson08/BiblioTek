@@ -29,8 +29,9 @@ export class FullNlmPipe implements PipeTransform {
     outputStr += ";";
     outputStr += ja.volumeNum;
     if (ja.issueNum) {
-      outputStr += "(" + ja.issueNum + "):";
+      outputStr += "(" + ja.issueNum + ")";
     }
+    outputStr += ":";
     outputStr += ja.pages + ".";
 
     return outputStr;
