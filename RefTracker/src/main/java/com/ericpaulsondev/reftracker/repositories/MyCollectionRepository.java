@@ -9,4 +9,6 @@ import com.ericpaulsondev.reftracker.entities.MyCollection;
 public interface MyCollectionRepository extends JpaRepository<MyCollection, Integer> {
 	
 	List<MyCollection> findByUserUsername(String username);
+	
+	List<MyCollection> findByUserId(Integer id);
 }

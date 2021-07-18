@@ -41,4 +41,9 @@ public class MyCollectionServiceImpl implements MyCollectionService {
 		coll = collRepo.saveAndFlush(coll);
 		return coll;
 	}
+
+	@Override
+	public List<MyCollection> findByUserId(Integer id) {
+		return collRepo.findByUserId(id);
+	}
 }
