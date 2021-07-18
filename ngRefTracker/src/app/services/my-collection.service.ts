@@ -14,8 +14,8 @@ export class MyCollectionService {
 
   constructor(
     private http: HttpClient,
-    private auth: AuthService
-    ) { }
+    private auth: AuthService,
+  ) { }
 
   generateHttpHeader() {
     let credentials = this.auth.getCredentials();
@@ -28,7 +28,7 @@ export class MyCollectionService {
     return httpOptions;
   }
 
-  index() : Observable<MyCollection[]> {
+  index(): Observable<MyCollection[]> {
     return this.http.get<MyCollection[]>(
       this.baseUrl + "api/collections/",
       this.generateHttpHeader())
@@ -39,7 +39,7 @@ export class MyCollectionService {
       );
   }
 
-  show(id : number): Observable<MyCollection> {
+  show(id: number): Observable<MyCollection> {
     return this.http.get<MyCollection>(
       this.baseUrl + "api/collections/" + id,
       this.generateHttpHeader())

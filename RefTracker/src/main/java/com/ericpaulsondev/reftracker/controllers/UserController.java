@@ -49,6 +49,19 @@ public class UserController {
 		return users;
 	}
 
+	@GetMapping("users/getId/{username}")
+	public int getId(@PathVariable String username, HttpServletResponse resp) {
+		int userId = 0;
+		userId = userSvc.showByUserName(username).getId();
+		if (userId != 0) {
+			resp.setStatus(200);
+		}
+		else {
+			resp.setStatus(404);
+		}
+		return userId;
+	}
+
 	@GetMapping("users/search/{username}")
 	public User showByUsername(HttpServletRequest req, HttpServletResponse res, @PathVariable String username,
 			Principal principal) {

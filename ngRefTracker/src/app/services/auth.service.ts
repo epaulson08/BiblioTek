@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,16 +22,19 @@ export class AuthService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
+
+    // localStorage.setItem("userId", this.findUserId(username).toString());
+
     return this.http
-      .get(this.baseUrl + 'authenticate', httpOptions)
-      .pipe(
-        tap((res) => {
-          localStorage.setItem('credentials', credentials);
-          return res;
-        }),
-        catchError((err: any) => {
-          console.log(err);
-          return throwError('AuthService.login(): error logging in.')
+    .get(this.baseUrl + 'authenticate', httpOptions)
+    .pipe(
+      tap((res) => {
+        localStorage.setItem('credentials', credentials);
+        return res;
+      }),
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('AuthService.login(): error logging in.')
         })
       );
   }
