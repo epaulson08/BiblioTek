@@ -1,97 +1,163 @@
-# REST API Endpoints for Testing
+# REST API Endpoints
 
 Note:
 - API endpoints starting with `all` will obtain results across all users, and are not intended to be exposed to users. They may be accessed by admins.
-- Admins will have the option to navigate the site as a user and have their own `JournalArticle`s. Thus they may also be accessing endpoints not starting with `all`.
+- Admins will not function as users (i.e. will not have their own personal collections of articles), to discourage unnecessary exposure of admin credentials. They can register for a separate user account to function as a user.
 
+[Back to readme](README.md)
 
+---
 ## `JournalArticle`
 
 
-
-### `GET api/all/articles`
-Admin can get all `JournalArticle`s in the database regardless of who they belong to. Non-admin users should not be able to access this.
-
-| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
-| --- | --- | --- | --- | --- | --- | --- |
-| GET | api/all/articles | admin only | `null` | n/a | 200 OK | `List<JournalArticle>` including all articles for all users |
-| GET | api/all/articles | user (unauthorized) | `null` | n/a | 403 Forbidden |`null` |
-| GET | api/all/articles | any | bad data: arbitrary JSON | n/a | 400 Bad Request | `null` |
-
-
-
 ### `GET api/articles`
-A user can get all of their own `JournalArticle`s but not those of other users. An admin can get all of their own personal articles.
+A user can get all of their own `JournalArticle`s but not those of other users.
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
-| GET | api/articles | admin or user | `null` | n/a | 200 OK | `List<JournalArticle>` representing all of user's articles (or admin's personal articles) |
+| GET | api/articles | user | `null` | n/a | 200 OK | `List<JournalArticle>` representing all of user's articles (or admin's personal articles) |
+| GET | api/articles | admin | `null` | n/a | 404 Not Found | `null` |
 
 
+---
+### `GET api/all/articles`
+An admin can get all `JournalArticle`s in the database regardless of what user they belong to. Non-admin users should not be able to access this.
 
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+| GET | api/all/articles | admin | `null` | n/a | 200 OK | `List<JournalArticle>` including all articles for all users |
+| GET | api/all/articles | user | `null` | n/a | 403 Forbidden |`null` |
+
+
+---
 ### `GET api/all/articles/{articleId}`
-An admin can look up any `JournalArticle` by its database ID.
+An admin can look up any `JournalArticle` by its database ID. A user cannot.
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
-| GET | api/all/articles/{id} | admin only | `null` | `JournalArticle` id | 200 OK | `JournalArticle` with given id |
+| GET | api/all/articles/{id} | admin | `null` | `JournalArticle` ID | 200 OK | `JournalArticle` with given id |
+| GET | api/all/articles/{id} | user | `null` | `JournalArticle` ID | 403 Forbidden | `null` |
 
 
-
-### `GET api/all/articles/journals/{journalId}`
-An admin can access all `JournalArticle`s in the database regardless of which user owns them. They are filtered by `Journal` ID.
-
-
-
+---
 ### `GET api/articles/journals/{journalId}`
-A user can access all of their `JournalArticle`s filtered by a given `Journal`. An admin can do the same for their personal `JournalArticles`.
+A user can access all of their `JournalArticle`s filtered by a given `Journal`.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+| GET | api/articles/journals/{journalId} | user | `null` | `Journal` ID | 200 OK | `List<JournalArticle>` associated with given `Journal` ID |
+| GET | api/articles/journals/{journalId} | admin | `null` | `Journal` ID | 404 Not Found | `null` |
 
 
-
-### `GET api/all/articles/search/{searchTerm}`
-An admin can search all `JournalArticle`s in the database by author or title.
-
-
-
+---
 ### `GET api/articles/search/{searchTerm}`
-A user can search all of the `JournalArticle`s belonging to them by author or title; an admin can search their personal `JournalArticle`s.
+A user can search all of the `JournalArticle`s belonging to them by author or title.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+| GET | api/articles/search/{searchTerm} | user | n/a | search term | 200 OK | `List<JournalArticle>` with author or title matching search term |
+| GET | api/articles/search/{searchTerm} | admin | n/a | search term | 404 Not Found | `null` |
 
 
+---
+### `GET api/all/articles/search/{searchTerm}`
+An admin can search all `JournalArticle`s in the database by author or title (regardless of what user the article belongs to).
 
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+| GET | api/all/articles/search/{searchTerm} | admin | n/a | search term | 200 OK | `List<JournalArticle>` with author or title matching search term |
+| GET | api/all/articles/search/{searchTerm} | user | n/a | search term | 403 Forbidden | `null` |
+
+
+---
 ### `GET api/all/articles/aggregates/count`
 An admin can view the total number of `JournalArticle`s in the database, regardless of what user owns them.
 
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+| GET | api/all/articles/aggregates/count | admin | n/a | n/a | 200 OK | `number` representing total articles |
+| GET | api/all/articles/aggregates/count | user | n/a | n/a | 403 Forbidden | `null` |
 
 
+---
 ### `GET api/articles/aggregates/count`
-A user can view the total number of `JournalArticle`s belonging to them. An admin can view the total count of their personal `JournalArticle`s.
+A user can view the total number of `JournalArticle`s belonging to them.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+| GET | api/articles/aggregates/count | user | n/a | n/a | 200 OK | `number` representing total articles |
+| GET | api/articles/aggregates/count | admin | n/a | n/a | 404 Not Found | `null` |
 
 
-
+---
 ### `POST api/articles`
-A user can create a `JournalArticle` that they then own. An admin can add a `JournalArticle` to their personal collection.
+A user can create a `JournalArticle` that they then own. Admins cannot create `JournalArticle`s.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+| POST | api/articles | user | `JournalArticle` | n/a | 201 Created | `JournalArticle` |
+| POST | api/articles | admin | `JournalArticle` | n/a | 405 Method Not Allowed | `null` |
 
 
+---
+### `PUT api/articles/{journalArticleId}`
+A user can update a `JournalArticle` belonging to them. An admin cannot.
 
-### `PUT api/articles/{id}`
-A user can update a `JournalArticle`. An admin may only update their own personal `JournalArticle`s (though they can delete those of other users).
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+| PUT | api/articles/{journalArticleId} | user | `JournalArticle` | ID of a `JournalArticle` belonging to user | 200 OK | `JournalArticle` |
+| PUT | api/articles/{journalArticleId} | user | `JournalArticle` | ID of a `JournalArticle` *not* belonging to user | 403 Forbidden | `null` |
+| PUT | api/articles/{journalArticleId} | admin | `JournalArticle` | `JournalArticle` ID | 405 Method Not Allowed | `null` |
 
 
+---
+### `PUT api/articles/{journalArticleId}/add-author/{authorId}`
+A user can add an `Author` to a `JournalArticle` if the `JournalArticle` belongs to them. Admins cannot add `Author`s.
 
-### `PUT api/articles/{jaId}/authors/{authorId}`
-A user can add or remove an author from a `JournalArticle`. Admins can only edit their own articles (though they can delete those of other users).
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+| PUT | api/articles/{journalArticleId}/add-author/{authorId} | user | n/a | ID of `JournalArticle` belonging to user and ID of `Author` to add to article | 200 OK | `JournalArticle` |
+| PUT | api/articles/{journalArticleId}/add-author/{authorId} | user | n/a | ID of `JournalArticle` *not* belonging to user, and any `Author` ID | 403 Forbidden | `null` |
+| PUT | api/articles/{journalArticleId}/add-author/{authorId} | admin | n/a | any `JournalArticle` ID and `Author` ID | 405 Method Not Allowed | `null` |
 
 
+---
+### `PUT api/articles/{journalArticleId}/remove-author/{authorId}`
+A user can delete an `Author` from a `JournalArticle` if the `JournalArticle` belongs to them. Admins cannot remove `Author`s.
 
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+| PUT | api/articles/{journalArticleId}/remove-author/{authorId} | user | n/a | ID of `JournalArticle` belonging to user and ID of `Author` to remove from article | 200 OK | `JournalArticle` |
+| PUT | api/articles/{journalArticleId}/remove-author/{authorId} | user | n/a | ID of `JournalArticle` *not* belonging to user, and any `Author` ID | 403 Forbidden | `null` |
+| PUT | api/articles/{journalArticleId}/remove-author/{authorId} | admin | n/a | Any `JournalArticle` ID and `Author` ID | 405 Method Not Allowed | `null` |
+
+
+---
+### `DELETE api/articles/{journalArticleId}`
+An user can delete any if their own `JournalArticle`s. This is a "soft delete" that maintains the record but sets its "enabled" status to false.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+| DELETE | api/articles/{journalArticleId} | user | n/a | ID of `JournalArticle` belonging to user | 204 No Content | `JournalArticle` |
+| DELETE | api/articles/{journalArticleId} | user | n/a | ID of `JournalArticle` *not* belonging to user | 403 Forbidden | `null` |
+| DELETE | api/articles/{journalArticleId} | admin | n/a | ID of any `JournalArticle` | 405 Method Not Allowed | `null` |
+
+---
 ### `DELETE api/all/articles/{id}`
-An admin can delete any user's articles. This is a "soft delete" that maintains the record but sets its "enabled" status to false.
+An admin can delete any user's `JournalArticle`s. This is a "soft delete" that maintains the record but sets its "enabled" status to false.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+| DELETE | api/all/articles/{journalArticleId} | admin | n/a | ID of `JournalArticle` to delete | 204 No Content | `JournalArticle` |
+| DELETE | api/all/articles/{journalArticleId} | user | n/a | Any `JournalArticle` ID | 403 Forbidden | `null` |
 
 
-
-### `DELETE api/articles/{id}`
-An user can delete any if their own articles. This is a "soft delete" that maintains the record but sets its "enabled" status to false.
-
-
-
-### Deprecated:
-- GET api/articles/{id}: an article's ID in the database is arbitrary will generally not be useful to a user.
+---
+## Documentation coming soon: 
+## `Authentication`
+## `Author`
+## `CitationStyle`
+## `CitationStyleLink`
+## `Journal`
+## `MyCollection`
+## `User`

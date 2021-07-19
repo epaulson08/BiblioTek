@@ -26,15 +26,5 @@ I have developed this project to practice "bread and butter" fundamentals of web
     * Bootstrap
     * HTML/CSS
 
-## API
-| HTTP Method | Resource URI | Request Body | Returns | Functionality |
-|-------------|--------------|--------------|---------|--------|
-| GET         | `api/articles` |   void           | `List<JournalArticle>` | void | Gets all journal articles |
-| GET | `api/articles/{id}` | void | `JournalArticle` | Gets one article by ID |
-| GET | `api/articles/aggregates/count` | void | void | Obtains a total number of journal articles in the user's collection |
-| POST | `api/articles` | `PayloadUtility`| `JournalArticle` | Creates a new journal article record |
-| PUT | `api/articles/{id}` | `JournalArticle` |   `JournalArticle` | Replaces an existing journal article by ID |
-| PUT | `api/articles/{jaId}/authors/{authorId}` | void | Associates an existing author with an existing journal article |
-| DELETE | `api/articles/{id}` | void | `boolean` | Deletes an existing article by ID |
-| GET | `api/journals` | void | `List<Journal>` | Gets all journals and orders by name |
-| GET | `api/journals/search/{searchTerm}` | void | `List<Journal>` | Gets all journals with title or author containing the String `searchTerm` |
+## REST API Endpoints
+Described in detail [here](REST-endpoints.md).
