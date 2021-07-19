@@ -173,7 +173,8 @@ A user can view all of their collections. An admin will use a different endpoint
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
-
+| GET | api/collections | user | n/a | n/a | 200 OK | `List<MyCollection>` of all `MyCollection`s belonging to user |
+| GET | api/collections | admin | n/a | n/a | 404 Not Found | `null` |
 
 ---
 ### `GET api/all/collections/{myCollectionId}`
@@ -181,6 +182,8 @@ An admin can view any `MyCollection` by `myCollection` ID.
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
+| GET | api/all/collections/{myCollectionId} | admin | n/a | `MyCollection` ID | 200 OK | `MyCollection` with the requested ID |
+| GET | api/all/collections/{myCollectionId} | user | n/a | any | 403 Forbidden | `null` |
 
 
 ---
@@ -189,7 +192,9 @@ An admin can view all `MyCollection`s owned by a particular user.
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
-
+| GET | api/all/collections/users/{userId} | admin | n/a | `User` ID | 200 OK | `List<MyCollection>` representing all `MyCollection`s belonging to the `User` with the given ID |
+| GET | api/all/collections/users/{userId} | user | n/a | any | 403 Forbidden | `null` |
+ 
 
 ---
 ### `POST api/collections`
@@ -197,7 +202,8 @@ A user can create a `MyCollection`.
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
-
+| POST | api/collections | user | `MyCollection` | n/a | 201 Created | `MyCollection` |
+| POST | api/collections | admin | `MyCollection` | n/a | 405 Method Not Allowed | `null` |
 
 ---
 ### `PUT api/collections/{myCollectionId}`
@@ -205,6 +211,9 @@ A user can update a `MyCollection` if it belongs to them.
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
+| PUT | api/collections/{myCollectionId} | user | `MyCollection` | `MyCollection` ID of a `MyCollection` belonging to user | 200 OK | `MyCollection` |
+| PUT | api/collections/{myCollectionId} | user | `MyCollection` | `MyCollection` ID of a `MyCollection` *not* belonging to user | 403 Forbidden | `null` |
+| PUT | api/collections/{myCollectionId} | admin | `MyCollection` | any | 405 Method Not Supported | `null` |
 
 
 ---
@@ -213,6 +222,9 @@ A user can add a `JournalArticle` to a `MyCollection` if if belongs to them.
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
+| PUT | api/collections/{myCollectionId}/add-article/{journalArticleId} | user | n/a | `MyCollection` ID belonging to user, and ID of `JournalArticle` to add | 200 OK | `MyCollection` |
+| PUT | api/collections/{myCollectionId}/add-article/{journalArticleId} | user | n/a | `MyCollection` ID *not* belonging to user, and ID of `JournalArticle` to add | 403 Forbidden | `MyCollection` |
+| PUT | api/collections/{myCollectionId}/add-article/{journalArticleId} | admin | n/a | any | 405 Method Not Supported | `null` |
 
 
 ---
@@ -221,14 +233,20 @@ A user can remove a `JournalArticle` from a `MyCollection` if it belongs to them
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
+| PUT | api/collections/{myCollectionId}/remove-article/{journalArticleId} | user | n/a | `MyCollection` ID belonging to user, and ID of `JournalArticle` to remove | 200 OK | `MyCollection` |
+| PUT | api/collections/{myCollectionId}/remove-article/{journalArticleId} | user | n/a | `MyCollection` ID *not* belonging to user, and ID of `JournalArticle` to remove | 403 Forbidden | `MyCollection` |
+| PUT | api/collections/{myCollectionId}/remove-article/{journalArticleId} | admin | n/a | any | 405 Method Not Supported | `null` |
 
 
 ---
 ### `DELETE api/collections/{myCollectionId}`
-A user can delete a `MyCollection` if it belongs to them.
+A user can delete a `MyCollection` if it belongs to them. An admin will use a different endpoint to accomplish this.
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
+| DELETE | api/collections/{myCollectionId} | user | n/a | ID of `MyCollection` to delete, belonging to user | 204 No Content | `MyCollection` |
+| DELETE | api/collections/{myCollectionId} | user | n/a | ID of `MyCollection` to delete, *not* belonging to user | 403 Forbidden | `null` |
+| DELETE | api/collections/{myCollectionId} | admin | n/a | any | 405 Method Not Supported | `null` |
 
 
 ---
@@ -237,15 +255,15 @@ An admin can delete a `MyCollection` belonging to any user.
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
+| DELETE | api/all/collections/{myCollectionId} | admin | n/a | ID of `MyCollection` to delete | 204 No Content | `MyCollection` |
+| DELETE | api/all/collections/{myCollectionId} | user | n/a | any | 403 Forbidden | `null` |
 
 
 ---
-
 ## Documentation coming soon: 
 ## `Authentication`
 ## `Author`
 ## `CitationStyle`
 ## `CitationStyleLink`
 ## `Journal`
-## `MyCollection`
 ## `User`
