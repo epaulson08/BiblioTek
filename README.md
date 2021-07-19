@@ -27,4 +27,4 @@ I have developed this project to practice "bread and butter" fundamentals of web
     * HTML/CSS
 
 ## REST API Endpoints
-Described in detail [here](REST-endpoints.md).
+Described in detail [here](REST-API/REST-endpoints.md).

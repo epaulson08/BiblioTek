@@ -175,7 +175,6 @@ A user can view all of their collections. An admin will use a different endpoint
 | --- | --- | --- | --- | --- | --- | --- |
 
 
-
 ---
 ### `GET api/all/collections/{myCollectionId}`
 An admin can view any `MyCollection` by `myCollection` ID.
