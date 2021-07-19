@@ -1,7 +1,18 @@
 # REST API Endpoints
 
-Note:
-- API endpoints starting with `all` will obtain results across all users, and are not intended to be exposed to users. They may be accessed by admins.
+Endpoints are organized by entity type:
+
+- [`Authentication`](#authentication)
+- [`Author`](#author)
+- [`CitationStyle`](#citationstyle)
+- [`CitationStyleLink`](#citationstylelink)
+- [`Journal`](#journal)
+- [`JournalArticle`](#journalarticle)
+- [`MyCollection`](#mycollection)
+- [`User`](#user)
+
+Endpoints have different access based on user role:
+- API endpoints starting with `api/all/` will obtain results across all users, and are not intended to be exposed to users. They may be accessed by admins.
 - Admins will not function as users (i.e. will not have their own personal collections of articles), to discourage unnecessary exposure of admin credentials. They can register for a separate user account to function as a user.
 
 [Back to readme](README.md)
@@ -152,7 +163,85 @@ An admin can delete any user's `JournalArticle`s. This is a "soft delete" that m
 | DELETE | api/all/articles/{journalArticleId} | user | n/a | Any `JournalArticle` ID | 403 Forbidden | `null` |
 
 
+
 ---
+## `MyCollection`
+
+
+### `GET api/collections`
+A user can view all of their collections. An admin will use a different endpoint for this functionality.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+
+
+
+---
+### `GET api/all/collections/{myCollectionId}`
+An admin can view any `MyCollection` by `myCollection` ID.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+
+
+---
+### `GET api/all/collections/users/{userId}`
+An admin can view all `MyCollection`s owned by a particular user.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+
+
+---
+### `POST api/collections`
+A user can create a `MyCollection`.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+
+
+---
+### `PUT api/collections/{myCollectionId}`
+A user can update a `MyCollection` if it belongs to them.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+
+
+---
+### `PUT api/collections/{myCollectionId}/add-article/{journalArticleId}`
+A user can add a `JournalArticle` to a `MyCollection` if if belongs to them.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+
+
+---
+### `PUT api/collections/{myCollectionId}/remove-article/{journalArticleId}`
+A user can remove a `JournalArticle` from a `MyCollection` if it belongs to them.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+
+
+---
+### `DELETE api/collections/{myCollectionId}`
+A user can delete a `MyCollection` if it belongs to them.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+
+
+---
+### `DELETE api/all/collections/{myCollectionId}`
+An admin can delete a `MyCollection` belonging to any user.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+
+
+---
+
 ## Documentation coming soon: 
 ## `Authentication`
 ## `Author`
