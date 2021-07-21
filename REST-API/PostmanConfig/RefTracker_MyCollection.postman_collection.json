@@ -6,7 +6,75 @@
 	},
 	"item": [
 		{
-			"name": "api/all/collections/{myCollectionId} - as admin",
+			"name": "api/collections - as user",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "demo",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "demo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8084/api/collections",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"collections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/collections - as admin",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "wombat1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8084/api/collections",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"collections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/all/collections/{myCollectionId} - as admin, collection exists",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -42,7 +110,7 @@
 			"response": []
 		},
 		{
-			"name": "api/collections - as user",
+			"name": "api/all/collections/{myCollectionId} - as user",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -62,21 +130,23 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8084/api/collections",
+					"raw": "localhost:8084/api/all/collections/2",
 					"host": [
 						"localhost"
 					],
 					"port": "8084",
 					"path": [
 						"api",
-						"collections"
+						"all",
+						"collections",
+						"2"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "api/all/collections/users/{userId} - as admin",
+			"name": "api/all/collections/{myCollectionId} - as admin, collection does not exist Copy",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -96,7 +166,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8084/api/all/collections/users/{userId} - as admin",
+					"raw": "localhost:8084/api/all/collections/1999",
 					"host": [
 						"localhost"
 					],
@@ -105,8 +175,7 @@
 						"api",
 						"all",
 						"collections",
-						"users",
-						"{userId} - as admin"
+						"1999"
 					]
 				}
 			},
