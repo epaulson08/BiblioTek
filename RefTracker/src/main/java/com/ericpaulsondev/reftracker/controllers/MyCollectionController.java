@@ -47,15 +47,17 @@ public class MyCollectionController {
 
 	@GetMapping("api/all/collections/{id}")
 	public MyCollection findById(@PathVariable Integer id, HttpServletResponse resp, Principal principal) {
-		MyCollection coll = collServ.findById(id);
-		if (coll == null) {
-			resp.setStatus(404);
-			return null;
-		} else {
-			if (coll.getUser().getUsername().equals(principal.getName())) {
+		if (isAdmin(principal)) {		
+			MyCollection coll = collServ.findById(id);
+			if (coll == null) {
+				resp.setStatus(404);
+				return null;
+			} else {
 				resp.setStatus(200);
 				return coll;
 			}
+		}
+		else {
 			resp.setStatus(403);
 			return null;
 		}
@@ -82,9 +84,6 @@ public class MyCollectionController {
 	private boolean isAdmin(Principal principal) {
 		try {
 			boolean isAdmin = userServ.showByUserName(principal.getName()).getRole().equals("admin");
-			System.err.println("isAdmin = " + isAdmin);
-			System.err.println("principal name = " + principal.getName());
-			System.err.println("principal role = " + userServ.showByUserName(principal.getName()).getRole());
 			return isAdmin;
 		} catch (NullPointerException npe) {
 			npe.printStackTrace();
