@@ -63,21 +63,23 @@ public class MyCollectionController {
 		}
 	}
 
-	@GetMapping("api/collections/users/{userId}")
+	@GetMapping("api/all/collections/users/{userId}")
 	public List<MyCollection> findByUserId(@PathVariable Integer userId, HttpServletResponse resp,
 			Principal principal) {
-		if (!principal.getName().equals(userServ.show(userId).getUsername())) {
+		if (isAdmin(principal)) {
+			List<MyCollection> toReturn = collServ.findByUserId(userId);
+			if (toReturn != null) {
+				resp.setStatus(200);
+			}
+			else {
+				resp.setStatus(404);
+			}
+			return toReturn;
+		}
+		else {
 			resp.setStatus(403);
 			return null;
 		}
-		List<MyCollection> toReturn = collServ.findByUserId(userId);
-		if (toReturn != null) {
-			resp.setStatus(200);
-		}
-		if (toReturn == null) {
-			resp.setStatus(404);
-		}
-		return toReturn;
 	}
 
 	// Utility methods for authentication checks

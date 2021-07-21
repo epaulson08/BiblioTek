@@ -44,6 +44,10 @@ public class MyCollectionServiceImpl implements MyCollectionService {
 
 	@Override
 	public List<MyCollection> findByUserId(Integer id) {
-		return collRepo.findByUserId(id);
+		List<MyCollection> toReturn = collRepo.findByUserId(id);
+		if (toReturn.size() > 0) {
+			return toReturn;
+		}
+		else return null;
 	}
 }
