@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ericpaulsondev.reftracker.entities.JournalArticle;
 import com.ericpaulsondev.reftracker.entities.MyCollection;
+import com.ericpaulsondev.reftracker.entities.User;
 import com.ericpaulsondev.reftracker.services.MyCollectionService;
 import com.ericpaulsondev.reftracker.services.UserService;
 
@@ -27,13 +29,19 @@ public class MyCollectionController {
 
 	@GetMapping("api/collections")
 	public List<MyCollection> findByUserUsername(Principal principal, HttpServletResponse resp) {
-		List<MyCollection> myColls = collServ.findByUserUsername(principal.getName());
-		if (myColls != null) {
-			resp.setStatus(200);
-			return myColls;
-		} else {
-			resp.setStatus(404);
+		if (isAdmin(principal)) {
+			resp.setStatus(405);
 			return null;
+		}
+		else {
+			List<MyCollection> myColls = collServ.findByUserUsername(principal.getName());
+			if (myColls != null) {
+				resp.setStatus(200);
+				return myColls;
+			} else {
+				resp.setStatus(404);
+				return null;
+			}			
 		}
 	}
 
@@ -68,5 +76,32 @@ public class MyCollectionController {
 			resp.setStatus(404);
 		}
 		return toReturn;
+	}
+
+	// Utility methods for authentication checks
+	private boolean isAdmin(Principal principal) {
+		try {
+			boolean isAdmin = userServ.showByUserName(principal.getName()).getRole().equals("admin");
+			System.err.println("isAdmin = " + isAdmin);
+			System.err.println("principal name = " + principal.getName());
+			System.err.println("principal role = " + userServ.showByUserName(principal.getName()).getRole());
+			return isAdmin;
+		} catch (NullPointerException npe) {
+			npe.printStackTrace();
+			return false;
+		}
+	}
+
+	private boolean belongsToUser(int myCollId, Principal principal) {
+		try {
+			User user = userServ.showByUserName(principal.getName());
+			MyCollection managedMyColl = collServ.findById(myCollId);
+			if (managedMyColl.getUser().equals(user))
+				return true;
+			return false;
+		} catch (NullPointerException npe) {
+			npe.printStackTrace();
+			return false;
+		}
 	}
 }

@@ -174,7 +174,7 @@ A user can view all of their collections. An admin will use a different endpoint
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
 | GET | api/collections | user | n/a | n/a | 200 OK | `List<MyCollection>` of all `MyCollection`s belonging to user |
-| GET | api/collections | admin | n/a | n/a | 404 Not Found | `null` |
+| GET | api/collections | admin | n/a | n/a | 405 Method Not Allowed | `null` |
 
 ---
 ### `GET api/all/collections/{myCollectionId}`

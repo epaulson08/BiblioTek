@@ -120,7 +120,6 @@ public class UtilityCreateTestData {
 			}
 
 			testAdmin.setId(3);
-			testAdmin.setUsername("admin");
 			testAdmin.setPassword("wombat1");
 			testAdmin.setRole("admin");
 
@@ -129,7 +128,9 @@ public class UtilityCreateTestData {
 			testAdmin.addJA(jaServ.findById(9));
 			testAdmin.addJA(jaServ.findById(10));
 
+			// this method call sets the role to user:
 			authServ.register(testAdmin);
+			// for testing purposes, change role in the database
 
 			// add a MyCollection
 			MyCollection coll = new MyCollection("Test mycollection for testuser",
@@ -144,7 +145,7 @@ public class UtilityCreateTestData {
 			testAdmin.addCS(csServ.findById(2));
 
 			resp.setStatus(201);
-			return "Test admin created: \nusername = admin, password = wombat1";
+			return "Test admin credentials:\nusername = admin, password = wombat1\nAPI sets role to user; change to admin in database for testing";
 		}
 
 		catch (Exception e) {

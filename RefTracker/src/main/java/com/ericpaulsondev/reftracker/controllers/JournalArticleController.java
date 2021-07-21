@@ -233,6 +233,7 @@ public class JournalArticleController {
 				return true;
 			return false;
 		} catch (NullPointerException npe) {
+			npe.printStackTrace();
 			return false;
 		}
 	}
