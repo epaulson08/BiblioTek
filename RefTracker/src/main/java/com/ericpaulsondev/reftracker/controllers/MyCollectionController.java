@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +31,7 @@ public class MyCollectionController {
 
 	@GetMapping("api/collections")
 	public List<MyCollection> findByUserUsername(Principal principal, HttpServletResponse resp) {
-		// admin: method not supported
+		// admin: 405 method not supported
 		if (isAdmin(principal)) {
 			resp.setStatus(405);
 			return null;
@@ -38,12 +39,12 @@ public class MyCollectionController {
 		// user
 		else {
 			List<MyCollection> myColls = collServ.findByUserUsername(principal.getName());
-			// article belongs to user
+			// article belongs to user: 200 OK
 			if (myColls != null) {
 				resp.setStatus(200);
 				return myColls;
 			}
-			// article does not belong to user
+			// article does not belong to user: 404 not found
 			else {
 				resp.setStatus(404);
 				return null;
@@ -56,18 +57,18 @@ public class MyCollectionController {
 		// admin
 		if (isAdmin(principal)) {
 			MyCollection coll = collServ.findById(id);
-			// no such MyCollection
+			// no such MyCollection: 404 not found
 			if (coll == null) {
 				resp.setStatus(404);
 				return null;
 			}
-			// MyCollection exists
+			// MyCollection exists: 200 OK
 			else {
 				resp.setStatus(200);
 				return coll;
 			}
 		}
-		// user: access denied
+		// user: access denied: 403 forbidden
 		else {
 			resp.setStatus(403);
 			return null;
@@ -80,17 +81,17 @@ public class MyCollectionController {
 		// admin
 		if (isAdmin(principal)) {
 			List<MyCollection> toReturn = collServ.findByUserId(userId);
-			// requested user has MyCollections
+			// requested user has MyCollections: 200 OK
 			if (toReturn != null) {
 				resp.setStatus(200);
 			}
-			// requested user has no MyCollections
+			// requested user has no MyCollections: 404 not found
 			else {
 				resp.setStatus(404);
 			}
 			return toReturn;
 		}
-		// user: access denied
+		// user: 403 forbidden
 		else {
 			resp.setStatus(403);
 			return null;
@@ -99,7 +100,7 @@ public class MyCollectionController {
 
 	@PostMapping("api/collections")
 	public MyCollection create(@RequestBody MyCollection myColl, HttpServletResponse resp, Principal principal) {
-		// admin: method not supported
+		// admin: 405 method not supported
 		if (isAdmin(principal)) {
 			resp.setStatus(405);
 			return null;
@@ -119,7 +120,29 @@ public class MyCollectionController {
 		}
 	}
 
-	// Utility methods for authentication checks
+	@PutMapping("api/collections/{myCollectionId}")
+	public MyCollection update(@PathVariable Integer myCollectionId, @RequestBody MyCollection myColl,
+			Principal principal, HttpServletResponse resp) {
+		// admin: 405 method not allowed
+		if (isAdmin(principal)) {
+			resp.setStatus(405);
+			return null;
+		}
+		else {
+			// user: owns article: 200 OK
+			if (belongsToUser(myCollectionId, principal)) {
+				resp.setStatus(200);
+				return collServ.update(myCollectionId, myColl);
+			}
+			// user: doesn't own article: 403 forbidden
+			else {
+				resp.setStatus(403);
+				return null;
+			}
+		}
+	}
+
+	// utility methods for authorization checks
 	private boolean isAdmin(Principal principal) {
 		try {
 			boolean isAdmin = userServ.showByUserName(principal.getName()).getRole().equals("admin");
