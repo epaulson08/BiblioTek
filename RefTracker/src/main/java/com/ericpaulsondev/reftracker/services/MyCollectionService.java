@@ -18,7 +18,7 @@ public interface MyCollectionService {
 	
 	MyCollection addJournalArticle(Integer myCollectionId, Integer journalArticleId);
 	
-	// MyCollection removeJournalArticle(Integer myCollectionId, Integer journalArticleId);
+	 MyCollection removeJournalArticle(Integer myCollectionId, Integer journalArticleId);
 	
 	// MyCollection delete(Integer myCollectionId);
 	

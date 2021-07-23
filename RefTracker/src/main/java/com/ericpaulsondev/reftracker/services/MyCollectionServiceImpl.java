@@ -101,6 +101,27 @@ public class MyCollectionServiceImpl implements MyCollectionService {
 		return managedMyColl;
 	}
 
+	@Override
+	public MyCollection removeJournalArticle(Integer myCollectionId, Integer journalArticleId) {
+		MyCollection managedMyColl = null;
+		JournalArticle managedJa = null;
+		
+		Optional<MyCollection> collOpt = collRepo.findById(myCollectionId);
+		if (collOpt.isPresent()) {
+			managedMyColl = collOpt.get();
+			
+			Optional<JournalArticle> jaOpt = jaRepo.findById(journalArticleId);
+			if (jaOpt.isPresent()) {
+				managedJa = jaOpt.get();
+				managedMyColl.removeJournalArticle(managedJa);
+				collRepo.saveAndFlush(managedMyColl);
+			} else
+				return null;
+			
+		}
+		return managedMyColl;
+	}
+
 
 	/*
 	 * ### `PUT api/collections/{myCollectionId}/remove-article/{journalArticleId}`

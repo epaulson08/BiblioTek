@@ -171,6 +171,30 @@ public class MyCollectionController {
 
 	}
 
+	@PutMapping("api/collections/{myCollectionId}/remove-article/{journalArticleId}")
+	public MyCollection removeJournalArticle(@PathVariable Integer myCollectionId, @PathVariable Integer journalArticleId,
+			Principal principal, HttpServletResponse resp) {
+		// admin: 405 method not supported
+		if (isAdmin(principal)) {
+			resp.setStatus(405);
+			return null;
+		} else {
+			// user: does not own MyCollection OR JournalArticle: 403 forbidden
+			if (!myCollectionBelongsToPrincipal(myCollectionId, principal)
+					|| !journalArticleBelongsToPrincipal(journalArticleId, principal)) {
+				resp.setStatus(403);
+				return null;
+			} else {
+				// user: owns MyCollection AND JournalArticle: 200 OK
+				MyCollection toReturn = collServ.removeJournalArticle(myCollectionId, journalArticleId);
+				resp.setStatus(200);
+				return toReturn;
+			}
+			
+		}
+		
+	}
+
 	// utility methods for authorization checks
 	private boolean isAdmin(Principal principal) {
 		try {
