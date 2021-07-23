@@ -71,9 +71,6 @@ public class MyCollectionServiceImpl implements MyCollectionService {
 				managedMyColl.setDescription(desc);
 			if (name != null && !name.equals(""))
 				managedMyColl.setName(name);
-			if (user != null)
-				managedMyColl.setUser(user);
-
 			return collRepo.saveAndFlush(managedMyColl);
 		} else
 			return null;
