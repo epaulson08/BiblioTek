@@ -1,6 +1,7 @@
 package com.ericpaulsondev.reftracker.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ericpaulsondev.reftracker.entities.JournalArticle;
 import com.ericpaulsondev.reftracker.entities.MyCollection;
 import com.ericpaulsondev.reftracker.entities.User;
+import com.ericpaulsondev.reftracker.services.JournalArticleService;
 import com.ericpaulsondev.reftracker.services.MyCollectionService;
 import com.ericpaulsondev.reftracker.services.UserService;
 
@@ -28,6 +31,9 @@ public class MyCollectionController {
 
 	@Autowired
 	private UserService userServ;
+
+	@Autowired
+	private JournalArticleService jaServ;
 
 	@GetMapping("api/collections")
 	public List<MyCollection> findByUserUsername(Principal principal, HttpServletResponse resp) {
@@ -127,10 +133,9 @@ public class MyCollectionController {
 		if (isAdmin(principal)) {
 			resp.setStatus(405);
 			return null;
-		}
-		else {
+		} else {
 			// user: owns article: 200 OK
-			if (belongsToUser(myCollectionId, principal)) {
+			if (myCollectionBelongsToPrincipal(myCollectionId, principal)) {
 				resp.setStatus(200);
 				return collServ.update(myCollectionId, myColl);
 			}
@@ -140,6 +145,30 @@ public class MyCollectionController {
 				return null;
 			}
 		}
+	}
+
+	@PutMapping("api/collections/{myCollectionId}/add-article/{journalArticleId}")
+	public MyCollection addJournalArticle(@PathVariable Integer myCollectionId, @PathVariable Integer journalArticleId,
+			Principal principal, HttpServletResponse resp) {
+		// admin: 405 method not supported
+		if (isAdmin(principal)) {
+			resp.setStatus(405);
+			return null;
+		} else {
+			// user: does not own MyCollection OR JournalArticle: 403 forbidden
+			if (!myCollectionBelongsToPrincipal(myCollectionId, principal)
+					|| !journalArticleBelongsToPrincipal(journalArticleId, principal)) {
+				resp.setStatus(403);
+				return null;
+			} else {
+				// user: owns MyCollection AND JournalArticle: 200 OK
+				MyCollection toReturn = collServ.addJournalArticle(myCollectionId, journalArticleId);
+				resp.setStatus(200);
+				return toReturn;
+			}
+
+		}
+
 	}
 
 	// utility methods for authorization checks
@@ -153,11 +182,24 @@ public class MyCollectionController {
 		}
 	}
 
-	private boolean belongsToUser(int myCollId, Principal principal) {
+	private boolean myCollectionBelongsToPrincipal(Integer myCollId, Principal principal) {
 		try {
 			User user = userServ.showByUserName(principal.getName());
 			MyCollection managedMyColl = collServ.findById(myCollId);
 			if (managedMyColl.getUser().equals(user))
+				return true;
+			return false;
+		} catch (NullPointerException npe) {
+			npe.printStackTrace();
+			return false;
+		}
+	}
+
+	private boolean journalArticleBelongsToPrincipal(Integer journalArticleId, Principal principal) {
+		try {
+			User user = userServ.showByUserName(principal.getName());
+			JournalArticle managedJa = jaServ.findById(journalArticleId);
+			if (managedJa.getUsers().contains(user))
 				return true;
 			return false;
 		} catch (NullPointerException npe) {
