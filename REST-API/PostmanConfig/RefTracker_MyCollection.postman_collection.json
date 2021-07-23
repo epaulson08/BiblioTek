@@ -726,7 +726,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8084/api/collections/7/add-article/15",
+					"raw": "localhost:8084/api/collections/7/add-article/5",
 					"host": [
 						"localhost"
 					],
@@ -736,7 +736,7 @@
 						"collections",
 						"7",
 						"add-article",
-						"15"
+						"5"
 					]
 				}
 			},
@@ -822,12 +822,12 @@
 					"basic": [
 						{
 							"key": "password",
-							"value": "demo",
+							"value": "wombat1",
 							"type": "string"
 						},
 						{
 							"key": "username",
-							"value": "demo",
+							"value": "admin",
 							"type": "string"
 						}
 					]
@@ -854,6 +854,183 @@
 						"collections",
 						"7",
 						"add-article",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/collections/{myCollectionId}/remove-article/{journalArticleId} - as user; owns MyCollection and JournalArticle Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "demo",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "demo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8084/api/collections/7/remove-article/5",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"collections",
+						"7",
+						"remove-article",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/collections/{myCollectionId}/add-article/{journalArticleId} - as user; does NOT own MyCollection OR JournalArticle Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "demo",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "demo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8084/api/collections/7/remove-article/15",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"collections",
+						"7",
+						"remove-article",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/collections/{myCollectionId}/remove-article/{journalArticleId} - as admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "wombat1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8084/api/collections/7/remove-article/15",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"collections",
+						"7",
+						"remove-article",
 						"15"
 					]
 				}
