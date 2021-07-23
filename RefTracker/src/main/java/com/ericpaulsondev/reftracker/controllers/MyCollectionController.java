@@ -1,13 +1,13 @@
 package com.ericpaulsondev.reftracker.controllers;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -166,14 +166,12 @@ public class MyCollectionController {
 				resp.setStatus(200);
 				return toReturn;
 			}
-
 		}
-
 	}
 
 	@PutMapping("api/collections/{myCollectionId}/remove-article/{journalArticleId}")
-	public MyCollection removeJournalArticle(@PathVariable Integer myCollectionId, @PathVariable Integer journalArticleId,
-			Principal principal, HttpServletResponse resp) {
+	public MyCollection removeJournalArticle(@PathVariable Integer myCollectionId,
+			@PathVariable Integer journalArticleId, Principal principal, HttpServletResponse resp) {
 		// admin: 405 method not supported
 		if (isAdmin(principal)) {
 			resp.setStatus(405);
@@ -190,9 +188,48 @@ public class MyCollectionController {
 				resp.setStatus(200);
 				return toReturn;
 			}
-			
+
 		}
-		
+
+	}
+
+	@DeleteMapping("api/collections/{myCollectionId}")
+	public void deleteAsUser(@PathVariable Integer myCollectionId, Principal principal, HttpServletResponse resp) {
+		// admin: 405 method not allowed
+		if (isAdmin(principal)) {
+			resp.setStatus(405);
+			return;
+		} else {
+			// user: does own MyCollection: 204 no content
+			if (myCollectionBelongsToPrincipal(myCollectionId, principal)) {
+				collServ.delete(myCollectionId);
+				resp.setStatus(204);
+				return;
+			} else {
+				// user: does NOT own MyCollection: 403 forbidden
+				resp.setStatus(403);
+				return;
+			}
+		}
+	}
+
+	@DeleteMapping("api/all/collections/{myCollectionId}")
+	public void deleteAsAdmin(@PathVariable Integer myCollectionId, Principal principal, HttpServletResponse resp) {
+		// admin: 204 no content
+		if (isAdmin(principal)) {
+			if (collServ.findById(myCollectionId) == null) {
+				resp.setStatus(404);
+				return;
+			} else {
+				collServ.delete(myCollectionId);
+				resp.setStatus(204);
+				return;
+			}
+		} else {
+			// user: 403 forbidden
+			resp.setStatus(403);
+			return;
+		}
 	}
 
 	// utility methods for authorization checks

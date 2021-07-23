@@ -244,7 +244,7 @@ A user can delete a `MyCollection` if it belongs to them. An admin will use a di
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
-| DELETE | api/collections/{myCollectionId} | user | n/a | ID of `MyCollection` to delete, belonging to user | 204 No Content | `MyCollection` |
+| DELETE | api/collections/{myCollectionId} | user | n/a | ID of `MyCollection` to delete, belonging to user | 204 No Content | n/a |
 | DELETE | api/collections/{myCollectionId} | user | n/a | ID of `MyCollection` to delete, *not* belonging to user | 403 Forbidden | `null` |
 | DELETE | api/collections/{myCollectionId} | admin | n/a | any | 405 Method Not Supported | `null` |
 
@@ -255,7 +255,7 @@ An admin can delete a `MyCollection` belonging to any user.
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
-| DELETE | api/all/collections/{myCollectionId} | admin | n/a | ID of `MyCollection` to delete | 204 No Content | `MyCollection` |
+| DELETE | api/all/collections/{myCollectionId} | admin | n/a | ID of `MyCollection` to delete | 204 No Content | n/a |
 | DELETE | api/all/collections/{myCollectionId} | user | n/a | any | 403 Forbidden | `null` |
 
 

@@ -133,7 +133,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8084/api/all/collections/2",
+					"raw": "localhost:8084/api/all/collections/10",
 					"host": [
 						"localhost"
 					],
@@ -142,7 +142,7 @@
 						"api",
 						"all",
 						"collections",
-						"2"
+						"10"
 					]
 				}
 			},
@@ -1038,7 +1038,7 @@
 			"response": []
 		},
 		{
-			"name": "api/collections - as user; owns MyCollection",
+			"name": "api/collections/{myCollectionId} - as user; owns MyCollection",
 			"event": [
 				{
 					"listen": "test",
@@ -1072,7 +1072,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"UPDATE worked!\",\n\t\"description\": \"to test PUT method\",\n    \"articles\": [{\"id\":1}],\n    \"user\": {\n        \"id\": 2\n    }\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1080,7 +1080,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8084/api/collections/7",
+					"raw": "http://localhost:8084/api/collections/11",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1089,14 +1089,14 @@
 					"path": [
 						"api",
 						"collections",
-						"7"
+						"11"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "api/collections - as user; does NOT own MyCollection Copy",
+			"name": "api/collections/{myCollectionId} - as user; does NOT own MyCollection Copy",
 			"event": [
 				{
 					"listen": "test",
@@ -1154,7 +1154,7 @@
 			"response": []
 		},
 		{
-			"name": "api/collections - as admin",
+			"name": "api/collections/{myCollectionId} - as admin",
 			"event": [
 				{
 					"listen": "test",
@@ -1196,7 +1196,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8084/api/collections/1",
+					"raw": "http://localhost:8084/api/collections/6",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1205,7 +1205,124 @@
 					"path": [
 						"api",
 						"collections",
-						"1"
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/all/collections/{myCollectionId} - as admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "wombat1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8084/api/all/collections/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"all",
+						"collections",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/all/collections/{myCollectionId} - as user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "demo",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "demo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8084/api/collections/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"collections",
+						"9"
 					]
 				}
 			},

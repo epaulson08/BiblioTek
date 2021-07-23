@@ -105,11 +105,11 @@ public class MyCollectionServiceImpl implements MyCollectionService {
 	public MyCollection removeJournalArticle(Integer myCollectionId, Integer journalArticleId) {
 		MyCollection managedMyColl = null;
 		JournalArticle managedJa = null;
-		
+
 		Optional<MyCollection> collOpt = collRepo.findById(myCollectionId);
 		if (collOpt.isPresent()) {
 			managedMyColl = collOpt.get();
-			
+
 			Optional<JournalArticle> jaOpt = jaRepo.findById(journalArticleId);
 			if (jaOpt.isPresent()) {
 				managedJa = jaOpt.get();
@@ -117,53 +117,18 @@ public class MyCollectionServiceImpl implements MyCollectionService {
 				collRepo.saveAndFlush(managedMyColl);
 			} else
 				return null;
-			
+
 		}
 		return managedMyColl;
 	}
 
+	@Override
+	public boolean delete(Integer myCollectionId) {
+		collRepo.deleteById(myCollectionId);
+		if (collRepo.findById(myCollectionId) == null)
+			return true;
+		else
+			return false;
+	}
 
-	/*
-	 * ### `PUT api/collections/{myCollectionId}/remove-article/{journalArticleId}`
-	 * A user can remove a `JournalArticle` from a `MyCollection` if it belongs to
-	 * them.
-	 * 
-	 * | HTTP Request Type | Path | User Role | Request Body | Route Parameter |
-	 * Expected HTTP Response Code | Expected Response Body | | --- | --- | --- |
-	 * --- | --- | --- | --- | | PUT |
-	 * api/collections/{myCollectionId}/remove-article/{journalArticleId} | user |
-	 * n/a | `MyCollection` ID belonging to user, and ID of `JournalArticle` to
-	 * remove | 200 OK | `MyCollection` | | PUT |
-	 * api/collections/{myCollectionId}/remove-article/{journalArticleId} | user |
-	 * n/a | `MyCollection` ID *not* belonging to user, and ID of `JournalArticle`
-	 * to remove | 403 Forbidden | `MyCollection` | | PUT |
-	 * api/collections/{myCollectionId}/remove-article/{journalArticleId} | admin |
-	 * n/a | any | 405 Method Not Supported | `null` |
-	 * 
-	 * 
-	 * --- ### `DELETE api/collections/{myCollectionId}` A user can delete a
-	 * `MyCollection` if it belongs to them. An admin will use a different endpoint
-	 * to accomplish this.
-	 * 
-	 * | HTTP Request Type | Path | User Role | Request Body | Route Parameter |
-	 * Expected HTTP Response Code | Expected Response Body | | --- | --- | --- |
-	 * --- | --- | --- | --- | | DELETE | api/collections/{myCollectionId} | user |
-	 * n/a | ID of `MyCollection` to delete, belonging to user | 204 No Content |
-	 * `MyCollection` | | DELETE | api/collections/{myCollectionId} | user | n/a |
-	 * ID of `MyCollection` to delete, *not* belonging to user | 403 Forbidden |
-	 * `null` | | DELETE | api/collections/{myCollectionId} | admin | n/a | any |
-	 * 405 Method Not Supported | `null` |
-	 * 
-	 * 
-	 * --- ### `DELETE api/all/collections/{myCollectionId}` An admin can delete a
-	 * `MyCollection` belonging to any user.
-	 * 
-	 * | HTTP Request Type | Path | User Role | Request Body | Route Parameter |
-	 * Expected HTTP Response Code | Expected Response Body | | --- | --- | --- |
-	 * --- | --- | --- | --- | | DELETE | api/all/collections/{myCollectionId} |
-	 * admin | n/a | ID of `MyCollection` to delete | 204 No Content |
-	 * `MyCollection` | | DELETE | api/all/collections/{myCollectionId} | user | n/a
-	 * | any | 403 Forbidden | `null` |
-	 * 
-	 */
 }

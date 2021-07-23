@@ -120,9 +120,9 @@ public class UtilityCreateTestData {
 			}
 
 			testAdmin.setId(3);
+			testAdmin.setUsername("admin");
 			testAdmin.setPassword("wombat1");
-			testAdmin.setRole("admin");
-
+			
 			// add JournalArticles to this user
 			testAdmin.addJA(jaServ.findById(8));
 			testAdmin.addJA(jaServ.findById(9));
