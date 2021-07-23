@@ -429,6 +429,15 @@
 				},
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"test collection\",\n\t\"description\": \"to test POST method\",\n    \"articles\": [{\"id\":1}],\n    \"user\": {\n        \"id\": 1\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:8084/api/collections",
 					"protocol": "http",
