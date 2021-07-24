@@ -58,8 +58,29 @@ public class MyCollectionController {
 		}
 	}
 
+	@GetMapping("api/collections/{id}")
+	public MyCollection findByIdAsUser(@PathVariable Integer id, HttpServletResponse resp, Principal principal) {
+		// admin
+		if (isAdmin(principal)) {
+			resp.setStatus(405);
+			return null;
+		} else {
+			// user: owns requested MyCollection
+			if (myCollectionBelongsToPrincipal(id, principal)) {
+				MyCollection toReturn = collServ.findById(id);
+				resp.setStatus(200);
+				return toReturn;
+			}
+			// user: does NOT own MyCollection
+			else {
+				resp.setStatus(403);
+				return null;
+			}
+		}
+	}
+
 	@GetMapping("api/all/collections/{id}")
-	public MyCollection findById(@PathVariable Integer id, HttpServletResponse resp, Principal principal) {
+	public MyCollection findByIdAsAdmin(@PathVariable Integer id, HttpServletResponse resp, Principal principal) {
 		// admin
 		if (isAdmin(principal)) {
 			MyCollection coll = collServ.findById(id);
