@@ -1,3 +1,7 @@
+<div *ngIf="myCollectionView">
+  <!-- MyCollection-specific buttons -->
+</div>
+
 <div class="card m-3">
   <div class="card-body">
     <div *ngIf="!deleted">
@@ -170,7 +174,11 @@
           Delete
         </button>
       </div>
-      <div class="ml-3" style="color: orange;" *ngIf="this.underConstructionMessage">
+      <div
+        class="ml-3"
+        style="color: orange"
+        *ngIf="this.underConstructionMessage"
+      >
         {{ this.underConstructionMessage }}
       </div>
     </div>
@@ -183,7 +191,11 @@
         Add to Collection
       </button>
       <button class="btn btn-secondary mr-2" (click)="resetCite()">Back</button>
-      <div class="float-center" style="color: orange;" *ngIf="this.underConstructionMessage">
+      <div
+        class="float-center"
+        style="color: orange"
+        *ngIf="this.underConstructionMessage"
+      >
         {{ this.underConstructionMessage }}
       </div>
     </div>

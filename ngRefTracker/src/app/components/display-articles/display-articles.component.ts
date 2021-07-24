@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class DisplayArticlesComponent implements OnInit {
   showOneArticle: boolean = false;
   @Input() articlesToDisplay: JournalArticle[];
+  @Input() myCollectionView: boolean;
 
   constructor(
     private router: Router

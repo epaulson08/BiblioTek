@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { AuthService } from 'src/app/services/auth.service';
@@ -17,6 +17,7 @@ export class DisplayAllArticlesComponent implements OnInit {
   totalArticles: number;
   searchTerm: string;
   deleted: boolean = false;
+  @Input() myCollectionView;
 
   // init
   constructor(

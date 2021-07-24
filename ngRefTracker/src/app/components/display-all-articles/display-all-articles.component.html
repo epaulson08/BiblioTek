@@ -1,6 +1,10 @@
 <app-navi></app-navi>
 <div class="container-fluid">
-  <h4>All Articles:<span class="float-right">Total: {{ this.totalArticles }}</span></h4>
+  <h4>
+    All Articles:<span class="float-right"
+      >Total: {{ this.totalArticles }}</span
+    >
+  </h4>
   <app-display-articles
     [articlesToDisplay]="journalArticles"
   ></app-display-articles>

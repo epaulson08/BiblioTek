@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MyCollection } from 'src/app/models/my-collection.model';
 import { AuthService } from 'src/app/services/auth.service';

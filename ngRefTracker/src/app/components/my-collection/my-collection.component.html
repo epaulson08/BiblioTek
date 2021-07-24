@@ -43,13 +43,17 @@
 
   <div *ngIf="this.expandedView">
     <div *ngFor="let article of coll.articles">
-      <app-display-article [articleId]="article.id"></app-display-article>
+      <app-display-article
+        [articleId]="article.id"
+        [myCollectionView]="true"
+      ></app-display-article>
     </div>
   </div>
 
   <div *ngIf="this.listView">
     <app-display-articles
       [articlesToDisplay]="coll.articles"
+      [myCollectionView]="true"
     ></app-display-articles>
   </div>
 </div>

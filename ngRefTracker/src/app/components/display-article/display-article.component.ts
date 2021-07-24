@@ -20,6 +20,7 @@ import { JournalService } from 'src/app/services/journal.service';
 export class DisplayArticleComponent implements OnInit {
 
   @Input() articleId: number;
+  @Input() myCollectionView: boolean;
   selected: JournalArticle = new JournalArticle();
   editJa: JournalArticle;
   editJournal: Journal;
@@ -39,8 +40,6 @@ export class DisplayArticleComponent implements OnInit {
     if (!this.auth.checkLogin()) { this.router.navigateByUrl("home"); }
     this.loadArticle();
     this.loadCitationStyles();
-    console.log(this.articleId);
-
   }
 
   loadArticle() {
