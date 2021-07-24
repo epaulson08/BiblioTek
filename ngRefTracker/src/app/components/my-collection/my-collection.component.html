@@ -1,20 +1,45 @@
 <app-navi></app-navi>
 <div class="container-fluid">
-  <h4>{{ coll.name }}</h4>
-  <h5>{{ coll.description }}</h5>
-  <button class="btn btn-warning mb-3">Cite All</button>
-  <button
-    class="float-right btn btn-secondary btn-sm"
-    (click)="setExpandedView()"
-  >
-    Expanded View
-  </button>
-  <button
-    class="float-right btn btn-secondary btn-sm mr-2"
-    (click)="setListView()"
-  >
-    List View
-  </button>
+  <div *ngIf="!this.editView">
+    <h4>
+      {{ coll.name }}
+      <button
+        class="float-right btn btn-secondary btn-sm"
+        (click)="setExpandedView()"
+      >
+        Expanded View
+      </button>
+      <button
+        class="float-right btn btn-secondary btn-sm mr-2"
+        (click)="setListView()"
+      >
+        List View
+      </button>
+    </h4>
+    <h5>
+      {{ coll.description
+      }}<button class="btn btn-success btn-sm ml-3" (click)="showEditView()">
+        Edit
+      </button>
+    </h5>
+    <button class="btn btn-warning mb-3">Cite All</button>
+  </div>
+
+  <div *ngIf="this.editView">
+    <h4><input [(ngModel)]="this.editedMyCollection.name" class="col-6" /></h4>
+    <h5>
+      <textarea
+        [(ngModel)]="this.editedMyCollection.description"
+        class="col-6"
+      ></textarea>
+    </h5>
+    <button
+      class="btn btn-success"
+      (click)="this.updateMyCollection(this.editedMyCollection)"
+    >
+      Save Changes
+    </button>
+  </div>
 
   <div *ngIf="this.expandedView">
     <div *ngFor="let article of coll.articles">

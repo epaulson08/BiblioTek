@@ -71,7 +71,17 @@ export class MyCollectionService {
   // create() { }
 
   // PUT api/collections/{myCollectionId}
-  // update() { }
+  update(id: number, newVersion: MyCollection): Observable<MyCollection> {
+    return this.http.put<MyCollection>(
+      this.baseUrl + "api/collections/" + id,
+      newVersion,
+      this.generateHttpHeader())
+      .pipe(
+        catchError((err: any) => {
+          return throwError(err);
+        })
+      );
+  }
 
   // PUT api/collections/{myCollectionId}/add-article/{journalArticleId}
   // addArticle() { }

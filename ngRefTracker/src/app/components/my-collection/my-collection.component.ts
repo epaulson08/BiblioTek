@@ -11,11 +11,25 @@ import { MyCollectionService } from 'src/app/services/my-collection.service';
 })
 export class MyCollectionComponent implements OnInit {
 
+  /////////
+  // FIELDS
+
+  // initialization
   collId: number;
   coll: MyCollection;
+
+  // UI
   listView: boolean = false;
   expandedView: boolean = true;
+  editView: boolean = false;
 
+  // CRUD
+  editedMyCollection: MyCollection;
+
+  //////////
+  // METHODS
+
+  // initialization
   constructor(private auth: AuthService, private route: ActivatedRoute, private router: Router, private collServ: MyCollectionService) { }
 
   ngOnInit(): void {
@@ -25,15 +39,13 @@ export class MyCollectionComponent implements OnInit {
     this.setExpandedView();
     this.collId = +this.route.snapshot.paramMap.get('collId');
     this.loadColl();
-
   }
 
   loadColl(): void {
     this.collServ.findByIdAsUser(this.collId).subscribe(
       success => {
         this.coll = success;
-        console.log(this.coll);
-
+        this.editedMyCollection = success;
         return success;
       },
       failure => {
@@ -41,6 +53,7 @@ export class MyCollectionComponent implements OnInit {
       });
   }
 
+  // UI
   setListView(): void {
     this.listView = true;
     this.expandedView = false;
@@ -51,5 +64,20 @@ export class MyCollectionComponent implements OnInit {
     this.listView = false;
   }
 
+  showEditView(): void {
+    this.editView = true;
+  }
+
+  // CRUD
+  updateMyCollection(updatedVersion: MyCollection) {
+    this.collServ.update(this.collId, updatedVersion).subscribe(
+      success => {
+        this.coll = success;
+      },
+      failure => {
+        console.error(failure);
+      }
+    )
+  }
 
 }

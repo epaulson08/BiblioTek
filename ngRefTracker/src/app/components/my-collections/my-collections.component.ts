@@ -12,13 +12,24 @@ import { MyCollectionService } from 'src/app/services/my-collection.service';
 })
 export class MyCollectionsComponent implements OnInit {
 
-  myCollections: MyCollection[];
+  /////////
+  // FIELDS
+
+  // initialization
+  allCollections: MyCollection[];
   userId: number;
+  collJas: JournalArticle[];
+  // UI
   myCollection: MyCollection;
   viewColl: MyCollection;
-  collJas: JournalArticle[];
   underConstructionMessage: boolean = false;
+  // CRUD
 
+
+  //////////
+  // METHODS
+
+  // initialization
   constructor(
     private collServ: MyCollectionService,
     private auth: AuthService,
@@ -30,22 +41,10 @@ export class MyCollectionsComponent implements OnInit {
     this.loadMyCollections();
   }
 
-  findMyCollectionByIdAsUser(cid: number): void {
-    this.collServ.findByIdAsUser(cid).subscribe(
-      success => {
-        this.myCollection = success;
-        return success;
-      },
-      failure => {
-        console.error(failure);
-      });
-    return null;
-  }
-
   loadMyCollections(): void {
     this.collServ.findAllAsUser().subscribe(
       success => {
-        this.myCollections = success;
+        this.allCollections = success;
         return success;
       },
       failure => {
@@ -54,6 +53,7 @@ export class MyCollectionsComponent implements OnInit {
     return null;
   }
 
+  // UI
   viewMyCollection(coll: MyCollection): void {
     this.viewColl = coll;
   }
@@ -66,6 +66,19 @@ export class MyCollectionsComponent implements OnInit {
   citeAll(coll: MyCollection): void {
     this.underConstructionMessage = true;
     this.myCollection = coll;
+  }
+
+  // CRUD
+  findMyCollectionByIdAsUser(myCollectionId: number): void {
+    this.collServ.findByIdAsUser(myCollectionId).subscribe(
+      success => {
+        this.myCollection = success;
+        return success;
+      },
+      failure => {
+        console.error(failure);
+      });
+    return null;
   }
 
 }
