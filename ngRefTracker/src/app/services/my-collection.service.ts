@@ -28,7 +28,8 @@ export class MyCollectionService {
     return httpOptions;
   }
 
-  index(): Observable<MyCollection[]> {
+  // GET api/collections
+  findAllAsUser(): Observable<MyCollection[]> {
     return this.http.get<MyCollection[]>(
       this.baseUrl + "api/collections/",
       this.generateHttpHeader())
@@ -39,7 +40,8 @@ export class MyCollectionService {
       );
   }
 
-  show(id: number): Observable<MyCollection> {
+  // GET api/collections/{myCollectionId}
+  findByIdAsUser(id: number): Observable<MyCollection> {
     return this.http.get<MyCollection>(
       this.baseUrl + "api/collections/" + id,
       this.generateHttpHeader())
@@ -50,6 +52,37 @@ export class MyCollectionService {
       );
   }
 
+  // GET api/all/collections/{myCollectionId}
+  findByIdAsAdmin(id: number): Observable<MyCollection> {
+    return this.http.get<MyCollection>(
+      this.baseUrl + "api/all/collections/" + id,
+      this.generateHttpHeader())
+      .pipe(
+        catchError((err: any) => {
+          return throwError(err);
+        })
+      );
+  }
 
+  // GET api/all/collections/users/{userId}
+  // findAllForUserAsAdmin() { }
+
+  // POST api/collections
+  // create() { }
+
+  // PUT api/collections/{myCollectionId}
+  // update() { }
+
+  // PUT api/collections/{myCollectionId}/add-article/{journalArticleId}
+  // addArticle() { }
+
+  // PUT api/collections/{myCollectionId}/remove-article/{journalArticleId}
+  // removeArticle() { }
+
+  // DELETE api/collections/{myCollectionId}
+  // deleteAsUser() { }
+
+  // DELETE api/all/collections/{myCollectionId}
+  // deleteAsAdmin() { }
 
 }

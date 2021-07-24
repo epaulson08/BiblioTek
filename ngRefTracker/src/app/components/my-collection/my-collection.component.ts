@@ -29,7 +29,7 @@ export class MyCollectionComponent implements OnInit {
   }
 
   loadColl(): void {
-    this.collServ.show(this.collId).subscribe(
+    this.collServ.findByIdAsUser(this.collId).subscribe(
       success => {
         this.coll = success;
         console.log(this.coll);

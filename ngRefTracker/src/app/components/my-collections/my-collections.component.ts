@@ -30,8 +30,8 @@ export class MyCollectionsComponent implements OnInit {
     this.loadMyCollections();
   }
 
-  showMyCollection(cid: number): void {
-    this.collServ.show(cid).subscribe(
+  findMyCollectionByIdAsUser(cid: number): void {
+    this.collServ.findByIdAsUser(cid).subscribe(
       success => {
         this.myCollection = success;
         return success;
@@ -43,7 +43,7 @@ export class MyCollectionsComponent implements OnInit {
   }
 
   loadMyCollections(): void {
-    this.collServ.index().subscribe(
+    this.collServ.findAllAsUser().subscribe(
       success => {
         this.myCollections = success;
         return success;
