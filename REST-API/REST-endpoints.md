@@ -177,6 +177,16 @@ A user can view all of their collections. An admin will use a different endpoint
 | GET | api/collections | admin | n/a | n/a | 405 Method Not Allowed | `null` |
 
 ---
+### `GET api/collections/{myCollectionId}`
+A user can view one of their collections by ID.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+| GET | api/collections/{myCollectionId} | user who owns requested `MyCollection` | n/a | ID of requested `MyCollection` | 200 OK | `MyCollection` |
+| GET | api/collections/{myCollectionId} | user who does not own requested `MyCollection` | n/a | any | 403 Forbidden | `null` |
+| GET | api/collections/{myCollectionId} | admin | n/a | any | 405 Method Not Supported | `null` |
+
+---
 ### `GET api/all/collections/{myCollectionId}`
 An admin can view any `MyCollection` by `myCollection` ID.
 
