@@ -1,7 +1,3 @@
-<div *ngIf="myCollectionView">
-  <!-- MyCollection-specific buttons -->
-</div>
-
 <div class="card m-3">
   <div class="card-body">
     <div *ngIf="!deleted">
@@ -140,63 +136,118 @@
             </div>
           </div>
         </div>
-
-        <!-- <a href="">ACS</a> ·
-        <a href="">AMS</a> ·
-        <a href="">ASA</a> ·
-        <a href="">Bluebook</a> ·
-        <a href="">Vancouver</a> -->
       </div>
     </div>
   </div>
   <div *ngIf="deleted"><h2>Deleted.</h2></div>
 
-  <!-- Buttons/Footer -->
-  <div *ngIf="!viewCite">
-    <div class="card-footer d-flex">
-      <div *ngIf="!deleted && !editJa">
+  <!-- BUTTONS/FOOTER -->
+  <!-- MyCollection version -->
+  <div *ngIf="myCollectionView">
+    <div *ngIf="!viewCite">
+      <div class="card-footer d-flex">
+        <div *ngIf="!deleted && !editJa">
+          <button class="btn btn-success mr-2" (click)="setEdit()">Edit</button>
+          <button class="btn btn-warning mr-2" (click)="cite()">Cite</button>
+          <button class="btn btn-secondary mr-2" (click)="goBack()">
+            Back
+          </button>
+        </div>
+        <div *ngIf="!deleted && editJa">
+          <button class="btn btn-success mr-2" (click)="update(editJa)">
+            Submit</button
+          ><button class="btn btn-secondary mr-2" (click)="cancelEdit()">
+            Cancel
+          </button>
+        </div>
+        <div *ngIf="!deleted">
+          <button class="btn btn-danger mr-2">Remove</button>
+          <button class="btn btn-danger mr-2" (click)="delete(selected.id)">
+            Delete
+          </button>
+        </div>
+        <div
+          class="ml-3"
+          style="color: orange"
+          *ngIf="this.underConstructionMessage"
+        >
+          {{ this.underConstructionMessage }}
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="viewCite">
+      <div class="card-footer d-flex">
         <button class="btn btn-success mr-2" (click)="setEdit()">Edit</button>
-        <button class="btn btn-warning mr-2" (click)="cite()">Cite</button>
         <button class="btn btn-info mr-2" (click)="addToCollection()">
           Add to Collection
         </button>
-        <button class="btn btn-secondary mr-2" (click)="goBack()">Back</button>
-      </div>
-      <div *ngIf="!deleted && editJa">
-        <button class="btn btn-success mr-2" (click)="update(editJa)">
-          Submit</button
-        ><button class="btn btn-secondary mr-2" (click)="cancelEdit()">
-          Cancel
+        <button class="btn btn-secondary mr-2" (click)="resetCite()">
+          Back
         </button>
-      </div>
-      <div *ngIf="!deleted">
-        <button class="btn btn-danger" (click)="delete(selected.id)">
-          Delete
-        </button>
-      </div>
-      <div
-        class="ml-3"
-        style="color: orange"
-        *ngIf="this.underConstructionMessage"
-      >
-        {{ this.underConstructionMessage }}
+        <div
+          class="float-center"
+          style="color: orange"
+          *ngIf="this.underConstructionMessage"
+        >
+          {{ this.underConstructionMessage }}
+        </div>
       </div>
     </div>
   </div>
 
-  <div *ngIf="viewCite">
-    <div class="card-footer d-flex">
-      <button class="btn btn-success mr-2" (click)="setEdit()">Edit</button>
-      <button class="btn btn-info mr-2" (click)="addToCollection()">
-        Add to Collection
-      </button>
-      <button class="btn btn-secondary mr-2" (click)="resetCite()">Back</button>
-      <div
-        class="float-center"
-        style="color: orange"
-        *ngIf="this.underConstructionMessage"
-      >
-        {{ this.underConstructionMessage }}
+  <!-- Non-MyCollection version -->
+  <div *ngIf="!myCollectionView">
+    <div *ngIf="!viewCite">
+      <div class="card-footer d-flex">
+        <div *ngIf="!deleted && !editJa">
+          <button class="btn btn-success mr-2" (click)="setEdit()">Edit</button>
+          <button class="btn btn-warning mr-2" (click)="cite()">Cite</button>
+          <button class="btn btn-info mr-2" (click)="addToCollection()">
+            Add to Collection
+          </button>
+          <button class="btn btn-secondary mr-2" (click)="goBack()">
+            Back
+          </button>
+        </div>
+        <div *ngIf="!deleted && editJa">
+          <button class="btn btn-success mr-2" (click)="update(editJa)">
+            Submit</button
+          ><button class="btn btn-secondary mr-2" (click)="cancelEdit()">
+            Cancel
+          </button>
+        </div>
+        <div *ngIf="!deleted">
+          <button class="btn btn-danger" (click)="delete(selected.id)">
+            Delete
+          </button>
+        </div>
+        <div
+          class="ml-3"
+          style="color: orange"
+          *ngIf="this.underConstructionMessage"
+        >
+          {{ this.underConstructionMessage }}
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="viewCite">
+      <div class="card-footer d-flex">
+        <button class="btn btn-success mr-2" (click)="setEdit()">Edit</button>
+        <button class="btn btn-info mr-2" (click)="addToCollection()">
+          Add to Collection
+        </button>
+        <button class="btn btn-secondary mr-2" (click)="resetCite()">
+          Back
+        </button>
+        <div
+          class="float-center"
+          style="color: orange"
+          *ngIf="this.underConstructionMessage"
+        >
+          {{ this.underConstructionMessage }}
+        </div>
       </div>
     </div>
   </div>
