@@ -4,7 +4,6 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { CitationStyle } from '../models/citation-style';
-import { CitationStyleLink } from '../models/citation-style-link';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -16,21 +15,10 @@ export class CitationStyleService {
 
   constructor(private http: HttpClient, private auth: AuthService) { }
 
-  generateHttpHeader() {
-    let credentials = this.auth.getCredentials();
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': `Basic ${credentials}`,
-        'X-Requested-With': 'XMLHttpRequest'
-      })
-    }
-    return httpOptions;
-  }
-
   findAll(): Observable<CitationStyle[]> {
     return this.http.get<CitationStyle[]>(
       `${this.baseUrl}api/citation-styles/`,
-      this.generateHttpHeader())
+      this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           console.log(err);

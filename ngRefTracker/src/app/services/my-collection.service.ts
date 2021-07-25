@@ -14,25 +14,17 @@ export class MyCollectionService {
 
   constructor(
     private http: HttpClient,
-    private auth: AuthService,
+    private auth: AuthService
   ) { }
 
-  generateHttpHeader() {
-    let credentials = this.auth.getCredentials();
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': `Basic ${credentials}`,
-        'X-Requested-With': 'XMLHttpRequest'
-      })
-    }
-    return httpOptions;
-  }
+  //////////////
+  // GET methods
 
   // GET api/collections
   findAllAsUser(): Observable<MyCollection[]> {
     return this.http.get<MyCollection[]>(
       this.baseUrl + "api/collections/",
-      this.generateHttpHeader())
+      this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           return throwError(err);
@@ -44,7 +36,7 @@ export class MyCollectionService {
   findByIdAsUser(id: number): Observable<MyCollection> {
     return this.http.get<MyCollection>(
       this.baseUrl + "api/collections/" + id,
-      this.generateHttpHeader())
+      this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           return throwError(err);
@@ -56,7 +48,7 @@ export class MyCollectionService {
   findByIdAsAdmin(id: number): Observable<MyCollection> {
     return this.http.get<MyCollection>(
       this.baseUrl + "api/all/collections/" + id,
-      this.generateHttpHeader())
+      this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           return throwError(err);
@@ -67,15 +59,21 @@ export class MyCollectionService {
   // GET api/all/collections/users/{userId}
   // findAllForUserAsAdmin() { }
 
+  ///////////////
+  // POST methods
+
   // POST api/collections
   // create() { }
+
+  //////////////
+  // PUT methods
 
   // PUT api/collections/{myCollectionId}
   update(id: number, newVersion: MyCollection): Observable<MyCollection> {
     return this.http.put<MyCollection>(
       this.baseUrl + "api/collections/" + id,
       newVersion,
-      this.generateHttpHeader())
+      this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           return throwError(err);
@@ -88,6 +86,9 @@ export class MyCollectionService {
 
   // PUT api/collections/{myCollectionId}/remove-article/{journalArticleId}
   // removeArticle() { }
+
+  /////////////////
+  // DELETE methods
 
   // DELETE api/collections/{myCollectionId}
   // deleteAsUser() { }

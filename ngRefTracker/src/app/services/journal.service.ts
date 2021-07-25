@@ -19,21 +19,10 @@ export class JournalService {
     private http : HttpClient,
     ) { }
 
-  generateHttpHeader() {
-    let credentials = this.auth.getCredentials();
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': `Basic ${credentials}`,
-        'X-Requested-With': 'XMLHttpRequest'
-      })
-    }
-    return httpOptions;
-  }
-
   index(): Observable<Journal[]> {
     return this.http.get<Journal[]>(
       this.baseUrl + 'api/journals',
-      this.generateHttpHeader())
+      this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           console.log(err);

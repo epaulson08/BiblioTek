@@ -18,21 +18,10 @@ export class CitationStyleLinkService {
     private auth: AuthService
   ) { }
 
-  generateHttpHeader() {
-    let credentials = this.auth.getCredentials();
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': `Basic ${credentials}`,
-        'X-Requested-With': 'XMLHttpRequest'
-      })
-    }
-    return httpOptions;
-  }
-
   findByCitationStyleId(citationStyleId: number): Observable<CitationStyleLink[]> {
     return this.http.get<CitationStyleLink[]>(
       `${this.baseUrl}api/citation-style-link/${citationStyleId}`,
-      this.generateHttpHeader())
+      this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           console.log(err);

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
@@ -6,7 +6,6 @@ import { JournalArticle } from '../models/journal-article';
 import { PayloadUtility } from '../models/payload-utility.model';
 import { Journal } from '../models/journal';
 import { AuthService } from './auth.service';
-import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -21,22 +20,10 @@ export class JournalArticleService {
     private auth: AuthService,
   ) { }
 
-
-  generateHttpHeader() {
-    let credentials = this.auth.getCredentials();
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': `Basic ${credentials}`,
-        'X-Requested-With': 'XMLHttpRequest'
-      })
-    }
-    return httpOptions;
-  }
-
   allJournalArticlesAllUsers(): Observable<JournalArticle[]> {
     return this.http.get<JournalArticle[]>(
       `${this.baseUrl}api/all/articles/`,
-      this.generateHttpHeader())
+      this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -48,7 +35,7 @@ export class JournalArticleService {
   index(): Observable<JournalArticle[]> {
     return this.http.get<JournalArticle[]>(
       `${this.baseUrl}api/articles/`,
-      this.generateHttpHeader())
+      this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -60,7 +47,7 @@ export class JournalArticleService {
   show(id: number): Observable<JournalArticle> {
     return this.http.get<JournalArticle>(
       `${this.baseUrl}api/articles/${id}`,
-      this.generateHttpHeader())
+      this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           return throwError(err);
@@ -71,7 +58,7 @@ export class JournalArticleService {
   showAllByJournal(journal: Journal): Observable<JournalArticle[]> {
     return this.http.get<JournalArticle[]>(
       `${this.baseUrl}api/articles/journals/${journal.id}`,
-      this.generateHttpHeader())
+      this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           return throwError(err);
@@ -82,7 +69,7 @@ export class JournalArticleService {
   search(searchTerm: string): Observable<JournalArticle[]> {
     return this.http.get<JournalArticle[]>(
       `${this.baseUrl}api/articles/search/${searchTerm}`,
-      this.generateHttpHeader())
+      this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           return throwError(err);
@@ -94,7 +81,7 @@ export class JournalArticleService {
     return this.http.post<PayloadUtility>(
       `${this.baseUrl}api/articles/`,
       payload,
-      this.generateHttpHeader())
+      this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           return throwError(err);
@@ -109,7 +96,7 @@ export class JournalArticleService {
     return this.http.put<JournalArticle>(
       `${this.baseUrl}api/articles/${ja.id}`,
       ja,
-      this.generateHttpHeader())
+      this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           return throwError(err);
@@ -121,7 +108,7 @@ export class JournalArticleService {
   delete(id: number): Observable<Object> {
     return this.http.delete(
       `${this.baseUrl}api/articles/${id}`,
-      this.generateHttpHeader())
+      this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
           return throwError(err);
