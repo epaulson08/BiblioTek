@@ -27,7 +27,7 @@ A user can get all of their own `JournalArticle`s but not those of other users.
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
 | GET | api/articles | user | `null` | n/a | 200 OK | `List<JournalArticle>` representing all of user's articles (or admin's personal articles) |
-| GET | api/articles | admin | `null` | n/a | 404 Not Found | `null` |
+| GET | api/articles | admin | `null` | n/a | 405 Method Not Supported | `null` |
 
 
 ---
@@ -57,7 +57,7 @@ A user can access all of their `JournalArticle`s filtered by a given `Journal`.
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
 | GET | api/articles/journals/{journalId} | user | `null` | `Journal` ID | 200 OK | `List<JournalArticle>` associated with given `Journal` ID |
-| GET | api/articles/journals/{journalId} | admin | `null` | `Journal` ID | 404 Not Found | `null` |
+| GET | api/articles/journals/{journalId} | admin | `null` | `Journal` ID | 405 Method Not Allowed | `null` |
 
 
 ---
@@ -67,7 +67,7 @@ A user can search all of the `JournalArticle`s belonging to them by author or ti
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
 | GET | api/articles/search/{searchTerm} | user | n/a | search term | 200 OK | `List<JournalArticle>` with author or title matching search term |
-| GET | api/articles/search/{searchTerm} | admin | n/a | search term | 404 Not Found | `null` |
+| GET | api/articles/search/{searchTerm} | admin | n/a | search term | 405 Method Not Allowed | `null` |
 
 
 ---
@@ -97,7 +97,7 @@ A user can view the total number of `JournalArticle`s belonging to them.
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
 | GET | api/articles/aggregates/count | user | n/a | n/a | 200 OK | `number` representing total articles |
-| GET | api/articles/aggregates/count | admin | n/a | n/a | 404 Not Found | `null` |
+| GET | api/articles/aggregates/count | admin | n/a | n/a | 405 Method Not Allowed | `null` |
 
 
 ---
