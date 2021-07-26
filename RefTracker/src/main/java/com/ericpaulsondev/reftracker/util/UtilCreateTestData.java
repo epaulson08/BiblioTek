@@ -1,4 +1,4 @@
-package com.ericpaulsondev.reftracker.controllers;
+package com.ericpaulsondev.reftracker.util;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,7 +23,7 @@ import com.ericpaulsondev.reftracker.services.UserService;
 
 @CrossOrigin({ "*", "http://localhost:4200" })
 @RestController
-public class UtilityCreateTestData {
+public class UtilCreateTestData {
 
 	@Autowired
 	AuthService authServ;

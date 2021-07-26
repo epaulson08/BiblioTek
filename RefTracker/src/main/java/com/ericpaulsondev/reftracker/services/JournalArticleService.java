@@ -2,8 +2,8 @@ package com.ericpaulsondev.reftracker.services;
 
 import java.util.List;
 
-import com.ericpaulsondev.reftracker.controllers.PayloadUtility;
 import com.ericpaulsondev.reftracker.entities.JournalArticle;
+import com.ericpaulsondev.reftracker.util.UtilPayload;
 
 public interface JournalArticleService {
 
@@ -13,7 +13,7 @@ public interface JournalArticleService {
 
 	JournalArticle findById(int id);
 	
-	JournalArticle create(PayloadUtility payload, String username);
+	JournalArticle create(UtilPayload payload, String username);
 	
 	JournalArticle update(int id, JournalArticle newJa);
 	

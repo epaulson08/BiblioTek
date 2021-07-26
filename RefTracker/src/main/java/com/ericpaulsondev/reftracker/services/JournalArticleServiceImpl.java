@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ericpaulsondev.reftracker.controllers.PayloadUtility;
 import com.ericpaulsondev.reftracker.entities.Author;
 import com.ericpaulsondev.reftracker.entities.JournalArticle;
 import com.ericpaulsondev.reftracker.entities.MyCollection;
@@ -17,6 +16,7 @@ import com.ericpaulsondev.reftracker.entities.User;
 import com.ericpaulsondev.reftracker.repositories.AuthorRepository;
 import com.ericpaulsondev.reftracker.repositories.JournalArticleRepository;
 import com.ericpaulsondev.reftracker.repositories.UserRepository;
+import com.ericpaulsondev.reftracker.util.UtilPayload;
 
 @Service
 @Transactional
@@ -77,7 +77,7 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 	}
 
 	@Override
-	public JournalArticle create(PayloadUtility payload, String username) {
+	public JournalArticle create(UtilPayload payload, String username) {
 		JournalArticle payloadJA, managedJA;
 		Author managedAuthor;
 		List<Author> payloadAuthors;

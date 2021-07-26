@@ -1,4 +1,4 @@
-package com.ericpaulsondev.reftracker.controllers;
+package com.ericpaulsondev.reftracker.util;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import com.ericpaulsondev.reftracker.entities.Author;
 import com.ericpaulsondev.reftracker.entities.Journal;
 import com.ericpaulsondev.reftracker.entities.JournalArticle;
 
-public class PayloadUtility {
+public class UtilPayload {
 
 	private Author author;
 	private List<Author> authors;
@@ -16,7 +16,7 @@ public class PayloadUtility {
 	private List<Journal> journals;
 	private Integer userId;
 	
-	public PayloadUtility() {
+	public UtilPayload() {
 	}
 
 	public Author getAuthor() {

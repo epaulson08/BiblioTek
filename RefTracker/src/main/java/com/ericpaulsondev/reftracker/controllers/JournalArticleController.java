@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ericpaulsondev.reftracker.entities.JournalArticle;
 import com.ericpaulsondev.reftracker.services.JournalArticleService;
 import com.ericpaulsondev.reftracker.services.UserService;
+import com.ericpaulsondev.reftracker.util.UtilPayload;
 import com.ericpaulsondev.reftracker.util.UtilCheckUserAccess;
 
 @CrossOrigin({ "*", "http://localhost:4200" })
@@ -34,7 +35,6 @@ public class JournalArticleController {
 	@GetMapping("api/articles")
 	public List<JournalArticle> findAllAsUser(Principal principal, HttpServletResponse resp) {
 		// admin
-		System.err.println(UtilCheckUserAccess.isAdmin(principal, this.userServ));
 		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
 			resp.setStatus(405);
 			return null;
@@ -131,7 +131,7 @@ public class JournalArticleController {
 	}
 
 	@PostMapping("api/articles")
-	public JournalArticle create(@RequestBody PayloadUtility payload, Principal principal, HttpServletRequest req,
+	public JournalArticle create(@RequestBody UtilPayload payload, Principal principal, HttpServletRequest req,
 			HttpServletResponse resp) {
 
 		if (payload == null || payload.getAuthors() == null || payload.getJa() == null) {
