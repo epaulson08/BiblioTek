@@ -35,6 +35,7 @@ export class DisplayArticleComponent implements OnInit {
   switch: boolean = false;
   moreInfo: boolean = false;
   underConstructionMessage: string;
+  articleRemoved: boolean = false;
 
   constructor(private auth: AuthService, private collServ: MyCollectionService, private csServ: CitationStyleService, private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
 
@@ -169,7 +170,7 @@ export class DisplayArticleComponent implements OnInit {
   removeFromCollection(myCollectionId: number, journalArticleId): void {
     this.collServ.removeArticle(myCollectionId, journalArticleId).subscribe(
       success => {
-        // TODO
+        this.articleRemoved = true;
       },
       failure => {
         console.error(failure);

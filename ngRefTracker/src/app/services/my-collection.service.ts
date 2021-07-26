@@ -71,8 +71,9 @@ export class MyCollectionService {
 
   // POST api/collections/{myCollectionId}/remove-article/{journalArticleId}
   removeArticle(myCollectionId: number, journalArticleId: number) {
-    return this.http.post<MyCollection>(
+    return this.http.post<any>(
       `${this.baseUrl}api/collections/${myCollectionId}/remove-article/${journalArticleId}`,
+      null,
       this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
