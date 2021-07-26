@@ -40,8 +40,19 @@ public class UtilCreateTestData {
 	@Autowired
 	MyCollectionService collServ;
 
-	@PostMapping("create-test-user")
-	public String createTestUser(HttpServletResponse resp) {
+	@PostMapping("create-test-data")
+	public String createTestData(HttpServletResponse resp) {
+		String toReturn = "";
+		toReturn += createTestUser();
+		toReturn += "\n\n";
+		toReturn += createTestAdmin();
+		resp.setStatus(200);
+		return toReturn;
+	}
+	
+	
+	
+	private String createTestUser() {
 		try {
 			User testUser = userServ.show(2);
 			if (testUser == null) {
@@ -99,20 +110,17 @@ public class UtilCreateTestData {
 				collServ.create(2, testColl3);
 			}
 
-			resp.setStatus(201);
 			return "Test user created/updated: \nusername = demo, password = demo";
 		}
 
 		catch (Exception e) {
 			e.printStackTrace();
-			resp.setStatus(400);
 			return "Test user not created. An error occurred";
 		}
 
 	}
 
-	@PostMapping("create-test-admin")
-	public String createTestAdmin(HttpServletResponse resp) {
+	private String createTestAdmin() {
 		try {
 			User testAdmin = userServ.show(3);
 			if (testAdmin == null) {
@@ -143,14 +151,11 @@ public class UtilCreateTestData {
 			// add AMA and APA citation styles
 			testAdmin.addCS(csServ.findById(1));
 			testAdmin.addCS(csServ.findById(2));
-
-			resp.setStatus(201);
 			return "Test admin credentials:\nusername = admin, password = wombat1\nAPI sets role to user; change to admin in database for testing";
 		}
 
 		catch (Exception e) {
 			e.printStackTrace();
-			resp.setStatus(400);
 			return "Test admin not created. An error occurred";
 		}
 
