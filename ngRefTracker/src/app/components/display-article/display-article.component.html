@@ -161,7 +161,7 @@
           </button>
         </div>
         <div *ngIf="!deleted">
-          <button class="btn btn-danger mr-2">Remove</button>
+          <button class="btn btn-danger mr-2" (click)="removeFromCollection(this.collId, this.articleId)">Remove</button>
           <button class="btn btn-danger mr-2" (click)="delete(selected.id)">
             Delete
           </button>

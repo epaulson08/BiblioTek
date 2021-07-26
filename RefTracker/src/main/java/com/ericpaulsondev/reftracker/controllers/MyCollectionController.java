@@ -147,28 +147,7 @@ public class MyCollectionController {
 		}
 	}
 
-	@PutMapping("api/collections/{myCollectionId}")
-	public MyCollection update(@PathVariable Integer myCollectionId, @RequestBody MyCollection myColl,
-			Principal principal, HttpServletResponse resp) {
-		// admin: 405 method not allowed
-		if (isAdmin(principal)) {
-			resp.setStatus(405);
-			return null;
-		} else {
-			// user: owns article: 200 OK
-			if (myCollectionBelongsToPrincipal(myCollectionId, principal)) {
-				resp.setStatus(200);
-				return collServ.update(myCollectionId, myColl);
-			}
-			// user: doesn't own article: 403 forbidden
-			else {
-				resp.setStatus(403);
-				return null;
-			}
-		}
-	}
-
-	@PutMapping("api/collections/{myCollectionId}/add-article/{journalArticleId}")
+	@PostMapping("api/collections/{myCollectionId}/add-article/{journalArticleId}")
 	public MyCollection addJournalArticle(@PathVariable Integer myCollectionId, @PathVariable Integer journalArticleId,
 			Principal principal, HttpServletResponse resp) {
 		// admin: 405 method not supported
@@ -190,7 +169,7 @@ public class MyCollectionController {
 		}
 	}
 
-	@PutMapping("api/collections/{myCollectionId}/remove-article/{journalArticleId}")
+	@PostMapping("api/collections/{myCollectionId}/remove-article/{journalArticleId}")
 	public MyCollection removeJournalArticle(@PathVariable Integer myCollectionId,
 			@PathVariable Integer journalArticleId, Principal principal, HttpServletResponse resp) {
 		// admin: 405 method not supported
@@ -212,6 +191,27 @@ public class MyCollectionController {
 
 		}
 
+	}
+
+	@PutMapping("api/collections/{myCollectionId}")
+	public MyCollection update(@PathVariable Integer myCollectionId, @RequestBody MyCollection myColl,
+			Principal principal, HttpServletResponse resp) {
+		// admin: 405 method not allowed
+		if (isAdmin(principal)) {
+			resp.setStatus(405);
+			return null;
+		} else {
+			// user: owns article: 200 OK
+			if (myCollectionBelongsToPrincipal(myCollectionId, principal)) {
+				resp.setStatus(200);
+				return collServ.update(myCollectionId, myColl);
+			}
+			// user: doesn't own article: 403 forbidden
+			else {
+				resp.setStatus(403);
+				return null;
+			}
+		}
 	}
 
 	@DeleteMapping("api/collections/{myCollectionId}")

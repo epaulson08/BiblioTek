@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CitationStyleService } from 'src/app/services/citation-style.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
 import { JournalService } from 'src/app/services/journal.service';
+import { MyCollectionService } from 'src/app/services/my-collection.service';
 
 @Component({
   selector: 'app-display-article',
@@ -19,6 +20,7 @@ import { JournalService } from 'src/app/services/journal.service';
 })
 export class DisplayArticleComponent implements OnInit {
 
+  @Input() collId: number;
   @Input() articleId: number;
   @Input() myCollectionView: boolean;
   selected: JournalArticle = new JournalArticle();
@@ -34,7 +36,7 @@ export class DisplayArticleComponent implements OnInit {
   moreInfo: boolean = false;
   underConstructionMessage: string;
 
-  constructor(private auth: AuthService, private csServ: CitationStyleService, private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
+  constructor(private auth: AuthService, private collServ: MyCollectionService, private csServ: CitationStyleService, private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
 
   ngOnInit(): void {
     if (!this.auth.checkLogin()) { this.router.navigateByUrl("home"); }
@@ -162,6 +164,16 @@ export class DisplayArticleComponent implements OnInit {
 
   addToCollection(): void {
     this.underConstructionMessage = "\"Add to Collection\" feature will be implemented soon!";
+  }
+
+  removeFromCollection(myCollectionId: number, journalArticleId): void {
+    this.collServ.removeArticle(myCollectionId, journalArticleId).subscribe(
+      success => {
+        // TODO
+      },
+      failure => {
+        console.error(failure);
+      });
   }
 
   private formatByCitationStyle(style: CitationStyle): string {

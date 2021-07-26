@@ -59,11 +59,27 @@ export class MyCollectionService {
   // GET api/all/collections/users/{userId}
   // findAllForUserAsAdmin() { }
 
+
   ///////////////
   // POST methods
 
   // POST api/collections
   // create() { }
+
+  // POST api/collections/{myCollectionId}/add-article/{journalArticleId}
+  // addArticle() { }
+
+  // POST api/collections/{myCollectionId}/remove-article/{journalArticleId}
+  removeArticle(myCollectionId: number, journalArticleId: number) {
+    return this.http.post<MyCollection>(
+      `${this.baseUrl}api/collections/${myCollectionId}/remove-article/${journalArticleId}`,
+      this.auth.generateHttpHeader())
+      .pipe(
+        catchError((err: any) => {
+          return throwError(err);
+        })
+      );
+  }
 
   //////////////
   // PUT methods
@@ -81,11 +97,7 @@ export class MyCollectionService {
       );
   }
 
-  // PUT api/collections/{myCollectionId}/add-article/{journalArticleId}
-  // addArticle() { }
 
-  // PUT api/collections/{myCollectionId}/remove-article/{journalArticleId}
-  // removeArticle() { }
 
   /////////////////
   // DELETE methods

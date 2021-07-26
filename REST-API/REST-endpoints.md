@@ -227,25 +227,25 @@ A user can update a `MyCollection` if it belongs to them.
 
 
 ---
-### `PUT api/collections/{myCollectionId}/add-article/{journalArticleId}`
+### `POST api/collections/{myCollectionId}/add-article/{journalArticleId}`
 A user can add a `JournalArticle` to a `MyCollection` if if belongs to them.
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
-| PUT | api/collections/{myCollectionId}/add-article/{journalArticleId} | user | n/a | `MyCollection` ID belonging to user, and ID of `JournalArticle` to add | 200 OK | `MyCollection` |
-| PUT | api/collections/{myCollectionId}/add-article/{journalArticleId} | user | n/a | `MyCollection` ID *not* belonging to user, and ID of `JournalArticle` to add | 403 Forbidden | `MyCollection` |
-| PUT | api/collections/{myCollectionId}/add-article/{journalArticleId} | admin | n/a | any | 405 Method Not Supported | `null` |
+| POST | api/collections/{myCollectionId}/add-article/{journalArticleId} | user | n/a | `MyCollection` ID belonging to user, and ID of `JournalArticle` to add | 200 OK | `MyCollection` |
+| POST | api/collections/{myCollectionId}/add-article/{journalArticleId} | user | n/a | `MyCollection` ID *not* belonging to user, and ID of `JournalArticle` to add | 403 Forbidden | `MyCollection` |
+| POST | api/collections/{myCollectionId}/add-article/{journalArticleId} | admin | n/a | any | 405 Method Not Supported | `null` |
 
 
 ---
-### `PUT api/collections/{myCollectionId}/remove-article/{journalArticleId}`
+### `POST api/collections/{myCollectionId}/remove-article/{journalArticleId}`
 A user can remove a `JournalArticle` from a `MyCollection` if it belongs to them.
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
-| PUT | api/collections/{myCollectionId}/remove-article/{journalArticleId} | user | n/a | `MyCollection` ID belonging to user, and ID of `JournalArticle` to remove | 200 OK | `MyCollection` |
-| PUT | api/collections/{myCollectionId}/remove-article/{journalArticleId} | user | n/a | `MyCollection` ID *not* belonging to user, and ID of `JournalArticle` to remove | 403 Forbidden | `MyCollection` |
-| PUT | api/collections/{myCollectionId}/remove-article/{journalArticleId} | admin | n/a | any | 405 Method Not Supported | `null` |
+| POST | api/collections/{myCollectionId}/remove-article/{journalArticleId} | user | n/a | `MyCollection` ID belonging to user, and ID of `JournalArticle` to remove | 200 OK | `MyCollection` |
+| POST | api/collections/{myCollectionId}/remove-article/{journalArticleId} | user | n/a | `MyCollection` ID *not* belonging to user, and ID of `JournalArticle` to remove | 403 Forbidden | `MyCollection` |
+| POST | api/collections/{myCollectionId}/remove-article/{journalArticleId} | admin | n/a | any | 405 Method Not Supported | `null` |
 
 
 ---
