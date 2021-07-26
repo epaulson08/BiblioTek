@@ -38,6 +38,7 @@ export class DisplayArticleComponent implements OnInit {
   underConstructionMessage: string;
   articleRemoved: boolean = false;
   myCollections: MyCollection[];
+  addedMessage: string;
 
   constructor(
     private auth: AuthService,
@@ -183,8 +184,16 @@ export class DisplayArticleComponent implements OnInit {
     this.moreInfo = !this.moreInfo;
   }
 
-  addToCollection(): void {
-    this.underConstructionMessage = "\"Add to Collection\" feature will be implemented soon!";
+  addToCollection(myCollectionId: number, myCollectionName: string, journalArticleId: number): void {
+    this.collServ.addArticle(myCollectionId, journalArticleId)
+      .subscribe(
+        success => {
+          this.addedMessage = myCollectionName;
+        },
+        failure => {
+          console.error(failure);
+        }
+      )
   }
 
   removeFromCollection(myCollectionId: number, journalArticleId): void {

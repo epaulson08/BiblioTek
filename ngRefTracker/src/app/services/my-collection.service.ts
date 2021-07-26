@@ -59,7 +59,6 @@ export class MyCollectionService {
   // GET api/all/collections/users/{userId}
   // findAllForUserAsAdmin() { }
 
-
   ///////////////
   // POST methods
 
@@ -107,8 +106,6 @@ export class MyCollectionService {
         })
       );
   }
-
-
 
   /////////////////
   // DELETE methods
