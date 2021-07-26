@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ericpaulsondev.reftracker.entities.JournalArticle;
-import com.ericpaulsondev.reftracker.entities.User;
 import com.ericpaulsondev.reftracker.services.JournalArticleService;
 import com.ericpaulsondev.reftracker.services.UserService;
+import com.ericpaulsondev.reftracker.util.UtilCheckUserAccess;
 
 @CrossOrigin({ "*", "http://localhost:4200" })
 @RestController
@@ -31,9 +31,31 @@ public class JournalArticleController {
 	@Autowired
 	private UserService userServ;
 
+	@GetMapping("api/articles")
+	public List<JournalArticle> findAllAsUser(Principal principal, HttpServletResponse resp) {
+		// admin
+		System.err.println(UtilCheckUserAccess.isAdmin(principal, this.userServ));
+		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
+			resp.setStatus(405);
+			return null;
+		}
+		// user
+		else {
+			String username = principal.getName();
+			List<JournalArticle> jasOfUser = jaServ.findByUser(username);
+			if (jasOfUser == null) {
+				resp.setStatus(404);
+				return null;
+			} else {
+				resp.setStatus(200);
+				return jasOfUser;
+			}
+		}
+	}
+
 	@GetMapping("api/all/articles")
-	public List<JournalArticle> index(Principal principal, HttpServletResponse resp) {
-		if (isAdmin(principal)) {
+	public List<JournalArticle> findAllAsAdmin(Principal principal, HttpServletResponse resp) {
+		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
 			List<JournalArticle> allArticles = jaServ.index();
 			resp.setStatus(200);
 			return allArticles;
@@ -43,22 +65,9 @@ public class JournalArticleController {
 		}
 	}
 
-	@GetMapping("api/articles/")
-	public List<JournalArticle> findByUser(Principal principal, HttpServletResponse resp) {
-		String username = principal.getName();
-		List<JournalArticle> jasOfUser = jaServ.findByUser(username);
-		if (jasOfUser == null) {
-			resp.setStatus(404);
-			return null;
-		} else {
-			resp.setStatus(200);
-			return jasOfUser;
-		}
-	}
-
 	@GetMapping("api/all/articles/{id}")
 	public JournalArticle findById(@PathVariable Integer id, Principal principal, HttpServletResponse resp) {
-		if (isAdmin(principal)) {
+		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
 			JournalArticle ja = jaServ.findById(id);
 			if (ja == null) {
 				resp.setStatus(404);
@@ -73,34 +82,28 @@ public class JournalArticleController {
 	@GetMapping("api/articles/{id}")
 	public JournalArticle findByIdAndUsersUsername(@PathVariable int id, Principal principal,
 			HttpServletResponse resp) {
-		if (belongsToUser(id, principal)) {
+		if (UtilCheckUserAccess.journalArticleBelongsToPrincipal(id, principal, userServ, jaServ)) {
 			JournalArticle ja = jaServ.findById(id);
 			if (ja == null) {
 				resp.setStatus(404);
 				return null;
-			}
-			else {
+			} else {
 				resp.setStatus(200);
 				return ja;
 			}
-		}
-		else {
+		} else {
 			resp.setStatus(404);
 			return null;
 		}
 	}
-	
-	//FIXME: HTTP response codes are improved up to here
 
 	@GetMapping("api/articles/journals/{journalId}")
 	public List<JournalArticle> findAllByJournalIdAndUsersUsername(@PathVariable int journalId, Principal principal,
 			HttpServletResponse resp) {
-
 		if (journalId < 0) {
 			resp.setStatus(400);
 			return null;
 		}
-
 		List<JournalArticle> results = null;
 		results = jaServ.findByJournalIdAndUsersUsername(journalId, principal.getName());
 		resp.setStatus(200);
@@ -109,7 +112,7 @@ public class JournalArticleController {
 
 	@GetMapping("api/all/articles/search/{searchTerm}")
 	public List<JournalArticle> searchAll(@PathVariable String searchTerm, Principal principal) {
-		if (isAdmin(principal))
+		if (UtilCheckUserAccess.isAdmin(principal, this.userServ))
 			return jaServ.search(searchTerm);
 		return null;
 	}
@@ -122,7 +125,7 @@ public class JournalArticleController {
 
 	@GetMapping("api/all/articles/aggregates/count")
 	public Long count(Principal principal) {
-		if (isAdmin(principal))
+		if (UtilCheckUserAccess.isAdmin(principal, this.userServ))
 			return jaServ.count();
 		return null;
 	}
@@ -159,7 +162,7 @@ public class JournalArticleController {
 			HttpServletResponse resp) {
 		JournalArticle ja = null;
 
-		if (belongsToUser(jaId, principal)) {
+		if (UtilCheckUserAccess.journalArticleBelongsToPrincipal(jaId, principal, this.userServ, this.jaServ)) {
 			try {
 				ja = jaServ.findById(jaId);
 
@@ -181,7 +184,7 @@ public class JournalArticleController {
 	@PutMapping("api/articles/{id}")
 	public JournalArticle update(@PathVariable Integer id, @RequestBody JournalArticle ja, Principal principal,
 			HttpServletResponse resp) {
-		if (belongsToUser(id, principal)) {
+		if (UtilCheckUserAccess.journalArticleBelongsToPrincipal(id, principal, this.userServ, this.jaServ)) {
 			try {
 				ja = jaServ.update(id, ja);
 				if (ja == null) {
@@ -199,7 +202,7 @@ public class JournalArticleController {
 
 	@DeleteMapping("api/articles/{id}")
 	public boolean delete(@PathVariable Integer id, Principal principal, HttpServletResponse resp) {
-		if (belongsToUser(id, principal)) {
+		if (UtilCheckUserAccess.journalArticleBelongsToPrincipal(id, principal, this.userServ, this.jaServ)) {
 			try {
 				if (jaServ.delete(id)) {
 					resp.setStatus(204);
@@ -212,30 +215,6 @@ public class JournalArticleController {
 			}
 		}
 		return false;
-	}
-
-	// Utility methods for authentication checks
-	private boolean isAdmin(Principal principal) {
-		try {
-			boolean isAdmin = userServ.showByUserName(principal.getName()).getRole().equals("admin");
-			return isAdmin;
-		} catch (NullPointerException npe) {
-			npe.printStackTrace();
-			return false;
-		}
-	}
-
-	private boolean belongsToUser(int journalArticleId, Principal principal) {
-		try {
-			User user = userServ.showByUserName(principal.getName());
-			JournalArticle managedJa = jaServ.findById(journalArticleId);
-			if (managedJa.getUsers().contains(user))
-				return true;
-			return false;
-		} catch (NullPointerException npe) {
-			npe.printStackTrace();
-			return false;
-		}
 	}
 
 }
