@@ -1,4 +1,4 @@
-<div *ngIf="!this.articleRemoved" class="card m-3">
+<div *ngIf="!this.articleRemoved && !this.deleted" class="card m-3">
   <div class="card-body">
     <div *ngIf="!deleted">
       <table class="m-3">
@@ -138,7 +138,6 @@
         </div>
       </div>
     </div>
-    <div *ngIf="deleted"><h2>Deleted.</h2></div>
   </div>
   <!-- ^^^ end card body -->
 
@@ -257,4 +256,8 @@
 
 <div *ngIf="this.articleRemoved" class="card m-3">
   <div class="card-body"><h5>Removed.</h5></div>
+</div>
+
+<div *ngIf="deleted" class="card m-3">
+  <div class="card-body"><h5>Deleted.</h5></div>
 </div>
