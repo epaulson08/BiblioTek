@@ -67,7 +67,17 @@ export class MyCollectionService {
   // create() { }
 
   // POST api/collections/{myCollectionId}/add-article/{journalArticleId}
-  // addArticle() { }
+  addArticle(myCollectionId: number, journalArticleId: number) {
+    return this.http.post<any>(
+      `${this.baseUrl}api/collections/${myCollectionId}/add-article/${journalArticleId}`,
+      null,
+      this.auth.generateHttpHeader())
+      .pipe(
+        catchError((err: any) => {
+          return throwError(err);
+        })
+      );
+  }
 
   // POST api/collections/{myCollectionId}/remove-article/{journalArticleId}
   removeArticle(myCollectionId: number, journalArticleId: number) {

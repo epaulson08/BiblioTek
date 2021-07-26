@@ -207,57 +207,75 @@
       <div *ngIf="!deleted && !editJa">
         <button class="btn btn-success mr-2" (click)="setEdit()">Edit</button>
         <button class="btn btn-warning mr-2" (click)="cite()">Cite</button>
-        <button class="btn btn-info mr-2" (click)="addToCollection()">
-          Add to Collection
-        </button>
-        <button class="btn btn-secondary mr-2" (click)="goBack()">Back</button>
-      </div>
-      <div *ngIf="!deleted && editJa">
-        <button class="btn btn-success mr-2" (click)="update(editJa)">
-          Submit</button
-        ><button class="btn btn-secondary mr-2" (click)="cancelEdit()">
-          Cancel
-        </button>
-      </div>
-      <div *ngIf="!deleted">
-        <button class="btn btn-danger" (click)="delete(selected.id)">
-          Delete
-        </button>
-      </div>
-      <div
-        class="ml-3"
-        style="color: orange"
-        *ngIf="this.underConstructionMessage"
-      >
-        {{ this.underConstructionMessage }}
-      </div>
-    </div>
+        <div ngbDropdown class="d-inline-block">
+          <button
+            class="btn btn-info mr-2"
+            id="dropdownAddToColl"
+            ngbDropdownToggle
+          >
+            Add to Collection
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownAddToColl">
+            <span *ngFor="let coll of this.myCollections"
+              ><button ngbDropdownItem>
+                {{ coll.name }}
+              </button></span
+            >
+          </div>
 
-    <div *ngIf="viewCite">
-      <div class="card-footer d-flex">
-        <button class="btn btn-success mr-2" (click)="setEdit()">Edit</button>
-        <button class="btn btn-info mr-2" (click)="addToCollection()">
-          Add to Collection
-        </button>
-        <button class="btn btn-secondary mr-2" (click)="resetCite()">
-          Back
-        </button>
-        <div
-          class="float-center"
-          style="color: orange"
-          *ngIf="this.underConstructionMessage"
-        >
-          {{ this.underConstructionMessage }}
+          <button class="btn btn-secondary mr-2" (click)="goBack()">
+            Back
+          </button>
+          <div *ngIf="!deleted && editJa">
+            <button class="btn btn-success mr-2" (click)="update(editJa)">
+              Submit</button
+            ><button class="btn btn-secondary mr-2" (click)="cancelEdit()">
+              Cancel
+            </button>
+          </div>
+          <span *ngIf="!deleted">
+            <button class="btn btn-danger" (click)="delete(selected.id)">
+              Delete
+            </button>
+          </span>
+          <div
+            class="ml-3"
+            style="color: orange"
+            *ngIf="this.underConstructionMessage"
+          >
+            {{ this.underConstructionMessage }}
+          </div>
+        </div>
+
+        <div *ngIf="viewCite">
+          <div class="card-footer d-flex">
+            <button class="btn btn-success mr-2" (click)="setEdit()">
+              Edit
+            </button>
+            <button class="btn btn-info mr-2" (click)="addToCollection()">
+              Add to Collection
+            </button>
+            <button class="btn btn-secondary mr-2" (click)="resetCite()">
+              Back
+            </button>
+            <div
+              class="float-center"
+              style="color: orange"
+              *ngIf="this.underConstructionMessage"
+            >
+              {{ this.underConstructionMessage }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+    <div *ngIf="this.articleRemoved" class="card m-3">
+      <div class="card-body"><h5>Removed.</h5></div>
+    </div>
+
+    <div *ngIf="deleted" class="card m-3">
+      <div class="card-body"><h5>Deleted.</h5></div>
+    </div>
   </div>
-</div>
-
-<div *ngIf="this.articleRemoved" class="card m-3">
-  <div class="card-body"><h5>Removed.</h5></div>
-</div>
-
-<div *ngIf="deleted" class="card m-3">
-  <div class="card-body"><h5>Deleted.</h5></div>
 </div>

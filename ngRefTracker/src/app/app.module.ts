@@ -43,6 +43,7 @@ import { FullMlaPipe } from './pipes/mla/full-mla.pipe';
 import { NlmAuthorPipe } from './pipes/nlm/nlm-author.pipe';
 import { NlmAuthorsPipe } from './pipes/nlm/nlm-authors.pipe';
 import { FullNlmPipe } from './pipes/nlm/full-nlm.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { FullNlmPipe } from './pipes/nlm/full-nlm.pipe';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [
     AuthService,

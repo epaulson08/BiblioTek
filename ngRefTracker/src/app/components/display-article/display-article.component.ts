@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CitationStyle } from 'src/app/models/citation-style';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
+import { MyCollection } from 'src/app/models/my-collection.model';
 import { FullAmaPipe } from 'src/app/pipes/ama/full-ama.pipe';
 import { FullApaPipe } from 'src/app/pipes/apa/full-apa.pipe';
 import { FullIeeePipe } from 'src/app/pipes/ieee/full-ieee.pipe';
@@ -36,13 +37,22 @@ export class DisplayArticleComponent implements OnInit {
   moreInfo: boolean = false;
   underConstructionMessage: string;
   articleRemoved: boolean = false;
+  myCollections: MyCollection[];
 
-  constructor(private auth: AuthService, private collServ: MyCollectionService, private csServ: CitationStyleService, private route: ActivatedRoute, private jaServ: JournalArticleService, private journalServ: JournalService, private router: Router) { }
+  constructor(
+    private auth: AuthService,
+    private collServ: MyCollectionService,
+    private csServ: CitationStyleService,
+    private jaServ: JournalArticleService,
+    private journalServ: JournalService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     if (!this.auth.checkLogin()) { this.router.navigateByUrl("home"); }
     this.loadArticle();
     this.loadCitationStyles();
+    this.loadMyCollections();
   }
 
   loadArticle() {
@@ -69,6 +79,16 @@ export class DisplayArticleComponent implements OnInit {
         console.error(failure);
       });
     return null;
+  }
+
+  loadMyCollections() {
+    this.collServ.findAllAsUser().subscribe(
+      success => {
+        this.myCollections = success;
+      },
+      failure => {
+        console.error(failure);
+      });
   }
 
   loadJournals(): Journal[] {
