@@ -858,7 +858,7 @@
 						}
 					]
 				},
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -917,7 +917,7 @@
 						}
 					]
 				},
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -976,7 +976,7 @@
 						}
 					]
 				},
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -1035,7 +1035,7 @@
 						}
 					]
 				},
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -1047,7 +1047,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8084/api/collections/7/remove-article/5",
+					"raw": "localhost:8084/api/collections/2/remove-article/2",
 					"host": [
 						"localhost"
 					],
@@ -1055,9 +1055,9 @@
 					"path": [
 						"api",
 						"collections",
-						"7",
+						"2",
 						"remove-article",
-						"5"
+						"2"
 					]
 				}
 			},
@@ -1094,7 +1094,7 @@
 						}
 					]
 				},
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -1153,7 +1153,7 @@
 						}
 					]
 				},
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
