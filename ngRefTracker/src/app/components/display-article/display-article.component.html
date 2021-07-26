@@ -1,148 +1,154 @@
 <div *ngIf="!this.articleRemoved && !this.deleted" class="card m-3">
+  <!-- *****************************
+  DISPLAY JOURNALARTICLE INFORMATION
+  ********************************** -->
   <div class="card-body">
-    <div *ngIf="!deleted">
-      <table class="m-3">
-        <tr>
-          <th scope="row">Title:</th>
-          <td *ngIf="selected !== editJa">{{ selected.title }}</td>
-          <td *ngIf="selected === editJa">
-            <textarea
-              class="form-control"
-              rows="5"
-              name="fred"
-              [(ngModel)]="editJa.title"
-            ></textarea>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">Authors:</th>
-          <td>
-            {{ selected.authors | authorFormat }}
-          </td>
-          <!-- TODO: allow editing of authors -->
-        </tr>
-        <tr>
-          <th scope="row">Journal:</th>
-          <td *ngIf="selected !== editJa">{{ selected.journal.name }}</td>
+    <table class="m-3">
+      <tr>
+        <th scope="row">Title:</th>
+        <td *ngIf="selected !== editJa">{{ selected.title }}</td>
+        <td *ngIf="selected === editJa">
+          <textarea
+            class="form-control"
+            rows="5"
+            name="fred"
+            [(ngModel)]="editJa.title"
+          ></textarea>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Authors:</th>
+        <td>
+          {{ selected.authors | authorFormat }}
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Journal:</th>
+        <td *ngIf="selected !== editJa">{{ selected.journal.name }}</td>
 
-          <td *ngIf="selected === editJa">
-            <select
-              class="form-control"
-              [(ngModel)]="editJournal"
-              name="editJournal"
-            >
-              <option [ngValue]="editJournal" selected>
-                {{ editJournal.name }}
-              </option>
-              <option *ngFor="let j of allJournals" [ngValue]="j">
-                {{ j.name }}
-              </option>
-            </select>
-          </td>
-        </tr>
-
-        <!-- Volume -->
-        <tr>
-          <th scope="row">Volume:</th>
-          <td *ngIf="selected !== editJa">{{ selected.volumeNum }}</td>
-          <td *ngIf="selected === editJa">
-            <input
-              type="text"
-              class="form-control"
-              name="editVol"
-              [(ngModel)]="editJa.volumeNum"
-            />
-          </td>
-        </tr>
-
-        <!-- Year -->
-        <tr>
-          <th scope="row">Year:</th>
-          <td *ngIf="selected !== editJa">{{ selected.yearPublished }}</td>
-          <td *ngIf="selected === editJa">
-            <input
-              type="text"
-              class="form-control"
-              name="editVol"
-              [(ngModel)]="editJa.yearPublished"
-            />
-          </td>
-        </tr>
-
-        <!-- DOI -->
-        <tr>
-          <th scope="row">DOI:</th>
-          <td *ngIf="selected !== editJa">{{ selected.doi }}</td>
-          <td
-            *ngIf="selected === editJa"
-            style="max-width: 150px; word-wrap: 'break-word;'"
+        <td *ngIf="selected === editJa">
+          <select
+            class="form-control"
+            [(ngModel)]="editJournal"
+            name="editJournal"
           >
-            <input
-              type="text"
-              class="form-control"
-              name="editDoi"
-              [(ngModel)]="editJa.doi"
-            />
-          </td>
-        </tr>
-      </table>
-      <div *ngIf="viewCite">
-        <hr />
-        <button
-          class="btn btn-warning mr-2 mb-2"
-          *ngFor="let cs of this.citationStyles"
-          (click)="chooseStyle(cs)"
+            <option [ngValue]="editJournal" selected>
+              {{ editJournal.name }}
+            </option>
+            <option *ngFor="let j of allJournals" [ngValue]="j">
+              {{ j.name }}
+            </option>
+          </select>
+        </td>
+      </tr>
+
+      <!-- Volume -->
+      <tr>
+        <th scope="row">Volume:</th>
+        <td *ngIf="selected !== editJa">{{ selected.volumeNum }}</td>
+        <td *ngIf="selected === editJa">
+          <input
+            type="text"
+            class="form-control"
+            name="editVol"
+            [(ngModel)]="editJa.volumeNum"
+          />
+        </td>
+      </tr>
+
+      <!-- Year -->
+      <tr>
+        <th scope="row">Year:</th>
+        <td *ngIf="selected !== editJa">{{ selected.yearPublished }}</td>
+        <td *ngIf="selected === editJa">
+          <input
+            type="text"
+            class="form-control"
+            name="editVol"
+            [(ngModel)]="editJa.yearPublished"
+          />
+        </td>
+      </tr>
+
+      <!-- DOI -->
+      <tr>
+        <th scope="row">DOI:</th>
+        <td *ngIf="selected !== editJa">{{ selected.doi }}</td>
+        <td
+          *ngIf="selected === editJa"
+          style="max-width: 150px; word-wrap: 'break-word;'"
         >
-          {{ cs.abbreviation }}
+          <input
+            type="text"
+            class="form-control"
+            name="editDoi"
+            [(ngModel)]="editJa.doi"
+          />
+        </td>
+      </tr>
+    </table>
+
+    <!-- **************
+    USER CLICKS ON CITE
+    ******************* -->
+    <div *ngIf="viewCite">
+      <hr />
+      <button
+        class="btn btn-warning mr-2 mb-2"
+        *ngFor="let cs of this.citationStyles"
+        (click)="chooseStyle(cs)"
+      >
+        {{ cs.abbreviation }}
+      </button>
+
+      <div *ngIf="citationOutput">
+        <h6 class="mt-2">{{ this.chosenStyle.abbreviation }} citation:</h6>
+
+        <div *ngIf="this.switch">
+          <span [outerHTML]="this.citationOutput"></span>
+        </div>
+        <div *ngIf="!this.switch">
+          <span [outerHTML]="this.citationOutput"></span>
+        </div>
+        <br />
+        <button
+          class="btn btn-secondary btn-sm mb-3"
+          (click)="toggleMoreInfo()"
+        >
+          More Info ▼
         </button>
-
-        <div *ngIf="citationOutput">
-          <h6 class="mt-2">{{ this.chosenStyle.abbreviation }} citation:</h6>
-
-          <div *ngIf="this.switch">
-            <span [outerHTML]="this.citationOutput"></span>
-          </div>
-          <div *ngIf="!this.switch">
-            <span [outerHTML]="this.citationOutput"></span>
-          </div>
+        <div *ngIf="moreInfo">
+          <h6>
+            {{ chosenStyle.name }} ({{ chosenStyle.abbreviation }}) format
+          </h6>
+          <em>Authoritative Source:</em>
           <br />
-          <button
-            class="btn btn-secondary btn-sm mb-3"
-            (click)="toggleMoreInfo()"
-          >
-            More Info ▼
-          </button>
-          <div *ngIf="moreInfo">
-            <h6>
-              {{ chosenStyle.name }} ({{ chosenStyle.abbreviation }}) format
-            </h6>
-            <em>Authoritative Source:</em>
-            <br />
-            {{ chosenStyle.definitiveReference }}
-            <br />
-            <a [href]="chosenStyle.definitiveReferenceUrl">{{
-              chosenStyle.definitiveReferenceUrl
-            }}</a>
+          {{ chosenStyle.definitiveReference }}
+          <br />
+          <a [href]="chosenStyle.definitiveReferenceUrl">{{
+            chosenStyle.definitiveReferenceUrl
+          }}</a>
+          <br />
+          <br />
+          <em>Links:</em>
+          <br />
+          <div *ngFor="let link of chosenStyle.links">
+            <a [href]="link.url">{{ link.url }}</a
+            ><br />
+            {{ link.comment }}
             <br />
             <br />
-            <em>Links:</em>
-            <br />
-            <div *ngFor="let link of chosenStyle.links">
-              <a [href]="link.url">{{ link.url }}</a
-              ><br />
-              {{ link.comment }}
-              <br />
-              <br />
-            </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- ^^^ end citations view -->
   </div>
   <!-- ^^^ end card body -->
 
-  <!-- BUTTONS/FOOTER -->
-  <!-- MyCollection version -->
+  <!-- *******************************
+  BUTTONS/FOOTER: MYCOLLECTION VERSION
+  ************************************ -->
   <div *ngIf="myCollectionView">
     <div *ngIf="!viewCite">
       <div class="card-footer d-flex">
@@ -181,12 +187,10 @@
       </div>
     </div>
 
+    <!-- Citation view selected: -->
     <div *ngIf="viewCite">
       <div class="card-footer d-flex">
         <button class="btn btn-success mr-2" (click)="setEdit()">Edit</button>
-        <button class="btn btn-info mr-2" (click)="addToCollection()">
-          Add to Collection
-        </button>
         <button class="btn btn-secondary mr-2" (click)="resetCite()">
           Back
         </button>
@@ -200,13 +204,70 @@
       </div>
     </div>
   </div>
+  <!-- ^^^ end MyCollections version -->
 
-  <!-- Non-MyCollection version -->
-  <div *ngIf="!myCollectionView && !viewCite">
-    <div class="card-footer d-flex">
-      <div *ngIf="!deleted && !editJa">
+  <!-- ***************************************
+  BUTTONS/FOOTER: DISPLAY-ALL-ARTICLES VERSION
+  ******************************************** -->
+  <div *ngIf="!this.myCollectionView">
+    <div *ngIf="!this.viewCite">
+      <div class="card-footer d-flex">
+        <div *ngIf="!deleted && !editJa">
+          <button class="btn btn-success mr-2" (click)="setEdit()">Edit</button>
+          <button class="btn btn-warning mr-2" (click)="cite()">Cite</button>
+          <div ngbDropdown class="d-inline-block">
+            <button
+              class="btn btn-info mr-2"
+              id="dropdownAddToColl"
+              ngbDropdownToggle
+            >
+              Add to Collection
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownAddToColl">
+              <span *ngFor="let coll of this.myCollections"
+                ><button
+                  ngbDropdownItem
+                  (click)="
+                    addToCollection(coll.id, coll.name, this.selected.id)
+                  "
+                >
+                  {{ coll.name }}
+                </button></span
+              >
+            </div>
+          </div>
+          <button class="btn btn-secondary mr-2" (click)="goBack()">
+            Back
+          </button>
+          <div *ngIf="!deleted && editJa">
+            <button class="btn btn-success mr-2" (click)="update(editJa)">
+              Submit</button
+            ><button class="btn btn-secondary mr-2" (click)="cancelEdit()">
+              Cancel
+            </button>
+          </div>
+          <span *ngIf="!deleted">
+            <button class="btn btn-danger" (click)="delete(selected.id)">
+              Delete
+            </button>
+          </span>
+          <div *ngIf="this.addedMessage">
+            <h5 class="my-auto">Added to {{ this.addedMessage }}.</h5>
+          </div>
+          <div
+            class="ml-3"
+            style="color: orange"
+            *ngIf="this.underConstructionMessage"
+          >
+            {{ this.underConstructionMessage }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Citation view selected: -->
+    <div *ngIf="viewCite">
+      <div class="card-footer d-flex">
         <button class="btn btn-success mr-2" (click)="setEdit()">Edit</button>
-        <button class="btn btn-warning mr-2" (click)="cite()">Cite</button>
         <div ngbDropdown class="d-inline-block">
           <button
             class="btn btn-info mr-2"
@@ -225,76 +286,29 @@
               </button></span
             >
           </div>
-</div>
-          <button class="btn btn-secondary mr-2" (click)="goBack()">
+          <button class="btn btn-secondary mr-2" (click)="resetCite()">
             Back
           </button>
-          <div *ngIf="!deleted && editJa">
-            <button class="btn btn-success mr-2" (click)="update(editJa)">
-              Submit</button
-            ><button class="btn btn-secondary mr-2" (click)="cancelEdit()">
-              Cancel
-            </button>
-          </div>
-          <span *ngIf="!deleted">
-            <button class="btn btn-danger" (click)="delete(selected.id)">
-              Delete
-            </button>
-          </span>
-          <div *ngIf="this.addedMessage">
-            <h5 class="mt-3">Added to {{this.addedMessage}}.</h5>
-          </div>
           <div
-            class="ml-3"
+            class="float-center"
             style="color: orange"
             *ngIf="this.underConstructionMessage"
           >
             {{ this.underConstructionMessage }}
           </div>
         </div>
-
-        <div *ngIf="viewCite">
-          <div class="card-footer d-flex">
-            <button class="btn btn-success mr-2" (click)="setEdit()">
-              Edit
-            </button>
-            <button
-              class="btn btn-info mr-2"
-              id="dropdownAddToColl"
-              ngbDropdownToggle
-            >
-              Add to Collection
-            </button>
-            <div ngbDropdownMenu aria-labelledby="dropdownAddToColl">
-              <span *ngFor="let coll of this.myCollections"
-                ><button
-                  ngbDropdownItem
-                  (click)="addToCollection(coll.id, coll.name, this.selected.id)"
-                >
-                  {{ coll.name }}
-                </button></span
-              >
-            </div>
-            <button class="btn btn-secondary mr-2" (click)="resetCite()">
-              Back
-            </button>
-            <div
-              class="float-center"
-              style="color: orange"
-              *ngIf="this.underConstructionMessage"
-            >
-              {{ this.underConstructionMessage }}
-            </div>
-          </div>
+        <div *ngIf="this.addedMessage">
+          <h5 class="my-auto">Added to {{ this.addedMessage }}.</h5>
         </div>
       </div>
     </div>
-
-    <div *ngIf="this.articleRemoved" class="card m-3">
-      <div class="card-body"><h5>Removed.</h5></div>
-    </div>
-
-    <div *ngIf="deleted" class="card m-3">
-      <div class="card-body"><h5>Deleted.</h5></div>
-    </div>
   </div>
+  <!-- Messages saying article removed from collection or deleted -->
+  <div *ngIf="this.articleRemoved" class="card m-3">
+    <div class="card-body"><h5>Removed.</h5></div>
+  </div>
+
+  <div *ngIf="deleted" class="card m-3">
+    <div class="card-body"><h5>Deleted.</h5></div>
+  </div>
+</div>
