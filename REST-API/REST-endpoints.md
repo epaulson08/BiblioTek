@@ -111,18 +111,7 @@ A user can create a `JournalArticle` that they then own. Admins cannot create `J
 
 
 ---
-### `PUT api/articles/{journalArticleId}`
-A user can update a `JournalArticle` belonging to them. An admin cannot.
-
-| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
-| --- | --- | --- | --- | --- | --- | --- |
-| PUT | api/articles/{journalArticleId} | user | `JournalArticle` | ID of a `JournalArticle` belonging to user | 200 OK | `JournalArticle` |
-| PUT | api/articles/{journalArticleId} | user | `JournalArticle` | ID of a `JournalArticle` *not* belonging to user | 403 Forbidden | `null` |
-| PUT | api/articles/{journalArticleId} | admin | `JournalArticle` | `JournalArticle` ID | 405 Method Not Allowed | `null` |
-
-
----
-### `PUT api/articles/{journalArticleId}/add-author/{authorId}`
+### `POST api/articles/{journalArticleId}/add-author/{authorId}`
 A user can add an `Author` to a `JournalArticle` if the `JournalArticle` belongs to them. Admins cannot add `Author`s.
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
@@ -133,7 +122,7 @@ A user can add an `Author` to a `JournalArticle` if the `JournalArticle` belongs
 
 
 ---
-### `PUT api/articles/{journalArticleId}/remove-author/{authorId}`
+### `POST api/articles/{journalArticleId}/remove-author/{authorId}`
 A user can delete an `Author` from a `JournalArticle` if the `JournalArticle` belongs to them. Admins cannot remove `Author`s.
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
@@ -141,6 +130,17 @@ A user can delete an `Author` from a `JournalArticle` if the `JournalArticle` be
 | PUT | api/articles/{journalArticleId}/remove-author/{authorId} | user | n/a | ID of `JournalArticle` belonging to user and ID of `Author` to remove from article | 200 OK | `JournalArticle` |
 | PUT | api/articles/{journalArticleId}/remove-author/{authorId} | user | n/a | ID of `JournalArticle` *not* belonging to user, and any `Author` ID | 403 Forbidden | `null` |
 | PUT | api/articles/{journalArticleId}/remove-author/{authorId} | admin | n/a | Any `JournalArticle` ID and `Author` ID | 405 Method Not Allowed | `null` |
+
+
+---
+### `PUT api/articles/{journalArticleId}`
+A user can update a `JournalArticle` belonging to them. An admin cannot.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+| PUT | api/articles/{journalArticleId} | user | `JournalArticle` | ID of a `JournalArticle` belonging to user | 200 OK | `JournalArticle` |
+| PUT | api/articles/{journalArticleId} | user | `JournalArticle` | ID of a `JournalArticle` *not* belonging to user | 403 Forbidden | `null` |
+| PUT | api/articles/{journalArticleId} | admin | `JournalArticle` | `JournalArticle` ID | 405 Method Not Allowed | `null` |
 
 
 ---

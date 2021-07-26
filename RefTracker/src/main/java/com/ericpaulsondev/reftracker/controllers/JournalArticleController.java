@@ -154,12 +154,17 @@ public class JournalArticleController {
 		}
 	}
 
-	@PutMapping("api/articles/{id}")
-	public JournalArticle update(@PathVariable Integer id, @RequestBody JournalArticle ja, Principal principal,
+	@PostMapping("api/articles/{jaId}/add-author/{authorId}")
+	public JournalArticle addAuthor(@PathVariable Integer jaId, @PathVariable Integer authorId, Principal principal,
 			HttpServletResponse resp) {
-		if (belongsToUser(id, principal)) {
+		JournalArticle ja = null;
+
+		if (belongsToUser(jaId, principal)) {
 			try {
-				ja = jaServ.update(id, ja);
+				ja = jaServ.findById(jaId);
+
+				jaServ.addAuthor(jaId, authorId);
+
 				if (ja == null) {
 					resp.setStatus(404);
 				}
@@ -173,17 +178,12 @@ public class JournalArticleController {
 		return null;
 	}
 
-	@PutMapping("api/articles/{jaId}/authors/{authorId}")
-	public JournalArticle addAuthor(@PathVariable Integer jaId, @PathVariable Integer authorId, Principal principal,
+	@PutMapping("api/articles/{id}")
+	public JournalArticle update(@PathVariable Integer id, @RequestBody JournalArticle ja, Principal principal,
 			HttpServletResponse resp) {
-		JournalArticle ja = null;
-
-		if (belongsToUser(jaId, principal)) {
+		if (belongsToUser(id, principal)) {
 			try {
-				ja = jaServ.findById(jaId);
-
-				jaServ.addAuthor(jaId, authorId);
-
+				ja = jaServ.update(id, ja);
 				if (ja == null) {
 					resp.setStatus(404);
 				}
