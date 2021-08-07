@@ -49,9 +49,7 @@ public class UtilCreateTestData {
 		resp.setStatus(200);
 		return toReturn;
 	}
-	
-	
-	
+
 	private String createTestUser() {
 		try {
 			User testUser = userServ.show(2);
@@ -74,8 +72,6 @@ public class UtilCreateTestData {
 				testUser.addCS(csServ.findById(i));
 			}
 
-			
-			
 			// persist test user
 			authServ.register(testUser);
 
@@ -83,34 +79,33 @@ public class UtilCreateTestData {
 			MyCollection testColl1 = collServ.findById(2);
 			MyCollection testColl2 = collServ.findById(3);
 			MyCollection testColl3 = collServ.findById(4);
-			
+
 			if (testColl1 == null) {
-				testColl1 = new MyCollection("AI in Radiology", "Applications of AI/machine learning to interpretation of radiologic images");
+				testColl1 = new MyCollection("AI in Radiology",
+						"Applications of AI/machine learning to interpretation of radiologic images");
 				testColl1.addJournalArticle(jaServ.findById(10));
 				testColl1.addJournalArticle(jaServ.findById(11));
 				testColl1.addJournalArticle(jaServ.findById(12));
 				testColl1.addJournalArticle(jaServ.findById(13));
-				collServ.create(2, testColl1);				
+				collServ.create(2, testColl1);
 			}
 
 			if (testColl2 == null) {
-				testColl2 = new MyCollection("CCJM",
-						"Cleveland Clinic Journal of Medicine review article collection");
+				testColl2 = new MyCollection("CCJM", "Cleveland Clinic Journal of Medicine review article collection");
 				testColl2.addJournalArticle(jaServ.findById(7));
 				testColl2.addJournalArticle(jaServ.findById(8));
 				testColl2.addJournalArticle(jaServ.findById(9));
-				collServ.create(2, testColl2);  
+				collServ.create(2, testColl2);
 			}
 
 			if (testColl3 == null) {
-				testColl3 = new MyCollection("Rapid response teams",
-						"Paper for research class, spring 2021");
+				testColl3 = new MyCollection("Rapid response teams", "Paper for research class, spring 2021");
 				testColl3.addJournalArticle(jaServ.findById(1));
 				testColl3.addJournalArticle(jaServ.findById(2));
 				collServ.create(2, testColl3);
 			}
 
-			return "Test user created/updated: \nusername = demo, password = demo";
+			return "Test user credentials: \nusername = demo, password = demo";
 		}
 
 		catch (Exception e) {
@@ -130,7 +125,7 @@ public class UtilCreateTestData {
 			testAdmin.setId(3);
 			testAdmin.setUsername("admin");
 			testAdmin.setPassword("wombat1");
-			
+
 			// add JournalArticles to this user
 			testAdmin.addJA(jaServ.findById(8));
 			testAdmin.addJA(jaServ.findById(9));
@@ -158,7 +153,6 @@ public class UtilCreateTestData {
 			e.printStackTrace();
 			return "Test admin not created. An error occurred";
 		}
-
 	}
 
 }
