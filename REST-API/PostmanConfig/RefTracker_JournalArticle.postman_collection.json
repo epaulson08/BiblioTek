@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "afee01b0-f4aa-47f7-baa2-4f3738671bd8",
+		"_postman_id": "a4470fe0-9635-4b9d-8f9b-0c16fe949a1e",
 		"name": "RefTracker_JournalArticle",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -689,53 +689,6 @@
 			"response": []
 		},
 		{
-			"name": "api/articles - as user",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Response code should be 201 Created\", function () {",
-							"    pm.response.to.have.status(201);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "demo",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "demo",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "localhost:8084/api/articles",
-					"host": [
-						"localhost"
-					],
-					"port": "8084",
-					"path": [
-						"api",
-						"articles"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "api/articles - as admin",
 			"event": [
 				{
@@ -1077,6 +1030,224 @@
 						"2",
 						"remove-author",
 						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/articles - as user Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response code should be 201 Created\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "demo",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "demo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8084/api/articles",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/articles/{journalArticleID} - as user owning article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response code should be 200 OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "demo",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "demo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": 5,\n        \"title\": \"PUT WORKED\",\n        \"volumeNum\": 36,\n        \"yearPublished\": 2010,\n        \"doi\": \"10.1007/s00134-009-1744-5\",\n        \"journal\": {\n            \"id\": 11,\n            \"name\": \"Intensive Care Medicine\",\n            \"abbreviation\": \"Intensive Care Med\"\n        },\n        \"authors\": [\n            {\n                \"id\": 29,\n                \"firstName\": \"Peter\",\n                \"middleName\": \"C\",\n                \"lastName\": \"Calder\",\n                \"suffix\": \"\"\n            },\n            {\n                \"id\": 30,\n                \"firstName\": \"Gordon\",\n                \"middleName\": \"L\",\n                \"lastName\": \"Jensen\",\n                \"suffix\": \"\"\n            },\n            {\n                \"id\": 31,\n                \"firstName\": \"Berthold\",\n                \"middleName\": \"V\",\n                \"lastName\": \"Koletzko\",\n                \"suffix\": \"\"\n            },\n            {\n                \"id\": 32,\n                \"firstName\": \"Pierre\",\n                \"middleName\": \"\",\n                \"lastName\": \"Singer\",\n                \"suffix\": \"\"\n            },\n            {\n                \"id\": 33,\n                \"firstName\": \"Geert\",\n                \"middleName\": \"J. A.\",\n                \"lastName\": \"Wanten\",\n                \"suffix\": \"\"\n            }\n        ],\n        \"pages\": \"735-749\",\n        \"issueNum\": null\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8084/api/articles/5",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"articles",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/articles/{journalArticleId} - as user NOT owning article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response code should be 403 Forbidden\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "demo",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "demo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": 1,\n        \"title\": \"CHANGED TITLE\",\n        \"volumeNum\": 15,\n        \"yearPublished\": 2011,\n        \"doi\": \"\",\n        \"journal\": {\n            \"id\": 5,\n            \"name\": \"Critical Care\",\n            \"abbreviation\": \"\"\n        },\n        \"authors\": [\n            {\n                \"id\": 4,\n                \"firstName\": \"B\",\n                \"middleName\": \"\",\n                \"lastName\": \"Ryobojad\",\n                \"suffix\": \"\"\n            },\n            {\n                \"id\": 5,\n                \"firstName\": \"J\",\n                \"middleName\": \"R\",\n                \"lastName\": \"Beitler\",\n                \"suffix\": \"\"\n            },\n            {\n                \"id\": 6,\n                \"firstName\": \"N\",\n                \"middleName\": \"\",\n                \"lastName\": \"Link\",\n                \"suffix\": \"\"\n            },\n            {\n                \"id\": 7,\n                \"firstName\": \"D\",\n                \"middleName\": \"B\",\n                \"lastName\": \"Bails\",\n                \"suffix\": \"\"\n            },\n            {\n                \"id\": 8,\n                \"firstName\": \"K\",\n                \"middleName\": \"\",\n                \"lastName\": \"Hurdle\",\n                \"suffix\": \"\"\n            }\n        ],\n        \"pages\": \"R269\",\n        \"issueNum\": \"6\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8084/api/articles/{journalArticleId}",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"articles",
+						"{journalArticleId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api/articles/{journalArticleId} - as admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response code should be 405 Method Not Allowed\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "wombat1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": 1,\n        \"title\": \"CHANGED TITLE\",\n        \"volumeNum\": 15,\n        \"yearPublished\": 2011,\n        \"doi\": \"\",\n        \"journal\": {\n            \"id\": 5,\n            \"name\": \"Critical Care\",\n            \"abbreviation\": \"\"\n        },\n        \"authors\": [\n            {\n                \"id\": 4,\n                \"firstName\": \"B\",\n                \"middleName\": \"\",\n                \"lastName\": \"Ryobojad\",\n                \"suffix\": \"\"\n            },\n            {\n                \"id\": 5,\n                \"firstName\": \"J\",\n                \"middleName\": \"R\",\n                \"lastName\": \"Beitler\",\n                \"suffix\": \"\"\n            },\n            {\n                \"id\": 6,\n                \"firstName\": \"N\",\n                \"middleName\": \"\",\n                \"lastName\": \"Link\",\n                \"suffix\": \"\"\n            },\n            {\n                \"id\": 7,\n                \"firstName\": \"D\",\n                \"middleName\": \"B\",\n                \"lastName\": \"Bails\",\n                \"suffix\": \"\"\n            },\n            {\n                \"id\": 8,\n                \"firstName\": \"K\",\n                \"middleName\": \"\",\n                \"lastName\": \"Hurdle\",\n                \"suffix\": \"\"\n            }\n        ],\n        \"pages\": \"R269\",\n        \"issueNum\": \"6\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8084/api/articles/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"articles",
+						"1"
 					]
 				}
 			},
