@@ -116,9 +116,9 @@ A user can add an `Author` to a `JournalArticle` if the `JournalArticle` belongs
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
-| PUT | api/articles/{journalArticleId}/add-author/{authorId} | user | n/a | ID of `JournalArticle` belonging to user and ID of `Author` to add to article | 200 OK | `JournalArticle` |
-| PUT | api/articles/{journalArticleId}/add-author/{authorId} | user | n/a | ID of `JournalArticle` *not* belonging to user, and any `Author` ID | 403 Forbidden | `null` |
-| PUT | api/articles/{journalArticleId}/add-author/{authorId} | admin | n/a | any `JournalArticle` ID and `Author` ID | 405 Method Not Allowed | `null` |
+| POST | api/articles/{journalArticleId}/add-author/{authorId} | user | n/a | ID of `JournalArticle` belonging to user and ID of `Author` to add to article | 200 OK | `JournalArticle` |
+| POST | api/articles/{journalArticleId}/add-author/{authorId} | user | n/a | ID of `JournalArticle` *not* belonging to user, and any `Author` ID | 403 Forbidden | `null` |
+| POST | api/articles/{journalArticleId}/add-author/{authorId} | admin | n/a | any `JournalArticle` ID and `Author` ID | 405 Method Not Allowed | `null` |
 
 
 ---
@@ -127,9 +127,9 @@ A user can delete an `Author` from a `JournalArticle` if the `JournalArticle` be
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
-| PUT | api/articles/{journalArticleId}/remove-author/{authorId} | user | n/a | ID of `JournalArticle` belonging to user and ID of `Author` to remove from article | 200 OK | `JournalArticle` |
-| PUT | api/articles/{journalArticleId}/remove-author/{authorId} | user | n/a | ID of `JournalArticle` *not* belonging to user, and any `Author` ID | 403 Forbidden | `null` |
-| PUT | api/articles/{journalArticleId}/remove-author/{authorId} | admin | n/a | Any `JournalArticle` ID and `Author` ID | 405 Method Not Allowed | `null` |
+| POST | api/articles/{journalArticleId}/remove-author/{authorId} | user | n/a | ID of `JournalArticle` belonging to user and ID of `Author` to remove from article | 200 OK | `JournalArticle` |
+| POST | api/articles/{journalArticleId}/remove-author/{authorId} | user | n/a | ID of `JournalArticle` *not* belonging to user, and any `Author` ID | 403 Forbidden | `null` |
+| POST | api/articles/{journalArticleId}/remove-author/{authorId} | admin | n/a | Any `JournalArticle` ID and `Author` ID | 405 Method Not Allowed | `null` |
 
 
 ---
