@@ -7,4 +7,8 @@ export class MyCollection {
   description: string;
   articles: JournalArticle[];
 
+  constructor(id?: number) {
+    if (id) this.id = id;
+  }
+
 }

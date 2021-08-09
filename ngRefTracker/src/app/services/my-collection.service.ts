@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class MyCollectionService {
-  private baseUrl: string = environment.baseUrl;
+  baseUrl: string = environment.baseUrl;
 
   constructor(
     private http: HttpClient,
