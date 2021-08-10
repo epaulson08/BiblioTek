@@ -41,7 +41,7 @@ export class MyCollectionComponent implements OnInit {
     this.loadColl();
   }
 
-  loadColl(): void {
+  loadColl(): MyCollection {
     this.collServ.findByIdAsUser(this.collId).subscribe(
       success => {
         this.coll = success;
@@ -51,6 +51,7 @@ export class MyCollectionComponent implements OnInit {
       failure => {
         console.error(failure);
       });
+      return null;
   }
 
   // UI
