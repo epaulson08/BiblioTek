@@ -11,12 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.ericpaulsondev.reftracker.entities.Author;
 import com.ericpaulsondev.reftracker.entities.JournalArticle;
-import com.ericpaulsondev.reftracker.entities.MyCollection;
 import com.ericpaulsondev.reftracker.entities.User;
 import com.ericpaulsondev.reftracker.repositories.AuthorRepository;
 import com.ericpaulsondev.reftracker.repositories.JournalArticleRepository;
 import com.ericpaulsondev.reftracker.repositories.UserRepository;
-import com.ericpaulsondev.reftracker.util.UtilPayload;
 
 @Service
 @Transactional
@@ -24,35 +22,14 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 
 	@Autowired
 	private JournalArticleRepository jaRepo;
-
 	@Autowired
 	private AuthorRepository authorRepo;
-
 	@Autowired
 	private AuthorService authorServ;
-
-	@Autowired
-	private MyCollectionService collServ;
-
 	@Autowired
 	private UserRepository userRepo;
 
-	@Override
-	public List<JournalArticle> index() {
-		List<JournalArticle> articles = jaRepo.findAll();
-		return articles;
-	}
-
-	@Override
-	public long count() {
-		return jaRepo.count();
-	}
-	
-	@Override
-	public long countByUsername(String username) {
-		return jaRepo.findByUsersUsername(username).size();
-	}
-
+	// READ
 	@Override
 	public JournalArticle findById(int id) {
 		Optional<JournalArticle> opt = jaRepo.findById(id);
@@ -60,6 +37,12 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 			return opt.get();
 		}
 		return null;
+	}
+
+	@Override
+	public List<JournalArticle> index() {
+		List<JournalArticle> articles = jaRepo.findAll();
+		return articles;
 	}
 
 	@Override
@@ -82,78 +65,47 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 	}
 
 	@Override
-	public JournalArticle create(UtilPayload payload, String username) {
-		JournalArticle payloadJA, managedJA;
+	public List<JournalArticle> findByJournalId(int journalId) {
+		return jaRepo.findByJournalId(journalId);
+	}
+	
+	@Override
+	public long count() {
+		return jaRepo.count();
+	}
+
+	@Override
+	public long countByUsername(String username) {
+		return jaRepo.findByUsersUsername(username).size();
+	}
+
+	// CREATE
+	@Override
+	public JournalArticle create(JournalArticle submittedJa, String username) {
+		JournalArticle managedJa;
 		Author managedAuthor;
-		List<Author> payloadAuthors;
+		List<Author> submittedAuthors = submittedJa.getAuthors();
 		List<Author> managedAuthors = new ArrayList<>();
 
-		payloadJA = payload.getJa();
-		payloadAuthors = payload.getAuthors();
-
 		// Persist journal article:
-		managedJA = jaRepo.saveAndFlush(payloadJA);
-		int managedJAId = managedJA.getId();
+		managedJa = jaRepo.saveAndFlush(submittedJa);
+		int managedJaId = managedJa.getId();
 
 		// Persist each author:
-		for (Author a : payloadAuthors) {
+		for (Author a : submittedAuthors) {
 			managedAuthor = authorServ.create(a);
 			managedAuthors.add(managedAuthor);
+			// Add each author to the journal article:
+			addAuthor(managedJaId, managedAuthor.getId());
 			managedAuthor = null;
 		}
 
-		// Add each author to the journal article:
-		for (Author ma : managedAuthors) {
-			addAuthor(managedJAId, ma.getId());
-		}
+		// Add the article to the user's all_articles_for_user table
+		User managedUser = userRepo.findByUsername(username);
+		managedUser.addJA(managedJa);
+		managedJa.addUser(managedUser);
 
-		// Add the article to the user's all_articles_for_user
-		User managedUser = null;
-		managedUser = userRepo.findByUsername(username);
-		managedUser.addJA(managedJA);
-		managedJA.addUser(managedUser);
-
-		return managedJA;
-	}
-
-	@Override
-	public JournalArticle update(int id, JournalArticle newJa) {
-		JournalArticle oldJa = findById(id);
-		if (oldJa != null) {
-			oldJa.setDoi(newJa.getDoi());
-			if (newJa.getJournal() != null)
-				oldJa.setJournal(newJa.getJournal());
-			oldJa.setTitle(newJa.getTitle());
-			oldJa.setVolumeNum(newJa.getVolumeNum());
-			oldJa.setYearPublished(newJa.getYearPublished());
-			newJa = jaRepo.saveAndFlush(oldJa);
-		}
-		return newJa;
-	}
-
-	@Override
-	public boolean delete(int id) {
-		JournalArticle trashArticle = null;
-
-		Optional<JournalArticle> opt = jaRepo.findById(id);
-		if (opt.isPresent()) {
-			trashArticle = opt.get();
-
-			List<Author> authors = new ArrayList<>(trashArticle.getAuthors());
-			if (authors != null) {
-				for (Author a : authors)
-					trashArticle.removeAuthor(a);
-			}
-			jaRepo.saveAndFlush(trashArticle);
-		}
-		opt = null;
-
-		jaRepo.deleteById(id);
-
-		if (!jaRepo.existsById(id))
-			return true;
-
-		return false;
+		return managedJa;
 	}
 
 	@Override
@@ -179,8 +131,51 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 	}
 
 	@Override
-	public List<JournalArticle> findByJournalId(int journalId) {
-		return jaRepo.findByJournalId(journalId);
+	public JournalArticle removeAuthor(int jaId, int authorId) {
+		// TODO impl
+		return null; // FIXME
+	}
+
+	// UPDATE
+	@Override
+	public JournalArticle update(int id, JournalArticle newJa) {
+		JournalArticle oldJa = findById(id);
+		if (oldJa != null) {
+			oldJa.setDoi(newJa.getDoi());
+			if (newJa.getJournal() != null)
+				oldJa.setJournal(newJa.getJournal());
+			oldJa.setTitle(newJa.getTitle());
+			oldJa.setVolumeNum(newJa.getVolumeNum());
+			oldJa.setYearPublished(newJa.getYearPublished());
+			newJa = jaRepo.saveAndFlush(oldJa);
+		}
+		return newJa;
+	}
+
+	// DELETE
+	@Override
+	public boolean delete(int id) {
+		JournalArticle trashArticle = null;
+
+		Optional<JournalArticle> opt = jaRepo.findById(id);
+		if (opt.isPresent()) {
+			trashArticle = opt.get();
+
+			List<Author> authors = new ArrayList<>(trashArticle.getAuthors());
+			if (authors != null) {
+				for (Author a : authors)
+					trashArticle.removeAuthor(a);
+			}
+			jaRepo.saveAndFlush(trashArticle);
+		}
+		opt = null;
+
+		jaRepo.deleteById(id);
+
+		if (!jaRepo.existsById(id))
+			return true;
+
+		return false;
 	}
 
 }
