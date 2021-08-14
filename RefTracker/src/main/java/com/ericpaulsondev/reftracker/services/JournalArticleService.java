@@ -10,6 +10,8 @@ public interface JournalArticleService {
 	List<JournalArticle> index();
 	
 	long count();
+	
+	long countByUsername(String username);
 
 	JournalArticle findById(int id);
 	

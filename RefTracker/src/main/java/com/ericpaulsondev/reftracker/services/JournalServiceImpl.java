@@ -29,27 +29,29 @@ public class JournalServiceImpl implements JournalService {
 
 	@Override
 	public long count() {
-		return 0;
+		return 0;  // FIXME
 	}
+	
+	
 
 	@Override
 	public Journal findById(int id) {
-		return null;
+		return null;  // FIXME
 	}
 
 	@Override
 	public Journal create(Journal j) {
-		return null;
+		return null;  // FIXME
 	}
 
 	@Override
 	public Journal update(int id, Journal newJ) {
-		return null;
+		return null;  // FIXME
 	}
 
 	@Override
 	public boolean delete(int id) {
-		return false;
+		return false;  // FIXME
 	}
 
 }

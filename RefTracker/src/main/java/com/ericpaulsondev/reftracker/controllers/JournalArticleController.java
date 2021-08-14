@@ -182,20 +182,28 @@ public class JournalArticleController {
 		}
 		// admin
 		else {
-			// FIXME: currently jaServ.count() returns a primitive so
-			// cannot handle null -- refactor with wrapper class or add
-			// try/catch for NullPointerException
+			long count = jaServ.count();
 			resp.setStatus(200);
-			return jaServ.count();
+			return count;
 		}
 	}
-	
-	
+
+	@GetMapping("api/articles/aggregates/count")
+	public Long countAsUser(Principal principal, HttpServletResponse resp) {
+		// admin
+		if (authServ.isAdmin(principal)) {
+			resp.setStatus(405);
+			return null;
+		}
+		// user
+		else {
+			Long toReturn = jaServ.countByUsername(principal.getName());
+			resp.setStatus(200);
+			return toReturn;
+		}
+	}
+
 	//////// REFACTORED TO HERE ^^^
-//	@GetMapping("api/articles/aggregates/count")
-//	public Long countAsUser(Principal principal, HttpServletResponse resp) {
-	
-	
 	@PostMapping("api/articles")
 	public JournalArticle create(@RequestBody UtilPayload payload, Principal principal, HttpServletRequest req,
 			HttpServletResponse resp) {

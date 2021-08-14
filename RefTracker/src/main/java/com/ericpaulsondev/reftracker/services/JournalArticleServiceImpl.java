@@ -47,6 +47,11 @@ public class JournalArticleServiceImpl implements JournalArticleService {
 	public long count() {
 		return jaRepo.count();
 	}
+	
+	@Override
+	public long countByUsername(String username) {
+		return jaRepo.findByUsersUsername(username).size();
+	}
 
 	@Override
 	public JournalArticle findById(int id) {
