@@ -72,25 +72,6 @@ public class JournalArticleController {
 	}
 
 	@GetMapping("api/all/articles/{id}")
-	public JournalArticle findById(@PathVariable Integer id, Principal principal, HttpServletResponse resp) {
-		// admin
-		if (authServ.isAdmin(principal)) {
-			JournalArticle ja = jaServ.findById(id);
-			if (ja == null) {
-				resp.setStatus(404);
-			} else {
-				resp.setStatus(200);
-			}
-			return ja;
-		}
-		// user
-		else {
-			resp.setStatus(403);
-			return null;
-		}
-	}
-
-	@GetMapping("api/all/articles/{id}")
 	public JournalArticle findByIdAndUsersUsername(@PathVariable int id, Principal principal,
 			HttpServletResponse resp) {
 		// user
