@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ericpaulsondev.reftracker.entities.JournalArticle;
 import com.ericpaulsondev.reftracker.services.AuthService;
 import com.ericpaulsondev.reftracker.services.JournalArticleService;
-import com.ericpaulsondev.reftracker.services.UserService;
 import com.ericpaulsondev.reftracker.util.UtilPayload;
 
 @CrossOrigin({ "*", "http://localhost:4200" })
@@ -55,11 +54,18 @@ public class JournalArticleController {
 
 	@GetMapping("api/all/articles")
 	public List<JournalArticle> findAllAsAdmin(Principal principal, HttpServletResponse resp) {
+		// admin
 		if (authServ.isAdmin(principal)) {
 			List<JournalArticle> allArticles = jaServ.index();
+			if (allArticles == null) {
+				resp.setStatus(404);
+				return null;
+			}
 			resp.setStatus(200);
 			return allArticles;
-		} else {
+		}
+		// user
+		else {
 			resp.setStatus(403);
 			return null;
 		}
@@ -67,22 +73,33 @@ public class JournalArticleController {
 
 	@GetMapping("api/all/articles/{id}")
 	public JournalArticle findById(@PathVariable Integer id, Principal principal, HttpServletResponse resp) {
+		// admin
 		if (authServ.isAdmin(principal)) {
 			JournalArticle ja = jaServ.findById(id);
 			if (ja == null) {
 				resp.setStatus(404);
+			} else {
+				resp.setStatus(200);
 			}
 			return ja;
-		} else {
+		}
+		// user
+		else {
 			resp.setStatus(403);
 			return null;
 		}
 	}
 
-	@GetMapping("api/articles/{id}")
+	@GetMapping("api/all/articles/{id}")
 	public JournalArticle findByIdAndUsersUsername(@PathVariable int id, Principal principal,
 			HttpServletResponse resp) {
-		if (authServ.journalArticleBelongsToPrincipal(id, principal)) {
+		// user
+		if (!authServ.isAdmin(principal)) {
+			resp.setStatus(403);
+			return null;
+		}
+		// admin
+		else {
 			JournalArticle ja = jaServ.findById(id);
 			if (ja == null) {
 				resp.setStatus(404);
@@ -91,45 +108,94 @@ public class JournalArticleController {
 				resp.setStatus(200);
 				return ja;
 			}
-		} else {
-			resp.setStatus(404);
-			return null;
 		}
 	}
 
 	@GetMapping("api/articles/journals/{journalId}")
 	public List<JournalArticle> findAllByJournalIdAndUsersUsername(@PathVariable int journalId, Principal principal,
 			HttpServletResponse resp) {
-		if (journalId < 0) {
-			resp.setStatus(400);
+		// admin
+		if (authServ.isAdmin(principal)) {
+			resp.setStatus(405);
 			return null;
 		}
-		List<JournalArticle> results = null;
-		results = jaServ.findByJournalIdAndUsersUsername(journalId, principal.getName());
-		resp.setStatus(200);
-		return results;
-	}
-
-	@GetMapping("api/all/articles/search/{searchTerm}")
-	public List<JournalArticle> searchAll(@PathVariable String searchTerm, Principal principal) {
-		if (authServ.isAdmin(principal))
-			return jaServ.search(searchTerm);
-		return null;
+		// user
+		else {
+			List<JournalArticle> results = jaServ.findByJournalIdAndUsersUsername(journalId, principal.getName());
+			if (results != null) {
+				resp.setStatus(200);
+				return results;
+			} else {
+				resp.setStatus(404);
+				return null;
+			}
+		}
 	}
 
 	@GetMapping("api/articles/search/{searchTerm}")
-	public List<JournalArticle> search(@PathVariable String searchTerm, Principal principal) {
-		// FIXME: return only Principal's articles
-		return jaServ.search(searchTerm);
+	public List<JournalArticle> search(@PathVariable String searchTerm, Principal principal, HttpServletResponse resp) {
+		// admin
+		if (authServ.isAdmin(principal)) {
+			resp.setStatus(405);
+			return null;
+		}
+		// user
+		else {
+			List<JournalArticle> results = jaServ.search(searchTerm);
+			if (results == null) {
+				resp.setStatus(404);
+				return null;
+			} else {
+				resp.setStatus(200);
+				return results;
+			}
+		}
+	}
+
+	@GetMapping("api/all/articles/search/{searchTerm}")
+	public List<JournalArticle> searchAll(@PathVariable String searchTerm, Principal principal,
+			HttpServletResponse resp) {
+		// user
+		if (!authServ.isAdmin(principal)) {
+			resp.setStatus(403);
+			return null;
+		}
+		// admin
+		else {
+			List<JournalArticle> results = jaServ.search(searchTerm);
+			if (results == null) {
+				resp.setStatus(404);
+				return null;
+			} else {
+				resp.setStatus(200);
+				return results;
+			}
+		}
 	}
 
 	@GetMapping("api/all/articles/aggregates/count")
-	public Long count(Principal principal) {
-		if (authServ.isAdmin(principal))
+	public Long countAsAdmin(Principal principal, HttpServletResponse resp) {
+		// user
+		if (!authServ.isAdmin(principal)) {
+			resp.setStatus(403);
+			return null;
+		}
+		// admin
+		else {
+			// FIXME: currently jaServ.count() returns a primitive so
+			// cannot handle null -- refactor with wrapper class or add
+			// try/catch for NullPointerException
+			resp.setStatus(200);
 			return jaServ.count();
-		return null;
+		}
 	}
-
+	
+	
+	//////// REFACTORED TO HERE ^^^
+//	@GetMapping("api/articles/aggregates/count")
+//	public Long countAsUser(Principal principal, HttpServletResponse resp) {
+	
+	
 	@PostMapping("api/articles")
 	public JournalArticle create(@RequestBody UtilPayload payload, Principal principal, HttpServletRequest req,
 			HttpServletResponse resp) {
