@@ -3,7 +3,6 @@ package com.ericpaulsondev.reftracker.services;
 import java.util.List;
 
 import com.ericpaulsondev.reftracker.entities.JournalArticle;
-import com.ericpaulsondev.reftracker.util.UtilPayload;
 
 public interface JournalArticleService {
 

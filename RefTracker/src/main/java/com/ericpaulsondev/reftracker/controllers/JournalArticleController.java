@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ericpaulsondev.reftracker.entities.JournalArticle;
 import com.ericpaulsondev.reftracker.services.AuthService;
 import com.ericpaulsondev.reftracker.services.JournalArticleService;
-import com.ericpaulsondev.reftracker.util.UtilPayload;
 
 @CrossOrigin({ "*", "http://localhost:4200" })
 @RestController
