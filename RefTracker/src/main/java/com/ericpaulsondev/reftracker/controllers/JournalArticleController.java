@@ -209,32 +209,6 @@ public class JournalArticleController {
 			return null;
 		}
 	}
-//	@PostMapping("api/articles")
-//	public JournalArticle create(@RequestBody UtilPayload payload, Principal principal, HttpServletRequest req,
-//			HttpServletResponse resp) {
-//		
-//		if (payload == null || payload.getAuthors() == null || payload.getJa() == null) {
-//			resp.setStatus(400);
-//			return null;
-//		}
-//		
-//		try {
-//			JournalArticle managedJA = jaServ.create(payload, principal.getName());
-//			resp.setStatus(201);
-//			
-//			StringBuffer url = req.getRequestURL();
-//			url.append("/").append(managedJA.getId());
-//			resp.setHeader("Location", url.toString());
-//			
-//			return managedJA;
-//			
-//		} catch (Exception e) {
-//			System.err.println(e);
-//			e.printStackTrace();
-//			resp.setStatus(400);
-//			return null;
-//		}
-//	}
 
 	@PostMapping("api/articles/{jaId}/add-author/{authorId}")
 	public JournalArticle addAuthor(@PathVariable Integer jaId, @PathVariable Integer authorId, Principal principal,
