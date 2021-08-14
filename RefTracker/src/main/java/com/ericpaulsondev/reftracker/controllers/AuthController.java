@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ericpaulsondev.reftracker.entities.User;
 import com.ericpaulsondev.reftracker.services.AuthService;
+import com.ericpaulsondev.reftracker.services.UserService;
 
 @RestController
 @CrossOrigin({ "*", "http://localhost:4200" })
@@ -20,7 +21,7 @@ public class AuthController {
 
 	@Autowired
 	private AuthService authService;
-
+	
 	@PostMapping(path = "register")
 	public User register(@RequestBody User user, HttpServletResponse resp) {
 
@@ -38,5 +39,5 @@ public class AuthController {
 	public Principal authenticate(Principal principal) {
 		return principal;
 	}
-
+	
 }

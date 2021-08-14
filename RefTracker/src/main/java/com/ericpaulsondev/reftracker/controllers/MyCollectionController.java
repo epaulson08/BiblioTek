@@ -15,13 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ericpaulsondev.reftracker.entities.JournalArticle;
 import com.ericpaulsondev.reftracker.entities.MyCollection;
-import com.ericpaulsondev.reftracker.entities.User;
-import com.ericpaulsondev.reftracker.services.JournalArticleService;
+import com.ericpaulsondev.reftracker.services.AuthService;
 import com.ericpaulsondev.reftracker.services.MyCollectionService;
 import com.ericpaulsondev.reftracker.services.UserService;
-import com.ericpaulsondev.reftracker.util.UtilCheckUserAccess;
 
 @CrossOrigin({ "*", "http://localhost:4200" })
 @RestController
@@ -29,17 +26,15 @@ public class MyCollectionController {
 
 	@Autowired
 	private MyCollectionService collServ;
-
 	@Autowired
 	private UserService userServ;
-
 	@Autowired
-	private JournalArticleService jaServ;
+	private AuthService authServ;
 
 	@GetMapping("api/collections")
 	public List<MyCollection> findByUserUsername(Principal principal, HttpServletResponse resp) {
 		// admin: 405 method not supported
-		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
+		if (authServ.isAdmin(principal)) {
 			resp.setStatus(405);
 			return null;
 		}
@@ -62,12 +57,12 @@ public class MyCollectionController {
 	@GetMapping("api/collections/{id}")
 	public MyCollection findByIdAsUser(@PathVariable Integer id, HttpServletResponse resp, Principal principal) {
 		// admin
-		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
+		if (authServ.isAdmin(principal)) {
 			resp.setStatus(405);
 			return null;
 		} else {
 			// user: owns requested MyCollection
-			if (UtilCheckUserAccess.myCollectionBelongsToPrincipal(id, principal, this.userServ, this.collServ)) {
+			if (authServ.myCollectionBelongsToPrincipal(id, principal)) {
 				MyCollection toReturn = collServ.findById(id);
 				resp.setStatus(200);
 				return toReturn;
@@ -83,7 +78,7 @@ public class MyCollectionController {
 	@GetMapping("api/all/collections/{id}")
 	public MyCollection findByIdAsAdmin(@PathVariable Integer id, HttpServletResponse resp, Principal principal) {
 		// admin
-		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
+		if (authServ.isAdmin(principal)) {
 			MyCollection coll = collServ.findById(id);
 			// no such MyCollection: 404 not found
 			if (coll == null) {
@@ -107,7 +102,7 @@ public class MyCollectionController {
 	public List<MyCollection> findByUserId(@PathVariable Integer userId, HttpServletResponse resp,
 			Principal principal) {
 		// admin
-		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
+		if (authServ.isAdmin(principal)) {
 			List<MyCollection> toReturn = collServ.findByUserId(userId);
 			// requested user has MyCollections: 200 OK
 			if (toReturn != null) {
@@ -129,7 +124,7 @@ public class MyCollectionController {
 	@PostMapping("api/collections")
 	public MyCollection create(@RequestBody MyCollection myColl, HttpServletResponse resp, Principal principal) {
 		// admin: 405 method not supported
-		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
+		if (authServ.isAdmin(principal)) {
 			resp.setStatus(405);
 			return null;
 		}
@@ -152,13 +147,13 @@ public class MyCollectionController {
 	public MyCollection addJournalArticle(@PathVariable Integer myCollectionId, @PathVariable Integer journalArticleId,
 			Principal principal, HttpServletResponse resp) {
 		// admin: 405 method not supported
-		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
+		if (authServ.isAdmin(principal)) {
 			resp.setStatus(405);
 			return null;
 		} else {
 			// user: does not own MyCollection OR JournalArticle: 403 forbidden
-			if (!UtilCheckUserAccess.myCollectionBelongsToPrincipal(myCollectionId, principal, this.userServ, this.collServ)
-					|| ! UtilCheckUserAccess.journalArticleBelongsToPrincipal(journalArticleId, principal, this.userServ, this.jaServ)) {
+			if (!authServ.myCollectionBelongsToPrincipal(myCollectionId, principal)
+					|| !authServ.journalArticleBelongsToPrincipal(journalArticleId, principal)) {
 				resp.setStatus(403);     
 				return null;
 			} else {
@@ -174,13 +169,13 @@ public class MyCollectionController {
 	public MyCollection removeJournalArticle(@PathVariable Integer myCollectionId,
 			@PathVariable Integer journalArticleId, Principal principal, HttpServletResponse resp) {
 		// admin: 405 method not supported
-		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
+		if (authServ.isAdmin(principal)) {
 			resp.setStatus(405);
 			return null;
 		} else {
 			// user: does not own MyCollection OR JournalArticle: 403 forbidden
-			if (! UtilCheckUserAccess.myCollectionBelongsToPrincipal(myCollectionId, principal, this.userServ, this.collServ)
-					|| ! UtilCheckUserAccess.journalArticleBelongsToPrincipal(journalArticleId, principal, this.userServ, this.jaServ)) {
+			if (!authServ.myCollectionBelongsToPrincipal(myCollectionId, principal)
+					|| !authServ.journalArticleBelongsToPrincipal(journalArticleId, principal)) {
 				resp.setStatus(403);
 				return null;
 			} else {
@@ -198,12 +193,12 @@ public class MyCollectionController {
 	public MyCollection update(@PathVariable Integer myCollectionId, @RequestBody MyCollection myColl,
 			Principal principal, HttpServletResponse resp) {
 		// admin: 405 method not allowed
-		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
+		if (authServ.isAdmin(principal)) {
 			resp.setStatus(405);
 			return null;
 		} else {
 			// user: owns article: 200 OK
-			if (UtilCheckUserAccess.myCollectionBelongsToPrincipal(myCollectionId, principal, this.userServ, this.collServ)) {
+			if (authServ.myCollectionBelongsToPrincipal(myCollectionId, principal)) {
 				resp.setStatus(200);
 				return collServ.update(myCollectionId, myColl);
 			}
@@ -218,12 +213,12 @@ public class MyCollectionController {
 	@DeleteMapping("api/collections/{myCollectionId}")
 	public void deleteAsUser(@PathVariable Integer myCollectionId, Principal principal, HttpServletResponse resp) {
 		// admin: 405 method not allowed
-		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
+		if (authServ.isAdmin(principal)) {
 			resp.setStatus(405);
 			return;
 		} else {
 			// user: does own MyCollection: 204 no content
-			if (UtilCheckUserAccess.myCollectionBelongsToPrincipal(myCollectionId, principal, this.userServ, this.collServ)) {
+			if (authServ.myCollectionBelongsToPrincipal(myCollectionId, principal)) {
 				collServ.delete(myCollectionId);
 				resp.setStatus(204);
 				return;
@@ -238,7 +233,7 @@ public class MyCollectionController {
 	@DeleteMapping("api/all/collections/{myCollectionId}")
 	public void deleteAsAdmin(@PathVariable Integer myCollectionId, Principal principal, HttpServletResponse resp) {
 		// admin: 204 no content
-		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
+		if (authServ.isAdmin(principal)) {
 			if (collServ.findById(myCollectionId) == null) {
 				resp.setStatus(404);
 				return;
