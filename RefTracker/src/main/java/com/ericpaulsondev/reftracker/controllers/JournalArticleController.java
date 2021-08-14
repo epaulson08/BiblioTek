@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ericpaulsondev.reftracker.entities.JournalArticle;
+import com.ericpaulsondev.reftracker.services.AuthService;
 import com.ericpaulsondev.reftracker.services.JournalArticleService;
 import com.ericpaulsondev.reftracker.services.UserService;
 import com.ericpaulsondev.reftracker.util.UtilPayload;
-import com.ericpaulsondev.reftracker.util.UtilCheckUserAccess;
 
 @CrossOrigin({ "*", "http://localhost:4200" })
 @RestController
@@ -30,12 +30,12 @@ public class JournalArticleController {
 	private JournalArticleService jaServ;
 
 	@Autowired
-	private UserService userServ;
+	private AuthService authServ;
 
 	@GetMapping("api/articles")
 	public List<JournalArticle> findAllAsUser(Principal principal, HttpServletResponse resp) {
 		// admin
-		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
+		if (authServ.isAdmin(principal)) {
 			resp.setStatus(405);
 			return null;
 		}
@@ -55,7 +55,7 @@ public class JournalArticleController {
 
 	@GetMapping("api/all/articles")
 	public List<JournalArticle> findAllAsAdmin(Principal principal, HttpServletResponse resp) {
-		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
+		if (authServ.isAdmin(principal)) {
 			List<JournalArticle> allArticles = jaServ.index();
 			resp.setStatus(200);
 			return allArticles;
@@ -67,7 +67,7 @@ public class JournalArticleController {
 
 	@GetMapping("api/all/articles/{id}")
 	public JournalArticle findById(@PathVariable Integer id, Principal principal, HttpServletResponse resp) {
-		if (UtilCheckUserAccess.isAdmin(principal, this.userServ)) {
+		if (authServ.isAdmin(principal)) {
 			JournalArticle ja = jaServ.findById(id);
 			if (ja == null) {
 				resp.setStatus(404);
@@ -82,7 +82,7 @@ public class JournalArticleController {
 	@GetMapping("api/articles/{id}")
 	public JournalArticle findByIdAndUsersUsername(@PathVariable int id, Principal principal,
 			HttpServletResponse resp) {
-		if (UtilCheckUserAccess.journalArticleBelongsToPrincipal(id, principal, userServ, jaServ)) {
+		if (authServ.journalArticleBelongsToPrincipal(id, principal)) {
 			JournalArticle ja = jaServ.findById(id);
 			if (ja == null) {
 				resp.setStatus(404);
@@ -112,7 +112,7 @@ public class JournalArticleController {
 
 	@GetMapping("api/all/articles/search/{searchTerm}")
 	public List<JournalArticle> searchAll(@PathVariable String searchTerm, Principal principal) {
-		if (UtilCheckUserAccess.isAdmin(principal, this.userServ))
+		if (authServ.isAdmin(principal))
 			return jaServ.search(searchTerm);
 		return null;
 	}
@@ -125,7 +125,7 @@ public class JournalArticleController {
 
 	@GetMapping("api/all/articles/aggregates/count")
 	public Long count(Principal principal) {
-		if (UtilCheckUserAccess.isAdmin(principal, this.userServ))
+		if (authServ.isAdmin(principal))
 			return jaServ.count();
 		return null;
 	}
@@ -162,7 +162,7 @@ public class JournalArticleController {
 			HttpServletResponse resp) {
 		JournalArticle ja = null;
 
-		if (UtilCheckUserAccess.journalArticleBelongsToPrincipal(jaId, principal, this.userServ, this.jaServ)) {
+		if (authServ.journalArticleBelongsToPrincipal(jaId, principal)) {
 			try {
 				ja = jaServ.findById(jaId);
 
@@ -184,7 +184,7 @@ public class JournalArticleController {
 	@PutMapping("api/articles/{id}")
 	public JournalArticle update(@PathVariable Integer id, @RequestBody JournalArticle ja, Principal principal,
 			HttpServletResponse resp) {
-		if (UtilCheckUserAccess.journalArticleBelongsToPrincipal(id, principal, this.userServ, this.jaServ)) {
+		if (authServ.journalArticleBelongsToPrincipal(id, principal)) {
 			try {
 				ja = jaServ.update(id, ja);
 				if (ja == null) {
@@ -202,7 +202,7 @@ public class JournalArticleController {
 
 	@DeleteMapping("api/articles/{id}")
 	public boolean delete(@PathVariable Integer id, Principal principal, HttpServletResponse resp) {
-		if (UtilCheckUserAccess.journalArticleBelongsToPrincipal(id, principal, this.userServ, this.jaServ)) {
+		if (authServ.journalArticleBelongsToPrincipal(id, principal)) {
 			try {
 				if (jaServ.delete(id)) {
 					resp.setStatus(204);
