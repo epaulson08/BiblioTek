@@ -18,7 +18,7 @@
     <!-- Row Displaying Article Entity -->
     <tr *ngFor="let ja of articlesToDisplay">
       <td>
-        <button (click)="showOne(ja)" class="btn btn-sm btn-warning mt-1">Cite / Examine</button>
+        <button (click)="showSelected(ja)" class="btn btn-sm btn-warning mt-1">Cite / Examine</button>
       </td>
 
       <!-- Title -->
@@ -42,6 +42,9 @@
 
 <!-- SHOW ONE ARTICLE -->
 <div *ngIf="showOneArticle">
-  <app-display-article [article]="this.selected">
+  <app-display-article
+    [article]="this.selected"
+    (backEvent)="comeBack($event)"
+  >
   </app-display-article>
 </div>

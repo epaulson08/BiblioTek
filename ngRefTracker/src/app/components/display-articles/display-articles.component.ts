@@ -1,7 +1,5 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
 import { JournalArticle } from 'src/app/models/journal-article';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-display-articles',
@@ -11,18 +9,21 @@ import { AuthService } from 'src/app/services/auth.service';
 export class DisplayArticlesComponent implements OnInit {
   @Input() articlesToDisplay: JournalArticle[];
   @Input() myCollectionView: boolean;
-  showOneArticle: boolean = false;
+  showOneArticle: boolean;
   selected: JournalArticle = null;
 
-  constructor(
-    private router: Router
-    ) { }
+  constructor() { }
 
   ngOnInit(): void {
+    this.showOneArticle = false;
   }
 
-  showOne(article: JournalArticle) {
+  showSelected(article: JournalArticle): void {
     this.selected = article;
     this.showOneArticle = true;
+  }
+
+  comeBack(): void {
+    this.showOneArticle = false;
   }
 }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Event, Router } from '@angular/router';
 import { CitationStyle } from 'src/app/models/citation-style';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
@@ -13,6 +13,7 @@ import { CitationStyleService } from 'src/app/services/citation-style.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
 import { JournalService } from 'src/app/services/journal.service';
 import { MyCollectionService } from 'src/app/services/my-collection.service';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-display-article',
@@ -25,6 +26,8 @@ export class DisplayArticleComponent implements OnInit {
   @Input() articleId: number;
   @Input() article: JournalArticle;
   @Input() myCollectionView: boolean;
+  @Output() backEvent = new EventEmitter<boolean>();
+
   selected: JournalArticle;
   editJa: JournalArticle;
   editJournal: Journal;
@@ -137,17 +140,8 @@ export class DisplayArticleComponent implements OnInit {
     );
   }
 
-  goBack(): void {
-    let whereLast: string = localStorage.getItem("lastPage");
-    if (whereLast === "search") {
-      this.router.navigateByUrl("search");
-    }
-    else if (whereLast === "display-all-articles") {
-      this.router.navigateByUrl("display-all-articles");
-    }
-    else {
-      this.router.navigateByUrl("display-all-articles");
-    }
+  goBack() {
+    this.backEvent.emit(true);
   }
 
   setEdit(): void {
