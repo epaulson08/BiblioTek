@@ -183,91 +183,134 @@ public class JournalArticleController {
 		}
 	}
 
-	//////// REFACTORED TO HERE ^^^
 	@PostMapping("api/articles")
 	public JournalArticle create(@RequestBody JournalArticle ja, Principal principal, HttpServletRequest req,
 			HttpServletResponse resp) {
+		// null input
 		if (ja == null || ja.getAuthors() == null) {
 			resp.setStatus(400);
 			return null;
 		}
-
-		try {
-			JournalArticle managedJA = jaServ.create(ja, principal.getName());
-			resp.setStatus(201);
-
-			StringBuffer url = req.getRequestURL();
-			url.append("/").append(managedJA.getId());
-			resp.setHeader("Location", url.toString());
-
-			return managedJA;
-
-		} catch (Exception e) {
-			System.err.println(e);
-			e.printStackTrace();
-			resp.setStatus(400);
+		// admin
+		if (authServ.isAdmin(principal)) {
+			resp.setStatus(405);
 			return null;
 		}
+		// user
+		JournalArticle managedJA = jaServ.create(ja, principal.getName());
+		resp.setStatus(201);
+
+		StringBuffer url = req.getRequestURL();
+		url.append("/").append(managedJA.getId());
+		resp.setHeader("Location", url.toString());
+
+		return managedJA;
 	}
 
 	@PostMapping("api/articles/{jaId}/add-author/{authorId}")
 	public JournalArticle addAuthor(@PathVariable Integer jaId, @PathVariable Integer authorId, Principal principal,
 			HttpServletResponse resp) {
-		JournalArticle ja = null;
-
-		if (authServ.journalArticleBelongsToPrincipal(jaId, principal)) {
-			try {
-				ja = jaServ.findById(jaId);
-
-				jaServ.addAuthor(jaId, authorId);
-
-				if (ja == null) {
-					resp.setStatus(404);
-				}
-			} catch (Exception e) {
-				System.err.println(e);
-				resp.setStatus(400);
-				ja = null;
-			}
-			return ja;
+		// admin
+		if (authServ.isAdmin(principal)) {
+			resp.setStatus(400);
+			return null;
 		}
-		return null;
+		// user, does NOT own JournalArticle
+		if (!authServ.journalArticleBelongsToPrincipal(jaId, principal)) {
+			resp.setStatus(403);
+			return null;
+		}
+		// user, owns JournalArticle
+		JournalArticle ja = jaServ.findById(jaId);
+		if (ja == null) {
+			resp.setStatus(404);
+			return null;
+		}
+		jaServ.addAuthor(jaId, authorId);
+		return ja;
+	}
+
+	@PostMapping("api/articles/{jaId}/remove-author/{authorId}")
+	public JournalArticle removeAuthor(@PathVariable Integer jaId, @PathVariable Integer authorId, Principal principal,
+			HttpServletResponse resp) {
+		// admin
+		if (authServ.isAdmin(principal)) {
+			resp.setStatus(400);
+			return null;
+		}
+		// user, does NOT own JournalArticle
+		if (!authServ.journalArticleBelongsToPrincipal(jaId, principal)) {
+			resp.setStatus(403);
+			return null;
+		}
+		// user, owns JournalArticle
+		JournalArticle ja = jaServ.findById(jaId);
+		if (ja == null) {
+			resp.setStatus(404);
+			return null;
+		}
+		jaServ.removeAuthor(jaId, authorId);
+		return ja;
 	}
 
 	@PutMapping("api/articles/{id}")
 	public JournalArticle update(@PathVariable Integer id, @RequestBody JournalArticle ja, Principal principal,
 			HttpServletResponse resp) {
-		if (authServ.journalArticleBelongsToPrincipal(id, principal)) {
-			try {
-				ja = jaServ.update(id, ja);
-				if (ja == null) {
-					resp.setStatus(404);
-				}
-			} catch (Exception e) {
-				System.err.println(e);
-				resp.setStatus(400);
-				ja = null;
-			}
-			return ja;
+		// null request body
+		if (ja == null) {
+			resp.setStatus(400);
+			return null;
 		}
-		return null;
+		// admin
+		if (authServ.isAdmin(principal)) {
+			resp.setStatus(405);
+			return null;
+		}
+		// user, NOT owner of JournalArticle
+		if (!authServ.journalArticleBelongsToPrincipal(id, principal)) {
+			resp.setStatus(403);
+			return null;
+		}
+		return jaServ.update(id, ja);
+	}
+
+	@DeleteMapping("api/all/articles/{id}")
+	public boolean deleteAsAdmin(@PathVariable Integer id, Principal principal, HttpServletResponse resp) {
+		// user
+		if (!authServ.isAdmin(principal)) {
+			resp.setStatus(403);
+			return false;
+		}
+		// admin
+		if (jaServ.delete(id)) {
+			resp.setStatus(204);
+			return true;
+		} else {
+			resp.setStatus(404);
+			return false;
+		}
 	}
 
 	@DeleteMapping("api/articles/{id}")
-	public boolean delete(@PathVariable Integer id, Principal principal, HttpServletResponse resp) {
-		if (authServ.journalArticleBelongsToPrincipal(id, principal)) {
-			try {
-				if (jaServ.delete(id)) {
-					resp.setStatus(204);
-					return true;
-				} else
-					resp.setStatus(404);
-			} catch (Exception e) {
-				System.err.println(e);
-				resp.setStatus(400);
-			}
+	public boolean deleteAsUser(@PathVariable Integer id, Principal principal, HttpServletResponse resp) {
+		// admin
+		if (authServ.isAdmin(principal)) {
+			resp.setStatus(405);
+			return false;
 		}
-		return false;
+		// user, does NOT own JournalArticle
+		if (!authServ.journalArticleBelongsToPrincipal(id, principal)) {
+			resp.setStatus(403);
+			return false;
+		}
+		// user, owns JournalArticle
+		if (jaServ.delete(id)) {
+			resp.setStatus(204);
+			return true;
+		} else {
+			resp.setStatus(404);
+			return false;
+		}
 	}
 
 }
