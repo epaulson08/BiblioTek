@@ -327,14 +327,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8084/api/all/articles/3",
+					"raw": "localhost:8084/api/articles/3",
 					"host": [
 						"localhost"
 					],
 					"port": "8084",
 					"path": [
 						"api",
-						"all",
 						"articles",
 						"3"
 					]
