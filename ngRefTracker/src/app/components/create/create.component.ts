@@ -1,10 +1,8 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Author } from 'src/app/models/author';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
-import { PayloadUtility } from 'src/app/models/payload-utility.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
 import { JournalService } from 'src/app/services/journal.service';
@@ -21,9 +19,7 @@ export class CreateComponent implements OnInit {
   newJa: JournalArticle = new JournalArticle();
   newAuthor: Author = new Author();
   authorsList: Author[] = [];
-  newPayload: PayloadUtility = new PayloadUtility();
   journals: Journal[] = [];
-
 
   // init:
   constructor(
@@ -40,18 +36,6 @@ export class CreateComponent implements OnInit {
     this.loadJournals();
   }
 
-  // methods:
-  generateHttpHeader() {
-    let credentials = this.auth.getCredentials();
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': `Basic ${credentials}`,
-        'X-Requested-With': 'XMLHttpRequest'
-      })
-    }
-    return httpOptions;
-  }
-
   // CRUD:
   create(form) {
 
@@ -65,17 +49,15 @@ export class CreateComponent implements OnInit {
     this.newJa.journal = this.newJournal;
 
     // Package article and authorList in payload
-    this.newPayload.ja = this.newJa;
-    this.newPayload.authors = this.authorsList;
+    this.newJa.authors = this.authorsList;
 
     // POST
-    this.jaServ.create(this.newPayload).subscribe(
+    this.jaServ.create(this.newJa).subscribe(
       data => {
         this.newJa = new JournalArticle();
         this.newAuthor = new Author();
         this.newJournal = new Journal();
         this.authorsList = [];
-        this.newPayload = new PayloadUtility();
         form.reset();
       },
       err => {

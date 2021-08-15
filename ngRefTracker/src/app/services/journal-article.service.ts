@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { JournalArticle } from '../models/journal-article';
-import { PayloadUtility } from '../models/payload-utility.model';
 import { Journal } from '../models/journal';
 import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
@@ -77,10 +76,10 @@ export class JournalArticleService {
       );
   }
 
-  create(payload: PayloadUtility): Observable<PayloadUtility> {
-    return this.http.post<PayloadUtility>(
+  create(ja: JournalArticle): Observable<JournalArticle> {
+    return this.http.post<JournalArticle>(
       `${this.baseUrl}api/articles/`,
-      payload,
+      ja,
       this.auth.generateHttpHeader())
       .pipe(
         catchError((err: any) => {
