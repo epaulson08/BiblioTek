@@ -1,11 +1,12 @@
 <app-navi></app-navi>
 <div class="container-fluid">
-  <h4>
+  <h4 *ngIf="showHeader">
     All Articles:<span class="float-right"
       >Total: {{ this.totalArticles }}</span
     >
   </h4>
   <app-display-articles
     [articlesToDisplay]="journalArticles"
+    (showHeaderEvent)="hideHeader($event)"
   ></app-display-articles>
 </div>

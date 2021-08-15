@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Event } from '@angular/router';
 import { JournalArticle } from 'src/app/models/journal-article';
 
 @Component({
@@ -9,6 +10,8 @@ import { JournalArticle } from 'src/app/models/journal-article';
 export class DisplayArticlesComponent implements OnInit {
   @Input() articlesToDisplay: JournalArticle[];
   @Input() myCollectionView: boolean;
+  @Output() showHeaderEvent =
+    new EventEmitter<boolean>();
   showOneArticle: boolean;
   selected: JournalArticle = null;
 
@@ -21,9 +24,13 @@ export class DisplayArticlesComponent implements OnInit {
   showSelected(article: JournalArticle): void {
     this.selected = article;
     this.showOneArticle = true;
+    this.showHeaderEvent.emit(false);
   }
 
-  comeBack(): void {
+  comeBack(event: boolean): void {
     this.showOneArticle = false;
+    console.log(event);
+
+    this.showHeaderEvent.emit(true);
   }
 }

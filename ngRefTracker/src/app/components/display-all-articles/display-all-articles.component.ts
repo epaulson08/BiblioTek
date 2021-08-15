@@ -4,7 +4,6 @@ import { JournalArticle } from 'src/app/models/journal-article';
 import { AuthService } from 'src/app/services/auth.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
 
-
 @Component({
   selector: 'app-display-all-articles',
   templateUrl: './display-all-articles.component.html',
@@ -18,6 +17,7 @@ export class DisplayAllArticlesComponent implements OnInit {
   searchTerm: string;
   deleted: boolean = false;
   @Input() myCollectionView;
+  showHeader: boolean;
 
   // init
   constructor(
@@ -28,8 +28,8 @@ export class DisplayAllArticlesComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
+    this.showHeader = true;
     this.loadJournalArticles();
-    localStorage.setItem("lastPage", "display-all-articles");
   }
 
   // CRUD
@@ -46,9 +46,8 @@ export class DisplayAllArticlesComponent implements OnInit {
     return null;
   }
 
-  // nav
-  goTo(id: number): void {
-    this.router.navigateByUrl('show-article/' + id);
+  hideHeader(event: boolean) {
+    this.showHeader = event;
   }
 
 }
