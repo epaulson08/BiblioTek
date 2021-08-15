@@ -51,6 +51,16 @@ An admin can look up any `JournalArticle` by its database ID. A user cannot.
 
 
 ---
+### `GET api/articles/{articleId}`
+A user can retrieve a `JournalArticle` by its database ID, but only if they are the owner of the article.
+
+| HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
+| --- | --- | --- | --- | --- | --- | --- |
+| GET | api/all/articles/{id} | admin | `null` | `JournalArticle` ID | 200 OK | `JournalArticle` with given id |
+| GET | api/all/articles/{id} | user | `null` | `JournalArticle` ID | 403 Forbidden | `null` |
+
+
+---
 ### `GET api/articles/journals/{journalId}`
 A user can access all of their `JournalArticle`s filtered by a given `Journal`.
 
