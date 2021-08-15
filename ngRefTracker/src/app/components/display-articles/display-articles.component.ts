@@ -9,9 +9,10 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./display-articles.component.css']
 })
 export class DisplayArticlesComponent implements OnInit {
-  showOneArticle: boolean = false;
   @Input() articlesToDisplay: JournalArticle[];
   @Input() myCollectionView: boolean;
+  showOneArticle: boolean = false;
+  selected: JournalArticle = null;
 
   constructor(
     private router: Router
@@ -20,8 +21,8 @@ export class DisplayArticlesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goTo(id: number) {
-    this.router.navigateByUrl(`show-article/${id}`);
+  showOne(article: JournalArticle) {
+    this.selected = article;
+    this.showOneArticle = true;
   }
-
 }

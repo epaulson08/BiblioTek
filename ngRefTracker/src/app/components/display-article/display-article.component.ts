@@ -23,8 +23,9 @@ export class DisplayArticleComponent implements OnInit {
 
   @Input() collId: number;
   @Input() articleId: number;
+  @Input() article: JournalArticle;
   @Input() myCollectionView: boolean;
-  selected: JournalArticle = new JournalArticle();
+  selected: JournalArticle;
   editJa: JournalArticle;
   editJournal: Journal;
   deleted: boolean = false;
@@ -51,7 +52,7 @@ export class DisplayArticleComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.auth.checkLogin()) { this.router.navigateByUrl("home"); }
-    this.loadArticle();
+    this.selected = this.article;
     this.loadCitationStyles();
     this.loadMyCollections();
   }

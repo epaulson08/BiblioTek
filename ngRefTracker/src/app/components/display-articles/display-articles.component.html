@@ -3,6 +3,7 @@
 </div>
 
 <!-- SEE ALL ARTICLES -->
+<div *ngIf="!showOneArticle">
 <table class="table table-hover">
   <thead class="thead-light">
     <tr>
@@ -17,7 +18,7 @@
     <!-- Row Displaying Article Entity -->
     <tr *ngFor="let ja of articlesToDisplay">
       <td>
-        <button (click)="goTo(ja.id)" class="btn btn-sm btn-warning mt-1">Cite / Examine</button>
+        <button (click)="showOne(ja)" class="btn btn-sm btn-warning mt-1">Cite / Examine</button>
       </td>
 
       <!-- Title -->
@@ -37,3 +38,10 @@
     </tr>
   </tbody>
 </table>
+</div>
+
+<!-- SHOW ONE ARTICLE -->
+<div *ngIf="showOneArticle">
+  <app-display-article [article]="this.selected">
+  </app-display-article>
+</div>
