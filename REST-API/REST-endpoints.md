@@ -56,9 +56,9 @@ A user can retrieve a `JournalArticle` by its database ID, but only if they are 
 
 | HTTP Request Type | Path | User Role | Request Body | Route Parameter | Expected HTTP Response Code | Expected Response Body |
 | --- | --- | --- | --- | --- | --- | --- |
-| GET | api/all/articles/{id} | admin | `null` | `JournalArticle` ID | 200 OK | `JournalArticle` with given id |
-| GET | api/all/articles/{id} | user | `null` | `JournalArticle` ID | 403 Forbidden | `null` |
-
+| GET | api/articles/{id} | user, owns article | `null` | `JournalArticle` ID | 200 OK | `JournalArticle` with requested ID |
+| GET | api/articles/{id} | user, does NOT own article | `null` | `JournalArticle` ID | 403 Forbidden | `null` |
+| GET | api/articles/{id} | admin | `null` | `JournalArticle` ID | 403 Forbidden | `null` |
 
 ---
 ### `GET api/articles/journals/{journalId}`
