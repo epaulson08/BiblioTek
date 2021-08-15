@@ -71,8 +71,7 @@ public class JournalArticleController {
 	}
 
 	@GetMapping("api/all/articles/{id}")
-	public JournalArticle findByIdAndUsersUsername(@PathVariable int id, Principal principal,
-			HttpServletResponse resp) {
+	public JournalArticle findByIdAsAdmin(@PathVariable int id, Principal principal, HttpServletResponse resp) {
 		// user
 		if (!authServ.isAdmin(principal)) {
 			resp.setStatus(403);
@@ -88,6 +87,30 @@ public class JournalArticleController {
 				resp.setStatus(200);
 				return ja;
 			}
+		}
+	}
+
+	@GetMapping("api/articles/{id}")
+	public JournalArticle findByIdAndUsersUsername(@PathVariable int id, Principal principal,
+			HttpServletResponse resp) {
+		// admin
+		if (authServ.isAdmin(principal)) {
+			resp.setStatus(405);
+			return null;
+		}
+		// user, does NOT own article
+		if (!authServ.journalArticleBelongsToPrincipal(id, principal)) {
+			resp.setStatus(403);
+			return null;
+		}
+		// user, owns article
+		JournalArticle ja = jaServ.findById(id);
+		if (ja == null) {
+			resp.setStatus(404);
+			return null;
+		} else {
+			resp.setStatus(200);
+			return ja;
 		}
 	}
 

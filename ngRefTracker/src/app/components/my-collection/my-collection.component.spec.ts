@@ -16,7 +16,6 @@ describe('MyCollectionComponent', () => {
   beforeEach(async () => {
     // service stubs
     collServStub = {
-
       findByIdAsUser(id: number): Observable<MyCollection> {
         let coll: MyCollection = new MyCollection();
         let obs: Observable<MyCollection> = new Observable((observer) => {
@@ -26,7 +25,6 @@ describe('MyCollectionComponent', () => {
         return obs;
       }
     }
-
     authServStub = {
       checkLogin() { return true; }
     };

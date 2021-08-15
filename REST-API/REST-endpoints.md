@@ -60,6 +60,7 @@ A user can retrieve a `JournalArticle` by its database ID, but only if they are 
 | GET | api/articles/{id} | user, does NOT own article | `null` | `JournalArticle` ID | 403 Forbidden | `null` |
 | GET | api/articles/{id} | admin | `null` | `JournalArticle` ID | 403 Forbidden | `null` |
 
+
 ---
 ### `GET api/articles/journals/{journalId}`
 A user can access all of their `JournalArticle`s filtered by a given `Journal`.
