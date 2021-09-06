@@ -1,1 +1,126 @@
 @import "~bootstrap/dist/css/bootstrap.css";
+
+/*
+Palette A:
+F6F6F7  White
+E0BB8E  Muted tan
+Mod: Muted tan darkened for contrast with white text: #c19a6b;
+B24251  Muted red
+4CC0CD  Bright light blue
+287286  Muted teal
+
+Thanks to colormind.io
+
+*/
+
+/* A1: Muted teal */
+nav, .bg-palette-A1 {
+  background-color: #287286;
+}
+
+.text-palette-A1 {
+  color: #287286;
+}
+
+.link-palette-A1 {
+  color: #287286;
+}
+
+.link-palette-A1:hover {
+  color: #287286;
+}
+
+.btn-palette-A1 {
+  background-color: #287286;
+  border-color: #287286;
+  color: white;
+}
+
+.btn-palette-A1:hover {
+  background-color: #287286;
+  border-color: #287286;
+  color: white;
+}
+
+/* A2: Bright light blue */
+.bg-palette-A2 {
+  background-color: #4CC0CD;
+}
+
+.text-palette-A2 {
+  color: #4CC0CD;
+}
+
+a, .link-palette-A2 {
+  color: #4CC0CD;
+}
+
+a:hover, .link-palette-A2:hover {
+  color: #359ca7;
+}
+
+.bg-palette-A2 {
+  background-color: #4CC0CD;
+}
+
+.btn-primary, .btn-info, .btn-success, .btn-warning, .btn-secondary, .btn-palette-A2 {
+  background-color: #4CC0Cd;
+  border-color: #4CC0CD;
+  color: white;
+}
+
+.btn-primary:hover, .btn-info:hover, .btn-success:hover, .btn-warning:hover, .btn-secondary:hover, .btn-palette-A2:hover {
+  background-color: #359ca7;
+  border-color: #359ca7;
+  color: white;
+}
+
+/* A3: Muted tan */
+.bg-palette-A3 {
+  background-color: #c19a6b;
+}
+
+.text-palette-A3 {
+  color: #c19a6b;
+}
+
+.btn-warning, .btn-palette-A3 {
+  background-color: #c19a6b;;
+  border-color: #c19a6b;;
+  color: white;
+}
+
+.btn-warning:hover, .btn-palette-A3:hover {
+  background-color: #a7855c;
+  border-color: #c19a6b;
+  color: white;
+}
+
+/* A4: Muted red */
+.text-palette-A4 {
+  color: #B24251;
+}
+
+.link-palette-A4 {
+  color: #B24251;
+}
+
+.link-palette-A4:hover {
+  color: #8f3642;
+}
+
+.btn-danger, .btn-palette-A4 {
+  background-color: #B24251;
+  border-color: #B24251;
+  color: white;
+}
+
+.btn-danger:hover, .btn-palette-A4:hover {
+  background-color: #8f3642;
+  border-color: #8f3642;
+  color: white;
+}
+
+.bg-palette-A4 {
+  background-color: #B24251;
+}

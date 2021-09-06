@@ -1,60 +1,70 @@
 <app-navi></app-navi>
-<div class="container-fluid">
-  <div *ngIf="!this.editView">
-    <h4>
-      {{ coll.name }}
-      <button
-        class="float-right btn btn-secondary btn-sm"
-        (click)="setExpandedView()"
-      >
-        Expanded View
-      </button>
-      <button
-        class="float-right btn btn-secondary btn-sm mr-2"
-        (click)="setListView()"
-      >
-        List View
-      </button>
-    </h4>
-    <h5>
-      {{ coll.description
-      }}<button class="btn btn-success btn-sm ml-3" (click)="showEditView()">
-        Edit
-      </button>
-    </h5>
-    <button class="btn btn-warning mb-3">Cite All</button>
-  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2 bg-palette-A3" style="min-height: 100vh"></div>
+      <div class="col mt-2">
+        <div *ngIf="!this.editView">
+          <h4>
+            {{ coll.name }}
+            <button
+              class="float-right btn btn-secondary btn-sm"
+              (click)="setExpandedView()"
+            >
+              Expanded View
+            </button>
+            <button
+              class="float-right btn btn-secondary btn-sm mr-2"
+              (click)="setListView()"
+            >
+              List View
+            </button>
+          </h4>
+          <h5 class="mt-3">
+            {{ coll.description
+            }}</h5><h5><button
+              class="btn btn-success btn-sm mr-2"
+              (click)="showEditView()"
+            >
+              Edit
+            </button>
+          <button class="btn btn-primary btn-sm">Cite All</button></h5>
+        </div>
+        <div class="row">
+          <div *ngIf="this.editView">
+            <h4>
+              <input [(ngModel)]="this.editedMyCollection.name" class="col-6" />
+            </h4>
+            <h5>
+              <textarea
+                [(ngModel)]="this.editedMyCollection.description"
+                class="col-6"
+              ></textarea>
+            </h5>
+            <button
+              class="btn btn-success"
+              (click)="this.updateMyCollection(this.editedMyCollection)"
+            >
+              Save Changes
+            </button>
+          </div>
 
-  <div *ngIf="this.editView">
-    <h4><input [(ngModel)]="this.editedMyCollection.name" class="col-6" /></h4>
-    <h5>
-      <textarea
-        [(ngModel)]="this.editedMyCollection.description"
-        class="col-6"
-      ></textarea>
-    </h5>
-    <button
-      class="btn btn-success"
-      (click)="this.updateMyCollection(this.editedMyCollection)"
-    >
-      Save Changes
-    </button>
-  </div>
+          <div *ngIf="this.expandedView">
+            <div *ngFor="let article of coll.articles">
+              <app-display-article
+                [articleId]="article.id"
+                [myCollectionView]="true"
+                [collId]="this.collId"
+              ></app-display-article>
+            </div>
+          </div>
 
-  <div *ngIf="this.expandedView">
-    <div *ngFor="let article of coll.articles">
-      <app-display-article
-        [articleId]="article.id"
-        [myCollectionView]="true"
-        [collId]="this.collId"
-      ></app-display-article>
+          <div *ngIf="this.listView">
+            <app-display-articles
+              [articlesToDisplay]="coll.articles"
+              [myCollectionView]="true"
+            ></app-display-articles>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div *ngIf="this.listView">
-    <app-display-articles
-      [articlesToDisplay]="coll.articles"
-      [myCollectionView]="true"
-    ></app-display-articles>
-  </div>
-</div>
