@@ -44,6 +44,7 @@ import { NlmAuthorPipe } from './pipes/nlm/nlm-author.pipe';
 import { NlmAuthorsPipe } from './pipes/nlm/nlm-authors.pipe';
 import { FullNlmPipe } from './pipes/nlm/full-nlm.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FullMlaPipe,
     NlmAuthorPipe,
     NlmAuthorsPipe,
-    FullNlmPipe
+    FullNlmPipe,
+    SidebarComponent
   ],
   imports: [
     AppRoutingModule,

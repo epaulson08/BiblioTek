@@ -1,10 +1,12 @@
 <app-navi></app-navi>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-2 bg-palette-A3" style="min-height: 100vh"></div>
+      <div class="col-2 bg-palette-A3 d-none d-lg-block">
+        <app-sidebar></app-sidebar>
+      </div>
       <div class="col mt-2">
         <div *ngIf="!this.editView">
-          <h4>
+          <h4 class="page-header">
             {{ coll.name }}
             <button
               class="float-right btn btn-secondary btn-sm"

@@ -1,161 +1,177 @@
 <app-navi></app-navi>
-<div class="container-fluid"><div class="row">
-  <div class="col-2 bg-palette-A3" style="min-height: 100vh;"></div><div class="col">
-  <h4 class="mt-2">New Journal Article:</h4>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2 bg-palette-A3 d-none d-md-block">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col">
+      <h4 class="my-3 page-header">Create New Article</h4>
 
-  <form #createForm>
-    <!-- Non-object fields -->
-    <div class="row">
-      <div class="col-6">
-        <div class="form-group">
-          <label for="title"> Title: </label>
-          <textarea class="form-control" name="title" id="title"></textarea>
+      <form #createForm>
+        <!-- Non-object fields -->
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="title"> Title: </label>
+              <textarea class="form-control" name="title" id="title"></textarea>
+            </div>
+            <!-- Journal Dropdown Menu -->
+            Journal:
+            <select
+              class="form-control mb-3"
+              [(ngModel)]="newJournal"
+              name="newJournal"
+            >
+              <option value="" selected></option>
+              <option *ngFor="let j of journals" [ngValue]="j">
+                {{ j.name }}
+              </option>
+            </select>
+          </div>
+          <div class="col-6">
+            <table>
+              <tr>
+                <td>
+                  <label for="volumeNum">Vol.: </label>
+                </td>
+                <td>
+                  <input type="text" class="form-control" id="vol" name="vol" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="year">Year: </label>
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="year"
+                    name="year"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="doi">DOI: </label>
+                </td>
+                <td>
+                  <input type="text" class="form-control" id="doi" name="doi" />
+                </td>
+              </tr>
+            </table>
+          </div>
         </div>
-        <!-- Journal Dropdown Menu -->
-        Journal:
-        <select
-          class="form-control mb-3"
-          [(ngModel)]="newJournal"
-          name="newJournal"
+        <hr />
+        <!-- Authors -->
+        <div class="row">
+          <div class="col-6">
+            <h5>Authors:</h5>
+            <div *ngIf="this.authorsList.length === 0">
+              (You must enter one or more authors)
+            </div>
+            <div *ngIf="this.authorsList.length !== 0">
+              <table>
+                <tr *ngFor="let a of authorsList">
+                  <td>
+                    {{ a.firstName }} {{ a.middleName }} {{ a.lastName }}
+                    {{ a.suffix }}
+                  </td>
+                  <td>
+                    <button
+                      class="btn btn-danger btn-sm ml-3"
+                      (click)="removeAuthor(a)"
+                    >
+                      Remove >>
+                    </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <h5>Create an Author:</h5>
+
+            <table>
+              <tr>
+                <td>
+                  <label for="authorFirstName">First name: </label>
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    [(ngModel)]="newAuthor.firstName"
+                    class="form-control"
+                    id="fname"
+                    name="fname"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="authorMiddleName">Middle name: </label>
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    [(ngModel)]="newAuthor.middleName"
+                    class="form-control"
+                    id="mid"
+                    name="mid"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="authorLastName">Last name: </label>
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    [(ngModel)]="newAuthor.lastName"
+                    class="form-control"
+                    id="lname"
+                    name="lname"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="authorSuffix">Suffix: </label>
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    [(ngModel)]="newAuthor.suffix"
+                    class="form-control"
+                    id="suffix"
+                    name="suffix"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <button
+                    (click)="addAuthor()"
+                    class="btn btn-block btn-outline-success btn-sm"
+                  >
+                    &lt; Add Author
+                  </button>
+                </td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-success mt-3 mb-3"
+          (click)="create(createForm)"
         >
-          <option value="" selected></option>
-          <option *ngFor="let j of journals" [ngValue]="j">{{ j.name }}</option>
-        </select>
-      </div>
-      <div class="col-6">
-        <table>
-          <tr>
-            <td>
-              <label for="volumeNum">Vol.: </label>
-            </td>
-            <td>
-              <input type="text" class="form-control" id="vol" name="vol" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="year">Year: </label>
-            </td>
-            <td>
-              <input type="text" class="form-control" id="year" name="year" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="doi">DOI: </label>
-            </td>
-            <td>
-              <input type="text" class="form-control" id="doi" name="doi" />
-            </td>
-          </tr>
-        </table>
-      </div>
+          Submit Journal Article
+        </button>
+      </form>
     </div>
-    <hr />
-    <!-- Authors -->
-    <div class="row">
-      <div class="col-6">
-        <h5>Authors:</h5>
-        <div *ngIf="this.authorsList.length === 0">
-          (You must enter one or more authors)
-        </div>
-        <div *ngIf="this.authorsList.length !== 0">
-          <table>
-            <tr *ngFor="let a of authorsList">
-              <td>
-                {{ a.firstName }} {{ a.middleName }} {{ a.lastName }}
-                {{ a.suffix }}
-              </td>
-              <td>
-                <button
-                  class="btn btn-danger btn-sm ml-3"
-                  (click)="removeAuthor(a)"
-                >
-                  Remove >>
-                </button>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
-      <div class="col-6">
-        <h5>Create an Author:</h5>
-
-        <table>
-          <tr>
-            <td>
-              <label for="authorFirstName">First name: </label>
-            </td>
-            <td>
-              <input
-                type="text"
-                [(ngModel)]="newAuthor.firstName"
-                class="form-control"
-                id="fname"
-                name="fname"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="authorMiddleName">Middle name: </label>
-            </td>
-            <td>
-              <input
-                type="text"
-                [(ngModel)]="newAuthor.middleName"
-                class="form-control"
-                id="mid"
-                name="mid"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="authorLastName">Last name: </label>
-            </td>
-            <td>
-              <input
-                type="text"
-                [(ngModel)]="newAuthor.lastName"
-                class="form-control"
-                id="lname"
-                name="lname"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label for="authorSuffix">Suffix: </label>
-            </td>
-            <td>
-              <input
-                type="text"
-                [(ngModel)]="newAuthor.suffix"
-                class="form-control"
-                id="suffix"
-                name="suffix"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <button (click)="addAuthor()" class="btn btn-block btn-outline-success btn-sm">
-                &lt; Add Author
-              </button>
-            </td>
-            <td></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <button
-      type="submit"
-      class="btn btn-success mt-3 mb-3"
-      (click)="create(createForm)"
-    >
-      Submit Journal Article
-    </button>
-  </form>
+  </div>
 </div>

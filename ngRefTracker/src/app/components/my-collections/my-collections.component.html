@@ -1,29 +1,54 @@
 <app-navi></app-navi>
 
-<div class="container-fluid"><div class="row">
-  <div class="col-2 bg-palette-A3"></div><div class="col">
-  <h4 class="mt-2">My Collections:</h4>
-  <div
-    class="card mb-3"
-    style="max-width: 500px"
-    *ngFor="let coll of this.allCollections"
-  >
-    <div class="container">
-      <div class="card-title mt-2">
-        <a [routerLink]="['/my-collection/' + coll.id]"
-          ><h5>{{ coll.name }}</h5></a
-        >
-      </div>
-      <div class="card-text mb-2">
-        {{ coll.description }}
-      </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2 bg-palette-A3 d-none d-md-block">
+      <app-sidebar></app-sidebar>
     </div>
-    <div class="card-footer">
-      <button class="btn btn-primary btn-sm mr-2" [routerLink]="['/my-collection/' + coll.id]">View</button>
-      <button class="btn btn-success btn-sm mr-2" (click)="editCollection(coll)">Edit</button>
-      <button class="btn btn-warning btn-sm" (click)="citeAll(coll)">Cite All</button>
-      <div *ngIf="underConstructionMessage && this.myCollection === coll" style="color: orange;">This feature is under construction!</div>
+    <div class="col">
+      <h4 class="my-3 ml-2 page-header">My Collections</h4>
+      <div
+        class="card mb-3"
+        style="max-width: 500px"
+        *ngFor="let coll of this.allCollections"
+      >
+        <div class="container">
+          <div class="card-title mt-2">
+            <a
+              class="link-my-collections-card"
+              [routerLink]="['/my-collection/' + coll.id]"
+              ><h5>{{ coll.name }}</h5></a
+            >
+          </div>
+          <div class="card-text mb-2">
+            {{ coll.description }}
+          </div>
+        </div>
+        <div class="card-footer">
+          <button
+            class="btn btn-primary btn-sm mr-2"
+            [routerLink]="['/my-collection/' + coll.id]"
+          >
+            View
+          </button>
+          <button
+            class="btn btn-secondary btn-sm mr-2"
+            (click)="editCollection(coll)"
+          >
+            Edit
+          </button>
+          <button class="btn btn-secondary btn-sm" (click)="citeAll(coll)">
+            Cite All
+          </button>
+          <div
+            *ngIf="underConstructionMessage && this.myCollection === coll"
+            style="color: orange"
+          >
+            This feature is under construction!
+          </div>
+        </div>
+      </div>
+      <br />
     </div>
   </div>
-  <br />
 </div>
