@@ -7,13 +7,13 @@
     </div>
 
     <!-- Main content -->
-    <div class="col mt-2">
+    <div class="col">
       <!-- Name and description -->
       <div class="row">
         <div class="col">
           <!-- Non-edit mode -->
           <span *ngIf="!this.editView">
-            <h4 class="page-header">
+            <h4 class="my-3 page-header">
               {{ coll.name }}
               <button
                 class="float-right btn btn-custom-warning btn-sm"
@@ -87,6 +87,7 @@
           </span>
 
           <!-- List View -->
+          <div class="mt-3"></div>
           <span *ngIf="this.listView">
             <app-display-articles
               [articlesToDisplay]="coll.articles"
