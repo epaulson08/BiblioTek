@@ -1,38 +1,68 @@
-<!-- <div *ngIf=> -->
-<div [ngClass]="this.backgroundPhotoEnvironment">
+<div class="background-image">
   &nbsp;
-  <div class="center-content card mx-auto" style="max-width: 500px">
-    <h2 class="text-center">Welcome to</h2>
-    <h1 class="text-center">Reference Manager</h1>
-    <h4 class="text-center" style="color: orange;">Start here to learn how to use this app:</h4>
-    <h4 class="mx-auto"><button (click)="loginDemo()" class="btn btn-warning">Log In as Demo User</button></h4>
-    <h4 class="ml-3">Log In:</h4>
+  <!-- Title Banner -->
+  <div class="row">
+    <div class="col">
+      <div class="banner-title">
+        <h1 class="text-center">BiblioTek</h1>
+        <h4 class="text-center">A simple, customizable reference manager</h4>
+        <button
+          class="btn btn-custom-primary btn-lg d-flex mx-auto"
+          id="demo-button"
+        >
+          Log In as Demo User
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <!-- Bottom Left Banner -->
+  <div class="banner-bottom-left col-6">
+    <h4 class="m-3">Log In</h4>
     <form #loginForm>
-    <table class="mx-3">
-      <tr>
-        <td><label>Username:</label></td>
-        <td><input name="uname" type="text" class="form-control" /></td>
-      </tr>
-      <tr>
-        <td><label>Password:</label></td>
-        <td><input name="pass" type="password" class="form-control" /></td>
-      </tr>
-      <tr>
-        <td>
-          <button
-            class="mb-3 btn btn-primary"
-            type="submit"
-            (click)="login(loginForm)"
-          >
-            Login
-          </button>
-        </td>
-      </tr>
-    </table>
-    <div *ngIf="errorLoggingIn" class="text-danger ml-3 mb-3">{{ this.errorLoggingIn}} </div>
-    <table class="mx-3 mb-3">
-      <tr><td><button class="btn btn-secondary" [routerLink]="['/register']">Register</button></td></tr>
-    </table>
+      <table class="mx-3">
+        <tr>
+          <td><label>Username:</label></td>
+          <td><input name="uname" type="text" class="form-control" /></td>
+        </tr>
+        <tr>
+          <td><label>Password:</label></td>
+          <td><input name="pass" type="password" class="form-control" /></td>
+        </tr>
+        <tr>
+          <td>
+            <button
+              class="my-3 btn btn-custom-warning-white"
+              type="submit"
+              (click)="login(loginForm)"
+            >
+              Login
+            </button>
+          </td>
+        </tr>
+      </table>
+      <div *ngIf="errorLoggingIn" class="text-danger ml-3 mb-3">
+        {{ this.errorLoggingIn }}
+      </div>
     </form>
+  </div>
+  <!-- Bottom Right Banner -->
+  <div class="banner-bottom-right col-6">
+    <h4 class="mt-3">New Users</h4>
+    <button class="btn btn-custom-danger-white btn-large my-2">Register</button>
+    <br />
+  </div>
+</div>
+
+<!-- About area -->
+<div class="row under">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <h5 class="text-center" id="header-about-this">About This Project</h5>
+    <p class="lead">BiblioTek enables you to manage references for academic papers.</p>
+    <p class="lead">You can save bibliographic information and generate citations formatted in a variety of citation styles.</p>
+    <p class="lead">BiblioTek was developed by <a href="https://github.com/epaulson08" id="link-about">Eric Paulson</a>.</p>
+    <div class="col-2"></div>
   </div>
 </div>

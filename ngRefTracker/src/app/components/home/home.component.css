@@ -1,32 +1,59 @@
-.background-image-dev {
+.background-image {
   background-image: url('src/assets/images/library.jpg');
   background-size: 100%;
   background-repeat: no-repeat;
-  min-height: 100%;
   width: 100%;
   height: auto;
-  position: fixed;
   top: 0;
   left: 0;
 }
 
-/* This is necessary because of differences
-in URL paths between production and development: */
-.background-image-prod {
-  /* FIXME url */
-  background-image: url('http://18.219.247.72:8080/RefTracker/assets/images/library.jpg');
-  background-size: 100%;
-  background-repeat: no-repeat;
-  min-height: 100%;
-  width: 100%;
-  height: auto;
-  position: fixed;
-  top: 0;
-  left: 0;
+.under {
+  padding-top: 50px;
+  background-color: #287286;
+  color: white;
+  min-height: 400px;
 }
 
-.center-content {
-  border: 0px;
-  /* background-color:rgb(237,237,237, 0.8); */
-  margin-top: 10%;
+#header-about-this {
+  padding-bottom: 30px;
+}
+
+.banner-title {
+  background-color: white;
+  padding: 100px;
+  margin-top: 75px;
+}
+
+.banner-bottom-left {
+  background-color: #c19a6b;
+  color: white;
+}
+
+.banner-bottom-right {
+  background-color: #b24251;
+  color: white;
+}
+
+
+/*
+Palette A:
+F6F6F7  White
+E0BB8E  Muted tan
+Mod: Muted tan darkened for contrast with white text: #c19a6b;
+B24251  Muted red
+4CC0CD  Bright light blue
+287286  Muted teal */
+
+#demo-button {
+  margin-top: 40px;
+}
+
+#link-about {
+  color: white;
+  text-decoration: underline;
+}
+
+#link-about:hover {
+  color:#c19a6b;
 }
