@@ -1,172 +1,118 @@
 <app-navi></app-navi>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-2 bg-palette-A3 d-none d-md-block sidebar">
+    <div class="col-md-2 bg-palette-A3 d-none d-md-block sidebar">
       <app-sidebar></app-sidebar>
     </div>
-    <div class="col">
+    <div class="col-md-6">
       <h4 class="my-3 page-header">Create New Article</h4>
-
       <form #createForm>
-        <!-- Non-object fields -->
-        <div class="row">
-          <div class="col-6">
-            <div class="form-group">
-              <label for="title"> Title: </label>
-              <textarea class="form-control" name="title" id="title"></textarea>
-            </div>
-            <!-- Journal Dropdown Menu -->
-            Journal:
-            <select
-              class="form-control mb-3"
-              [(ngModel)]="newJournal"
-              name="newJournal"
-            >
-              <option value="" selected></option>
-              <option *ngFor="let j of journals" [ngValue]="j">
-                {{ j.name }}
-              </option>
-            </select>
-          </div>
-          <div class="col-6">
-            <table>
-              <tr>
-                <td>
-                  <label for="volumeNum">Vol.: </label>
-                </td>
-                <td>
-                  <input type="text" class="form-control" id="vol" name="vol" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="year">Year: </label>
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="year"
-                    name="year"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="doi">DOI: </label>
-                </td>
-                <td>
-                  <input type="text" class="form-control" id="doi" name="doi" />
-                </td>
-              </tr>
-            </table>
-          </div>
+        <!-- Title -->
+        <div class="form-group">
+          <label for="title"><h5>Title:</h5></label>
+          <textarea class="form-control" name="title" id="title"></textarea>
         </div>
         <hr />
         <!-- Authors -->
-        <div class="row">
-          <div class="col-6">
-            <h5>Authors:</h5>
-            <div *ngIf="this.authorsList.length === 0">
-              (You must enter one or more authors)
-            </div>
-            <div *ngIf="this.authorsList.length !== 0">
-              <table>
-                <tr *ngFor="let a of authorsList">
-                  <td>
-                    {{ a.firstName }} {{ a.middleName }} {{ a.lastName }}
-                    {{ a.suffix }}
-                  </td>
-                  <td>
-                    <button
-                      class="btn btn-custom-danger btn-sm ml-3"
-                      (click)="removeAuthor(a)"
-                    >
-                      Remove >>
-                    </button>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
+        <h5>Authors:</h5>
+        <div *ngIf="this.authorsList.length === 0" class="text-custom-warning">
+          (Please enter one or more authors)
+        </div>
+        <div *ngIf="this.authorsList.length !== 0">
+          <table>
+            <tr *ngFor="let a of authorsList">
+              <td>
+                <button
+                  class="btn btn-custom-danger btn-sm mr-3"
+                  (click)="removeAuthor(a)"
+                >
+                  Remove
+                </button>
+              </td>
 
-          <div class="col-6">
-            <h5>Create an Author:</h5>
+              <td>
+                {{ a.firstName }} {{ a.middleName }} {{ a.lastName }}
+                {{ a.suffix }}
+              </td>
+            </tr>
+          </table>
+        </div>
 
-            <table>
-              <tr>
-                <td>
-                  <label for="authorFirstName">First name: </label>
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    [(ngModel)]="newAuthor.firstName"
-                    class="form-control"
-                    id="fname"
-                    name="fname"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="authorMiddleName">Middle name: </label>
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    [(ngModel)]="newAuthor.middleName"
-                    class="form-control"
-                    id="mid"
-                    name="mid"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="authorLastName">Last name: </label>
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    [(ngModel)]="newAuthor.lastName"
-                    class="form-control"
-                    id="lname"
-                    name="lname"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label for="authorSuffix">Suffix: </label>
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    [(ngModel)]="newAuthor.suffix"
-                    class="form-control"
-                    id="suffix"
-                    name="suffix"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  <button
-                    (click)="addAuthor()"
-                    class="btn btn-custom-primary btn-sm"
-                  >
-                    &lt; Add Author
-                  </button>
-                </td>
-                <td></td>
-              </tr>
-            </table>
-          </div>
+        <div class="form-group mt-3">
+          <label for="authorFirstName">First name: </label>
+          <input
+            type="text"
+            [(ngModel)]="newAuthor.firstName"
+            class="form-control"
+            id="fname"
+            name="fname"
+          />
+        </div>
+        <div class="form-group">
+          <label for="authorMiddleName">Middle name: </label>
+          <input
+            type="text"
+            [(ngModel)]="newAuthor.middleName"
+            class="form-control"
+            id="mid"
+            name="mid"
+          />
+        </div>
+        <div class="form-group">
+          <label for="authorLastName">Last name: </label>
+          <input
+            type="text"
+            [(ngModel)]="newAuthor.lastName"
+            class="form-control"
+            id="lname"
+            name="lname"
+          />
+        </div>
+        <div class="form-group">
+          <label for="authorSuffix">Suffix: </label>
+          <input
+            type="text"
+            [(ngModel)]="newAuthor.suffix"
+            class="form-control"
+            id="suffix"
+            name="suffix"
+          />
+        </div>
+        <div class="form-group">
+          <button (click)="addAuthor()" class="btn btn-custom-warning btn-sm">
+            Add Author
+          </button>
+        </div>
+        <hr />
+        <!-- Journal Dropdown Menu -->
+        <div class="form-group">
+          <h5>Journal:</h5>
+          <select
+            class="form-control mb-3"
+            [(ngModel)]="newJournal"
+            name="newJournal"
+          >
+            <option value="" selected></option>
+            <option *ngFor="let j of journals" [ngValue]="j">
+              {{ j.name }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="volumeNum"><h5>Volume:</h5></label>
+          <input type="text" class="form-control" id="vol" name="vol" />
+        </div>
+        <div class="form-group">
+          <label for="year"><h5>Year:</h5></label>
+          <input type="text" class="form-control" id="year" name="year" />
+        </div>
+        <div class="form-group">
+          <label for="doi"><h5>DOI:</h5></label>
+          <input type="text" class="form-control" id="doi" name="doi" />
         </div>
         <button
           type="submit"
-          class="btn btn-custom-primary mt-3 mb-3"
+          class="btn btn-custom-primary mt-3 mb-3 btn-full-width"
           (click)="create(createForm)"
         >
           Submit
