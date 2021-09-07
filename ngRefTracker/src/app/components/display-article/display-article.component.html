@@ -94,7 +94,7 @@
     <div *ngIf="viewCite">
       <hr />
       <button
-        class="btn btn-primary mr-2 mb-2"
+        class="btn btn-custom-primary mr-2 mb-2"
         *ngFor="let cs of this.citationStyles"
         (click)="chooseStyle(cs)"
       >
@@ -111,7 +111,7 @@
           <span [outerHTML]="this.citationOutput"></span>
         </div>
         <br />
-        <button class="btn btn-primary btn-sm mb-3" (click)="toggleMoreInfo()">
+        <button class="btn btn-custom-primary btn-sm mb-3" (click)="toggleMoreInfo()">
           More Info ▼
         </button>
         <div *ngIf="moreInfo">
@@ -150,27 +150,27 @@
     <div *ngIf="!viewCite">
       <div class="card-footer d-flex">
         <div *ngIf="!deleted && !editJa">
-          <button class="btn btn-primary mr-2" (click)="cite()">Cite</button>
-          <button class="btn btn-secondary mr-2" (click)="setEdit()">
+          <button class="btn btn-custom-primary mr-2" (click)="cite()">Cite</button>
+          <button class="btn btn-custom-secondary mr-2" (click)="setEdit()">
             Edit
           </button>
-          <button class="btn btn-warning mr-2" (click)="goBack()">Back</button>
+          <button class="btn btn-custom-warning mr-2" (click)="goBack()">Back</button>
         </div>
         <div *ngIf="!deleted && editJa">
-          <button class="btn btn-primary mr-2" (click)="update(editJa)">
+          <button class="btn btn-custom-primary mr-2" (click)="update(editJa)">
             Submit</button
-          ><button class="btn btn-secondary mr-2" (click)="cancelEdit()">
+          ><button class="btn btn-custom-secondary mr-2" (click)="cancelEdit()">
             Cancel
           </button>
         </div>
         <div *ngIf="!deleted">
           <button
-            class="btn btn-danger mr-2"
+            class="btn btn-custom-danger mr-2"
             (click)="removeFromCollection(this.collId, this.articleId)"
           >
             Remove
           </button>
-          <button class="btn btn-danger mr-2" (click)="delete(selected.id)">
+          <button class="btn btn-custom-danger mr-2" (click)="delete(selected.id)">
             Delete
           </button>
         </div>
@@ -187,8 +187,8 @@
     <!-- Citation view selected: -->
     <div *ngIf="viewCite">
       <div class="card-footer d-flex">
-        <button class="btn btn-secondary mr-2" (click)="setEdit()">Edit</button>
-        <button class="btn btn-warning mr-2" (click)="resetCite()">Back</button>
+        <button class="btn btn-custom-secondary mr-2" (click)="setEdit()">Edit</button>
+        <button class="btn btn-custom-warning mr-2" (click)="resetCite()">Back</button>
         <div
           class="float-center"
           style="color: orange"
@@ -208,10 +208,10 @@
     <div *ngIf="!this.viewCite">
       <div class="card-footer d-flex">
         <div *ngIf="!deleted && !editJa">
-          <button class="btn btn-primary mr-2" (click)="cite()">Cite</button>
+          <button class="btn btn-custom-primary mr-2" (click)="cite()">Cite</button>
           <div ngbDropdown class="d-inline-block">
             <button
-              class="btn btn-info mr-2"
+              class="btn btn-custom-primary mr-2"
               id="dropdownAddToColl"
               ngbDropdownToggle
             >
@@ -230,19 +230,19 @@
               >
             </div>
           </div>
-          <button class="btn btn-secondary mr-2" (click)="setEdit()">
+          <button class="btn btn-custom-secondary mr-2" (click)="setEdit()">
             Edit
           </button>
-          <button class="btn btn-warning mr-2" (click)="goBack()">Back</button>
+          <button class="btn btn-custom-warning mr-2" (click)="goBack()">Back</button>
           <div *ngIf="!deleted && editJa">
-            <button class="btn btn-primary mr-2" (click)="update(editJa)">
+            <button class="btn btn-custom-primary mr-2" (click)="update(editJa)">
               Submit</button
-            ><button class="btn btn-secondary mr-2" (click)="cancelEdit()">
+            ><button class="btn btn-custom-secondary mr-2" (click)="cancelEdit()">
               Cancel
             </button>
           </div>
           <span *ngIf="!deleted">
-            <button class="btn btn-danger" (click)="delete(selected.id)">
+            <button class="btn btn-custom-danger" (click)="delete(selected.id)">
               Delete
             </button>
           </span>
@@ -264,7 +264,7 @@
       <div class="card-footer d-flex">
         <div ngbDropdown class="d-inline-block">
           <button
-            class="btn btn-primary mr-2"
+            class="btn btn-custom-primary mr-2"
             id="dropdownAddToColl"
             ngbDropdownToggle
           >
@@ -280,11 +280,11 @@
               </button></span
             >
           </div>
-          <button class="btn btn-secondary mr-2" (click)="setEdit()">
+          <button class="btn btn-custom-secondary mr-2" (click)="setEdit()">
             Edit
           </button>
 
-          <button class="btn btn-warning mr-2" (click)="resetCite()">
+          <button class="btn btn-custom-warning mr-2" (click)="resetCite()">
             Back
           </button>
           <div

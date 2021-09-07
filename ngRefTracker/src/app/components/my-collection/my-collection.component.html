@@ -16,13 +16,13 @@
             <h4 class="page-header">
               {{ coll.name }}
               <button
-                class="float-right btn btn-warning btn-sm"
+                class="float-right btn btn-custom-warning btn-sm"
                 (click)="setExpandedView()"
               >
                 Expanded View
               </button>
               <button
-                class="float-right btn btn-warning btn-sm mr-2"
+                class="float-right btn btn-custom-warning btn-sm mr-2"
                 (click)="setListView()"
               >
                 List View
@@ -36,9 +36,9 @@
               </div>
             </div>
             <h5>
-              <button class="btn btn-primary btn-sm mr-2">Cite All</button>
+              <button class="btn btn-custom-primary btn-sm mr-2">Cite All</button>
               <button
-                class="btn btn-secondary btn-sm mr-2"
+                class="btn btn-custom-secondary btn-sm mr-2"
                 (click)="showEditView()"
               >
                 Edit
@@ -58,7 +58,7 @@
               ></textarea>
             </h5>
             <button
-              class="btn btn-success"
+              class="btn btn-custom-success"
               (click)="this.updateMyCollection(this.editedMyCollection)"
             >
               Save Changes
