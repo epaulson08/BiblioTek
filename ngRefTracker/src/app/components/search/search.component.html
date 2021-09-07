@@ -2,66 +2,71 @@
 <div class="container-fluid">
   <div class="row">
     <div
-      class="col-2 bg-palette-A3 d-none d-md-block"
+      class="col-2 bg-palette-A3 d-none d-md-block sidebar"
       style="min-height: 100vh"
     >
       <app-sidebar></app-sidebar>
     </div>
     <div class="col">
-      <h4 class="my-3 page-header">Search</h4>
-
-      <!-- Search by author or title -->
-      <form #searchForm class="form-inline">
-        <div class="form-group">
-          <label for="searchTerm">Search term (author or title):</label>
-          <input
-            type="text"
-            class="form-control mr-2 ml-2"
-            [(ngModel)]="searchTerm"
-            name="searchTerm"
-            id="searchTerm"
-          />
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <h4 class="my-3 page-header">Search</h4>
+          <!-- Search by author or title -->
+          <form #searchTitleForm>
+            <div class="form-group">
+              <label for="searchTitleTerm"><h5 class="text-palette-A1">Title or Author:</h5></label>
+              <br />
+              <textarea
+                class="form-control"
+                rows="2"
+                [(ngModel)]="searchTerm"
+                name="searchTerm"
+                id="searchTerm"
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="search()">
+              Search
+            </button>
+          </form>
+          <hr />
+          <!-- Show all articles for a given journal -->
+          <form>
+            <div class="form-group">
+              <h5 class="text-palette-A1">Journal:</h5>
+              <select
+                class="form-control select-journal"
+                [(ngModel)]="selectedJournal"
+                name="selectedJournal"
+              >
+                <option value="" selected></option>
+                <option *ngFor="let j of allJournals" [ngValue]="j">
+                  {{ j.name }}
+                </option>
+              </select>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="showAllByJournal()"
+            >
+              Search
+            </button>
+          </form>
         </div>
-        <button type="submit" class="btn btn-secondary" (click)="search()">
-          Search
-        </button>
-      </form>
-      <br />
-
-      <!-- Show all articles for a given journal -->
-      <form class="form-inline">
-        Journal:
-        <select
-          class="form-control ml-2 mr-2"
-          [(ngModel)]="selectedJournal"
-          name="selectedJournal"
-        >
-          <option value="" selected></option>
-          <option *ngFor="let j of allJournals" [ngValue]="j">
-            {{ j.name }}
-          </option>
-        </select>
-
-        <button
-          type="submit"
-          class="btn btn-secondary"
-          (click)="showAllByJournal()"
-        >
-          Search
-        </button>
-      </form>
-
-      <!-- Search Results: -->
-      <div *ngIf="articleResults">
-        <div *ngIf="articleResults.length !== 0">
-          <h3>Results:</h3>
-
-          <app-display-articles
-            [articlesToDisplay]="articleResults"
-          ></app-display-articles>
-        </div>
-        <div *ngIf="articleResults.length === 0">
-          No articles matched your search criteria.
+        <div class="col-12">
+          <!-- Search Results: -->
+          <div *ngIf="articleResults">
+            <hr />
+            <h4 class="my-3 page-header">Results</h4>
+            <div *ngIf="articleResults.length !== 0">
+              <app-display-articles
+                [articlesToDisplay]="articleResults"
+              ></app-display-articles>
+            </div>
+            <div *ngIf="articleResults.length === 0">
+              No articles matched your search criteria.
+            </div>
+          </div>
         </div>
       </div>
     </div>

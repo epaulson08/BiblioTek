@@ -1,38 +1,53 @@
 <app-navi></app-navi>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-2 bg-palette-A3 d-none d-lg-block">
-        <app-sidebar></app-sidebar>
-      </div>
-      <div class="col mt-2">
-        <div *ngIf="!this.editView">
-          <h4 class="page-header">
-            {{ coll.name }}
-            <button
-              class="float-right btn btn-secondary btn-sm"
-              (click)="setExpandedView()"
-            >
-              Expanded View
-            </button>
-            <button
-              class="float-right btn btn-secondary btn-sm mr-2"
-              (click)="setListView()"
-            >
-              List View
-            </button>
-          </h4>
-          <h5 class="mt-3">
-            {{ coll.description
-            }}</h5><h5><button
-              class="btn btn-success btn-sm mr-2"
-              (click)="showEditView()"
-            >
-              Edit
-            </button>
-          <button class="btn btn-primary btn-sm">Cite All</button></h5>
-        </div>
-        <div class="row">
-          <div *ngIf="this.editView">
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-2 bg-palette-A3 d-none d-md-block sidebar">
+      <app-sidebar></app-sidebar>
+    </div>
+
+    <!-- Main content -->
+    <div class="col mt-2">
+      <!-- Name and description -->
+      <div class="row">
+        <div class="col">
+          <!-- Non-edit mode -->
+          <span *ngIf="!this.editView">
+            <h4 class="page-header">
+              {{ coll.name }}
+              <button
+                class="float-right btn btn-warning btn-sm"
+                (click)="setExpandedView()"
+              >
+                Expanded View
+              </button>
+              <button
+                class="float-right btn btn-warning btn-sm mr-2"
+                (click)="setListView()"
+              >
+                List View
+              </button>
+            </h4>
+            <div class="row">
+              <div class="col-8">
+                <h5 class="mt-2 text-palette-A1">
+                  {{ coll.description }}
+                </h5>
+              </div>
+            </div>
+            <h5>
+              <button class="btn btn-primary btn-sm mr-2">Cite All</button>
+              <button
+                class="btn btn-secondary btn-sm mr-2"
+                (click)="showEditView()"
+              >
+                Edit
+              </button>
+            </h5>
+          </span>
+
+          <!-- Edit mode -->
+          <span *ngIf="this.editView">
             <h4>
               <input [(ngModel)]="this.editedMyCollection.name" class="col-6" />
             </h4>
@@ -48,25 +63,38 @@
             >
               Save Changes
             </button>
-          </div>
+          </span>
+        </div>
+      </div>
+      <!-- ^ Close row: header -->
 
-          <div *ngIf="this.expandedView">
-            <div *ngFor="let article of coll.articles">
-              <app-display-article
-                [articleId]="article.id"
-                [myCollectionView]="true"
-                [collId]="this.collId"
-              ></app-display-article>
+      <div class="my-2"></div>
+
+      <!-- Articles -->
+      <div class="row">
+        <div class="col">
+          <!-- Expanded View -->
+          <span *ngIf="this.expandedView">
+            <div class="card-deck">
+              <span *ngFor="let article of coll.articles" style="min-width:100%">
+                <app-display-article
+                  [articleId]="article.id"
+                  [myCollectionView]="true"
+                  [collId]="this.collId"
+                ></app-display-article>
+              </span>
             </div>
-          </div>
+          </span>
 
-          <div *ngIf="this.listView">
+          <!-- List View -->
+          <span *ngIf="this.listView">
             <app-display-articles
               [articlesToDisplay]="coll.articles"
               [myCollectionView]="true"
             ></app-display-articles>
-          </div>
+          </span>
         </div>
       </div>
     </div>
   </div>
+</div>

@@ -137,3 +137,12 @@ a:hover, .link-palette-A2:hover {
 .link-sidebar:hover {
   color: white;
 }
+
+.select-journal {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar {
+  min-height: 100vh;
+}
