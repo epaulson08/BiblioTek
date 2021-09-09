@@ -1,5 +1,3 @@
-
-
 /*
 Palette A:
 F6F6F7  White
@@ -19,6 +17,7 @@ nav,
   background-color: #287286;
 }
 
+.text-custom-secondary,
 .text-palette-A1 {
   color: #287286;
 }
@@ -203,9 +202,14 @@ a:hover,
 
 .sidebar {
   min-height: 100vh;
+  background-color: #c19a6b;
 }
 
 .page-header {
   color: #287286;
-  font-family: Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.header-highlighter {
+  background-color: #b24251;
 }

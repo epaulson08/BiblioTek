@@ -2,7 +2,13 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar -->
-    <div class="col-2 bg-palette-A3 d-none d-md-block sidebar">
+    <div *ngIf="this.listView" class="col-2 d-none d-md-block sidebar">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div
+      *ngIf="!this.listView"
+      class="col-3 col-xl-2 d-none d-md-block sidebar"
+    >
       <app-sidebar></app-sidebar>
     </div>
 
@@ -14,6 +20,7 @@
           <!-- Non-edit mode -->
           <span *ngIf="!this.editView">
             <h4 class="my-3 page-header">
+              <span class="header-highlighter">&nbsp;</span>&nbsp;
               {{ coll.name }}
               <button
                 class="float-right btn btn-custom-warning btn-sm"
@@ -36,7 +43,9 @@
               </div>
             </div>
             <h5>
-              <button class="btn btn-custom-primary btn-sm mr-2">Cite All</button>
+              <button class="btn btn-custom-primary btn-sm mr-2">
+                Cite All
+              </button>
               <button
                 class="btn btn-custom-secondary btn-sm mr-2"
                 (click)="showEditView()"
@@ -76,7 +85,10 @@
           <!-- Expanded View -->
           <span *ngIf="this.expandedView">
             <div class="card-deck">
-              <span *ngFor="let article of coll.articles" style="min-width:100%">
+              <span
+                *ngFor="let article of coll.articles"
+                style="min-width: 100%"
+              >
                 <app-display-article
                   [articleId]="article.id"
                   [myCollectionView]="true"

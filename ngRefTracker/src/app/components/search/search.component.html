@@ -1,72 +1,67 @@
 <app-navi></app-navi>
 <div class="container-fluid">
   <div class="row">
-    <div
-      class="col-2 bg-palette-A3 d-none d-md-block sidebar"
-      style="min-height: 100vh"
-    >
+    <div class="col-3 col-xl-2 d-none d-md-block sidebar">
       <app-sidebar></app-sidebar>
     </div>
-    <div class="col">
-      <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-6">
-          <h4 class="my-3 page-header">Search</h4>
-          <!-- Search by author or title -->
-          <form #searchTitleForm>
-            <div class="form-group">
-              <label for="searchTitleTerm"><h5>Title or Author:</h5></label>
-              <br />
-              <textarea
-                class="form-control"
-                rows="2"
-                [(ngModel)]="searchTerm"
-                name="searchTerm"
-                id="searchTerm"
-              ></textarea>
-            </div>
-            <button type="submit" class="btn btn-custom-primary" (click)="search()">
-              Search
-            </button>
-          </form>
-          <hr />
-          <!-- Show all articles for a given journal -->
-          <form>
-            <div class="form-group">
-              <h5>Journal:</h5>
-              <select
-                class="form-control select-journal"
-                [(ngModel)]="selectedJournal"
-                name="selectedJournal"
-              >
-                <option value="" selected></option>
-                <option *ngFor="let j of allJournals" [ngValue]="j">
-                  {{ j.name }}
-                </option>
-              </select>
-            </div>
-            <button
-              type="submit"
-              class="btn btn-custom-primary"
-              (click)="showAllByJournal()"
-            >
-              Search
-            </button>
-          </form>
+    <div class="col-sm-12 col-md-6">
+      <h4 class="my-3 page-header">
+        <span class="header-highlighter">&nbsp;</span>&nbsp;Search
+      </h4>
+      <!-- Search by author or title -->
+      <form #searchTitleForm>
+        <div class="form-group">
+          <label for="searchTitleTerm"><h5>Title or Author:</h5></label>
+          <br />
+          <textarea
+            class="form-control"
+            rows="2"
+            [(ngModel)]="searchTerm"
+            name="searchTerm"
+            id="searchTerm"
+          ></textarea>
         </div>
-        <div class="col-12">
-          <!-- Search Results: -->
-          <div *ngIf="articleResults">
-            <hr />
-            <h4 class="my-3 page-header">Results</h4>
-            <div *ngIf="articleResults.length !== 0">
-              <app-display-articles
-                [articlesToDisplay]="articleResults"
-              ></app-display-articles>
-            </div>
-            <div *ngIf="articleResults.length === 0">
-              No articles matched your search criteria.
-            </div>
-          </div>
+        <button type="submit" class="btn btn-custom-primary" (click)="search()">
+          Search
+        </button>
+      </form>
+      <hr />
+      <!-- Show all articles for a given journal -->
+      <form>
+        <div class="form-group">
+          <h5>Journal:</h5>
+          <select
+            class="form-control select-journal"
+            [(ngModel)]="selectedJournal"
+            name="selectedJournal"
+          >
+            <option value="" selected></option>
+            <option *ngFor="let j of allJournals" [ngValue]="j">
+              {{ j.name }}
+            </option>
+          </select>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-custom-primary"
+          (click)="showAllByJournal()"
+        >
+          Search
+        </button>
+      </form>
+    </div>
+    <div class="col-12">
+      <!-- Search Results: -->
+      <div *ngIf="articleResults">
+        <hr />
+        <h4 class="my-3 page-header">Results</h4>
+        <div *ngIf="articleResults.length !== 0">
+          <app-display-articles
+            [articlesToDisplay]="articleResults"
+          ></app-display-articles>
+        </div>
+        <div *ngIf="articleResults.length === 0">
+          No articles matched your search criteria.
         </div>
       </div>
     </div>

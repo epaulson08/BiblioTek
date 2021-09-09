@@ -1,34 +1,36 @@
 <app-navi></app-navi>
 <div class="container-fluid">
-<div class="row">
-  <div class="col-2 bg-palette-A3 d-none d-md-block sidebar">
-    <app-sidebar></app-sidebar>
+  <div class="row">
+    <div class="col-3 col-xl-2 d-none d-md-block sidebar">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col">
+      <h4 class="my-3 page-header">
+        <span class="header-highlighter">&nbsp;</span>&nbsp;Register
+      </h4>
+      <form #registerForm>
+        <table>
+          <tr>
+            <td><label>Username:</label></td>
+            <td><input name="uname" type="text" class="form-control" /></td>
+          </tr>
+          <tr>
+            <td><label>Password:</label></td>
+            <td><input name="pass" type="password" class="form-control" /></td>
+          </tr>
+          <tr>
+            <td>
+              <button
+                class="my-3 btn btn-custom-primary"
+                type="submit"
+                (click)="register(registerForm)"
+              >
+                Register
+              </button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
   </div>
-  <div class="col">
-    <h4 class="my-3 page-header">
-      Register</h4>
-<form #registerForm>
-      <table>
-        <tr>
-          <td><label>Username:</label></td>
-          <td><input name="uname" type="text" class="form-control" /></td>
-        </tr>
-        <tr>
-          <td><label>Password:</label></td>
-          <td><input name="pass" type="password" class="form-control" /></td>
-        </tr>
-        <tr>
-          <td>
-            <button
-              class="my-3 btn btn-custom-primary"
-              type="submit"
-              (click)="register(registerForm)"
-            >
-              Register
-            </button>
-          </td>
-        </tr>
-      </table>
-    </form>
 </div>
-</div></div>

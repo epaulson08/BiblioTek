@@ -1,11 +1,11 @@
 <app-navi></app-navi>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-2 bg-palette-A3 d-none d-md-block sidebar">
+    <div class="col-3 col-xl-2 d-none d-md-block sidebar">
       <app-sidebar></app-sidebar>
     </div>
     <div class="col-md-6">
-      <h4 class="my-3 page-header">Create New Article</h4>
+      <h4 class="my-3 page-header"><span class="header-highlighter">&nbsp;</span>&nbsp;Create New Article</h4>
       <form #createForm>
         <!-- Title -->
         <div class="form-group">
@@ -15,7 +15,7 @@
         <hr />
         <!-- Authors -->
         <h5>Authors:</h5>
-        <div *ngIf="this.authorsList.length === 0" class="text-custom-warning">
+        <div *ngIf="this.authorsList.length === 0" class="text-custom-secondary">
           (Please enter one or more authors)
         </div>
         <div *ngIf="this.authorsList.length !== 0">
@@ -79,7 +79,7 @@
           />
         </div>
         <div class="form-group">
-          <button (click)="addAuthor()" class="btn btn-custom-warning btn-sm">
+          <button (click)="addAuthor()" class="btn btn-custom-secondary btn-sm">
             Add Author
           </button>
         </div>

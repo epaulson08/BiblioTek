@@ -1,14 +1,13 @@
 <app-navi></app-navi>
 <div class="container-fluid">
   <div class="row">
-    <div
-      class="col-2 bg-palette-A3 d-none d-md-block sidebar"
-      style="min-height: 100vh"
-    >
+    <div class="col-3 col-xl-2 d-none d-md-block sidebar">
       <app-sidebar></app-sidebar>
     </div>
     <div class="col">
-      <h4 class="my-3 page-header">Welcome, {{ this.username }}!</h4>
+      <h4 class="my-3 page-header">
+        <span class="header-highlighter">&nbsp;</span>&nbsp;Dashboard
+      </h4>
 
       <h5 class="text-palette-A1">Let's get started:</h5>
       <button
@@ -23,10 +22,16 @@
       >
         My Collections
       </button>
-      <button class="btn btn-custom-secondary mr-2 my-1" [routerLink]="['/create']">
+      <button
+        class="btn btn-custom-secondary mr-2 my-1"
+        [routerLink]="['/create']"
+      >
         Create
       </button>
-      <button class="btn btn-custom-secondary mr-2 my-1" [routerLink]="['/search']">
+      <button
+        class="btn btn-custom-secondary mr-2 my-1"
+        [routerLink]="['/search']"
+      >
         Search
       </button>
     </div>
