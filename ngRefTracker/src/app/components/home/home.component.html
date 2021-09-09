@@ -8,7 +8,7 @@
         <h4 class="text-center">A simple, customizable reference manager</h4>
         <button
           class="btn btn-custom-primary btn-lg d-flex mx-auto"
-          id="demo-button"
+          id="demo-button" (click)="loginDemo()"
         >
           Log In as Demo User
         </button>
@@ -50,7 +50,7 @@
   <!-- Bottom Right Banner -->
   <div class="banner-bottom-right col-6">
     <h4 class="mt-3">New Users</h4>
-    <button class="btn btn-custom-danger-white btn-large my-2">Register</button>
+    <button class="btn btn-custom-danger-white btn-large my-2" [routerLink]="['/register']">Register</button>
     <br />
   </div>
 </div>
