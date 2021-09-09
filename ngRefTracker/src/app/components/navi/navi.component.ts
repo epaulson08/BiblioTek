@@ -9,12 +9,15 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './navi.component.html',
   styleUrls: ['./navi.component.css']
 })
+
 export class NaviComponent implements OnInit {
+
+  loggedIn: boolean = false;
 
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
+    if (this.auth.checkLogin()) this.loggedIn = true;
   }
 
   logout() {

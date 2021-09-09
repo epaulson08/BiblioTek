@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -10,9 +12,13 @@ export class UserDashboardComponent implements OnInit {
   username: String = localStorage.getItem("username");
   clickedCite: boolean = false;
 
-  constructor() { }
+  constructor(
+    private authServ: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    if (!this.authServ.checkLogin()) this.router.navigateByUrl('home');
   }
 
   clickCiteButton() {

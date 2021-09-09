@@ -13,7 +13,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="collapseTarget">
+  <div *ngIf="this.loggedIn" class="collapse navbar-collapse" id="collapseTarget">
       <!-- Left-aligned items -->
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
