@@ -1,5 +1,12 @@
 <app-navi></app-navi>
 <div class="container-fluid">
+<div class="row">
+  <div class="col-2 bg-palette-A3 d-none d-md-block sidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col">
+    <h4 class="my-3 page-header">
+      Register</h4>
 <form #registerForm>
       <table>
         <tr>
@@ -13,7 +20,7 @@
         <tr>
           <td>
             <button
-              class="my-3 btn btn-primary"
+              class="my-3 btn btn-custom-primary"
               type="submit"
               (click)="register(registerForm)"
             >
@@ -24,3 +31,4 @@
       </table>
     </form>
 </div>
+</div></div>
