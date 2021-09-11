@@ -3,15 +3,18 @@
   <form>
     <div class="form-group">
       <input
-        type="text"
-        class="form-control form-control-sm mt-2"
-        placeholder="Search..."
+      type="text"
+      class="form-control form-control-sm mt-2"
+      placeholder="Search..."
+      name="searchTerm"
+      [(ngModel)]="searchTerm"
       />
-      <button class="btn btn-sm btn-custom-warning-white btn-full-width mt-1">Go</button>
+      <button (click)="search()" class="btn btn-sm btn-custom-warning-white btn-full-width mt-1">Go</button>
     </div>
   </form>
   <hr />
-  <div class="text-center">
-    <a class="link-sidebar" href="https://github.com/epaulson08/BiblioTek/blob/main/README.md">About</a>
-  </div>
+  <button [routerLink]="['/display-all-articles']" class="btn btn-sm btn-custom-warning-white btn-full-width my-1">List All</button>
+  <button [routerLink]="['/my-collections']" class="btn btn-sm btn-custom-warning-white btn-full-width my-1">My Collections</button>
+  <button [routerLink]="['/create']" class="btn btn-sm btn-custom-warning-white btn-full-width my-1">Create</button>
+  <button [routerLink]="['/search']" class="btn btn-sm btn-custom-warning-white btn-full-width my-1">Search</button>
 </span>

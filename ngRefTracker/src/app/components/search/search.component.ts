@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input, AfterContentChecked, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router, RoutesRecognized } from '@angular/router';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,7 +11,7 @@ import { JournalService } from 'src/app/services/journal.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnChanges {
 
   ja: JournalArticle = new JournalArticle();
   selected: JournalArticle = new JournalArticle();
@@ -19,23 +19,39 @@ export class SearchComponent implements OnInit {
   editJa: JournalArticle;
   allJournals: Journal[];
   selectedJournal: Journal = new Journal();
-  searchTerm: string;
+  searchTerm: string = null;
+  routeSearchTerm: string;
 
   constructor(
     private auth: AuthService,
     private jaServ: JournalArticleService,
     private journalServ: JournalService,
-    private router: Router
-    ) { }
+    private router: Router,
+    private route: ActivatedRoute
+    ) {
+      this.router.events.forEach((event) => {
+        if(event instanceof NavigationEnd) {
+          this.routeSearchTerm = this.route.snapshot.paramMap.get('searchTerm');
+          this.searchTerm = this.routeSearchTerm;
+          if (this.searchTerm) this.search();
+        }
+      });
+    }
 
-  ngOnInit(): void {
+    ngOnInit(): void {
     if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
     this.loadJournals();
     localStorage.setItem("lastPage", "search");
     if (localStorage.getItem("lastSearchTerm")) {
       this.searchTerm = localStorage.getItem("lastSearchTerm");
-      this.search();
     }
+    if (this.searchTerm) this.search();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.warn(changes);
+
+    // this.search();
   }
 
   show(form): void {

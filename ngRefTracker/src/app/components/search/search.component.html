@@ -49,15 +49,14 @@
           Search
         </button>
       </form>
-    </div>
-    <div class="col-12">
+
       <!-- Search Results: -->
       <div *ngIf="articleResults">
         <hr />
         <h4 class="my-3 page-header">Results</h4>
         <div *ngIf="articleResults.length !== 0">
           <app-display-articles
-            [articlesToDisplay]="articleResults"
+          [articlesToDisplay]="articleResults"
           ></app-display-articles>
         </div>
         <div *ngIf="articleResults.length === 0">

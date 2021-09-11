@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  searchTerm: string = null;
+
+  constructor(private route: Router) { }
 
   ngOnInit(): void {
+  }
+
+  search(): void {
+    if (this.searchTerm !== null) {
+      this.route.navigateByUrl('search/' + this.searchTerm);
+    }
+    else {
+      this.route.navigateByUrl('search');
+    }
   }
 
 }

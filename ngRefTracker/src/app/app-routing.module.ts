@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'my-collection/:collId', component: MyCollectionComponent },
   { path: 'my-collections', component: MyCollectionsComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'search/:searchTerm', component: SearchComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'test', component: DownloadCopyComponent},
   { path: 'user-dashboard', component: UserDashboardComponent },
