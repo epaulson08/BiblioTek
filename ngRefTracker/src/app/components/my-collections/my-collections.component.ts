@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CitationStyle } from 'src/app/models/citation-style';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { MyCollection } from 'src/app/models/my-collection.model';
+import { FullAmaPipe } from 'src/app/pipes/ama/full-ama.pipe';
+import { FullApaPipe } from 'src/app/pipes/apa/full-apa.pipe';
+import { FullIeeePipe } from 'src/app/pipes/ieee/full-ieee.pipe';
+import { FullNlmPipe } from 'src/app/pipes/nlm/full-nlm.pipe';
 import { AuthService } from 'src/app/services/auth.service';
+import { CitationStyleService } from 'src/app/services/citation-style.service';
 import { MyCollectionService } from 'src/app/services/my-collection.service';
 
 @Component({
@@ -25,8 +31,15 @@ export class MyCollectionsComponent implements OnInit {
   myCollection: MyCollection;
   viewColl: MyCollection;
   underConstructionMessage: boolean = false;
-  // CRUD
+  moreInfo: boolean = false;
+  switch: boolean = false;
+  chosenStyle: CitationStyle;
+  citationOutput: string = "";
+  selectedJa: JournalArticle;
+  clickedChooseStyle: boolean = false;
 
+  // CRUD
+  citationStyles: CitationStyle[];
 
   //////////
   // METHODS
@@ -34,25 +47,27 @@ export class MyCollectionsComponent implements OnInit {
   // initialization
   constructor(
     private collServ: MyCollectionService,
+    private csServ: CitationStyleService,
     private auth: AuthService,
     private router: Router
-  ) { }
+    ) { }
 
-  ngOnInit(): void {
-    if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
-    this.loadMyCollections();
-  }
+    ngOnInit(): void {
+      if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
+      this.loadMyCollections();
+      this.loadCitationStyles();
+    }
 
-  loadMyCollections(): void {
-    this.collServ.findAllAsUser().subscribe(
-      success => {
-        this.allCollections = success;
-        return success;
-      },
-      failure => {
-        console.error(failure);
-      });
-    return null;
+    loadMyCollections(): void {
+      this.collServ.findAllAsUser().subscribe(
+        success => {
+          this.allCollections = success;
+          return success;
+        },
+        failure => {
+          console.error(failure);
+        });
+        return null;
   }
 
   // UI
@@ -66,8 +81,48 @@ export class MyCollectionsComponent implements OnInit {
   }
 
   citeAll(coll: MyCollection): void {
-    this.underConstructionMessage = true;
     this.myCollection = coll;
+  }
+
+  loadCitationStyles() {
+    this.csServ.findAll().subscribe(
+      success => {
+        this.citationStyles = success;
+        // alphabetize by abbreviation:
+        this.citationStyles.sort((a, b) => a.abbreviation.localeCompare(b.abbreviation));
+        return success;
+      },
+      failure => {
+        console.error(failure);
+      });
+    return null;
+  }
+
+  back(): void {
+    this.myCollection = null;
+  }
+
+  chooseStyle(citationStyle: CitationStyle) {
+    this.moreInfo = false;
+    // workaround to force reload of [outerHTML] span:
+    this.switch = !this.switch;
+    this.chosenStyle = citationStyle;
+    this.citationOutput += "<hr />";
+      this.myCollection.articles.forEach(ja => {
+        this.citationOutput += this.formatByCitationStyle(this.chosenStyle, ja);
+        this.citationOutput += "<hr />";
+    });
+    this.clickedChooseStyle = true;
+  }
+
+  private formatByCitationStyle(style: CitationStyle, ja: JournalArticle): string {
+    switch (style.abbreviation) {
+      case "AMA": return new FullAmaPipe().transform(ja);
+      case "APA": return new FullApaPipe().transform(ja);
+      case "NLM": return new FullNlmPipe().transform(ja);
+      case "IEEE": return new FullIeeePipe().transform(ja);
+      default: return "Citation style not found.";
+    }
   }
 
   // CRUD
