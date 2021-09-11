@@ -211,8 +211,6 @@ export class DisplayArticleComponent implements OnInit {
       case "AMA": return new FullAmaPipe().transform(this.selected);
       case "APA": return new FullApaPipe().transform(this.selected);
       case "NLM": return new FullNlmPipe().transform(this.selected);
-      case "MLA": return "MLA citations are not yet available.";
-      case "Chicago": return "Chicago style citations are not yet available.";
       case "IEEE": return new FullIeeePipe().transform(this.selected);
       default: return "Citation style not found.";
     }

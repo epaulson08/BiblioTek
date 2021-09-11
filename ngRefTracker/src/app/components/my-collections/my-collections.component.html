@@ -25,26 +25,58 @@
           <div class="card-text mb-2">
             {{ coll.description }}
           </div>
+          <div *ngIf="this.myCollection === coll">
+            <hr />
+            <h5 class="mb-2">
+              <span class="text-custom-secondary">Cite All</span>
+            </h5>
+            Choose a style:
+            <div *ngIf="this.citationStyles" class="my-2">
+              <button
+                class="btn btn-custom-primary mr-2 mb-2 btn-sm"
+                *ngFor="let cs of this.citationStyles"
+                (click)="chooseStyle(cs)"
+              >
+                {{ cs.abbreviation }}
+              </button>
+              <span *ngIf="this.clickedChooseStyle">
+                <span *ngIf="this.switch"><span [outerHTML]="this.citationOutput" class="my-2"></span></span>
+                <span *ngIf="!this.switch"><span [outerHTML]="this.citationOutput" class="my-2"></span></span>
+              <button class="btn btn-full-width btn-custom-primary mb-2">
+                Download as .docx
+              </button>
+                </span>
+            </div>
+          </div>
         </div>
+
         <div class="card-footer">
-          <button
-            class="btn btn-custom-primary btn-sm mr-2"
-            [routerLink]="['/my-collection/' + coll.id]"
-          >
-            View
-          </button>
-          <button
-            class="btn btn-custom-secondary btn-sm mr-2"
-            (click)="editCollection(coll)"
-          >
-            Edit
-          </button>
-          <button
-            class="btn btn-custom-secondary btn-sm"
-            (click)="citeAll(coll)"
-          >
-            Cite All
-          </button>
+          <span *ngIf="this.myCollection === coll">
+            <button class="btn btn-custom-secondary btn-sm" (click)="back()">
+              Back
+            </button>
+          </span>
+
+          <div *ngIf="this.myCollection !== coll">
+            <button
+              class="btn btn-sm btn-custom-primary mr-2"
+              [routerLink]="['/my-collection/' + coll.id]"
+            >
+              View
+            </button>
+            <button
+              class="btn btn-sm btn-custom-primary mr-2"
+              (click)="citeAll(coll)"
+            >
+              Cite All
+            </button>
+            <button
+              class="btn btn-sm btn-custom-secondary mr-2"
+              (click)="editCollection(coll)"
+            >
+              Edit
+            </button>
+          </div>
           <div
             *ngIf="underConstructionMessage && this.myCollection === coll"
             style="color: orange"
