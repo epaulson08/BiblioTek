@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, AfterContentChecked, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, NavigationStart, Router, RoutesRecognized } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,7 +11,7 @@ import { JournalService } from 'src/app/services/journal.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit, OnChanges {
+export class SearchComponent implements OnInit {
 
   ja: JournalArticle = new JournalArticle();
   selected: JournalArticle = new JournalArticle();
@@ -46,12 +46,6 @@ export class SearchComponent implements OnInit, OnChanges {
       this.searchTerm = localStorage.getItem("lastSearchTerm");
     }
     if (this.searchTerm) this.search();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.warn(changes);
-
-    // this.search();
   }
 
   show(form): void {
