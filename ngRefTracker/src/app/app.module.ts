@@ -90,7 +90,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [
     AuthService,
