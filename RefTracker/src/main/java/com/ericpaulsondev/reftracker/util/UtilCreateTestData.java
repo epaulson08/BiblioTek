@@ -68,11 +68,12 @@ public class UtilCreateTestData {
 			}
 
 			// add citation styles
-			for (int i = 1; i <= 6; i++) {
-				testUser.addCS(csServ.findById(i));
-			}
+			testUser.addCS(csServ.findById(1));
+			testUser.addCS(csServ.findById(2));
+			testUser.addCS(csServ.findById(4));
+			testUser.addCS(csServ.findById(6));
 
-			// persist test user
+			// persist test users
 			authServ.register(testUser);
 
 			// add MyCollections

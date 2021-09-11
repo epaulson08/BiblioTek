@@ -221,7 +221,6 @@ CREATE TABLE IF NOT EXISTS `all_articles_for_user` (
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
--- THIS LINE MUST BE DELETED FOR MARIADB:
 DROP USER IF EXISTS user@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 CREATE USER 'user'@'localhost' IDENTIFIED BY 'user';
@@ -546,9 +545,7 @@ START TRANSACTION;
 USE `reftrackerdb`;
 INSERT INTO `citation_style` (`id`, `name`, `definitive_reference`, `definitive_reference_url`, `abbreviation`) VALUES (1, 'American Psychological Association', 'American Psychological Association APA Style Website', 'https://apastyle.apa.org/', 'APA');
 INSERT INTO `citation_style` (`id`, `name`, `definitive_reference`, `definitive_reference_url`, `abbreviation`) VALUES (2, 'American Medical Association', 'AMA Manual of Style', 'https://www.amamanualofstyle.com/', 'AMA');
-INSERT INTO `citation_style` (`id`, `name`, `definitive_reference`, `definitive_reference_url`, `abbreviation`) VALUES (3, 'Chicago Style', 'Chicago Manual of Style', 'https://www.chicagomanualofstyle.org/home.html', 'Chicago');
 INSERT INTO `citation_style` (`id`, `name`, `definitive_reference`, `definitive_reference_url`, `abbreviation`) VALUES (4, 'National Library of Medicine', 'ICMJE Recommendations', 'http://www.icmje.org/recommendations/', 'NLM');
-INSERT INTO `citation_style` (`id`, `name`, `definitive_reference`, `definitive_reference_url`, `abbreviation`) VALUES (5, 'Modern Language Association', 'MLA Style Center', 'https://style.mla.org/', 'MLA');
 INSERT INTO `citation_style` (`id`, `name`, `definitive_reference`, `definitive_reference_url`, `abbreviation`) VALUES (6, 'Institute of Electrical and Electronics Engineers', 'IEEE Editorial Style Manual', 'https://journals.ieeeauthorcenter.ieee.org/create-your-ieee-journal-article/create-the-text-of-your-article/ieee-editorial-style-manual/', 'IEEE');
 
 COMMIT;
@@ -563,9 +560,7 @@ INSERT INTO `citation_style_link` (`id`, `url`, `comment`, `citation_style_id`) 
 INSERT INTO `citation_style_link` (`id`, `url`, `comment`, `citation_style_id`) VALUES (2, 'https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/general_format.html', 'Purdue University\'s Online Writing lab, APA page', 1);
 INSERT INTO `citation_style_link` (`id`, `url`, `comment`, `citation_style_id`) VALUES (3, 'https://library.tamu.edu/help/help-yourself/citing-sources/files/Using-the-AMA-Style.pdf', 'Texas A&M University AMA style guide. Warning: this is from 2009 and may contain outdated information.', 2);
 INSERT INTO `citation_style_link` (`id`, `url`, `comment`, `citation_style_id`) VALUES (4, 'https://www.scribbr.com/apa-style/format/', 'Scribbr\'s guide to APA document formatting.', 1);
-INSERT INTO `citation_style_link` (`id`, `url`, `comment`, `citation_style_id`) VALUES (5, 'https://owl.purdue.edu/owl/research_and_citation/chicago_manual_17th_edition/cmos_formatting_and_style_guide/periodicals.html', 'Purdue University\'s Online Writing Lab, Chicago Style', 3);
 INSERT INTO `citation_style_link` (`id`, `url`, `comment`, `citation_style_id`) VALUES (6, 'https://libguides.logan.edu/citation_styles/nlm', 'Logan University Library Research Guides', 4);
-INSERT INTO `citation_style_link` (`id`, `url`, `comment`, `citation_style_id`) VALUES (7, 'https://owl.purdue.edu/owl/research_and_citation/mla_style/mla_style_introduction.html', 'Purdue Online Writing Lab', 5);
 INSERT INTO `citation_style_link` (`id`, `url`, `comment`, `citation_style_id`) VALUES (8, 'https://libguides.murdoch.edu.au/IEEE/journal', 'Murdoch University IEEE citation guide', 6);
 INSERT INTO `citation_style_link` (`id`, `url`, `comment`, `citation_style_id`) VALUES (DEFAULT, 'https://libraryguides.vu.edu.au/ieeereferencing/journals', 'Victoria University Library Guide', 6);
 
