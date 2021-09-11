@@ -105,13 +105,14 @@ export class MyCollectionsComponent implements OnInit {
   chooseStyle(citationStyle: CitationStyle) {
     this.moreInfo = false;
     // workaround to force reload of [outerHTML] span:
-    this.switch = !this.switch;
     this.chosenStyle = citationStyle;
+    this.citationOutput = "";
     this.citationOutput += "<hr />";
-      this.myCollection.articles.forEach(ja => {
-        this.citationOutput += this.formatByCitationStyle(this.chosenStyle, ja);
-        this.citationOutput += "<hr />";
+    this.myCollection.articles.forEach(ja => {
+      this.citationOutput += this.formatByCitationStyle(this.chosenStyle, ja);
+      this.citationOutput += "<hr />";
     });
+    this.switch = !this.switch;
     this.clickedChooseStyle = true;
   }
 
