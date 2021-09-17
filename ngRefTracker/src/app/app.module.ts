@@ -3,14 +3,14 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 // components
 import { AppComponent } from './app.component';
 import { CreateComponent } from './components/create/create.component';
 import { DisplayArticleComponent } from './components/display-article/display-article.component';
 import { DisplayAllArticlesComponent } from './components/display-all-articles/display-all-articles.component';
 import { DisplayArticlesComponent } from './components/display-articles/display-articles.component';
-import { DownloadCopyComponent } from './components/download-copy/download-copy.component';
+import { DownloadDocxComponent } from './components/download-docx/download-docx.component';
 import { HomeComponent } from './components/home/home.component';
 import { MyCollectionComponent } from './components/my-collection/my-collection.component';
 import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
@@ -66,7 +66,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     ShowArticleComponent,
     FullApaPipe,
     FullAmaPipe,
-    DownloadCopyComponent,
+    DownloadDocxComponent,
     UserDashboardComponent,
     DisplayArticleComponent,
     MyCollectionComponent,

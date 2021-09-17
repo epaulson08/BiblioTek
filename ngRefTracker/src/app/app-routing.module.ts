@@ -2,11 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateComponent } from './components/create/create.component';
 import { DisplayAllArticlesComponent } from './components/display-all-articles/display-all-articles.component';
-import { DownloadCopyComponent } from './components/download-copy/download-copy.component';
+import { DownloadDocxComponent } from './components/download-docx/download-docx.component';
 import { HomeComponent } from './components/home/home.component';
 import { MyCollectionComponent } from './components/my-collection/my-collection.component';
 import { MyCollectionsComponent } from './components/my-collections/my-collections.component';
-import { NaviComponent } from './components/navi/navi.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SearchComponent } from './components/search/search.component';
@@ -24,7 +23,7 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'search/:searchTerm', component: SearchComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'test', component: DownloadCopyComponent},
+  { path: 'test', component: DownloadDocxComponent},
   { path: 'user-dashboard', component: UserDashboardComponent },
   { path: '**', component: NotFoundComponent }
 ];

@@ -1,21 +1,19 @@
-import { TransitiveCompileNgModuleMetadata } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { Document, HeadingLevel, ImageRun, Packer, Paragraph, Table, TableCell, TableRow, TextRun, VerticalAlign } from 'docx';
+import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from "file-saver";
-import { Author } from 'src/app/models/author';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { ApaAuthorsPipe } from 'src/app/pipes/apa/apa-authors.pipe';
 
 @Component({
-  selector: 'app-download-copy',
-  templateUrl: './download-copy.component.html',
-  styleUrls: ['./download-copy.component.css']
+  selector: 'app-download-docx',
+  templateUrl: './download-docx.component.html',
+  styleUrls: ['./download-docx.component.css']
 })
 
 // thanks to https://github.com/dolanmiu/docx/tree/master/demo
 
-export class DownloadCopyComponent implements OnInit {
+export class DownloadDocxComponent implements OnInit {
   testArticle: JournalArticle;
   testArr: JournalArticle[];
 
@@ -27,10 +25,6 @@ export class DownloadCopyComponent implements OnInit {
   }
 
   save(citationStyle: string): void {
-    // testing:
-    // this.saveDocx(this.createTestDocx(citationStyle));
-
-    // actual:
     switch(citationStyle) {
       case "apa":
         this.saveDocx(this.createApaDocx());
@@ -44,7 +38,6 @@ export class DownloadCopyComponent implements OnInit {
       default:
         break;
     }
-
   }
 
   createApaCitation(ja: JournalArticle): Paragraph {
