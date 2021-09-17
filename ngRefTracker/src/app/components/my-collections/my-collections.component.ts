@@ -24,7 +24,6 @@ export class MyCollectionsComponent implements OnInit {
   // initialization
   allCollections: MyCollection[];
   userId: number;
-  collJas: JournalArticle[];
   myCollectionView: boolean = true;
 
   // UI

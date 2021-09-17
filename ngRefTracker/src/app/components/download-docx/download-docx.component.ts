@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from "file-saver";
+import { CitationStyle } from 'src/app/models/citation-style';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { ApaAuthorsPipe } from 'src/app/pipes/apa/apa-authors.pipe';
@@ -14,26 +15,28 @@ import { ApaAuthorsPipe } from 'src/app/pipes/apa/apa-authors.pipe';
 // thanks to https://github.com/dolanmiu/docx/tree/master/demo
 
 export class DownloadDocxComponent implements OnInit {
-  testArticle: JournalArticle;
-  testArr: JournalArticle[];
+  @Input() docxCitationStyle: CitationStyle;
+  @Input() articlesToCite: JournalArticle[];
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.createTestData();
+    console.warn(this.articlesToCite);
+    console.warn(this.docxCitationStyle.abbreviation);
+
   }
 
-  save(citationStyle: string): void {
-    switch(citationStyle) {
-      case "apa":
+  downloadDocx(): void {
+    switch(this.docxCitationStyle.abbreviation) {
+      case "APA":
         this.saveDocx(this.createApaDocx());
         break;
-      case "ama":
+      case "AMA":
         break;
-      case "ieee":
+      case "IEEE":
         break;
-      case "nlm":
+      case "NLM":
         break;
       default:
         break;
@@ -64,11 +67,11 @@ export class DownloadDocxComponent implements OnInit {
         ]})
   }
 
-  createApaCitations(jas: JournalArticle[]): Paragraph[] {
+  createApaCitations(): Paragraph[] {
     let toReturn: Paragraph[] = [];
-    for (let i=0; i < jas.length; i++) {
-      toReturn.push(this.createApaCitation(jas[i]));
-      if (i !== jas.length - 1) {
+    for (let i=0; i < this.articlesToCite.length; i++) {
+      toReturn.push(this.createApaCitation(this.articlesToCite[i]));
+      if (i !== this.articlesToCite.length - 1) {
         toReturn.push(new Paragraph({style: "default", children: [new TextRun({text: ""})]}));
       }
     }
@@ -76,7 +79,7 @@ export class DownloadDocxComponent implements OnInit {
   }
 
   createApaDocx(): Document {
-    let citations: Paragraph[] = this.createApaCitations(this.testArr);
+    let citations: Paragraph[] = this.createApaCitations();
     return new Document({
       styles: {
         paragraphStyles: [
@@ -141,75 +144,75 @@ export class DownloadDocxComponent implements OnInit {
     });
   }
 
-  createTestData() {
-    this.testArticle = new JournalArticle();
-    this.testArticle.title = "Clinical outcomes of patients seen by rapid response teams: a template for benchmarking international teams";
-    this.testArticle.volumeNum = 107;
-    this.testArticle.yearPublished = 2016;
-    this.testArticle.doi = "http://dx.doi.org/10.1016/j.resuscitation.2016.07.001";
-    this.testArticle.journal = new Journal();
-    this.testArticle.journal.name = "Resuscitation";
-    this.testArticle.authors = [
-          {
-              "id": 9,
-              "firstName": "D",
-              "middleName": "H",
-              "lastName": "Chong",
-              "suffix": "",
-              "articles": []
-          },
-          {
-              "id": 10,
-              "firstName": "J",
-              "middleName": "",
-              "lastName": "Bannard-Smith",
-              "suffix": "",
-              "articles": []
-          },
-          {
-              "id": 11,
-              "firstName": "G",
-              "middleName": "K",
-              "lastName": "Lighthall",
-              "suffix": "",
-              "articles": []
-          },
-          {
-              "id": 12,
-              "firstName": "C",
-              "middleName": "P",
-              "lastName": "Subbe",
-              "suffix": "",
-              "articles": []
-          },
-          {
-              "id": 13,
-              "firstName": "L",
-              "middleName": "",
-              "lastName": "Durham",
-              "suffix": "",
-              "articles": []
-          },
-          {
-              "id": 14,
-              "firstName": "J",
-              "middleName": "",
-              "lastName": "Welch",
-              "suffix": "",
-              "articles": []
-          },
-          {
-              "id": 15,
-              "firstName": "R",
-              "middleName": "",
-              "lastName": "Bellomo",
-              "suffix": "",
-              "articles": []
-          }
-      ];
-      this.testArticle.pages = "7-12";
-      this.testArticle.issueNum = null;
+  // createTestData() {
+  //   this.testArticle = new JournalArticle();
+  //   this.testArticle.title = "Clinical outcomes of patients seen by rapid response teams: a template for benchmarking international teams";
+  //   this.testArticle.volumeNum = 107;
+  //   this.testArticle.yearPublished = 2016;
+  //   this.testArticle.doi = "http://dx.doi.org/10.1016/j.resuscitation.2016.07.001";
+  //   this.testArticle.journal = new Journal();
+  //   this.testArticle.journal.name = "Resuscitation";
+  //   this.testArticle.authors = [
+  //         {
+  //             "id": 9,
+  //             "firstName": "D",
+  //             "middleName": "H",
+  //             "lastName": "Chong",
+  //             "suffix": "",
+  //             "articles": []
+  //         },
+  //         {
+  //             "id": 10,
+  //             "firstName": "J",
+  //             "middleName": "",
+  //             "lastName": "Bannard-Smith",
+  //             "suffix": "",
+  //             "articles": []
+  //         },
+  //         {
+  //             "id": 11,
+  //             "firstName": "G",
+  //             "middleName": "K",
+  //             "lastName": "Lighthall",
+  //             "suffix": "",
+  //             "articles": []
+  //         },
+  //         {
+  //             "id": 12,
+  //             "firstName": "C",
+  //             "middleName": "P",
+  //             "lastName": "Subbe",
+  //             "suffix": "",
+  //             "articles": []
+  //         },
+  //         {
+  //             "id": 13,
+  //             "firstName": "L",
+  //             "middleName": "",
+  //             "lastName": "Durham",
+  //             "suffix": "",
+  //             "articles": []
+  //         },
+  //         {
+  //             "id": 14,
+  //             "firstName": "J",
+  //             "middleName": "",
+  //             "lastName": "Welch",
+  //             "suffix": "",
+  //             "articles": []
+  //         },
+  //         {
+  //             "id": 15,
+  //             "firstName": "R",
+  //             "middleName": "",
+  //             "lastName": "Bellomo",
+  //             "suffix": "",
+  //             "articles": []
+  //         }
+  //     ];
+  //     this.testArticle.pages = "7-12";
+  //     this.testArticle.issueNum = null;
 
-      this.testArr = [this.testArticle, this.testArticle, this.testArticle];
-    }
+  //     this.testArr = [this.testArticle, this.testArticle, this.testArticle];
+  //   }
   }

@@ -40,12 +40,14 @@
                 {{ cs.abbreviation }}
               </button>
               <span *ngIf="this.clickedChooseStyle">
-                <span *ngIf="this.switch"><span [outerHTML]="this.citationOutput" class="my-2"></span></span>
-                <span *ngIf="!this.switch"><span [outerHTML]="this.citationOutput" class="my-2"></span></span>
-              <button class="btn btn-full-width btn-custom-primary mb-2">
-                Download as .docx
-              </button>
-                </span>
+                <span *ngIf="this.switch"
+                  ><span [outerHTML]="this.citationOutput" class="my-2"></span
+                ></span>
+                <span *ngIf="!this.switch"
+                  ><span [outerHTML]="this.citationOutput" class="my-2"></span
+                ></span>
+                <app-download-docx [articlesToCite]="this.coll.articles" [docxCitationStyle]="this.chosenStyle"></app-download-docx>
+              </span>
             </div>
           </div>
         </div>
