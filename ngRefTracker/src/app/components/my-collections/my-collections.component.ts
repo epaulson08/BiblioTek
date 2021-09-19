@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { CitationStyle } from 'src/app/models/citation-style';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { MyCollection } from 'src/app/models/my-collection.model';
-import { FullAmaPipe } from 'src/app/pipes/ama/full-ama.pipe';
+import { FullAmaPipe } from 'src/app/pipes/ama/ama-html.pipe';
 import { ApaHtmlPipe } from 'src/app/pipes/apa/apa-html.pipe';
 import { FullIeeePipe } from 'src/app/pipes/ieee/full-ieee.pipe';
 import { FullNlmPipe } from 'src/app/pipes/nlm/full-nlm.pipe';

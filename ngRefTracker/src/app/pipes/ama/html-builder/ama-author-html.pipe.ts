@@ -1,11 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Author } from 'src/app/models/author';
-import { AuthorEtAlHandlerPipe } from '../author-et-al-handler.pipe';
 
 @Pipe({
-  name: 'amaAuthor'
+  name: 'amaAuthorHtml'
 })
-export class AmaAuthorPipe implements PipeTransform {
+export class AmaAuthorHtmlPipe implements PipeTransform {
 
   transform(author: Author): string {
     if (author != null) {

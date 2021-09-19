@@ -23,15 +23,15 @@ import { ShowArticleComponent } from './components/show-article/show-article.com
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 // pipes
-import { AmaAuthorPipe } from './pipes/ama/ama-author.pipe';
-import { AmaAuthorsPipe } from './pipes/ama/ama-authors.pipe';
+import { AmaAuthorHtmlPipe } from './pipes/ama/html-builder/ama-author-html.pipe';
+import { AmaAuthorsHtmlPipe } from './pipes/ama/html-builder/ama-authors-html.pipe';
 import { ApaAuthorHtmlPipe } from './pipes/apa/html-builder/apa-author-html.pipe';
 import { ApaAuthorsHtmlPipe } from './pipes/apa/html-builder/apa-authors-html.pipe';
 import { ApaDocxPipe } from './pipes/apa/apa-docx.pipe';
 import { ApaHtmlPipe } from './pipes/apa/apa-html.pipe';
 import { AuthorFormatPipe } from './pipes/author-format.pipe';
 import { ChicagoAuthorsPipe } from './pipes/chicago/chicago-authors.pipe';
-import { FullAmaPipe } from './pipes/ama/full-ama.pipe';
+import { FullAmaPipe } from './pipes/ama/ama-html.pipe';
 import { FullIeeePipe } from './pipes/ieee/full-ieee.pipe';
 import { FullMlaPipe } from './pipes/mla/full-mla.pipe';
 import { FullNlmPipe } from './pipes/nlm/full-nlm.pipe';
@@ -51,10 +51,13 @@ import { ApaCitationsDocxPipe } from './pipes/apa/docx-builder/apa-citations-doc
 
 @NgModule({
   declarations: [
-    AmaAuthorPipe,
-    AmaAuthorsPipe,
+    AmaAuthorHtmlPipe,
+    AmaAuthorsHtmlPipe,
     ApaAuthorHtmlPipe,
     ApaAuthorsHtmlPipe,
+    ApaCitationDocxPipe,
+    ApaCitationsDocxPipe,
+    ApaDocxPipe,
     AppComponent,
     AuthorFormatPipe,
     CreateComponent,
@@ -67,6 +70,7 @@ import { ApaCitationsDocxPipe } from './pipes/apa/docx-builder/apa-citations-doc
     RegisterComponent,
     SearchComponent,
     ShowArticleComponent,
+    SidebarComponent,
     ApaHtmlPipe,
     FullAmaPipe,
     DownloadDocxComponent,
@@ -85,10 +89,6 @@ import { ApaCitationsDocxPipe } from './pipes/apa/docx-builder/apa-citations-doc
     NlmAuthorPipe,
     NlmAuthorsPipe,
     FullNlmPipe,
-    SidebarComponent,
-    ApaDocxPipe,
-    ApaCitationDocxPipe,
-    ApaCitationsDocxPipe
   ],
   imports: [
     AppRoutingModule,

@@ -1,4 +1,4 @@
-import { FullAmaPipe } from './full-ama.pipe';
+import { FullAmaPipe } from './ama-html.pipe';
 
 describe('FullAmaPipe', () => {
   it('create an instance', () => {
