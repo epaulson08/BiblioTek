@@ -47,7 +47,18 @@ export class ApaAuthorsPipe implements PipeTransform {
 
 
     // MORE THAN TWENTY AUTHORS
-    else if (authors.length > 20) { }
+    else if (authors.length > 20) {
+      for (let i = 0; i < authors.length; i++) {
+        if (i < 19) {
+          outputStr += new ApaAuthorPipe().transform(authors[i]);
+          outputStr += ", ";
+        }
+        if (i === authors.length - 1) {
+          outputStr += " . . . ";
+          outputStr += new ApaAuthorPipe().transform(authors[i]);
+        }
+      }
+    }
 
     else return "";
 
