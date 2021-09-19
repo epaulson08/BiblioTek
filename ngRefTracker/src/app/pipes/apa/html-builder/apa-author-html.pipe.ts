@@ -1,10 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Author } from '../../models/author';
+import { Author } from '../../../models/author';
 
 @Pipe({
   name: 'apaAuthor'
 })
-export class ApaAuthorPipe implements PipeTransform {
+export class ApaAuthorHtmlPipe implements PipeTransform {
 
   transform(author: Author): string {
     let outputStr: string = "";

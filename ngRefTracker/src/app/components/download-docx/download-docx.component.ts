@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Document, Packer, Paragraph, TextRun } from 'docx';
+import { Document, Packer } from 'docx';
 import { saveAs } from "file-saver";
 import { CitationStyle } from 'src/app/models/citation-style';
-import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
-import { ApaAuthorsPipe } from 'src/app/pipes/apa/apa-authors.pipe';
+import { ApaDocxPipe } from 'src/app/pipes/apa/apa-docx.pipe';
 
 @Component({
   selector: 'app-download-docx',
@@ -22,15 +21,12 @@ export class DownloadDocxComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.warn(this.articlesToCite);
-    console.warn(this.docxCitationStyle.abbreviation);
-
   }
 
   downloadDocx(): void {
     switch(this.docxCitationStyle.abbreviation) {
       case "APA":
-        this.saveDocx(this.createApaDocx());
+        this.saveDocx(new ApaDocxPipe().transform(this.articlesToCite));
         break;
       case "AMA":
         break;
@@ -43,176 +39,9 @@ export class DownloadDocxComponent implements OnInit {
     }
   }
 
-  createApaCitation(ja: JournalArticle): Paragraph {
-    // Part A: non-italic: [authors (year). Title.]
-    // Part B: italic: [journal, vol,]
-    // Part C: non-italic: [pp.]
-    let authors: string = new ApaAuthorsPipe().transform(ja.authors);
-    let partA: string = `${authors} (${ja.yearPublished}). ${ja.title}. `;
-    let partB: string = `${ja.journal.name}, ${ja.volumeNum}, `;
-    let partC: string = `${ja.pages}.`;
-    return new Paragraph({
-      style: "default",
-        children: [
-          new TextRun({
-            text: partA
-          }),
-          new TextRun({
-            text: partB,
-            italics: true,
-          }),
-          new TextRun({
-            text: partC,
-          })
-        ]})
-  }
-
-  createApaCitations(): Paragraph[] {
-    let toReturn: Paragraph[] = [];
-    for (let i=0; i < this.articlesToCite.length; i++) {
-      toReturn.push(this.createApaCitation(this.articlesToCite[i]));
-      if (i !== this.articlesToCite.length - 1) {
-        toReturn.push(new Paragraph({style: "default", children: [new TextRun({text: ""})]}));
-      }
-    }
-    return toReturn;
-  }
-
-  createApaDocx(): Document {
-    let citations: Paragraph[] = this.createApaCitations();
-    return new Document({
-      styles: {
-        paragraphStyles: [
-            {
-              id: "default",
-              name: "default",
-              basedOn: "Normal",
-              quickFormat: true,
-              run: {
-                font: "Calibri",
-                size: 22  // halves font on save for unknown reasons
-                // https://github.com/dolanmiu/docx/blob/master/demo/11-declaritive-styles-2.ts
-              }
-            }
-        ]
-      },
-      sections: [
-        {
-          children: citations
-        },
-      ],
-    });
-  }
-
-  createTestDocx(citationStyle: string): Document {
-    return new Document({
-      styles: {
-        paragraphStyles: [
-            {
-              id: "default",
-              name: "default",
-              basedOn: "Normal",
-              quickFormat: true,
-              run: {
-                font: "Calibri",
-                size: 22  // halves font on save for unknown reasons
-                // https://github.com/dolanmiu/docx/blob/master/demo/11-declaritive-styles-2.ts
-              }
-            }
-        ]
-      },
-      sections: [
-        {
-          children: [
-            new Paragraph({
-              style: "default",
-              children: [
-                new TextRun({
-                    text: "ipsum",
-
-                })],
-            }),
-          ],
-        },
-      ],
-    });
-  }
-
   saveDocx(docToSave: Document) {
     Packer.toBlob(docToSave).then(blob => {
       saveAs(blob, "my-refs.docx");
     });
   }
-
-  // createTestData() {
-  //   this.testArticle = new JournalArticle();
-  //   this.testArticle.title = "Clinical outcomes of patients seen by rapid response teams: a template for benchmarking international teams";
-  //   this.testArticle.volumeNum = 107;
-  //   this.testArticle.yearPublished = 2016;
-  //   this.testArticle.doi = "http://dx.doi.org/10.1016/j.resuscitation.2016.07.001";
-  //   this.testArticle.journal = new Journal();
-  //   this.testArticle.journal.name = "Resuscitation";
-  //   this.testArticle.authors = [
-  //         {
-  //             "id": 9,
-  //             "firstName": "D",
-  //             "middleName": "H",
-  //             "lastName": "Chong",
-  //             "suffix": "",
-  //             "articles": []
-  //         },
-  //         {
-  //             "id": 10,
-  //             "firstName": "J",
-  //             "middleName": "",
-  //             "lastName": "Bannard-Smith",
-  //             "suffix": "",
-  //             "articles": []
-  //         },
-  //         {
-  //             "id": 11,
-  //             "firstName": "G",
-  //             "middleName": "K",
-  //             "lastName": "Lighthall",
-  //             "suffix": "",
-  //             "articles": []
-  //         },
-  //         {
-  //             "id": 12,
-  //             "firstName": "C",
-  //             "middleName": "P",
-  //             "lastName": "Subbe",
-  //             "suffix": "",
-  //             "articles": []
-  //         },
-  //         {
-  //             "id": 13,
-  //             "firstName": "L",
-  //             "middleName": "",
-  //             "lastName": "Durham",
-  //             "suffix": "",
-  //             "articles": []
-  //         },
-  //         {
-  //             "id": 14,
-  //             "firstName": "J",
-  //             "middleName": "",
-  //             "lastName": "Welch",
-  //             "suffix": "",
-  //             "articles": []
-  //         },
-  //         {
-  //             "id": 15,
-  //             "firstName": "R",
-  //             "middleName": "",
-  //             "lastName": "Bellomo",
-  //             "suffix": "",
-  //             "articles": []
-  //         }
-  //     ];
-  //     this.testArticle.pages = "7-12";
-  //     this.testArticle.issueNum = null;
-
-  //     this.testArr = [this.testArticle, this.testArticle, this.testArticle];
-  //   }
-  }
+}

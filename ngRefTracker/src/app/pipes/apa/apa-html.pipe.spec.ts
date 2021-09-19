@@ -1,8 +1,8 @@
-import { FullApaPipe } from './full-apa.pipe';
+import { ApaHtmlPipe } from "./apa-html.pipe";
 
 describe('FullApaPipe', () => {
   it('create an instance', () => {
-    const pipe = new FullApaPipe();
+    const pipe = new ApaHtmlPipe();
     expect(pipe).toBeTruthy();
   });
 });
