@@ -1,12 +1,44 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Paragraph, TextRun } from 'docx';
+import { JournalArticle } from 'src/app/models/journal-article';
+import { ApaAuthorsHtmlPipe } from '../../apa/html-builder/apa-authors-html.pipe';
+import { AmaAuthorsHtmlPipe } from '../html-builder/ama-authors-html.pipe';
 
 @Pipe({
   name: 'amaCitationDocx'
 })
 export class AmaCitationDocxPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(ja: JournalArticle): Paragraph {
+    // Part A: non-italic: [authors. title.]
+    // Part B: italic: [journalname]
+    // Part C: non-italic: [. yearpub; vol(issueNum): pp.]
+
+    // AmaAuthorsHtmlPipe will give appropriate output:
+    let authors: string = new AmaAuthorsHtmlPipe().transform(ja.authors);
+console.log(authors);
+
+    let partA: string = `${authors} ${ja.title}. `;
+    let partB: string = `${ja.journal.name}. `;
+    let partC: string = `${ja.yearPublished}; ${ja.volumeNum}`;
+    if (ja.issueNum) partC += `(${ja.issueNum})`;
+    if (ja.pages) partC += `: ${ja.pages}`;
+    partC += ".";
+
+    return new Paragraph({
+      style: "default",
+        children: [
+          new TextRun({
+            text: partA
+          }),
+          new TextRun({
+            text: partB,
+            italics: true,
+          }),
+          new TextRun({
+            text: partC,
+          })
+        ]})
   }
 
 }

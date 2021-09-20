@@ -10,7 +10,7 @@ export class AmaAuthorHtmlPipe implements PipeTransform {
     if (author != null) {
       let outputStr: string = "";
 
-      if (author.lastName) outputStr += " " + author.lastName;
+      if (author.lastName) outputStr += author.lastName;
       if (author.suffix) outputStr += " " + author.suffix;
       if (author.firstName) outputStr += " " + author.firstName[0];
       if (author.middleName) outputStr += author.middleName[0];
