@@ -1,7 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Paragraph, TextRun } from 'docx';
 import { JournalArticle } from 'src/app/models/journal-article';
-import { ApaAuthorsHtmlPipe } from '../../apa/html-builder/apa-authors-html.pipe';
 import { AmaAuthorsHtmlPipe } from '../html-builder/ama-authors-html.pipe';
 
 @Pipe({
@@ -16,7 +15,6 @@ export class AmaCitationDocxPipe implements PipeTransform {
 
     // AmaAuthorsHtmlPipe will give appropriate output:
     let authors: string = new AmaAuthorsHtmlPipe().transform(ja.authors);
-console.log(authors);
 
     let partA: string = `${authors} ${ja.title}. `;
     let partB: string = `${ja.journal.name}. `;

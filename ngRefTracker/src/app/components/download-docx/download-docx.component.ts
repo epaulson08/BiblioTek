@@ -5,6 +5,7 @@ import { CitationStyle } from 'src/app/models/citation-style';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { AmaDocxPipe } from 'src/app/pipes/ama/ama-docx.pipe';
 import { ApaDocxPipe } from 'src/app/pipes/apa/apa-docx.pipe';
+import { IeeeDocxPipe } from 'src/app/pipes/ieee/ieee-docx.pipe';
 
 @Component({
   selector: 'app-download-docx',
@@ -33,6 +34,7 @@ export class DownloadDocxComponent implements OnInit {
         this.saveDocx(new AmaDocxPipe().transform(this.articlesToCite));
         break;
       case "IEEE":
+        this.saveDocx(new IeeeDocxPipe().transform(this.articlesToCite));
         break;
       case "NLM":
         break;

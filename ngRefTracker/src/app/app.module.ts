@@ -32,13 +32,13 @@ import { ApaHtmlPipe } from './pipes/apa/apa-html.pipe';
 import { AuthorFormatPipe } from './pipes/author-format.pipe';
 import { ChicagoAuthorsPipe } from './pipes/chicago/chicago-authors.pipe';
 import { FullAmaPipe } from './pipes/ama/ama-html.pipe';
-import { FullIeeePipe } from './pipes/ieee/full-ieee.pipe';
+import { IeeeHtmlPipe } from './pipes/ieee/ieee-html.pipe';
 import { FullMlaPipe } from './pipes/mla/full-mla.pipe';
 import { FullNlmPipe } from './pipes/nlm/full-nlm.pipe';
 import { ChicagoAuthorPipe } from './pipes/chicago/chicago-author.pipe';
 import { FullChicagoPipe } from './pipes/chicago/full-chicago.pipe';
-import { IeeeAuthorPipe } from './pipes/ieee/ieee-author.pipe';
-import { IeeeAuthorsPipe } from './pipes/ieee/ieee-authors.pipe';
+import { IeeeAuthorHtmlPipe } from './pipes/ieee/html-builder/ieee-author-html.pipe';
+import { IeeeAuthorsHtmlPipe } from './pipes/ieee/html-builder/ieee-authors-html.pipe';
 import { MlaAuthorPipe } from './pipes/mla/mla-author.pipe';
 import { MlaAuthorsPipe } from './pipes/mla/mla-authors.pipe';
 import { NlmAuthorPipe } from './pipes/nlm/nlm-author.pipe';
@@ -79,9 +79,9 @@ import { ApaCitationsDocxPipe } from './pipes/apa/docx-builder/apa-citations-doc
     MyCollectionComponent,
     ChicagoAuthorPipe,
     FullChicagoPipe,
-    IeeeAuthorPipe,
-    IeeeAuthorsPipe,
-    FullIeeePipe,
+    IeeeAuthorHtmlPipe,
+    IeeeAuthorsHtmlPipe,
+    IeeeHtmlPipe,
     ChicagoAuthorsPipe,
     MlaAuthorPipe,
     MlaAuthorsPipe,
