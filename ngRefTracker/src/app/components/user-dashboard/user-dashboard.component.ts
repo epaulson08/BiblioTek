@@ -9,7 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UserDashboardComponent implements OnInit {
 
-  username: String = localStorage.getItem("username");
+  chosenPalette: string = "btn btn-primary";
+  username: string = localStorage.getItem("username");
   clickedCite: boolean = false;
 
   constructor(
