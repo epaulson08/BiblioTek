@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark">
+<nav [ngClass]="'navbar navbar-expand-md navbar-dark navbar-palette' + chosenPalette">
   <a
     *ngIf="this.loggedIn"
     class="navbar-brand"

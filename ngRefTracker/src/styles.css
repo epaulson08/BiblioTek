@@ -12,8 +12,7 @@ Thanks to colormind.io
 */
 
 /* A1: Muted teal */
-nav,
-.bg-palette-A1 {
+.navbar-palette-A {
   background-color: #287286;
 }
 
@@ -186,28 +185,32 @@ Y danger:red
 */
 
 /* btn-primary (Z) */
+.navbar-palette-Y {
+  background-color: brown;
+}
+
 .btn-custom-primary-Y {
-  background-color: yellow;
-  border-color: yellow;
-  color: black;
+  background-color: orange;
+  border-color: orange;
+  color: white;
 }
 
 .btn-custom-primary-Y:hover {
-  background-color: yellow;
-  border-color: yellow;
-  color: black;
+  background-color: orange;
+  border-color: orange;
+  color: white;
 }
 
 .btn-custom-primary-white-Y {
-  background-color: yellow;
+  background-color: orange;
   border-color: white;
-  color: black;
+  color: white;
 }
 
 .btn-custom-primary-white-Y:hover {
-  background-color: yellow;
+  background-color: orange;
   border-color: white;
-  color: black;
+  color: white;
 }
 
 /* btn-secondary (Y) */
@@ -237,27 +240,27 @@ Y danger:red
 
 /* btn-custom-warning (Y) */
 .btn-custom-warning-Y {
-  background-color: orange;
-  border-color: orange;
-  color: white;
+  background-color: yellow;
+  border-color: yellow;
+  color: black;
 }
 
 .btn-custom-warning-Y:hover {
-  background-color: orange;
-  border-color: orange;
-  color: white;
+  background-color: yellow;
+  border-color: yellow;
+  color: black;
 }
 
 .btn-custom-warning-white-Y {
-  background-color: orange;
-  border-color: orange;
-  color: white;
+  background-color: yellow;
+  border-color: yellow;
+  color: black;
 }
 
 .btn-custom-warning-white-Y:hover {
-  background-color: orange;
+  background-color: yellow;
   border-color: white;
-  color: white;
+  color: black;
 }
 
 /* btn-custom-danger (Y) */
@@ -294,7 +297,15 @@ Z warning: grey;
 Z danger: pink
 */
 
+.navbar-palette-Z {
+  background-color: navy;
+}
+
 /* btn-primary (Z) */
+navbar-palette-Z {
+  background-color: navy;
+}
+
 .btn-custom-primary-Z {
   background-color: purple;
   border-color: purple;
@@ -317,6 +328,10 @@ Z danger: pink
   background-color: purple;
   border-color: white;
   color: white;
+}
+
+.navbar-palette-Z {
+  background-color: navy;
 }
 
 /* btn-secondary (Z) */

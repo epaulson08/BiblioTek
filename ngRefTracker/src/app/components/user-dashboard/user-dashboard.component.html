@@ -1,4 +1,4 @@
-<app-navi></app-navi>
+<app-navi [chosenPalette]="this.chosenPalette"></app-navi>
 <div class="container-fluid">
   <div class="row">
     <div class="col-3 col-xl-2 d-none d-md-block sidebar">
@@ -56,14 +56,14 @@
       </button>
 
       <hr />
-      <button class="btn btn-custom-primary-A" (click)="choosePalette('A')">Revert Palette</button>
+      <button class="btn btn-custom-primary-A" (click)="choosePalette('A')">Choose Palette A (Default)</button>
       <hr />
 
       <button
         [ngClass]="'btn btn-custom-primary' + this.chosenPalette"
         (click)="choosePalette('Z')"
       >
-        Choose Palette
+        Choose Palette Z
       </button>
       <div id="palette-A-1" class="mt-2"></div>
       <div id="palette-A-2"></div>
@@ -74,7 +74,7 @@
         [ngClass]="'btn btn-custom-primary' + this.chosenPalette"
         (click)="choosePalette('Y')"
       >
-        Choose Palette
+        Choose Palette Y
       </button>
       <div id="palette-B-1" class="mt-2"></div>
       <div id="palette-B-2"></div>

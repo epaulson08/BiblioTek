@@ -23,7 +23,6 @@ export class UserDashboardComponent implements OnInit {
   ngOnInit(): void {
     if (!this.authServ.checkLogin()) this.router.navigateByUrl('home');
     this.loadPalette();
-    console.log(this.chosenPalette);
   }
 
   loadPalette(): string {
