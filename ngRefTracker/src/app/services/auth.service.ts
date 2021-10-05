@@ -3,7 +3,6 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,10 +28,8 @@ export class AuthService {
     .pipe(
       tap((res) => {
         localStorage.setItem('credentials', credentials);
-        // this is clumsy and can likely be refactored:
         localStorage.setItem('chosenPalette', this.loadPalette());
         return res;
-
       }),
       catchError((err: any) => {
         console.log(err);
