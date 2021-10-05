@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UserDashboardComponent implements OnInit {
 
-  chosenPalette: string = "btn btn-primary";
+  chosenPalette: string;
   username: string = localStorage.getItem("username");
   clickedCite: boolean = false;
 
@@ -20,8 +20,12 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.authServ.checkLogin()) this.router.navigateByUrl('home');
+    this.chosenPalette = '-A';
   }
 
+  choosePalette(choice: string) {
+    this.chosenPalette = "-" + choice;
+  }
   clickCiteButton() {
     this.clickedCite = true;
   }

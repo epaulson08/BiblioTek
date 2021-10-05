@@ -10,7 +10,7 @@
       </h4>
       <h5 class="text-palette-A1">Get started:</h5>
       <button
-        class="btn btn-custom-primary my-1 mr-2"
+        class="btn my-1 mr-2 btn-custom-primary"
         [routerLink]="['/display-all-articles']"
       >
         List All
@@ -34,7 +34,21 @@
         Search
       </button>
       <hr />
-      <button [ngClass]="chosenPalette">Tester</button>
+      <button [ngClass]="'btn btn-custom-primary' + this.chosenPalette" (click)="choosePalette('A')">
+        Choose Palette
+      </button>
+      <div id="palette-A-1" class="mt-2"></div>
+      <div id="palette-A-2"></div>
+      <div id="palette-A-3"></div>
+      <div id="palette-A-4"></div>
+      <hr />
+      <button [ngClass]="'btn btn-custom-primary' + this.chosenPalette">
+        Choose Palette
+      </button>
+      <div id="palette-B-1" class="mt-2"></div>
+      <div id="palette-B-2"></div>
+      <div id="palette-B-3"></div>
+      <div id="palette-B-4"></div>
     </div>
   </div>
 </div>
