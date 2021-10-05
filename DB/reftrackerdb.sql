@@ -103,6 +103,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `update_date` DATETIME NULL,
   `dob` DATE NULL,
   `suffix` VARCHAR(45) NULL,
+  `preferred_palette` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -511,7 +512,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `reftrackerdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `middle_name`, `role`, `localdate`, `enabled`, `create_date`, `update_date`, `dob`, `suffix`) VALUES (1, 'testuser', 'wombat1', 'tester@test.com', 'Testy', 'Tester', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `middle_name`, `role`, `localdate`, `enabled`, `create_date`, `update_date`, `dob`, `suffix`, `preferred_palette`) VALUES (1, 'testuser', 'wombat1', 'tester@test.com', 'Testy', 'Tester', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
