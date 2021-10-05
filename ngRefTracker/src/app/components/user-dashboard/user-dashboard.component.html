@@ -10,31 +10,59 @@
       </h4>
       <h5 class="text-palette-A1">Get started:</h5>
       <button
-        class="btn my-1 mr-2 btn-custom-primary"
+        [ngClass]="'mr-2 my-1 btn btn-custom-primary' + this.chosenPalette"
         [routerLink]="['/display-all-articles']"
       >
         List All
       </button>
       <button
-        class="btn btn-custom-primary my-1 mr-2"
+        [ngClass]="'mr-2 my-1 btn btn-custom-primary' + this.chosenPalette"
         [routerLink]="['/my-collections']"
       >
         My Collections
       </button>
       <button
-        class="btn btn-custom-secondary mr-2 my-1"
+        [ngClass]="'mr-2 my-1 btn btn-custom-primary' + this.chosenPalette"
         [routerLink]="['/create']"
       >
         Create
       </button>
       <button
-        class="btn btn-custom-secondary mr-2 my-1"
+        [ngClass]="'mr-2 my-1 btn btn-custom-primary' + this.chosenPalette"
         [routerLink]="['/search']"
       >
         Search
       </button>
       <hr />
-      <button [ngClass]="'btn btn-custom-primary' + this.chosenPalette" (click)="choosePalette('A')">
+      <button
+        [ngClass]="'mr-2 my-1 btn btn-custom-primary' + this.chosenPalette"
+      >
+        btn-primary
+      </button>
+      <button
+        [ngClass]="'mr-2 my-1 btn btn-custom-secondary' + this.chosenPalette"
+      >
+        btn-secondary
+      </button>
+      <button
+        [ngClass]="'mr-2 my-1 btn btn-custom-warning' + this.chosenPalette"
+      >
+        btn-warning
+      </button>
+      <button
+        [ngClass]="'mr-2 my-1 btn btn-custom-danger' + this.chosenPalette"
+      >
+        btn-danger
+      </button>
+
+      <hr />
+      <button class="btn btn-custom-primary-A" (click)="choosePalette('A')">Revert Palette</button>
+      <hr />
+
+      <button
+        [ngClass]="'btn btn-custom-primary' + this.chosenPalette"
+        (click)="choosePalette('Z')"
+      >
         Choose Palette
       </button>
       <div id="palette-A-1" class="mt-2"></div>
@@ -42,7 +70,10 @@
       <div id="palette-A-3"></div>
       <div id="palette-A-4"></div>
       <hr />
-      <button [ngClass]="'btn btn-custom-primary' + this.chosenPalette">
+      <button
+        [ngClass]="'btn btn-custom-primary' + this.chosenPalette"
+        (click)="choosePalette('Y')"
+      >
         Choose Palette
       </button>
       <div id="palette-B-1" class="mt-2"></div>
