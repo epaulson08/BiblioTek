@@ -10,35 +10,35 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserDashboardComponent implements OnInit {
 
-  chosenPalette: string;
+  chosenPalette: string = localStorage.getItem("chosenPalette");
   username: string = localStorage.getItem("username");
   clickedCite: boolean = false;
 
   constructor(
     private authServ: AuthService,
-    private userServ: UserService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
     if (!this.authServ.checkLogin()) this.router.navigateByUrl('home');
-    this.loadPalette();
+    // this.loadPalette();
   }
 
-  loadPalette(): string {
-    this.userServ.findPalette().subscribe(
-      success => {
-        this.chosenPalette = "-" + success;
-        return success;
-      },
-      failure => {
-        console.error(failure);
-      });
-    return null;
-  }
+  // loadPalette(): string {
+  //   this.userServ.findPalette().subscribe(
+  //     success => {
+  //       this.chosenPalette = "-" + success;
+  //       return success;
+  //     },
+  //     failure => {
+  //       console.error(failure);
+  //     });
+  //   return null;
+  // }
 
   choosePalette(choice: string) {
     this.chosenPalette = "-" + choice;
+    localStorage.setItem("chosenPalette", this.chosenPalette);
   }
 
   clickCiteButton() {

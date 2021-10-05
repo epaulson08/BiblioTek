@@ -1,8 +1,16 @@
-<app-navi [chosenPalette]="this.chosenPalette"></app-navi>
+<app-navi
+  [ngClass]="this.chosenPalette"
+  [chosenPalette]="this.chosenPalette"
+></app-navi>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-3 col-xl-2 d-none d-md-block sidebar">
-      <app-sidebar></app-sidebar>
+    <div
+      [ngClass]="
+        'col-3 col-xl-2 d-none d-md-block sidebar sidebar-palette' +
+        this.chosenPalette
+      "
+    >
+      <app-sidebar [chosenPalette]="this.chosenPalette"></app-sidebar>
     </div>
     <div class="col">
       <h4 class="my-3 page-header">
@@ -34,52 +42,96 @@
         Search
       </button>
       <hr />
+      <h5 class="text-palette-A1">Settings</h5>
+      <h6 class="text-palette-A1">Current Palette:</h6>
       <button
         [ngClass]="'mr-2 my-1 btn btn-custom-primary' + this.chosenPalette"
       >
-        btn-primary
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </button>
       <button
         [ngClass]="'mr-2 my-1 btn btn-custom-secondary' + this.chosenPalette"
       >
-        btn-secondary
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </button>
       <button
         [ngClass]="'mr-2 my-1 btn btn-custom-warning' + this.chosenPalette"
       >
-        btn-warning
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </button>
       <button
         [ngClass]="'mr-2 my-1 btn btn-custom-danger' + this.chosenPalette"
       >
-        btn-danger
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </button>
-
+      <h6 class="my-2 text-palette-A1">Change Palette:</h6>
       <hr />
-      <button class="btn btn-custom-primary-A" (click)="choosePalette('A')">Choose Palette A (Default)</button>
-      <hr />
-
+      <button class="mr-2 my-1 btn btn-custom-primary-A">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button class="mr-2 my-1 btn btn-custom-secondary-A">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button class="mr-2 my-1 btn btn-custom-warning-A">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button class="mr-2 my-1 btn btn-custom-danger-A">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
       <button
-        [ngClass]="'btn btn-custom-primary' + this.chosenPalette"
+        [ngClass]="
+          'float-right btn ml-2 btn-custom-primary' + this.chosenPalette
+        "
+        (click)="choosePalette('A')"
+      >
+        Select
+      </button>
+      <hr />
+      <button class="mr-2 my-1 btn btn-custom-primary-Z">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button class="mr-2 my-1 btn btn-custom-secondary-Z">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button class="mr-2 my-1 btn btn-custom-warning-Z">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button class="mr-2 my-1 btn btn-custom-danger-Z">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button
+        [ngClass]="'btn float-right btn-custom-primary' + this.chosenPalette"
         (click)="choosePalette('Z')"
       >
-        Choose Palette Z
+        Select
       </button>
-      <div id="palette-A-1" class="mt-2"></div>
-      <div id="palette-A-2"></div>
-      <div id="palette-A-3"></div>
-      <div id="palette-A-4"></div>
       <hr />
       <button
-        [ngClass]="'btn btn-custom-primary' + this.chosenPalette"
+        class="mr-2 my-1 btn btn-custom-primary-Y"
+      >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button
+        class="mr-2 my-1 btn btn-custom-secondary-Y"
+      >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button
+        class="mr-2 my-1 btn btn-custom-warning-Y"
+      >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button
+        class="mr-2 my-1 btn btn-custom-danger-Y"
+      >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button
+        [ngClass]="'float-right btn btn-custom-primary' + this.chosenPalette"
         (click)="choosePalette('Y')"
       >
-        Choose Palette Y
+        Select
       </button>
-      <div id="palette-B-1" class="mt-2"></div>
-      <div id="palette-B-2"></div>
-      <div id="palette-B-3"></div>
-      <div id="palette-B-4"></div>
     </div>
   </div>
 </div>

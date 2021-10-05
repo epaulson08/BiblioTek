@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,10 @@ export class AuthService {
     .pipe(
       tap((res) => {
         localStorage.setItem('credentials', credentials);
+        // this is clumsy and can likely be refactored:
+        localStorage.setItem('chosenPalette', this.loadPalette());
         return res;
+
       }),
       catchError((err: any) => {
         console.log(err);
@@ -78,5 +82,30 @@ export class AuthService {
     }
     return httpOptions;
   }
+
+  // On Login:
+  // (this approach is clumsy and can likely be refactored)
+  findPalette(): Observable<string> {
+    return this.http.get<string>(
+      this.baseUrl + `users/palette`,
+      this.generateHttpHeader())
+      .pipe(
+        catchError((err: any) => {
+          return throwError(err);
+        })
+        );
+      }
+
+    loadPalette(): string {
+       this.findPalette().subscribe(
+          success => {
+            localStorage.setItem("chosenPalette", "-" + success);
+            return success;
+          },
+          failure => {
+            console.error(failure);
+          });
+        return null;
+      }
 
 }

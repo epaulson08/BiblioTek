@@ -16,6 +16,10 @@ Thanks to colormind.io
   background-color: #287286;
 }
 
+.sidebar-palette-A {
+  background-color: #c19a6b;
+}
+
 .text-custom-secondary,
 .text-palette-A1 {
   color: #287286;
@@ -119,7 +123,7 @@ a:hover,
 }
 
 .btn-custom-warning-white,
-.btn-cutsom-warning-white-A {
+.btn-custom-warning-white-A {
   background-color: #c19a6b;
   border-color: white;
   color: white;
@@ -184,31 +188,35 @@ Y warning: orange
 Y danger:red
 */
 
-/* btn-primary (Z) */
+.sidebar-palette-Y {
+  background-color: orange;
+}
+
 .navbar-palette-Y {
   background-color: brown;
 }
 
+/* btn-primary (Y) */
 .btn-custom-primary-Y {
-  background-color: orange;
-  border-color: orange;
-  color: white;
+  background-color: yellow;
+  border-color: yellow;
+  color: black;
 }
 
 .btn-custom-primary-Y:hover {
-  background-color: orange;
-  border-color: orange;
-  color: white;
+  background-color: yellow;
+  border-color: yellow;
+  color: black;
 }
 
 .btn-custom-primary-white-Y {
-  background-color: orange;
+  background-color: yellow;
   border-color: white;
   color: white;
 }
 
 .btn-custom-primary-white-Y:hover {
-  background-color: orange;
+  background-color: yellow;
   border-color: white;
   color: white;
 }
@@ -240,27 +248,27 @@ Y danger:red
 
 /* btn-custom-warning (Y) */
 .btn-custom-warning-Y {
-  background-color: yellow;
-  border-color: yellow;
-  color: black;
+  background-color: orange;
+  border-color: orange;
+  color: white;
 }
 
 .btn-custom-warning-Y:hover {
-  background-color: yellow;
-  border-color: yellow;
-  color: black;
+  background-color: orange;
+  border-color: orange;
+  color: white;
 }
 
 .btn-custom-warning-white-Y {
-  background-color: yellow;
-  border-color: yellow;
-  color: black;
+  background-color: orange;
+  border-color: white;
+  color: white;
 }
 
 .btn-custom-warning-white-Y:hover {
-  background-color: yellow;
+  background-color: orange;
   border-color: white;
-  color: black;
+  color: white;
 }
 
 /* btn-custom-danger (Y) */
@@ -289,7 +297,6 @@ Y danger:red
 }
 
 
-
 /* Palette Z (for testing):
 Z primary: purple;
 Z secondary: navy;
@@ -301,11 +308,11 @@ Z danger: pink
   background-color: navy;
 }
 
-/* btn-primary (Z) */
-navbar-palette-Z {
-  background-color: navy;
+.sidebar-palette-Z {
+  background-color: grey !important;
 }
 
+/* btn-primary (Z) */
 .btn-custom-primary-Z {
   background-color: purple;
   border-color: purple;
@@ -438,7 +445,7 @@ navbar-palette-Z {
 
 .sidebar {
   min-height: 100vh;
-  background-color: #c19a6b;
+  /* background-color: #c19a6b; */
 }
 
 .page-header,

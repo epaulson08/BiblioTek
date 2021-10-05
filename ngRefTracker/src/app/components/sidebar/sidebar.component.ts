@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,11 +8,13 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
 
+  @Input() chosenPalette: string;
   searchTerm: string = null;
 
   constructor(private route: Router) { }
 
   ngOnInit(): void {
+    if (!this.chosenPalette) this.chosenPalette = "-A";
   }
 
   search(): void {
