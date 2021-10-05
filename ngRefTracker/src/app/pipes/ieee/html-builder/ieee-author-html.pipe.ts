@@ -2,9 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Author } from 'src/app/models/author';
 
 @Pipe({
-  name: 'ieeeAuthor'
+  name: 'ieeeAuthorHtml'
 })
-export class IeeeAuthorPipe implements PipeTransform {
+export class IeeeAuthorHtmlPipe implements PipeTransform {
   // http://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE-Reference-Guide-Online-v.04-20-2021.pdf
 
   transform(author: Author): string {

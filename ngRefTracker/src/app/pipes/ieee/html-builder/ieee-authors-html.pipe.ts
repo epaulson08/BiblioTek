@@ -1,17 +1,17 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Author } from 'src/app/models/author';
-import { IeeeAuthorPipe } from './ieee-author.pipe';
+import { IeeeAuthorHtmlPipe } from './ieee-author-html.pipe';
 
 @Pipe({
   name: 'ieeeAuthors'
 })
-export class IeeeAuthorsPipe implements PipeTransform {
+export class IeeeAuthorsHtmlPipe implements PipeTransform {
   // http://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE-Reference-Guide-Online-v.04-20-2021.pdf
   // https://libraryguides.vu.edu.au/ieeereferencing/journals
 
   transform(authors: Author[]): string {
     let outputStr: string = "";
-    let authPipe = new IeeeAuthorPipe();
+    let authPipe = new IeeeAuthorHtmlPipe();
 
     if (authors.length === 1) {
       return authPipe.transform(authors[0]);
@@ -30,7 +30,7 @@ export class IeeeAuthorsPipe implements PipeTransform {
           outputStr += ", ";
         }
         else {
-          outputStr += ", and ";
+          outputStr += "and ";
           outputStr += authPipe.transform(authors[i]);
         }
       }

@@ -6,7 +6,7 @@ import { JournalArticle } from 'src/app/models/journal-article';
 import { MyCollection } from 'src/app/models/my-collection.model';
 import { FullAmaPipe } from 'src/app/pipes/ama/ama-html.pipe';
 import { ApaHtmlPipe } from 'src/app/pipes/apa/apa-html.pipe';
-import { FullIeeePipe } from 'src/app/pipes/ieee/full-ieee.pipe';
+import { IeeeHtmlPipe } from 'src/app/pipes/ieee/ieee-html.pipe';
 import { FullNlmPipe } from 'src/app/pipes/nlm/full-nlm.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { CitationStyleService } from 'src/app/services/citation-style.service';
@@ -211,7 +211,7 @@ export class DisplayArticleComponent implements OnInit {
       case "AMA": return new FullAmaPipe().transform(this.selected);
       case "APA": return new ApaHtmlPipe().transform(this.selected);
       case "NLM": return new FullNlmPipe().transform(this.selected);
-      case "IEEE": return new FullIeeePipe().transform(this.selected);
+      case "IEEE": return new IeeeHtmlPipe().transform(this.selected);
       default: return "Citation style not found.";
     }
   }

@@ -1,15 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { PageSize } from 'docx';
 import { JournalArticle } from 'src/app/models/journal-article';
-import { IeeeAuthorsPipe } from './ieee-authors.pipe';
+import { IeeeAuthorsHtmlPipe } from './html-builder/ieee-authors-html.pipe';
 
 @Pipe({
-  name: 'fullIeee'
+  name: 'ieeeHtml'
 })
-export class FullIeeePipe implements PipeTransform {
+export class IeeeHtmlPipe implements PipeTransform {
 
   transform(ja: JournalArticle): string {
-    let authsPipe = new IeeeAuthorsPipe();
+    let authsPipe = new IeeeAuthorsHtmlPipe();
     let outputStr: string = "";
 
     outputStr += authsPipe.transform(ja.authors);
