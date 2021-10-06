@@ -14,6 +14,12 @@ export class UserService {
 
   constructor(private auth: AuthService, private http: HttpClient) { }
 
+  loadPalette(): string {
+    let chosenPalette: string = localStorage.getItem("chosenPalette");
+    if (!chosenPalette) chosenPalette = '-A';
+    return chosenPalette;
+  }
+
   findUserId(username: string): Observable<number> {
     return this.http.get<number>(
       this.baseUrl + `api/users/getId/${username}`,

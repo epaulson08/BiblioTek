@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-3 col-xl-2 d-none d-md-block sidebar">
+    <div [ngClass]="'col-3 col-xl-2 d-none d-md-block sidebar sidebar-palette' + this.chosenPalette">
       <app-sidebar></app-sidebar>
     </div>
     <div class="col">

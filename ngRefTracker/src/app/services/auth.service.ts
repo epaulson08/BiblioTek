@@ -76,4 +76,8 @@ export class AuthService {
     }
     return httpOptions;
   }
+
+  guardRoute() {
+    if (!this.checkLogin()) this.router.navigateByUrl("home");
+  }
 }

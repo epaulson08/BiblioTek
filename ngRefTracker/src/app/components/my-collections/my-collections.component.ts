@@ -10,6 +10,7 @@ import { FullNlmPipe } from 'src/app/pipes/nlm/full-nlm.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { CitationStyleService } from 'src/app/services/citation-style.service';
 import { MyCollectionService } from 'src/app/services/my-collection.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-my-collections',
@@ -25,6 +26,7 @@ export class MyCollectionsComponent implements OnInit {
   allCollections: MyCollection[];
   userId: number;
   myCollectionView: boolean = true;
+  chosenPalette: string;
 
   // UI
   myCollection: MyCollection;
@@ -47,12 +49,14 @@ export class MyCollectionsComponent implements OnInit {
   constructor(
     private collServ: MyCollectionService,
     private csServ: CitationStyleService,
+    private userServ: UserService,
     private auth: AuthService,
     private router: Router
     ) { }
 
     ngOnInit(): void {
-      if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
+      this.auth.guardRoute();
+      this.chosenPalette = this.userServ.loadPalette();
       this.loadMyCollections();
       this.loadCitationStyles();
     }
