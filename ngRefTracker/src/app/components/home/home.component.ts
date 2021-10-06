@@ -45,9 +45,9 @@ export class HomeComponent implements OnInit {
     this.auth.login("demo", "demo")
       .subscribe(
         data => {
+          localStorage.setItem('chosenPalette', this.auth.loadPalette());
           LocalStorageKeyList.clear();
           localStorage.setItem("username", "Demo User");
-          this.router.navigateByUrl("/user-dashboard");
         },
 
         err => {

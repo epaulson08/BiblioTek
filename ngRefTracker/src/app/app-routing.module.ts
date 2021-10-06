@@ -11,10 +11,18 @@ import { RegisterComponent } from './components/register/register.component';
 import { SearchComponent } from './components/search/search.component';
 import { ShowArticleComponent } from './components/show-article/show-article.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { UserPreferencesResolverService } from './services/user-preferences-resolver.service';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent},
+  {
+    path: 'user-dashboard',
+    component: UserDashboardComponent,
+    resolve: {
+      chosenPalette: UserPreferencesResolverService
+    }
+  },
   { path: 'show-article/:articleId', component: ShowArticleComponent },
   { path: 'display-all-articles', component: DisplayAllArticlesComponent },
   { path: 'create', component: CreateComponent },
@@ -25,7 +33,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'test', component: DownloadDocxComponent},
   { path: 'user-dashboard', component: UserDashboardComponent },
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
