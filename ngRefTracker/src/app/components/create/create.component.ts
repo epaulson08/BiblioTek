@@ -6,6 +6,7 @@ import { JournalArticle } from 'src/app/models/journal-article';
 import { AuthService } from 'src/app/services/auth.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
 import { JournalService } from 'src/app/services/journal.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-create',
@@ -20,19 +21,19 @@ export class CreateComponent implements OnInit {
   newAuthor: Author = new Author();
   authorsList: Author[] = [];
   journals: Journal[] = [];
+  chosenPalette: string;
 
   // init:
   constructor(
     private auth: AuthService,
-    private router: Router,
     private journalServ: JournalService,
-    private jaServ: JournalArticleService
+    private jaServ: JournalArticleService,
+    private userServ: UserService
   ) { }
 
   ngOnInit(): void {
-    if (!this.auth.checkLogin()) {
-      this.router.navigateByUrl("home");
-    }
+    this.auth.guardRoute();
+    this.chosenPalette = this.userServ.loadPalette();
     this.loadJournals();
   }
 

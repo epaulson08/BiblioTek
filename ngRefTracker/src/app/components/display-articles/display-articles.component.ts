@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-display-articles',
@@ -15,12 +16,12 @@ export class DisplayArticlesComponent implements OnInit {
   chosenPalette: string;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private userServ: UserService
     ) { }
 
   ngOnInit(): void {
-    this.chosenPalette = localStorage.getItem("chosenPalette");
-    if (!this.chosenPalette) this.chosenPalette = '-A';
+    this.chosenPalette = this.userServ.loadPalette();
    }
 
   goTo(id: number) {

@@ -6,6 +6,7 @@ import { JournalArticle } from 'src/app/models/journal-article';
 import { AmaDocxPipe } from 'src/app/pipes/ama/ama-docx.pipe';
 import { ApaDocxPipe } from 'src/app/pipes/apa/apa-docx.pipe';
 import { IeeeDocxPipe } from 'src/app/pipes/ieee/ieee-docx.pipe';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-download-docx',
@@ -18,11 +19,12 @@ import { IeeeDocxPipe } from 'src/app/pipes/ieee/ieee-docx.pipe';
 export class DownloadDocxComponent implements OnInit {
   @Input() docxCitationStyle: CitationStyle;
   @Input() articlesToCite: JournalArticle[];
+  chosenPalette: string;
 
-  constructor() {
-  }
+  constructor(private userServ: UserService) { }
 
   ngOnInit(): void {
+    this.chosenPalette = this.userServ.loadPalette();
   }
 
   downloadDocx(): void {

@@ -1,8 +1,8 @@
-<app-navi></app-navi>
+<app-navi [chosenPalette]="this.chosenPalette"></app-navi>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-3 col-xl-2 d-none d-md-block sidebar">
-      <app-sidebar></app-sidebar>
+    <div [ngClass]="'col-3 col-xl-2 d-none d-md-block sidebar sidebar-palette' + this.chosenPalette">
+      <app-sidebar [chosenPalette]="this.chosenPalette"></app-sidebar>
     </div>
     <div class="col-sm-12 col-md-6">
       <h4 class="my-3 page-header">

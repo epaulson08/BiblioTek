@@ -10,15 +10,13 @@ import { AuthService } from 'src/app/services/auth.service';
 
 export class NaviComponent implements OnInit {
 
-  chosenPalette: string;
+  @Input() chosenPalette: string;
   loggedIn: boolean = false;
 
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
     if (this.auth.checkLogin()) this.loggedIn = true;
-    this.chosenPalette = localStorage.getItem("chosenPalette");
-    if (!this.chosenPalette) this.chosenPalette = "-A";
   }
 
   logout() {

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { AuthService } from 'src/app/services/auth.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -23,14 +24,14 @@ export class DisplayAllArticlesComponent implements OnInit {
   // init
   constructor(
     private jaServ: JournalArticleService,
+    private userServ: UserService,
     private router: Router,
     private auth: AuthService
   ) { }
 
   ngOnInit(): void {
-    if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
-    this.chosenPalette = localStorage.getItem("chosenPalette");
-    if (!this.chosenPalette) this.chosenPalette = '-A';
+    this.auth.guardRoute();
+    this.chosenPalette = this.userServ.loadPalette();
     this.loadJournalArticles();
     localStorage.setItem("lastPage", "display-all-articles");
   }

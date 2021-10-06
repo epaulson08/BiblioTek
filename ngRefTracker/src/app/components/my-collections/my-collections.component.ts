@@ -50,8 +50,7 @@ export class MyCollectionsComponent implements OnInit {
     private collServ: MyCollectionService,
     private csServ: CitationStyleService,
     private userServ: UserService,
-    private auth: AuthService,
-    private router: Router
+    private auth: AuthService
     ) { }
 
     ngOnInit(): void {

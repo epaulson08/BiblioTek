@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -15,13 +16,12 @@ export class UserDashboardComponent implements OnInit {
 
   constructor(
     private authServ: AuthService,
-    private router: Router,
+    private userServ: UserService
   ) { }
 
   ngOnInit(): void {
-    if (!this.authServ.checkLogin()) this.router.navigateByUrl('home');
-    this.chosenPalette = localStorage.getItem("chosenPalette");
-    if (!this.chosenPalette) this.chosenPalette = '-A';
+    this.authServ.guardRoute();
+    this.chosenPalette = this.userServ.loadPalette();
   }
 
   choosePalette(choice: string) {

@@ -1,1 +1,1 @@
-<button class="btn btn-custom-primary btn-full-width" (click)="downloadDocx()">Download as .docx</button>
+<button [ngClass]="'btn btn-full-width btn-custom-primary' + this.chosenPalette" (click)="downloadDocx()">Download as .docx</button>

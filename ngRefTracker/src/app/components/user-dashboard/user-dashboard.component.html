@@ -1,4 +1,4 @@
-<app-navi></app-navi>
+<app-navi [chosenPalette]="this.chosenPalette"></app-navi>
 <div class="container-fluid">
   <div class="row">
     <div
@@ -7,7 +7,7 @@
         this.chosenPalette
       "
     >
-      <app-sidebar></app-sidebar>
+      <app-sidebar [chosenPalette]="this.chosenPalette"></app-sidebar>
     </div>
     <div class="col">
       <h4 [ngClass]="'my-3 page-header header-palette' + this.chosenPalette">

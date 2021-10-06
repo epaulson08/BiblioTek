@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MyCollection } from 'src/app/models/my-collection.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { MyCollectionService } from 'src/app/services/my-collection.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-my-collection',
@@ -17,6 +18,7 @@ export class MyCollectionComponent implements OnInit {
   // initialization
   collId: number;
   coll: MyCollection;
+  chosenPalette: string;
 
   // UI
   listView: boolean = false;
@@ -30,12 +32,11 @@ export class MyCollectionComponent implements OnInit {
   // METHODS
 
   // initialization
-  constructor(private auth: AuthService, private route: ActivatedRoute, private router: Router, private collServ: MyCollectionService) { }
+  constructor(private auth: AuthService, private route: ActivatedRoute, private collServ: MyCollectionService, private userServ: UserService) { }
 
   ngOnInit(): void {
-    if (!this.auth.checkLogin()) {
-      this.router.navigateByUrl("home");
-    }
+    this.auth.guardRoute();
+    this.chosenPalette = this.userServ.loadPalette();
     this.setExpandedView();
     this.collId = +this.route.snapshot.paramMap.get('collId');
     this.loadColl();
