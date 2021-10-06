@@ -181,6 +181,125 @@ a:hover,
   background-color: #b24251;
 }
 
+
+/* Palette B:
+B primary: #9A7156;
+B secondary: #57382F;
+B warning: #A39684;
+B danger: #948D53;
+
+Thanks to colormind.io
+*/
+
+.sidebar-palette-B {
+  background-color: #A39684;
+}
+
+.navbar-palette-B {
+  background-color: #57382F;
+}
+
+/* btn-primary (B) */
+.btn-custom-primary-B {
+  background-color: #9A7156;
+  border-color: #9A7156;
+  color: white;
+}
+
+.btn-custom-primary-B:hover {
+  background-color: #825f49;
+  border-color: #825f49;
+  color: white;
+}
+
+.btn-custom-primary-white-B {
+  background-color: #9A7156;
+  border-color: white;
+  color: white;
+}
+
+.btn-custom-primary-white-B:hover {
+  background-color: #825f49;
+  border-color: white;
+  color: white;
+}
+
+/* btn-secondary (B) */
+.btn-custom-secondary-B {
+  background-color: #57382F;
+  border-color: #57382F;
+  color: white;
+}
+
+.btn-custom-secondary-B:hover {
+  background-color: #7d4c41;
+  border-color: #7d4c41;
+  color: white;
+}
+
+.btn-custom-secondary-white-B {
+  background-color: #57382F;
+  border-color: white;
+  color: white;
+}
+
+.btn-custom-secondary-white-B:hover {
+  background-color: #7d4c41;
+  border-color: white;
+  color: white;
+}
+
+/* btn-custom-warning (B) */
+.btn-custom-warning-B {
+  background-color: #A39684;
+  border-color: #A39684;
+  color: white;
+}
+
+.btn-custom-warning-B:hover {
+  background-color: #918678;
+  border-color: #918678;
+  color: white;
+}
+
+.btn-custom-warning-white-B {
+  background-color: #A39684;
+  border-color: white;
+  color: white;
+}
+
+.btn-custom-warning-white-B:hover {
+  background-color: #918678;
+  border-color: white;
+  color: white;
+}
+
+/* btn-custom-danger (B) */
+.btn-custom-danger-B {
+  background-color: #948D53;
+  border-color: #948D53;
+  color: white;
+}
+
+.btn-custom-danger-B:hover {
+  background-color: #948D53;;
+  border-color: #948D53;
+  color: white;
+}
+
+.btn-custom-danger-white-B {
+  background-color: #948D53;;
+  border-color: white;
+  color: white;
+}
+
+.btn-custom-danger-white-B:hover {
+  background-color: #948D53;;
+  border-color: white;
+  color: white;
+}
+
+
 /* Palette Y (for testing only):
 Y primary: yellow
 Y secondary: brown
