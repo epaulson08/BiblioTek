@@ -308,6 +308,14 @@ Z danger: pink
   background-color: navy;
 }
 
+.header-palette-Z {
+  color: navy;
+}
+
+.header-highlighter-palette-Z {
+  background-color: pink;
+}
+
 .sidebar-palette-Z {
   background-color: grey !important;
 }
@@ -336,11 +344,6 @@ Z danger: pink
   border-color: white;
   color: white;
 }
-
-.navbar-palette-Z {
-  background-color: navy;
-}
-
 /* btn-secondary (Z) */
 .btn-custom-secondary-Z {
   background-color: navy;
@@ -450,7 +453,6 @@ Z danger: pink
 
 .page-header,
 .page-header-A {
-  color: #287286;
   font-family: Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 

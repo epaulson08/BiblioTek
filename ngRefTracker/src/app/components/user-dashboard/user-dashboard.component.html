@@ -1,7 +1,4 @@
-<app-navi
-  [ngClass]="this.chosenPalette"
-  [chosenPalette]="this.chosenPalette"
-></app-navi>
+<app-navi [chosenPalette]="this.chosenPalette"></app-navi>
 <div class="container-fluid">
   <div class="row">
     <div
@@ -13,10 +10,12 @@
       <app-sidebar [chosenPalette]="this.chosenPalette"></app-sidebar>
     </div>
     <div class="col">
-      <h4 class="my-3 page-header">
-        <span class="header-highlighter">&nbsp;</span>&nbsp;Dashboard
+      <h4 [ngClass]="'my-3 page-header header-palette' + this.chosenPalette">
+        <span [ngClass]="'header-highlighter-palette' + this.chosenPalette"
+          >&nbsp;</span
+        >&nbsp;Dashboard
       </h4>
-      <h5 class="text-palette-A1">Get started:</h5>
+      <h5 [ngClass]="'header-palette' + this.chosenPalette">Get started:</h5>
       <button
         [ngClass]="'mr-2 my-1 btn btn-custom-primary' + this.chosenPalette"
         [routerLink]="['/display-all-articles']"
@@ -42,8 +41,10 @@
         Search
       </button>
       <hr />
-      <h5 class="text-palette-A1">Settings</h5>
-      <h6 class="text-palette-A1">Current Palette:</h6>
+      <h5 [ngClass]="'header-palette' + this.chosenPalette">Settings</h5>
+      <h6 [ngClass]="'header-palette' + this.chosenPalette">
+        Current Palette:
+      </h6>
       <button
         [ngClass]="'mr-2 my-1 btn btn-custom-primary' + this.chosenPalette"
       >
@@ -64,7 +65,9 @@
       >
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </button>
-      <h6 class="my-2 text-palette-A1">Change Palette:</h6>
+      <h6 [ngClass]="'my-2 header-palette' + this.chosenPalette">
+        Change Palette:
+      </h6>
       <hr />
       <button class="mr-2 my-1 btn btn-custom-primary-A">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -106,24 +109,16 @@
         Select
       </button>
       <hr />
-      <button
-        class="mr-2 my-1 btn btn-custom-primary-Y"
-      >
+      <button class="mr-2 my-1 btn btn-custom-primary-Y">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </button>
-      <button
-        class="mr-2 my-1 btn btn-custom-secondary-Y"
-      >
+      <button class="mr-2 my-1 btn btn-custom-secondary-Y">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </button>
-      <button
-        class="mr-2 my-1 btn btn-custom-warning-Y"
-      >
+      <button class="mr-2 my-1 btn btn-custom-warning-Y">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </button>
-      <button
-        class="mr-2 my-1 btn btn-custom-danger-Y"
-      >
+      <button class="mr-2 my-1 btn btn-custom-danger-Y">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </button>
       <button
