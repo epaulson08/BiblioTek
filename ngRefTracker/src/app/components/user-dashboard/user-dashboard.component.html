@@ -82,12 +82,18 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </button>
       <button
+      [ngClass]="'float-right btn btn-custom-secondary' + this.chosenPalette"
+      (click)="savePalette('A')"
+    >
+    Save
+    </button>
+      <button
         [ngClass]="
-          'float-right btn ml-2 btn-custom-primary' + this.chosenPalette
+          'mr-2 float-right btn ml-2 btn-custom-primary' + this.chosenPalette
         "
-        (click)="choosePalette('A')"
+        (click)="previewPalette('A')"
       >
-        Select
+        Preview
       </button>
       <hr />
       <button class="mr-2 my-1 btn btn-custom-primary-Z">
@@ -103,11 +109,17 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </button>
       <button
-        [ngClass]="'btn float-right btn-custom-primary' + this.chosenPalette"
-        (click)="choosePalette('Z')"
+        [ngClass]="'float-right btn btn-custom-secondary' + this.chosenPalette"
+        (click)="savePalette('Z')"
       >
-        Select
+      Save
       </button>
+      <button
+      [ngClass]="'btn mr-2 float-right btn-custom-primary' + this.chosenPalette"
+      (click)="previewPalette('Z')"
+      >
+      Preview
+    </button>
       <hr />
       <button class="mr-2 my-1 btn btn-custom-primary-Y">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -122,10 +134,16 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </button>
       <button
-        [ngClass]="'float-right btn btn-custom-primary' + this.chosenPalette"
-        (click)="choosePalette('Y')"
+        [ngClass]="'float-right btn btn-custom-secondary' + this.chosenPalette"
+        (click)="savePalette('Y')"
       >
-        Select
+        Save
+      </button>
+      <button
+        [ngClass]="'mr-2 float-right btn btn-custom-primary' + this.chosenPalette"
+        (click)="previewPalette('Y')"
+      >
+        Preview
       </button>
     </div>
   </div>
