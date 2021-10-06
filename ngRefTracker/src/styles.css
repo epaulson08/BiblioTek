@@ -181,7 +181,7 @@ a:hover,
   background-color: #b24251;
 }
 
-/* Palette Y (for testing):
+/* Palette Y (for testing only):
 Y primary: yellow
 Y secondary: brown
 Y warning: orange
@@ -297,11 +297,11 @@ Y danger:red
 }
 
 
-/* Palette Z (for testing):
+/* Palette Z:
 Z primary: purple;
 Z secondary: navy;
 Z warning: grey;
-Z danger: pink
+Z danger: pink;
 */
 
 .navbar-palette-Z {
@@ -328,8 +328,8 @@ Z danger: pink
 }
 
 .btn-custom-primary-Z:hover {
-  background-color: purple;
-  border-color: purple;
+  background-color: rgb(165, 1, 165);
+  border-color:  rgb(165, 1, 165);
   color: white;
 }
 
@@ -340,7 +340,7 @@ Z danger: pink
 }
 
 .btn-custom-primary-white-Z:hover {
-  background-color: purple;
+  background-color: rgb(165, 1, 165);
   border-color: white;
   color: white;
 }
@@ -352,8 +352,8 @@ Z danger: pink
 }
 
 .btn-custom-secondary-Z:hover {
-  background-color: navy;
-  border-color: navy;
+  background-color: rgb(8, 8, 213);
+  border-color: rgb(8, 8, 213);
   color: white;
 }
 
@@ -364,7 +364,7 @@ Z danger: pink
 }
 
 .btn-custom-secondary-white-Z:hover {
-  background-color: navy;
+  background-color: rgb(8, 8, 213);
   border-color: white;
   color: white;
 }
@@ -377,8 +377,8 @@ Z danger: pink
 }
 
 .btn-custom-warning-Z:hover {
-  background-color: gray;
-  border-color: gray;
+  background-color: rgb(171, 171, 171);
+  border-color: rgb(171, 171, 171);
   color: white;
 }
 
@@ -389,7 +389,7 @@ Z danger: pink
 }
 
 .btn-custom-warning-white-Z:hover {
-  background-color: gray;
+  background-color: rgb(171, 171, 171);
   border-color: white;
   color: white;
 }
@@ -402,8 +402,8 @@ Z danger: pink
 }
 
 .btn-custom-danger-Z:hover {
-  background-color: pink;
-  border-color: pink;
+  background-color: rgb(252, 157, 173);
+  border-color: rgb(252, 157, 173);
   color: white;
 }
 
@@ -414,7 +414,7 @@ Z danger: pink
 }
 
 .btn-custom-danger-white-Z:hover {
-  background-color: pink;
+  background-color: rgb(252, 157, 173);
   border-color: white;
   color: white;
 }
