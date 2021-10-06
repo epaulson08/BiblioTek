@@ -17,8 +17,7 @@ export class DisplayArticlesComponent implements OnInit {
     private router: Router
     ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   goTo(id: number) {
     this.router.navigateByUrl(`show-article/${id}`);

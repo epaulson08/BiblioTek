@@ -19,7 +19,6 @@ export class UserDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.warn("in ngOnInit()");
     if (!this.authServ.checkLogin()) this.router.navigateByUrl('home');
     this.chosenPalette = localStorage.getItem("chosenPalette");
     if (!this.chosenPalette) this.chosenPalette = '-A';

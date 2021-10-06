@@ -8,12 +8,13 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
 
-  @Input() chosenPalette: string;
+  chosenPalette: string;
   searchTerm: string = null;
 
   constructor(private route: Router) { }
 
   ngOnInit(): void {
+    this.chosenPalette = localStorage.getItem("chosenPalette");
     if (!this.chosenPalette) this.chosenPalette = "-A";
   }
 

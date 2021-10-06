@@ -1,12 +1,12 @@
 <app-navi></app-navi>
 <div class="container-fluid">
   <div class="row flex-nowrap">
-    <div class="col-2 d-none d-md-block sidebar">
+    <div [ngClass]="'col-2 d-none d-md-block sidebar sidebar-palette' + this.chosenPalette">
       <app-sidebar></app-sidebar>
     </div>
     <div class="col">
-      <h4 class="my-3 page-header">
-        <span class="header-highlighter">&nbsp;</span>&nbsp;All Articles<span class="float-right"
+      <h4 [ngClass]="'my-3 page-header header-palette' + this.chosenPalette">
+        <span [ngClass]="'header-highlighter-palette' + this.chosenPalette">&nbsp;</span>&nbsp;All Articles<span class="float-right"
           >Total: {{ this.totalArticles }}</span
         >
       </h4>

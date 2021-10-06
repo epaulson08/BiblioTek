@@ -13,11 +13,12 @@ import { JournalArticleService } from 'src/app/services/journal-article.service'
 export class DisplayAllArticlesComponent implements OnInit {
 
   // fields
+  @Input() myCollectionView;
   journalArticles: JournalArticle[] = [];
   totalArticles: number;
   searchTerm: string;
   deleted: boolean = false;
-  @Input() myCollectionView;
+  chosenPalette: string;
 
   // init
   constructor(
@@ -28,6 +29,8 @@ export class DisplayAllArticlesComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
+    this.chosenPalette = localStorage.getItem("chosenPalette");
+    if (!this.chosenPalette) this.chosenPalette = '-A';
     this.loadJournalArticles();
     localStorage.setItem("lastPage", "display-all-articles");
   }
