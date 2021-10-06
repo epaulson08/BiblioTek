@@ -25,4 +25,15 @@ export class UserService {
       );
   }
 
+  findPalette(): Observable<string> {
+    return this.http.get<string>(
+      this.baseUrl + `users/palette`,
+      this.auth.generateHttpHeader())
+      .pipe(
+        catchError((err: any) => {
+          return throwError(err);
+        })
+        );
+      }
+
 }

@@ -16,7 +16,6 @@ export class NaviComponent implements OnInit {
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
-    console.warn("navi, chosenPalette=" + this.chosenPalette);
     if (this.auth.checkLogin()) this.loggedIn = true;
     if (!this.chosenPalette) this.chosenPalette = "-A"
   }

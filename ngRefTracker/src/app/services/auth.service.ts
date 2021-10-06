@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -76,31 +76,4 @@ export class AuthService {
     }
     return httpOptions;
   }
-
-  // On Login:
-  // (this approach is clumsy and can likely be refactored)
-  findPalette(): Observable<string> {
-    return this.http.get<string>(
-      this.baseUrl + `users/palette`,
-      this.generateHttpHeader())
-      .pipe(
-        catchError((err: any) => {
-          return throwError(err);
-        })
-        );
-      }
-
-    loadPalette(): string {
-       this.findPalette().subscribe(
-          success => {
-            localStorage.setItem("chosenPalette", "-" + success);
-            this.router.navigateByUrl("/user-dashboard");
-            return success;
-          },
-          failure => {
-            console.error(failure);
-          });
-        return null;
-      }
-
 }
