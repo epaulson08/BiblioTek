@@ -1,14 +1,12 @@
 /*
 Palette A:
-F6F6F7  White
-E0BB8E  Muted tan
-Mod: Muted tan darkened for contrast with white text: #c19a6b;
-B24251  Muted red
-4CC0CD  Bright light blue
-287286  Muted teal
+primary: #4CC0CD;    bright light blue
+secondary: #287286;    dark teal
+warning: #c19a6b;    tan
+(warning was originally #E0BB8E; but was too low contrast with white text)
+danger: #B24251;    red
 
 Thanks to colormind.io
-
 */
 
 /* A1: Muted teal */
@@ -35,7 +33,15 @@ Thanks to colormind.io
   color: #287286;
 }
 
-.btn-custom-secondary,
+.header-palette-A {
+  color: #287286;
+}
+
+.header-highlighter-palette-A {
+  background-color: #4CC0CD;
+}
+
+/* btn-secondary (A) */
 .btn-custom-secondary-A {
   background-color: #287286;
   border-color: #287286;
@@ -199,6 +205,14 @@ Thanks to colormind.io
   background-color: #57382F;
 }
 
+.header-palette-B {
+  color: #57382F;
+}
+
+.header-highlighter-palette-B {
+  background-color: #9A7156;
+}
+
 /* btn-primary (B) */
 .btn-custom-primary-B {
   background-color: #9A7156;
@@ -282,8 +296,8 @@ Thanks to colormind.io
 }
 
 .btn-custom-danger-B:hover {
-  background-color: #948D53;;
-  border-color: #948D53;
+  background-color: #bbb25f;
+  border-color: #bbb25f;
   color: white;
 }
 
@@ -294,7 +308,7 @@ Thanks to colormind.io
 }
 
 .btn-custom-danger-white-B:hover {
-  background-color: #948D53;;
+  background-color: #bbb25f;
   border-color: white;
   color: white;
 }
@@ -463,6 +477,7 @@ Z danger: pink;
   border-color: white;
   color: white;
 }
+
 /* btn-secondary (Z) */
 .btn-custom-secondary-Z {
   background-color: navy;
