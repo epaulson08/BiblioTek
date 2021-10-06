@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ShowArticleComponent implements OnInit {
 
   articleId: number;
+  chosenPalette: string;
 
   constructor(private auth: AuthService, private route: ActivatedRoute, private router: Router) { }
 
@@ -18,6 +19,8 @@ export class ShowArticleComponent implements OnInit {
       this.router.navigateByUrl("home");
     }
     this.articleId = +this.route.snapshot.paramMap.get('articleId');
+    this.chosenPalette = localStorage.getItem("chosenPalette");
+    if (!this.chosenPalette) this.chosenPalette = '-A';
   }
 
 }

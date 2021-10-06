@@ -9,15 +9,19 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./display-articles.component.css']
 })
 export class DisplayArticlesComponent implements OnInit {
-  showOneArticle: boolean = false;
   @Input() articlesToDisplay: JournalArticle[];
   @Input() myCollectionView: boolean;
+  showOneArticle: boolean = false;
+  chosenPalette: string;
 
   constructor(
     private router: Router
     ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.chosenPalette = localStorage.getItem("chosenPalette");
+    if (!this.chosenPalette) this.chosenPalette = '-A';
+   }
 
   goTo(id: number) {
     this.router.navigateByUrl(`show-article/${id}`);

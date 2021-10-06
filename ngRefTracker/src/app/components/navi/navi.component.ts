@@ -18,7 +18,7 @@ export class NaviComponent implements OnInit {
   ngOnInit(): void {
     if (this.auth.checkLogin()) this.loggedIn = true;
     this.chosenPalette = localStorage.getItem("chosenPalette");
-    if (!this.chosenPalette) this.chosenPalette = "-A"
+    if (!this.chosenPalette) this.chosenPalette = "-A";
   }
 
   logout() {

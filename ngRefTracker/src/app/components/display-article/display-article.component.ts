@@ -39,6 +39,7 @@ export class DisplayArticleComponent implements OnInit {
   articleRemoved: boolean = false;
   myCollections: MyCollection[];
   addedMessage: string;
+  chosenPalette: string;
 
   constructor(
     private auth: AuthService,
@@ -51,6 +52,8 @@ export class DisplayArticleComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.auth.checkLogin()) { this.router.navigateByUrl("home"); }
+    this.chosenPalette = localStorage.getItem("chosenPalette");
+    if (!this.chosenPalette) this.chosenPalette = '-A';
     this.loadArticle();
     this.loadCitationStyles();
     this.loadMyCollections();

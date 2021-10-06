@@ -94,7 +94,7 @@
     <div *ngIf="viewCite">
       <hr />
       <button
-        class="btn btn-custom-primary mr-2 mb-2"
+        [ngClass]="'btn mr-2 mb-2 btn-custom-primary' + this.chosenPalette"
         *ngFor="let cs of this.citationStyles"
         (click)="chooseStyle(cs)"
       >
@@ -111,7 +111,10 @@
           <span [outerHTML]="this.citationOutput"></span>
         </div>
         <br />
-        <button class="btn btn-custom-primary btn-sm mb-3" (click)="toggleMoreInfo()">
+        <button
+          [ngClass]="'btn btn-sm mb-3 btn-custom-primary' + this.chosenPalette"
+          (click)="toggleMoreInfo()"
+        >
           More Info ▼
         </button>
         <div *ngIf="moreInfo">
@@ -150,27 +153,49 @@
     <div *ngIf="!viewCite">
       <div class="card-footer d-flex">
         <div *ngIf="!deleted && !editJa">
-          <button class="btn btn-custom-primary mr-2" (click)="cite()">Cite</button>
-          <button class="btn btn-custom-secondary mr-2" (click)="setEdit()">
+          <button
+            [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+            (click)="cite()"
+          >
+            Cite
+          </button>
+          <button
+            [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+            (click)="setEdit()"
+          >
             Edit
           </button>
-          <button class="btn btn-custom-warning mr-2" (click)="goBack()">Back</button>
+          <button
+            [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
+            (click)="goBack()"
+          >
+            Back
+          </button>
         </div>
         <div *ngIf="!deleted && editJa">
-          <button class="btn btn-custom-primary mr-2" (click)="update(editJa)">
+          <button
+            [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+            (click)="update(editJa)"
+          >
             Submit</button
-          ><button class="btn btn-custom-secondary mr-2" (click)="cancelEdit()">
+          ><button
+            [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+            (click)="cancelEdit()"
+          >
             Cancel
           </button>
         </div>
         <div *ngIf="!deleted">
           <button
-            class="btn btn-custom-danger mr-2"
+            [ngClass]="'btn mr-2 btn-custom-danger' + this.chosenPalette"
             (click)="removeFromCollection(this.collId, this.articleId)"
           >
             Remove
           </button>
-          <button class="btn btn-custom-danger mr-2" (click)="delete(selected.id)">
+          <button
+            [ngClass]="'btn mr-2 btn-custom-danger' + this.chosenPalette"
+            (click)="delete(selected.id)"
+          >
             Delete
           </button>
         </div>
@@ -187,8 +212,18 @@
     <!-- Citation view selected: -->
     <div *ngIf="viewCite">
       <div class="card-footer d-flex">
-        <button class="btn btn-custom-secondary mr-2" (click)="setEdit()">Edit</button>
-        <button class="btn btn-custom-warning mr-2" (click)="resetCite()">Back</button>
+        <button
+          [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+          (click)="setEdit()"
+        >
+          Edit
+        </button>
+        <button
+          [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
+          (click)="resetCite()"
+        >
+          Back
+        </button>
         <div
           class="float-center"
           style="color: orange"
@@ -208,10 +243,15 @@
     <div *ngIf="!this.viewCite">
       <div class="card-footer d-flex">
         <div *ngIf="!deleted && !editJa">
-          <button class="btn btn-custom-primary mr-2" (click)="cite()">Cite</button>
+          <button
+            [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+            (click)="cite()"
+          >
+            Cite
+          </button>
           <div ngbDropdown class="d-inline-block">
             <button
-              class="btn btn-custom-primary mr-2"
+              [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
               id="dropdownAddToColl"
               ngbDropdownToggle
             >
@@ -230,19 +270,36 @@
               >
             </div>
           </div>
-          <button class="btn btn-custom-secondary mr-2" (click)="setEdit()">
+          <button
+            [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+            (click)="setEdit()"
+          >
             Edit
           </button>
-          <button class="btn btn-custom-warning mr-2" (click)="goBack()">Back</button>
+          <button
+            [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
+            (click)="goBack()"
+          >
+            Back
+          </button>
           <div *ngIf="!deleted && editJa">
-            <button class="btn btn-custom-primary mr-2" (click)="update(editJa)">
+            <button
+              [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+              (click)="update(editJa)"
+            >
               Submit</button
-            ><button class="btn btn-custom-secondary mr-2" (click)="cancelEdit()">
+            ><button
+              [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+              (click)="cancelEdit()"
+            >
               Cancel
             </button>
           </div>
           <span *ngIf="!deleted">
-            <button class="btn btn-custom-danger" (click)="delete(selected.id)">
+            <button
+              [ngClass]="'btn btn-custom-danger' + this.chosenPalette"
+              (click)="delete(selected.id)"
+            >
               Delete
             </button>
           </span>
@@ -264,7 +321,7 @@
       <div class="card-footer d-flex">
         <div ngbDropdown class="d-inline-block">
           <button
-            class="btn btn-custom-primary mr-2"
+            [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
             id="dropdownAddToColl"
             ngbDropdownToggle
           >
@@ -280,11 +337,11 @@
               </button></span
             >
           </div>
-          <button class="btn btn-custom-secondary mr-2" (click)="setEdit()">
+          <button [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette" (click)="setEdit()">
             Edit
           </button>
 
-          <button class="btn btn-custom-warning mr-2" (click)="resetCite()">
+          <button [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette" (click)="resetCite()">
             Back
           </button>
           <div
