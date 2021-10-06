@@ -5,25 +5,25 @@
       <app-sidebar [chosenPalette]="this.chosenPalette"></app-sidebar>
     </div>
     <div class="col-md-6">
-      <h4 class="my-3 page-header"><span class="header-highlighter">&nbsp;</span>&nbsp;Create New Article</h4>
+      <h4 [ngClass]="'my-3 page-header header-palette' + this.chosenPalette"><span [ngClass]="'header-highlighter-palette' + this.chosenPalette">&nbsp;</span>&nbsp;Create New Article</h4>
       <form #createForm>
         <!-- Title -->
         <div class="form-group">
-          <label for="title"><h5>Title:</h5></label>
+          <label for="title"><h5 [ngClass]="'header-palette' + this.chosenPalette">Title:</h5></label>
           <textarea class="form-control" name="title" id="title"></textarea>
         </div>
         <hr />
         <!-- Authors -->
-        <h5>Authors:</h5>
-        <div *ngIf="this.authorsList.length === 0" class="text-custom-secondary">
-          (Please enter one or more authors)
+        <h5 [ngClass]="'header-palette' + this.chosenPalette">Authors:</h5>
+        <div *ngIf="this.authorsList.length === 0">
+          <h6 [ngClass]="'header-palette' + this.chosenPalette">(Please enter one or more authors)</h6>
         </div>
         <div *ngIf="this.authorsList.length !== 0">
           <table>
             <tr *ngFor="let a of authorsList">
               <td>
                 <button
-                  class="btn btn-custom-danger btn-sm mr-3"
+                  [ngClass]="'btn btn-sm mr-3 btn-custom-danger' + this.chosenPalette"
                   (click)="removeAuthor(a)"
                 >
                   Remove
@@ -79,14 +79,14 @@
           />
         </div>
         <div class="form-group">
-          <button (click)="addAuthor()" class="btn btn-custom-secondary btn-sm">
+          <button (click)="addAuthor()" [ngClass]="'btn btn-sm btn-custom-secondary' + this.chosenPalette">
             Add Author
           </button>
         </div>
         <hr />
         <!-- Journal Dropdown Menu -->
         <div class="form-group">
-          <h5>Journal:</h5>
+          <h5 [ngClass]="'header-palette' + this.chosenPalette">Journal:</h5>
           <select
             class="form-control mb-3"
             [(ngModel)]="newJournal"
@@ -99,20 +99,20 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="volumeNum"><h5>Volume:</h5></label>
+          <label for="volumeNum"><h5 [ngClass]="'header-palette' + this.chosenPalette">Volume:</h5></label>
           <input type="text" class="form-control" id="vol" name="vol" />
         </div>
         <div class="form-group">
-          <label for="year"><h5>Year:</h5></label>
+          <label for="year"><h5 [ngClass]="'header-palette' + this.chosenPalette">Year:</h5></label>
           <input type="text" class="form-control" id="year" name="year" />
         </div>
         <div class="form-group">
-          <label for="doi"><h5>DOI:</h5></label>
+          <label for="doi"><h5 [ngClass]="'header-palette' + this.chosenPalette">DOI:</h5></label>
           <input type="text" class="form-control" id="doi" name="doi" />
         </div>
         <button
           type="submit"
-          class="btn btn-custom-primary mt-3 mb-3 btn-full-width"
+          [ngClass]="'btn mt-3 mb-3 btn-full-width btn-custom-primary' + this.chosenPalette"
           (click)="create(createForm)"
         >
           Submit
