@@ -155,10 +155,7 @@ public class UserController {
 	
 	@PutMapping("users/palette/{paletteChoice}")
 	public User updatePalette(@PathVariable String paletteChoice, Principal principal, HttpServletResponse resp) {
-		User user = userSvc.showByUserName(principal.getName());
-		user.setPalette(paletteChoice);
-		userSvc.update(principal.getName(), user.getId(), user);
-		return user;
+		return userSvc.updatePalette(principal.getName(), paletteChoice);
 	}
 
 	@DeleteMapping("users/{uid}")

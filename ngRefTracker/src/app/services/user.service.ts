@@ -40,6 +40,18 @@ export class UserService {
           return throwError(err);
         })
         );
-      }
+  }
+
+  savePalette(paletteToSave: string): Observable<string> {
+    return this.http.put<string>(
+      this.baseUrl + `users/palette/${paletteToSave}`,
+      null,
+      this.auth.generateHttpHeader())
+        .pipe(
+          catchError((err: any) => {
+            return throwError(err);
+          })
+        )
+  }
 
 }

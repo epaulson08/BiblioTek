@@ -24,10 +24,16 @@ export class UserDashboardComponent implements OnInit {
     this.chosenPalette = this.userServ.loadPalette();
   }
 
-  savePalette(choice: string) {
+  savePalette(choice: string): string {
     this.chosenPalette = "-" + choice;
     localStorage.setItem("chosenPalette", this.chosenPalette);
-    // TODO: PUT through UserService to update DB
+    this.userServ.savePalette(choice).subscribe(success => {
+      return success;
+    },
+    failure => {
+      console.error(failure);
+    });
+  return null;
   }
 
   previewPalette(choice: string) {
