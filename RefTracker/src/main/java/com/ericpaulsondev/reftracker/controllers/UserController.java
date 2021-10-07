@@ -21,8 +21,6 @@ import com.ericpaulsondev.reftracker.repositories.UserRepository;
 import com.ericpaulsondev.reftracker.services.AuthService;
 import com.ericpaulsondev.reftracker.services.UserService;
 import com.fasterxml.jackson.core.io.JsonStringEncoder;
-import com.fasterxml.jackson.databind.util.JSONWrappedObject;
-import com.mysql.cj.xdevapi.JsonString;
 
 @RestController
 @CrossOrigin({ "*", "http://localhost:4200" })
@@ -152,6 +150,14 @@ public class UserController {
 			user = null;
 		}
 
+		return user;
+	}
+	
+	@PutMapping("users/palette/{paletteChoice}")
+	public User updatePalette(@PathVariable String paletteChoice, Principal principal, HttpServletResponse resp) {
+		User user = userSvc.showByUserName(principal.getName());
+		user.setPalette(paletteChoice);
+		userSvc.update(principal.getName(), user.getId(), user);
 		return user;
 	}
 
