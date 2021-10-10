@@ -69,6 +69,7 @@ public class UserServiceImpl implements UserService {
 		User requestingUser = userRepo.findByUsername(username);
 		User dbUser = null;
 
+		
 		// Requesting user is either admin or updating own info:
 		if (requestingUser != null
 				&& (requestingUser.getRole().equalsIgnoreCase("admin") || requestingUser.getId() == uid)) {
