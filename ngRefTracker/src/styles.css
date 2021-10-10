@@ -1,3 +1,54 @@
+/* Global */
+
+.wrap-urls {
+  word-break: break-all;
+}
+
+.btn-full-width {
+  width: 100%;
+}
+
+.link-sidebar {
+  color: white;
+}
+
+.link-sidebar:hover {
+  color: white;
+}
+
+.link-white {
+  color: white;
+}
+
+.link-white:hover {
+  color: white;
+}
+
+.select-journal {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar {
+  min-height: 100vh;
+}
+
+.page-header {
+  font-family: Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+html, body { height: 100%; }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.no-wrap {
+  flex-wrap: nowrap;
+}
+
+
+/* Palettes */
+
+
 /*
 Palette A:
 primary: #4CC0CD;    bright light blue
@@ -9,28 +60,12 @@ danger: #B24251;    red
 Thanks to colormind.io
 */
 
-/* A1: Muted teal */
 .navbar-palette-A {
   background-color: #287286;
 }
 
 .sidebar-palette-A {
   background-color: #c19a6b;
-}
-
-.text-custom-secondary,
-.text-palette-A1 {
-  color: #287286;
-}
-
-.link-my-collections-card,
-.link-palette-A1 {
-  color: #287286;
-}
-
-.link-my-collections-card:hover,
-.link-palette-A1:hover {
-  color: #287286;
 }
 
 .header-palette-A {
@@ -41,7 +76,21 @@ Thanks to colormind.io
   background-color: #4CC0CD;
 }
 
-/* btn-secondary (A) */
+/* btn-custom-primary (A) */
+.btn-custom-primary-A {
+  background-color: #4cc0cd;
+  border-color: #4cc0cd;
+  color: white;
+}
+
+.btn-custom-primary:hover,
+.btn-custom-primary-A:hover {
+  background-color: #359ca7 !important;
+  border-color: #359ca7;
+  color: white;
+}
+
+/* btn-custom-secondary (A) */
 .btn-custom-secondary-A {
   background-color: #287286;
   border-color: #287286;
@@ -67,53 +116,7 @@ Thanks to colormind.io
   color: white;
 }
 
-/* A2: Bright light blue */
-.bg-palette-A2 {
-  background-color: #4cc0cd;
-}
-
-.text-palette-A2 {
-  color: #4cc0cd;
-}
-
-a,
-.link-palette-A2 {
-  color: #4cc0cd;
-}
-
-a:hover,
-.link-palette-A2:hover {
-  color: #359ca7;
-}
-
-.bg-palette-A2 {
-  background-color: #4cc0cd;
-}
-
-.btn-custom-primary,
-.btn-custom-primary-A {
-  background-color: #4cc0cd;
-  border-color: #4cc0cd;
-  color: white;
-}
-
-.btn-custom-primary:hover,
-.btn-custom-primary-A:hover {
-  background-color: #359ca7 !important;
-  border-color: #359ca7;
-  color: white;
-}
-
-/* A3: Muted tan */
-.bg-palette-A3 {
-  background-color: #c19a6b;
-}
-
-.text-custom-warning,
-.text-palette-A3 {
-  color: #c19a6b;
-}
-
+/* button-custom-warning (A) */
 .btn-custom-warning,
 .btn-custom-warning-A {
   background-color: #c19a6b;
@@ -142,18 +145,7 @@ a:hover,
   color: white;
 }
 
-/* A4: Muted red */
-.text-palette-A4 {
-  color: #b24251;
-}
-
-.link-palette-A4 {
-  color: #b24251;
-}
-
-.link-palette-A4:hover {
-  color: #8f3642;
-}
+/* btn-custom-danger (A) */
 
 .btn-custom-danger,
 .btn-custom-danger-A {
@@ -183,10 +175,6 @@ a:hover,
   color: white;
 }
 
-.bg-palette-A4 {
-  background-color: #b24251;
-}
-
 
 /* Palette B:
 B primary: #9A7156;
@@ -213,7 +201,7 @@ Thanks to colormind.io
   background-color: #9A7156;
 }
 
-/* btn-primary (B) */
+/* btn-custom-primary (B) */
 .btn-custom-primary-B {
   background-color: #9A7156;
   border-color: #9A7156;
@@ -238,7 +226,7 @@ Thanks to colormind.io
   color: white;
 }
 
-/* btn-secondary (B) */
+/* btn-custom-secondary (B) */
 .btn-custom-secondary-B {
   background-color: #57382F;
   border-color: #57382F;
@@ -329,7 +317,7 @@ Y danger:red
   background-color: brown;
 }
 
-/* btn-primary (Y) */
+/* btn-custom-primary (Y) */
 .btn-custom-primary-Y {
   background-color: yellow;
   border-color: yellow;
@@ -354,7 +342,7 @@ Y danger:red
   color: white;
 }
 
-/* btn-secondary (Y) */
+/* btn-custom-secondary (Y) */
 .btn-custom-secondary-Y {
   background-color: brown;
   border-color: brown;
@@ -551,52 +539,4 @@ Z danger: pink;
   background-color: rgb(252, 157, 173);
   border-color: white;
   color: white;
-}
-
-
-/* Other */
-.btn-full-width {
-  width: 100%;
-}
-
-.link-sidebar {
-  color: white;
-}
-
-.link-sidebar:hover {
-  color: white;
-}
-
-.link-white {
-  color: white;
-}
-
-.link-white:hover {
-  color: white;
-}
-
-.select-journal {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.sidebar {
-  min-height: 100vh;
-  /* background-color: #c19a6b; */
-}
-
-.page-header,
-.page-header-A {
-  font-family: Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-.header-highlighter {
-  background-color: #b24251;
-}
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-.no-wrap {
-  flex-wrap: nowrap;
 }
