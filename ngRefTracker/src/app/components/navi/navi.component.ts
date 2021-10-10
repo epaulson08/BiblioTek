@@ -1,6 +1,4 @@
-import { NgLocaleLocalization } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { LocalStorageKeyList } from 'src/app/models/local-storage-key-list';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -12,9 +10,10 @@ import { AuthService } from 'src/app/services/auth.service';
 
 export class NaviComponent implements OnInit {
 
+  @Input() chosenPalette: string;
   loggedIn: boolean = false;
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
     if (this.auth.checkLogin()) this.loggedIn = true;

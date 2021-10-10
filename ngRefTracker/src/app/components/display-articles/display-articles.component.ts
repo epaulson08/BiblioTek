@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-display-articles',
@@ -9,16 +10,19 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./display-articles.component.css']
 })
 export class DisplayArticlesComponent implements OnInit {
-  showOneArticle: boolean = false;
   @Input() articlesToDisplay: JournalArticle[];
   @Input() myCollectionView: boolean;
+  showOneArticle: boolean = false;
+  chosenPalette: string;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private userServ: UserService
     ) { }
 
   ngOnInit(): void {
-  }
+    this.chosenPalette = this.userServ.loadPalette();
+   }
 
   goTo(id: number) {
     this.router.navigateByUrl(`show-article/${id}`);

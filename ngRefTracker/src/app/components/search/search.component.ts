@@ -5,6 +5,7 @@ import { JournalArticle } from 'src/app/models/journal-article';
 import { AuthService } from 'src/app/services/auth.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
 import { JournalService } from 'src/app/services/journal.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-search',
@@ -21,13 +22,15 @@ export class SearchComponent implements OnInit {
   selectedJournal: Journal = new Journal();
   searchTerm: string = null;
   routeSearchTerm: string;
+  chosenPalette: string;
 
   constructor(
     private auth: AuthService,
     private jaServ: JournalArticleService,
     private journalServ: JournalService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userServ: UserService
     ) {
       this.router.events.forEach((event) => {
         if(event instanceof NavigationEnd) {
@@ -39,7 +42,8 @@ export class SearchComponent implements OnInit {
     }
 
     ngOnInit(): void {
-    if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
+    this.auth.guardRoute();
+    this.chosenPalette = this.userServ.loadPalette();
     this.loadJournals();
     localStorage.setItem("lastPage", "search");
     if (localStorage.getItem("lastSearchTerm")) {

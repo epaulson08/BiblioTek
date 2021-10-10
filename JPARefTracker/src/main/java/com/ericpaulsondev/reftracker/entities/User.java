@@ -71,6 +71,9 @@ public class User {
 	@JoinTable(name = "user_citation_style", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "citation_style_id"))
 	private List<CitationStyle> citationStyles;
 
+	@Column(name = "preferred_palette")
+	private String palette;
+	
 	// ctors
 	public User() {
 	}
@@ -202,6 +205,14 @@ public class User {
 
 	public void setArticles(List<JournalArticle> articles) {
 		this.articles = articles;
+	}
+
+	public String getPalette() {
+		return palette;
+	}
+
+	public void setPalette(String palette) {
+		this.palette = palette;
 	}
 
 	// add, remove CitationStyle

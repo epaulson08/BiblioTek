@@ -21,6 +21,8 @@ public interface UserService {
 	public User addMyCollection(int userId, MyCollection coll);
 
 	public User update(String username, int uid, User user);
+	
+	public User updatePalette(String username, String newPalette);
 
 	public int deactivate(String username, int uid);
 

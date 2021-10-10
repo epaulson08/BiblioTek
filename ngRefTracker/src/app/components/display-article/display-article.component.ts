@@ -13,6 +13,7 @@ import { CitationStyleService } from 'src/app/services/citation-style.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
 import { JournalService } from 'src/app/services/journal.service';
 import { MyCollectionService } from 'src/app/services/my-collection.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-display-article',
@@ -39,6 +40,7 @@ export class DisplayArticleComponent implements OnInit {
   articleRemoved: boolean = false;
   myCollections: MyCollection[];
   addedMessage: string;
+  chosenPalette: string;
 
   constructor(
     private auth: AuthService,
@@ -46,11 +48,13 @@ export class DisplayArticleComponent implements OnInit {
     private csServ: CitationStyleService,
     private jaServ: JournalArticleService,
     private journalServ: JournalService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private userServ: UserService
+    ) { }
 
-  ngOnInit(): void {
-    if (!this.auth.checkLogin()) { this.router.navigateByUrl("home"); }
+    ngOnInit(): void {
+    this.auth.guardRoute();
+    this.chosenPalette = this.userServ.loadPalette();
     this.loadArticle();
     this.loadCitationStyles();
     this.loadMyCollections();

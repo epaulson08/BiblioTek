@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-show-article',
@@ -10,14 +11,14 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ShowArticleComponent implements OnInit {
 
   articleId: number;
+  chosenPalette: string;
 
-  constructor(private auth: AuthService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private auth: AuthService, private userServ: UserService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    if (!this.auth.checkLogin()) {
-      this.router.navigateByUrl("home");
-    }
+    this.auth.guardRoute();
     this.articleId = +this.route.snapshot.paramMap.get('articleId');
+    this.chosenPalette = this.userServ.loadPalette();
   }
 
 }

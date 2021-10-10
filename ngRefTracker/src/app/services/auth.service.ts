@@ -3,6 +3,7 @@ import { throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   private baseUrl: string = environment.baseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(username, password) {
     const credentials = this.generateBasicAuthCredentials(username, password);
@@ -20,9 +21,6 @@ export class AuthService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
-
-    // localStorage.setItem("userId", this.findUserId(username).toString());
-
     return this.http
     .get(this.baseUrl + 'authenticate', httpOptions)
     .pipe(
@@ -79,4 +77,7 @@ export class AuthService {
     return httpOptions;
   }
 
+  guardRoute() {
+    if (!this.checkLogin()) this.router.navigateByUrl("home");
+  }
 }

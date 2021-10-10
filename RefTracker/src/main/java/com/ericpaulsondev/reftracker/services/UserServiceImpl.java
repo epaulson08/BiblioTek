@@ -55,6 +55,14 @@ public class UserServiceImpl implements UserService {
 		}
 		return user;
 	}
+	
+	@Override
+	public User updatePalette(String username, String newPalette) {
+		 User managedUser = userRepo.findByUsername(username);
+		 managedUser.setPalette(newPalette);
+		 User toReturn = userRepo.saveAndFlush(managedUser);
+		 return toReturn;
+	}
 
 	@Override
 	public User update(String username, int uid, User user) {

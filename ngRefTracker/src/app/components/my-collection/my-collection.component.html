@@ -1,15 +1,15 @@
-<app-navi></app-navi>
+<app-navi [chosenPalette]="this.chosenPalette"></app-navi>
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar -->
-    <div *ngIf="this.listView" class="col-2 d-none d-md-block sidebar">
-      <app-sidebar></app-sidebar>
+    <div *ngIf="this.listView" [ngClass]="'col-2 d-none d-md-block sidebar sidebar-palette' + this.chosenPalette">
+      <app-sidebar [chosenPalette]="this.chosenPalette"></app-sidebar>
     </div>
     <div
       *ngIf="!this.listView"
-      class="col-3 col-xl-2 d-none d-md-block sidebar"
+      [ngClass]="'col-3 col-xl-2 d-none d-md-block sidebar sidebar-palette' + this.chosenPalette"
     >
-      <app-sidebar></app-sidebar>
+      <app-sidebar [chosenPalette]="this.chosenPalette"></app-sidebar>
     </div>
 
     <!-- Main content -->
@@ -19,17 +19,17 @@
         <div class="col">
           <!-- Non-edit mode -->
           <span *ngIf="!this.editView">
-            <h4 class="my-3 page-header">
-              <span class="header-highlighter">&nbsp;</span>&nbsp;
+            <h4 [ngClass]="'my-3 page-header header-palette' + this.chosenPalette">
+              <span [ngClass]="'header-highlighter-palette' + this.chosenPalette">&nbsp;</span>&nbsp;
               {{ coll.name }}
               <button
-                class="float-right btn btn-custom-warning btn-sm"
+                [ngClass]="'float-right btn btn-sm btn-custom-warning' + this.chosenPalette"
                 (click)="setExpandedView()"
               >
                 Expanded View
               </button>
               <button
-                class="float-right btn btn-custom-warning btn-sm mr-2"
+                [ngClass]="'float-right btn btn-sm mr-2 btn-custom-warning' + this.chosenPalette"
                 (click)="setListView()"
               >
                 List View
@@ -37,17 +37,17 @@
             </h4>
             <div class="row">
               <div class="col-8">
-                <h5 class="mt-2 text-palette-A1">
+                <h5 [ngClass]="'mt-2 header-palette' + this.chosenPalette">
                   {{ coll.description }}
                 </h5>
               </div>
             </div>
             <h5>
-              <button class="btn btn-custom-primary btn-sm mr-2">
+              <button [ngClass]="'btn btn-sm mr-2 btn-custom-primary' + this.chosenPalette">
                 Cite All
               </button>
               <button
-                class="btn btn-custom-secondary btn-sm mr-2"
+                [ngClass]="'btn btn-sm mr-2 btn-custom-secondary' + this.chosenPalette"
                 (click)="showEditView()"
               >
                 Edit
@@ -67,7 +67,7 @@
               ></textarea>
             </h5>
             <button
-              class="btn btn-custom-success"
+              [ngClass]="'btn btn-custom-success' + this.chosenPalette"
               (click)="this.updateMyCollection(this.editedMyCollection)"
             >
               Save Changes

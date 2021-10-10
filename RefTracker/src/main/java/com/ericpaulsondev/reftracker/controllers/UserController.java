@@ -14,16 +14,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ericpaulsondev.reftracker.entities.User;
 import com.ericpaulsondev.reftracker.repositories.UserRepository;
 import com.ericpaulsondev.reftracker.services.AuthService;
 import com.ericpaulsondev.reftracker.services.UserService;
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
 
 @RestController
-@RequestMapping("api")
 @CrossOrigin({ "*", "http://localhost:4200" })
 public class UserController {
 
@@ -36,7 +35,7 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepo;
 
-	@GetMapping("users")
+	@GetMapping("api/users")
 	public List<User> index(HttpServletRequest req, HttpServletResponse res, Principal principal) {
 
 		List<User> users = userSvc.index(principal.getName());
@@ -49,7 +48,7 @@ public class UserController {
 		return users;
 	}
 
-	@GetMapping("users/getId/{username}")
+	@GetMapping("api/users/getId/{username}")
 	public int getId(@PathVariable String username, HttpServletResponse resp) {
 		int userId = 0;
 		userId = userSvc.showByUserName(username).getId();
@@ -62,7 +61,7 @@ public class UserController {
 		return userId;
 	}
 
-	@GetMapping("users/search/{username}")
+	@GetMapping("api/users/search/{username}")
 	public User showByUsername(HttpServletRequest req, HttpServletResponse res, @PathVariable String username,
 			Principal principal) {
 		if (principal.getName().equals(username)) {
@@ -79,9 +78,8 @@ public class UserController {
 		return null;
 	}
 
-	@GetMapping("users/{uid}")
+	@GetMapping("api/users/{uid}")
 	public User show(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, Principal principal) {
-
 		User user = userSvc.show(principal.getName(), uid);
 		if (user == null) {
 			res.setStatus(404);
@@ -90,6 +88,12 @@ public class UserController {
 			user = null;
 		}
 		return user;
+	}
+	
+	@GetMapping("users/palette")
+	public char[] findPaletteForPrincipal(Principal principal, HttpServletResponse resp) {
+		User user = userSvc.showByUserName(principal.getName());
+		return new JsonStringEncoder().quoteAsString(user.getPalette());
 	}
 
 	@PostMapping("users")
@@ -147,6 +151,11 @@ public class UserController {
 		}
 
 		return user;
+	}
+	
+	@PutMapping("users/palette/{paletteChoice}")
+	public User updatePalette(@PathVariable String paletteChoice, Principal principal, HttpServletResponse resp) {
+		return userSvc.updatePalette(principal.getName(), paletteChoice);
 	}
 
 	@DeleteMapping("users/{uid}")

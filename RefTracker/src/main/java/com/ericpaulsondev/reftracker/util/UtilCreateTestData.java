@@ -61,7 +61,8 @@ public class UtilCreateTestData {
 			testUser.setUsername("demo");
 			testUser.setPassword("demo");
 			testUser.setRole("user");
-
+			testUser.setPalette("Z");
+			
 			// add JournalArticles to this user
 			for (int i = 1; i <= 14; i++) {
 				testUser.addJA(jaServ.findById(i));

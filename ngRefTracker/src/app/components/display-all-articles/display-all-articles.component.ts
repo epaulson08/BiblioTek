@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { AuthService } from 'src/app/services/auth.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -13,21 +14,24 @@ import { JournalArticleService } from 'src/app/services/journal-article.service'
 export class DisplayAllArticlesComponent implements OnInit {
 
   // fields
+  @Input() myCollectionView;
   journalArticles: JournalArticle[] = [];
   totalArticles: number;
   searchTerm: string;
   deleted: boolean = false;
-  @Input() myCollectionView;
+  chosenPalette: string;
 
   // init
   constructor(
     private jaServ: JournalArticleService,
+    private userServ: UserService,
     private router: Router,
     private auth: AuthService
   ) { }
 
   ngOnInit(): void {
-    if (!this.auth.checkLogin()) this.router.navigateByUrl("home");
+    this.auth.guardRoute();
+    this.chosenPalette = this.userServ.loadPalette();
     this.loadJournalArticles();
     localStorage.setItem("lastPage", "display-all-articles");
   }

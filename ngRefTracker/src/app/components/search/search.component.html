@@ -1,17 +1,17 @@
-<app-navi></app-navi>
+<app-navi [chosenPalette]="this.chosenPalette"></app-navi>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-3 col-xl-2 d-none d-md-block sidebar">
-      <app-sidebar></app-sidebar>
+    <div [ngClass]="'col-3 col-xl-2 d-none d-md-block sidebar sidebar-palette' + this.chosenPalette">
+      <app-sidebar [chosenPalette]="this.chosenPalette"></app-sidebar>
     </div>
     <div class="col-sm-12 col-md-6">
-      <h4 class="my-3 page-header">
-        <span class="header-highlighter">&nbsp;</span>&nbsp;Search
+      <h4 [ngClass]="'my-3 page-header header-palette' + this.chosenPalette">
+        <span [ngClass]="'header-highlighter-palette' + this.chosenPalette">&nbsp;</span>&nbsp;Search
       </h4>
       <!-- Search by author or title -->
       <form #searchTitleForm>
         <div class="form-group">
-          <label for="searchTitleTerm"><h5>Title or Author:</h5></label>
+          <label for="searchTitleTerm"><h5 [ngClass]="'header-palette' + this.chosenPalette">Title or Author:</h5></label>
           <br />
           <textarea
             class="form-control"
@@ -21,7 +21,7 @@
             id="searchTerm"
           ></textarea>
         </div>
-        <button type="submit" class="btn btn-custom-primary" (click)="search()">
+        <button type="submit" [ngClass]="'btn btn-custom-primary' + this.chosenPalette" (click)="search()">
           Search
         </button>
       </form>
@@ -29,7 +29,7 @@
       <!-- Show all articles for a given journal -->
       <form>
         <div class="form-group">
-          <h5>Journal:</h5>
+          <h5 [ngClass]="'header-palette' + this.chosenPalette">Journal:</h5>
           <select
             class="form-control select-journal"
             [(ngModel)]="selectedJournal"
@@ -43,7 +43,7 @@
         </div>
         <button
           type="submit"
-          class="btn btn-custom-primary"
+          [ngClass]="'btn btn-custom-primary' + this.chosenPalette"
           (click)="showAllByJournal()"
         >
           Search
@@ -53,7 +53,7 @@
       <!-- Search Results: -->
       <div *ngIf="articleResults">
         <hr />
-        <h4 class="my-3 page-header">Results</h4>
+        <h4 [ngClass]="'my-3 page-header header-palette' + this.chosenPalette">Results</h4>
         <div *ngIf="articleResults.length !== 0">
           <app-display-articles
           [articlesToDisplay]="articleResults"

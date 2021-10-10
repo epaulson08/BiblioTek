@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
+
 // web
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 // components
 import { AppComponent } from './app.component';
 import { CreateComponent } from './components/create/create.component';
@@ -97,7 +99,7 @@ import { ApaCitationsDocxPipe } from './pipes/apa/docx-builder/apa-citations-doc
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
-  ],
+    ],
   providers: [
     AuthService,
     JournalArticleService

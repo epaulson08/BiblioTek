@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -9,16 +10,34 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UserDashboardComponent implements OnInit {
 
-  username: String = localStorage.getItem("username");
+  chosenPalette: string;
+  username: string = localStorage.getItem("username");
   clickedCite: boolean = false;
 
   constructor(
     private authServ: AuthService,
-    private router: Router
+    private userServ: UserService
   ) { }
 
   ngOnInit(): void {
-    if (!this.authServ.checkLogin()) this.router.navigateByUrl('home');
+    this.authServ.guardRoute();
+    this.chosenPalette = this.userServ.loadPalette();
+  }
+
+  savePalette(choice: string): string {
+    this.chosenPalette = "-" + choice;
+    localStorage.setItem("chosenPalette", this.chosenPalette);
+    this.userServ.savePalette(choice).subscribe(success => {
+      return success;
+    },
+    failure => {
+      console.error(failure);
+    });
+  return null;
+  }
+
+  previewPalette(choice: string) {
+    this.chosenPalette = "-" + choice;
   }
 
   clickCiteButton() {

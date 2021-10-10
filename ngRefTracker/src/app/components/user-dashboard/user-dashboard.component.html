@@ -1,37 +1,149 @@
-<app-navi></app-navi>
+<app-navi [chosenPalette]="this.chosenPalette"></app-navi>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-3 col-xl-2 d-none d-md-block sidebar">
-      <app-sidebar></app-sidebar>
+    <div
+      [ngClass]="
+        'col-3 col-xl-2 d-none d-md-block sidebar sidebar-palette' +
+        this.chosenPalette
+      "
+    >
+      <app-sidebar [chosenPalette]="this.chosenPalette"></app-sidebar>
     </div>
     <div class="col">
-      <h4 class="my-3 page-header">
-        <span class="header-highlighter">&nbsp;</span>&nbsp;Dashboard
+      <h4 [ngClass]="'my-3 page-header header-palette' + this.chosenPalette">
+        <span [ngClass]="'header-highlighter-palette' + this.chosenPalette"
+          >&nbsp;</span
+        >&nbsp;Dashboard
       </h4>
-      <h5 class="text-palette-A1">Get started:</h5>
+      <h5 [ngClass]="'header-palette' + this.chosenPalette">Get started:</h5>
       <button
-        class="btn btn-custom-primary my-1 mr-2"
+        [ngClass]="'mr-2 my-1 btn btn-custom-primary' + this.chosenPalette"
         [routerLink]="['/display-all-articles']"
       >
         List All
       </button>
       <button
-        class="btn btn-custom-primary my-1 mr-2"
+        [ngClass]="'mr-2 my-1 btn btn-custom-primary' + this.chosenPalette"
         [routerLink]="['/my-collections']"
       >
         My Collections
       </button>
       <button
-        class="btn btn-custom-secondary mr-2 my-1"
+        [ngClass]="'mr-2 my-1 btn btn-custom-primary' + this.chosenPalette"
         [routerLink]="['/create']"
       >
         Create
       </button>
       <button
-        class="btn btn-custom-secondary mr-2 my-1"
+        [ngClass]="'mr-2 my-1 btn btn-custom-primary' + this.chosenPalette"
         [routerLink]="['/search']"
       >
         Search
+      </button>
+      <hr />
+      <h5 [ngClass]="'header-palette' + this.chosenPalette">Settings:</h5>
+      <h6 [ngClass]="'header-palette' + this.chosenPalette">
+        Current Palette:
+      </h6>
+      <button
+        [ngClass]="'mr-2 my-1 btn btn-custom-primary' + this.chosenPalette"
+      >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button
+        [ngClass]="'mr-2 my-1 btn btn-custom-secondary' + this.chosenPalette"
+      >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button
+        [ngClass]="'mr-2 my-1 btn btn-custom-warning' + this.chosenPalette"
+      >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button
+        [ngClass]="'mr-2 my-1 btn btn-custom-danger' + this.chosenPalette"
+      >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <h6 [ngClass]="'my-2 header-palette' + this.chosenPalette">
+        Change Palette:
+      </h6>
+      <hr />
+      <button class="mr-2 my-1 btn btn-custom-primary-A">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button class="mr-2 my-1 btn btn-custom-secondary-A">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button class="mr-2 my-1 btn btn-custom-warning-A">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button class="mr-2 my-1 btn btn-custom-danger-A">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button
+      [ngClass]="'float-right btn btn-custom-secondary' + this.chosenPalette"
+      (click)="savePalette('A')"
+    >
+    Save
+    </button>
+      <button
+        [ngClass]="
+          'mr-2 float-right btn ml-2 btn-custom-primary' + this.chosenPalette
+        "
+        (click)="previewPalette('A')"
+      >
+        Preview
+      </button>
+      <hr />
+      <button class="mr-2 my-1 btn btn-custom-primary-Z">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button class="mr-2 my-1 btn btn-custom-secondary-Z">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button class="mr-2 my-1 btn btn-custom-warning-Z">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button class="mr-2 my-1 btn btn-custom-danger-Z">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button
+        [ngClass]="'float-right btn btn-custom-secondary' + this.chosenPalette"
+        (click)="savePalette('Z')"
+      >
+      Save
+      </button>
+      <button
+      [ngClass]="'btn mr-2 float-right btn-custom-primary' + this.chosenPalette"
+      (click)="previewPalette('Z')"
+      >
+      Preview
+    </button>
+      <hr />
+      <button class="mr-2 my-1 btn btn-custom-primary-B">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button class="mr-2 my-1 btn btn-custom-secondary-B">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button class="mr-2 my-1 btn btn-custom-warning-B">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button class="mr-2 my-1 btn btn-custom-danger-B">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+      <button
+        [ngClass]="'float-right btn btn-custom-secondary' + this.chosenPalette"
+        (click)="savePalette('B')"
+      >
+        Save
+      </button>
+      <button
+        [ngClass]="'mr-2 float-right btn btn-custom-primary' + this.chosenPalette"
+        (click)="previewPalette('B')"
+      >
+        Preview
       </button>
     </div>
   </div>

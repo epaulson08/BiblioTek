@@ -15,6 +15,7 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent},
+  { path: 'user-dashboard', component: UserDashboardComponent},
   { path: 'show-article/:articleId', component: ShowArticleComponent },
   { path: 'display-all-articles', component: DisplayAllArticlesComponent },
   { path: 'create', component: CreateComponent },
@@ -25,7 +26,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'test', component: DownloadDocxComponent},
   { path: 'user-dashboard', component: UserDashboardComponent },
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
