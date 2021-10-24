@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // components
+import { AmaComponent } from './components/citation/ama/ama.component';
+import { ApaComponent } from './components/citation/apa/apa.component';
 import { AppComponent } from './app.component';
 import { CreateComponent } from './components/create/create.component';
 import { DisplayArticleComponent } from './components/display-article/display-article.component';
@@ -91,6 +93,8 @@ import { ApaCitationsDocxPipe } from './pipes/apa/docx-builder/apa-citations-doc
     NlmAuthorPipe,
     NlmAuthorsPipe,
     FullNlmPipe,
+    AmaComponent,
+    ApaComponent,
   ],
   imports: [
     AppRoutingModule,
