@@ -102,7 +102,7 @@
       </button>
 
       <div *ngIf="citationOutput">
-        <app-citation-style-switch [chosenCitationStyle]="this.chosenStyle"></app-citation-style-switch>
+        <app-citation-style-switch [chosenCitationStyle]="this.chosenStyle" [jaToCite]="this.selected"></app-citation-style-switch>
       </div>
         <!-- <h6 class="mt-2">{{ this.chosenStyle.abbreviation }} citation:</h6>
 

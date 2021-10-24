@@ -1,6 +1,6 @@
 <div [ngSwitch]="this.chosenCitationStyle.abbreviation">
   <!-- AMA -->
-  <div *ngSwitchCase="'AMA'"><app-ama-citation></app-ama-citation></div>
+  <div *ngSwitchCase="'AMA'"><app-ama-citation [jaToCite]="this.jaToCite"></app-ama-citation></div>
 
   <!-- APA -->
   <div *ngSwitchCase="'APA'">in APA</div>

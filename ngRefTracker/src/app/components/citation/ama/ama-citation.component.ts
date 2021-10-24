@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { JournalArticle } from 'src/app/models/journal-article';
 
 @Component({
   selector: 'app-ama-citation',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AmaCitationComponent implements OnInit {
 
+  @Input() jaToCite: JournalArticle;
+
   constructor() { }
 
   ngOnInit(): void {
+
+    console.warn(this.jaToCite);
+    console.warn(this.jaToCite.title);
   }
 
 }
