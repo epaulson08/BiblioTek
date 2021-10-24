@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ApaCitationComponent } from './apa-citation.component';
 
-import { AmaComponent } from './ama.component';
 
-describe('AmaComponent', () => {
-  let component: AmaComponent;
-  let fixture: ComponentFixture<AmaComponent>;
+describe('ApaCitationComponent', () => {
+  let component: ApaCitationComponent;
+  let fixture: ComponentFixture<ApaCitationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AmaComponent ]
+      declarations: [ ApaCitationComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AmaComponent);
+    fixture = TestBed.createComponent(ApaCitationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

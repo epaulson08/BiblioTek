@@ -102,7 +102,9 @@
       </button>
 
       <div *ngIf="citationOutput">
-        <h6 class="mt-2">{{ this.chosenStyle.abbreviation }} citation:</h6>
+        <app-citation-style-switch [chosenCitationStyle]="this.chosenStyle"></app-citation-style-switch>
+      </div>
+        <!-- <h6 class="mt-2">{{ this.chosenStyle.abbreviation }} citation:</h6>
 
         <div *ngIf="this.switch">
           <span [outerHTML]="this.citationOutput"></span>
@@ -137,10 +139,9 @@
             ><br />
             {{ link.comment }}
             <br />
-            <br />
-          </div>
-        </div>
-      </div>
+            <br /> -->
+          <!-- </div> -->
+      <!-- </div> -->
     </div>
     <!-- ^^^ end citations view -->
   </div>

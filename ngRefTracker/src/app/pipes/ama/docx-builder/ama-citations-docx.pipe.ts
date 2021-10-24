@@ -1,7 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Paragraph, TextRun } from 'docx';
 import { JournalArticle } from 'src/app/models/journal-article';
-import { ApaCitationDocxPipe } from '../../apa/docx-builder/apa-citation-docx.pipe';
 import { AmaCitationDocxPipe } from './ama-citation-docx.pipe';
 
 @Pipe({

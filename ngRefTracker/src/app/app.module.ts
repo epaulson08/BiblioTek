@@ -8,9 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // components
-import { AmaComponent } from './components/citation/ama/ama.component';
-import { ApaComponent } from './components/citation/apa/apa.component';
+import { AmaCitationComponent } from './components/citation/ama/ama-citation.component';
+import { ApaCitationComponent } from './components/citation/apa/apa-citation.component';
 import { AppComponent } from './app.component';
+import { CitationStyleSwitchComponent } from './components/citation/citation-style-switch/citation-style-switch.component';
 import { CreateComponent } from './components/create/create.component';
 import { DisplayArticleComponent } from './components/display-article/display-article.component';
 import { DisplayAllArticlesComponent } from './components/display-all-articles/display-all-articles.component';
@@ -27,15 +28,16 @@ import { ShowArticleComponent } from './components/show-article/show-article.com
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 // pipes
-import { AmaAuthorHtmlPipe } from './pipes/ama/html-builder/ama-author-html.pipe';
-import { AmaAuthorsHtmlPipe } from './pipes/ama/html-builder/ama-authors-html.pipe';
+import { AmaAuthorPipe } from './pipes/ama/author-builder/ama-author.pipe';
+import { AmaAuthorsPipe } from './pipes/ama/author-builder/ama-authors.pipe';
 import { ApaAuthorHtmlPipe } from './pipes/apa/html-builder/apa-author-html.pipe';
 import { ApaAuthorsHtmlPipe } from './pipes/apa/html-builder/apa-authors-html.pipe';
+import { ApaCitationDocxPipe } from './pipes/apa/docx-builder/apa-citation-docx.pipe';
+import { ApaCitationsDocxPipe } from './pipes/apa/docx-builder/apa-citations-docx.pipe';
 import { ApaDocxPipe } from './pipes/apa/apa-docx.pipe';
 import { ApaHtmlPipe } from './pipes/apa/apa-html.pipe';
 import { AuthorFormatPipe } from './pipes/author-format.pipe';
 import { ChicagoAuthorsPipe } from './pipes/chicago/chicago-authors.pipe';
-import { FullAmaPipe } from './pipes/ama/ama-html.pipe';
 import { IeeeHtmlPipe } from './pipes/ieee/ieee-html.pipe';
 import { FullMlaPipe } from './pipes/mla/full-mla.pipe';
 import { FullNlmPipe } from './pipes/nlm/full-nlm.pipe';
@@ -50,20 +52,22 @@ import { NlmAuthorsPipe } from './pipes/nlm/nlm-authors.pipe';
 // services
 import { AuthService } from './services/auth.service';
 import { JournalArticleService } from './services/journal-article.service';
-import { ApaCitationDocxPipe } from './pipes/apa/docx-builder/apa-citation-docx.pipe';
-import { ApaCitationsDocxPipe } from './pipes/apa/docx-builder/apa-citations-docx.pipe';
 
 @NgModule({
   declarations: [
-    AmaAuthorHtmlPipe,
-    AmaAuthorsHtmlPipe,
+    AmaAuthorPipe,
+    AmaAuthorsPipe,
+    AmaCitationComponent,
+    ApaCitationComponent,
     ApaAuthorHtmlPipe,
     ApaAuthorsHtmlPipe,
     ApaCitationDocxPipe,
     ApaCitationsDocxPipe,
     ApaDocxPipe,
+    ApaHtmlPipe,
     AppComponent,
     AuthorFormatPipe,
+    CitationStyleSwitchComponent,
     CreateComponent,
     DisplayAllArticlesComponent,
     DisplayArticlesComponent,
@@ -75,8 +79,6 @@ import { ApaCitationsDocxPipe } from './pipes/apa/docx-builder/apa-citations-doc
     SearchComponent,
     ShowArticleComponent,
     SidebarComponent,
-    ApaHtmlPipe,
-    FullAmaPipe,
     DownloadDocxComponent,
     UserDashboardComponent,
     DisplayArticleComponent,
@@ -93,8 +95,6 @@ import { ApaCitationsDocxPipe } from './pipes/apa/docx-builder/apa-citations-doc
     NlmAuthorPipe,
     NlmAuthorsPipe,
     FullNlmPipe,
-    AmaComponent,
-    ApaComponent,
   ],
   imports: [
     AppRoutingModule,

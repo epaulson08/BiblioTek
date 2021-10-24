@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Paragraph, TextRun } from 'docx';
 import { JournalArticle } from 'src/app/models/journal-article';
-import { AmaAuthorsHtmlPipe } from '../html-builder/ama-authors-html.pipe';
+import { AmaAuthorsPipe } from '../author-builder/ama-authors.pipe';
 
 @Pipe({
   name: 'amaCitationDocx'
@@ -14,7 +14,7 @@ export class AmaCitationDocxPipe implements PipeTransform {
     // Part C: non-italic: [. yearpub; vol(issueNum): pp.]
 
     // AmaAuthorsHtmlPipe will give appropriate output:
-    let authors: string = new AmaAuthorsHtmlPipe().transform(ja.authors);
+    let authors: string = new AmaAuthorsPipe().transform(ja.authors);
 
     let partA: string = `${authors} ${ja.title}. `;
     let partB: string = `${ja.journal.name}. `;

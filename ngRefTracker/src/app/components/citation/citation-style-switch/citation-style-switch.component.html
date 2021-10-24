@@ -1,0 +1,23 @@
+<div [ngSwitch]="this.chosenCitationStyle.abbreviation">
+  <!-- AMA -->
+  <div *ngSwitchCase="'AMA'"><app-ama-citation></app-ama-citation></div>
+
+  <!-- APA -->
+  <div *ngSwitchCase="'APA'">in APA</div>
+
+  <!-- Chicago -->
+  <div *ngSwitchCase="'Chicago'">
+    Chicago citation style is not yet available.
+  </div>
+
+  <!-- IEEE -->
+  <div *ngSwitchCase="'IEEE'">
+    in IEEE
+  </div>
+
+  <!-- MLA -->
+  <div *ngSwitchCase="'MLA'">MLA citation style is not yet available.</div>
+
+  <!-- NLM -->
+  <div *ngSwitchCase="'NLM'">in NLM</div>
+</div>

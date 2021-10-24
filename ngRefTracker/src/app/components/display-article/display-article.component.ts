@@ -4,7 +4,6 @@ import { CitationStyle } from 'src/app/models/citation-style';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { MyCollection } from 'src/app/models/my-collection.model';
-import { FullAmaPipe } from 'src/app/pipes/ama/ama-html.pipe';
 import { ApaHtmlPipe } from 'src/app/pipes/apa/apa-html.pipe';
 import { IeeeHtmlPipe } from 'src/app/pipes/ieee/ieee-html.pipe';
 import { FullNlmPipe } from 'src/app/pipes/nlm/full-nlm.pipe';
@@ -212,7 +211,7 @@ export class DisplayArticleComponent implements OnInit {
 
   private formatByCitationStyle(style: CitationStyle): string {
     switch (style.abbreviation) {
-      case "AMA": return new FullAmaPipe().transform(this.selected);
+      // case "AMA": return new FullAmaPipe().transform(this.selected);
       case "APA": return new ApaHtmlPipe().transform(this.selected);
       case "NLM": return new FullNlmPipe().transform(this.selected);
       case "IEEE": return new IeeeHtmlPipe().transform(this.selected);
