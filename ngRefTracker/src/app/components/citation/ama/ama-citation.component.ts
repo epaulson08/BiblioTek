@@ -8,7 +8,7 @@ import { JournalArticle } from 'src/app/models/journal-article';
 })
 export class AmaCitationComponent implements OnInit {
 
-  @Input() jaToCite: JournalArticle;
+  @Input() ja: JournalArticle;
 
   constructor() { }
 
