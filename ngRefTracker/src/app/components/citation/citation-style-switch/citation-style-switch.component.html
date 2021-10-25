@@ -1,6 +1,9 @@
 <div [ngSwitch]="this.chosenCitationStyle.abbreviation">
   <!-- AMA -->
-  <div *ngSwitchCase="'AMA'"><app-ama-citation [jaToCite]="this.jaToCite"></app-ama-citation></div>
+  <div *ngSwitchCase="'AMA'">
+    <h6 class="mt-2">{{ this.chosenCitationStyle.abbreviation }} citation:</h6>
+    <app-ama-citation [jaToCite]="this.jaToCite"></app-ama-citation>
+  </div>
 
   <!-- APA -->
   <div *ngSwitchCase="'APA'">in APA</div>
@@ -11,9 +14,7 @@
   </div>
 
   <!-- IEEE -->
-  <div *ngSwitchCase="'IEEE'">
-    in IEEE
-  </div>
+  <div *ngSwitchCase="'IEEE'">in IEEE</div>
 
   <!-- MLA -->
   <div *ngSwitchCase="'MLA'">MLA citation style is not yet available.</div>

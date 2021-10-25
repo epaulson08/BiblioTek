@@ -1,2 +1,6 @@
-<p>ama works!</p>
-{{this.jaToCite.title}}
+{{ jaToCite.authors | amaAuthors }} {{ jaToCite.title }}.
+<em>{{ jaToCite.journal.name }}</em
+>. {{ jaToCite.yearPublished }}; {{ jaToCite.volumeNum
+}}<span *ngIf="jaToCite.issueNum">{{ jaToCite.issueNum }}</span
+><span *ngIf="jaToCite.pages">:&nbsp;{{ jaToCite.pages }}</span
+>.

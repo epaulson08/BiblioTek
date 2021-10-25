@@ -14,8 +14,6 @@ export class CitationStyleSwitchComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.warn(this.jaToCite);
-
   }
 
 }

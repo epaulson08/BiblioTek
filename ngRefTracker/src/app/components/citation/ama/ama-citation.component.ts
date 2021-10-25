@@ -13,9 +13,6 @@ export class AmaCitationComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
-    console.warn(this.jaToCite);
-    console.warn(this.jaToCite.title);
   }
 
 }
