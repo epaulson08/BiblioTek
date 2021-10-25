@@ -1,12 +1,16 @@
+<h6 class="mt-2" *ngIf="this.chosenCitationStyle">
+  {{ this.chosenCitationStyle.abbreviation }} citation:
+</h6>
 <div [ngSwitch]="this.chosenCitationStyle.abbreviation">
   <!-- AMA -->
   <div *ngSwitchCase="'AMA'">
-    <h6 class="mt-2">{{ this.chosenCitationStyle.abbreviation }} citation:</h6>
     <app-ama-citation [ja]="this.jaToCite"></app-ama-citation>
   </div>
 
   <!-- APA -->
-  <div *ngSwitchCase="'APA'">in APA</div>
+  <div *ngSwitchCase="'APA'">
+    <app-apa-citation [ja]="this.jaToCite"></app-apa-citation>
+  </div>
 
   <!-- Chicago -->
   <div *ngSwitchCase="'Chicago'">

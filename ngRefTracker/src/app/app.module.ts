@@ -27,6 +27,7 @@ import { SearchComponent } from './components/search/search.component';
 import { ShowArticleComponent } from './components/show-article/show-article.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+
 // pipes
 import { AmaAuthorPipe } from './pipes/ama/author-builder/ama-author.pipe';
 import { AmaAuthorsPipe } from './pipes/ama/author-builder/ama-authors.pipe';
@@ -34,14 +35,15 @@ import { ApaAuthorHtmlPipe } from './pipes/apa/html-builder/apa-author-html.pipe
 import { ApaAuthorsHtmlPipe } from './pipes/apa/html-builder/apa-authors-html.pipe';
 import { ApaCitationDocxPipe } from './pipes/apa/docx-builder/apa-citation-docx.pipe';
 import { ApaCitationsDocxPipe } from './pipes/apa/docx-builder/apa-citations-docx.pipe';
+import { AmaDocxPipe } from './pipes/ama/docx-builder/ama-docx.pipe';
 import { ApaDocxPipe } from './pipes/apa/apa-docx.pipe';
 import { ApaHtmlPipe } from './pipes/apa/apa-html.pipe';
 import { AuthorFormatPipe } from './pipes/author-format.pipe';
+import { ChicagoAuthorPipe } from './pipes/chicago/chicago-author.pipe';
 import { ChicagoAuthorsPipe } from './pipes/chicago/chicago-authors.pipe';
 import { IeeeHtmlPipe } from './pipes/ieee/ieee-html.pipe';
 import { FullMlaPipe } from './pipes/mla/full-mla.pipe';
 import { FullNlmPipe } from './pipes/nlm/full-nlm.pipe';
-import { ChicagoAuthorPipe } from './pipes/chicago/chicago-author.pipe';
 import { FullChicagoPipe } from './pipes/chicago/full-chicago.pipe';
 import { IeeeAuthorHtmlPipe } from './pipes/ieee/html-builder/ieee-author-html.pipe';
 import { IeeeAuthorsHtmlPipe } from './pipes/ieee/html-builder/ieee-authors-html.pipe';
@@ -49,16 +51,17 @@ import { MlaAuthorPipe } from './pipes/mla/mla-author.pipe';
 import { MlaAuthorsPipe } from './pipes/mla/mla-authors.pipe';
 import { NlmAuthorPipe } from './pipes/nlm/nlm-author.pipe';
 import { NlmAuthorsPipe } from './pipes/nlm/nlm-authors.pipe';
+import { TitleValidatorPipe } from './pipes/validator/title-validator.pipe';
 // services
 import { AuthService } from './services/auth.service';
 import { JournalArticleService } from './services/journal-article.service';
-import { TitleValidatorPipe } from './pipes/validator/title-validator.pipe';
 
 @NgModule({
   declarations: [
     AmaAuthorPipe,
     AmaAuthorsPipe,
     AmaCitationComponent,
+    AmaDocxPipe,
     ApaCitationComponent,
     ApaAuthorHtmlPipe,
     ApaAuthorsHtmlPipe,
@@ -68,35 +71,35 @@ import { TitleValidatorPipe } from './pipes/validator/title-validator.pipe';
     ApaHtmlPipe,
     AppComponent,
     AuthorFormatPipe,
+    ChicagoAuthorPipe,
+    ChicagoAuthorsPipe,
     CitationStyleSwitchComponent,
     CreateComponent,
+    DisplayArticleComponent,
     DisplayAllArticlesComponent,
     DisplayArticlesComponent,
+    DownloadDocxComponent,
+    FullChicagoPipe,
+    FullMlaPipe,
+    FullNlmPipe,
     HomeComponent,
+    IeeeAuthorHtmlPipe,
+    IeeeAuthorsHtmlPipe,
+    IeeeHtmlPipe,
+    MlaAuthorPipe,
+    MlaAuthorsPipe,
+    MyCollectionComponent,
     MyCollectionsComponent,
     NaviComponent,
+    NlmAuthorPipe,
+    NlmAuthorsPipe,
     NotFoundComponent,
     RegisterComponent,
     SearchComponent,
     ShowArticleComponent,
     SidebarComponent,
-    DownloadDocxComponent,
-    UserDashboardComponent,
-    DisplayArticleComponent,
-    MyCollectionComponent,
-    ChicagoAuthorPipe,
-    FullChicagoPipe,
-    IeeeAuthorHtmlPipe,
-    IeeeAuthorsHtmlPipe,
-    IeeeHtmlPipe,
-    ChicagoAuthorsPipe,
-    MlaAuthorPipe,
-    MlaAuthorsPipe,
-    FullMlaPipe,
-    NlmAuthorPipe,
-    NlmAuthorsPipe,
-    FullNlmPipe,
     TitleValidatorPipe,
+    UserDashboardComponent,
   ],
   imports: [
     AppRoutingModule,

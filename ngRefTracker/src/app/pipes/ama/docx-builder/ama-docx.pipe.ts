@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Paragraph, Document } from 'docx';
 import { JournalArticle } from 'src/app/models/journal-article';
-import { AmaCitationsDocxPipe } from './docx-builder/ama-citations-docx.pipe';
+import { AmaCitationsDocxPipe } from './ama-citations-docx.pipe';
 
 @Pipe({
   name: 'amaDocx'
