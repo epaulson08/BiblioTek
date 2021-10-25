@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CitationStyle } from 'src/app/models/citation-style';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { MyCollection } from 'src/app/models/my-collection.model';
-import { ApaHtmlPipe } from 'src/app/pipes/apa/apa-html.pipe';
 import { IeeeHtmlPipe } from 'src/app/pipes/ieee/ieee-html.pipe';
 import { FullNlmPipe } from 'src/app/pipes/nlm/full-nlm.pipe';
 import { AuthService } from 'src/app/services/auth.service';
@@ -118,7 +117,6 @@ export class MyCollectionsComponent implements OnInit {
 
   private formatByCitationStyle(style: CitationStyle, ja: JournalArticle): string {
     switch (style.abbreviation) {
-      case "APA": return new ApaHtmlPipe().transform(ja);
       case "NLM": return new FullNlmPipe().transform(ja);
       case "IEEE": return new IeeeHtmlPipe().transform(ja);
       default: return "Citation style not found.";

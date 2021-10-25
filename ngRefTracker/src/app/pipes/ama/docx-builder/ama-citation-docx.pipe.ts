@@ -13,7 +13,6 @@ export class AmaCitationDocxPipe implements PipeTransform {
     // Part B: italic: [journalname]
     // Part C: non-italic: [. yearpub; vol(issueNum): pp.]
 
-    // AmaAuthorsHtmlPipe will give appropriate output:
     let authors: string = new AmaAuthorsPipe().transform(ja.authors);
 
     let partA: string = `${authors} ${ja.title}. `;

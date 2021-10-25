@@ -37,7 +37,6 @@ import { ApaCitationDocxPipe } from './pipes/apa/docx-builder/apa-citation-docx.
 import { ApaCitationsDocxPipe } from './pipes/apa/docx-builder/apa-citations-docx.pipe';
 import { AmaDocxPipe } from './pipes/ama/docx-builder/ama-docx.pipe';
 import { ApaDocxPipe } from './pipes/apa/docx-builder/apa-docx.pipe';
-import { ApaHtmlPipe } from './pipes/apa/apa-html.pipe';
 import { AuthorFormatPipe } from './pipes/author-format.pipe';
 import { ChicagoAuthorPipe } from './pipes/chicago/chicago-author.pipe';
 import { ChicagoAuthorsPipe } from './pipes/chicago/chicago-authors.pipe';
@@ -68,7 +67,6 @@ import { JournalArticleService } from './services/journal-article.service';
     ApaCitationDocxPipe,
     ApaCitationsDocxPipe,
     ApaDocxPipe,
-    ApaHtmlPipe,
     AppComponent,
     AuthorFormatPipe,
     ChicagoAuthorPipe,
