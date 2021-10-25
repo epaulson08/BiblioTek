@@ -4,7 +4,7 @@ import { Author } from '../../../models/author';
 @Pipe({
   name: 'apaAuthor'
 })
-export class ApaAuthorHtmlPipe implements PipeTransform {
+export class ApaAuthorPipe implements PipeTransform {
 
   transform(author: Author): string {
     let outputStr: string = "";

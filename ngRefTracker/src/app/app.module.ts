@@ -31,12 +31,12 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
 // pipes
 import { AmaAuthorPipe } from './pipes/ama/author-builder/ama-author.pipe';
 import { AmaAuthorsPipe } from './pipes/ama/author-builder/ama-authors.pipe';
-import { ApaAuthorHtmlPipe } from './pipes/apa/html-builder/apa-author-html.pipe';
-import { ApaAuthorsHtmlPipe } from './pipes/apa/html-builder/apa-authors-html.pipe';
+import { ApaAuthorPipe } from './pipes/apa/author-builder/apa-author.pipe';
+import { ApaAuthorsPipe } from './pipes/apa/author-builder/apa-authors.pipe';
 import { ApaCitationDocxPipe } from './pipes/apa/docx-builder/apa-citation-docx.pipe';
 import { ApaCitationsDocxPipe } from './pipes/apa/docx-builder/apa-citations-docx.pipe';
 import { AmaDocxPipe } from './pipes/ama/docx-builder/ama-docx.pipe';
-import { ApaDocxPipe } from './pipes/apa/apa-docx.pipe';
+import { ApaDocxPipe } from './pipes/apa/docx-builder/apa-docx.pipe';
 import { ApaHtmlPipe } from './pipes/apa/apa-html.pipe';
 import { AuthorFormatPipe } from './pipes/author-format.pipe';
 import { ChicagoAuthorPipe } from './pipes/chicago/chicago-author.pipe';
@@ -63,8 +63,8 @@ import { JournalArticleService } from './services/journal-article.service';
     AmaCitationComponent,
     AmaDocxPipe,
     ApaCitationComponent,
-    ApaAuthorHtmlPipe,
-    ApaAuthorsHtmlPipe,
+    ApaAuthorPipe,
+    ApaAuthorsPipe,
     ApaCitationDocxPipe,
     ApaCitationsDocxPipe,
     ApaDocxPipe,

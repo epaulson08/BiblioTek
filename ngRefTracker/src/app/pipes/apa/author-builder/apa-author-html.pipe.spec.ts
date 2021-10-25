@@ -1,8 +1,8 @@
-import { ApaAuthorHtmlPipe } from "./apa-author-html.pipe";
+import { ApaAuthorPipe } from "./apa-author.pipe";
 
 describe('ApaAuthorHtmlPipe', () => {
   it('create an instance', () => {
-    const pipe = new ApaAuthorHtmlPipe();
+    const pipe = new ApaAuthorPipe();
     expect(pipe).toBeTruthy();
   });
 });

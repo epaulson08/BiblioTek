@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { JournalArticle } from 'src/app/models/journal-article';
-import { ApaAuthorsHtmlPipe } from './html-builder/apa-authors-html.pipe';
+import { ApaAuthorsPipe } from './author-builder/apa-authors.pipe';
 
 @Pipe({
   name: 'fullApa'
@@ -10,7 +10,7 @@ export class ApaHtmlPipe implements PipeTransform {
   transform(ja: JournalArticle): string {
 
     let outputStr =
-      `${new ApaAuthorsHtmlPipe().transform(ja.authors)}
+      `${new ApaAuthorsPipe().transform(ja.authors)}
     (${ja.yearPublished}).
     ${ja.title}.
     <em>${ja.journal.name}, ${ja.volumeNum}</em
