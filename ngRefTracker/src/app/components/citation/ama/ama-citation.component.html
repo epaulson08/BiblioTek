@@ -1,6 +1,6 @@
-{{ jaToCite.authors | amaAuthors }} {{ jaToCite.title }}.
-<em>{{ jaToCite.journal.name }}</em
->. {{ jaToCite.yearPublished }}; {{ jaToCite.volumeNum
+{{ jaToCite.authors | amaAuthors }}
+{{ jaToCite.title | titleValidator }}&nbsp;<em>{{ jaToCite.journal.name }}.</em
+>&nbsp;{{ jaToCite.yearPublished }};&nbsp;{{ jaToCite.volumeNum
 }}<span *ngIf="jaToCite.issueNum">{{ jaToCite.issueNum }}</span
 ><span *ngIf="jaToCite.pages">:&nbsp;{{ jaToCite.pages }}</span
 >.

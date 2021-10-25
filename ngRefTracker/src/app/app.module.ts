@@ -52,6 +52,7 @@ import { NlmAuthorsPipe } from './pipes/nlm/nlm-authors.pipe';
 // services
 import { AuthService } from './services/auth.service';
 import { JournalArticleService } from './services/journal-article.service';
+import { TitleValidatorPipe } from './pipes/validator/title-validator.pipe';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import { JournalArticleService } from './services/journal-article.service';
     NlmAuthorPipe,
     NlmAuthorsPipe,
     FullNlmPipe,
+    TitleValidatorPipe,
   ],
   imports: [
     AppRoutingModule,
