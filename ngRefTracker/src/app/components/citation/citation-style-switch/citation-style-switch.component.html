@@ -1,4 +1,4 @@
-<h6 class="mt-2" *ngIf="this.chosenCitationStyle">
+<h6 class="mt-2" *ngIf="this.chosenCitationStyle && this.showHeader">
   {{ this.chosenCitationStyle.abbreviation }} citation:
 </h6>
 <div [ngSwitch]="this.chosenCitationStyle.abbreviation">

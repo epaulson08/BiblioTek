@@ -4,9 +4,6 @@ import { CitationStyle } from 'src/app/models/citation-style';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { MyCollection } from 'src/app/models/my-collection.model';
-import { ApaHtmlPipe } from 'src/app/pipes/apa/apa-html.pipe';
-import { IeeeHtmlPipe } from 'src/app/pipes/ieee/ieee-html.pipe';
-import { FullNlmPipe } from 'src/app/pipes/nlm/full-nlm.pipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { CitationStyleService } from 'src/app/services/citation-style.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
@@ -33,7 +30,6 @@ export class DisplayArticleComponent implements OnInit {
   citationStyles: CitationStyle[];
   chosenStyle: CitationStyle;
   citationOutput: string;
-  switch: boolean = false;
   moreInfo: boolean = false;
   underConstructionMessage: string;
   articleRemoved: boolean = false;
@@ -174,13 +170,7 @@ export class DisplayArticleComponent implements OnInit {
 
   chooseStyle(citationStyle: CitationStyle) {
     this.moreInfo = false;
-
-    // workaround to force reload of [outerHTML] span:
-    this.switch = !this.switch;
-
     this.chosenStyle = citationStyle;
-    this.citationOutput = this.formatByCitationStyle(this.chosenStyle);
-
   }
 
   toggleMoreInfo(): void {
@@ -207,15 +197,5 @@ export class DisplayArticleComponent implements OnInit {
       failure => {
         console.error(failure);
       });
-  }
-
-  private formatByCitationStyle(style: CitationStyle): string {
-    switch (style.abbreviation) {
-      // case "AMA": return new FullAmaPipe().transform(this.selected);
-      case "APA": return new ApaHtmlPipe().transform(this.selected);
-      case "NLM": return new FullNlmPipe().transform(this.selected);
-      case "IEEE": return new IeeeHtmlPipe().transform(this.selected);
-      default: return "Citation style not found.";
-    }
   }
 }
