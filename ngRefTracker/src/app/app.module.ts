@@ -49,6 +49,7 @@ import { TitleValidatorPipe } from './pipes/validator/title-validator.pipe';
 // services
 import { AuthService } from './services/auth.service';
 import { JournalArticleService } from './services/journal-article.service';
+import { IeeeCitationComponent } from './components/citation/ieee/ieee-citation.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { JournalArticleService } from './services/journal-article.service';
     SidebarComponent,
     TitleValidatorPipe,
     UserDashboardComponent,
+    IeeeCitationComponent,
   ],
   imports: [
     AppRoutingModule,
