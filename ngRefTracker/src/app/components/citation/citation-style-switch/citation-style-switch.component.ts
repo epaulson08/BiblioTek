@@ -10,7 +10,6 @@ import { JournalArticle } from 'src/app/models/journal-article';
 export class CitationStyleSwitchComponent implements OnInit {
   @Input() chosenCitationStyle: CitationStyle;
   @Input() jaToCite: JournalArticle;
-  @Input() showHeader: boolean;
 
   constructor() {}
 

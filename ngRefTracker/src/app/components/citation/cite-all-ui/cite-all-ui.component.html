@@ -12,13 +12,15 @@ Choose a style:<br />
 
 <!-- user has chosen a CitationStyle -->
 <span *ngIf="this.chosenCitationStyle">
+  <h6 [ngClass]="'mt-2 header-palette' + this.chosenPalette" *ngIf="this.chosenCitationStyle">
+    {{ this.chosenCitationStyle.abbreviation }} citations
+  </h6>
   <hr />
   <span *ngFor="let ja of this.collToCiteAll.articles">
     <!-- show JournalArticle citations -->
-    <app-citation-style-switch
+        <app-citation-style-switch
       [jaToCite]="ja"
       [chosenCitationStyle]="this.chosenCitationStyle"
-      [showHeader]="false"
     ></app-citation-style-switch>
     <hr />
   </span>
