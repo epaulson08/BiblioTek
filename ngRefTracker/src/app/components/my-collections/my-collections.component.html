@@ -45,15 +45,21 @@
             {{ coll.description }}
           </div>
 
-          <!-- user clicks Cite All -->
+          <!-- user clicked Cite All -->
           <div *ngIf="this.collToCiteAll === coll">
             <hr />
-            <h5 [ngClass]="'mb-2 header-palette' + this.chosenPalette">
+            <app-cite-all-ui
+              [chosenPalette]="this.chosenPalette"
+              [citationStyles]="this.citationStyles"
+              [collToCiteAll]="coll"
+            ></app-cite-all-ui>
+
+            <!-- <h5 [ngClass]="'mb-2 header-palette' + this.chosenPalette">
               Cite All
-            </h5>
-            <!-- user prompted to choose a CitationStyle -->
-            Choose a style:
-            <div *ngIf="this.citationStyles" class="my-2">
+            </h5> -->
+            <!-- user is prompted to choose a CitationStyle -->
+            <!-- Choose a style: -->
+            <!-- <div *ngIf="this.citationStyles" class="my-2">
               <button
                 [ngClass]="
                   'btn mr-2 mb-2 btn-sm btn-custom-primary' + this.chosenPalette
@@ -62,32 +68,32 @@
                 (click)="chooseCitationStyle(cs)"
               >
                 {{ cs.abbreviation }}
-              </button>
+              </button> -->
 
-              <!-- user has chosen a CitationStyle -->
-              <span *ngIf="this.clickedChooseStyle">
-                <span *ngFor="let ja of this.collToCiteAll.articles">
-                  <!-- show JournalArticle citations -->
-                  <app-citation-style-switch
+            <!-- user has chosen a CitationStyle -->
+            <!-- <span *ngIf="this.clickedChooseStyle">
+                <span *ngFor="let ja of this.collToCiteAll.articles"> -->
+            <!-- show JournalArticle citations -->
+            <!-- <app-citation-style-switch
                     [jaToCite]="ja"
                     [chosenCitationStyle]="this.chosenCitationStyle"
                     [showHeader]="false"
                   ></app-citation-style-switch>
                   <hr />
-                </span>
-                <!-- button to download as docx -->
-                <app-download-docx
+                </span> -->
+            <!-- button to download as docx -->
+            <!-- <app-download-docx
                   [articlesToCite]="this.coll.articles"
                   [docxCitationStyle]="this.chosenCitationStyle"
-                ></app-download-docx>
-              </span>
-            </div>
+                ></app-download-docx> -->
+            <!-- button end -->
+            <!-- </span> -->
           </div>
         </div>
 
         <!-- card footer -->
         <div class="card-footer">
-          <span *ngIf="this.myCollection === coll">
+          <span *ngIf="this.collToView === coll">
             <button
               [ngClass]="'btn btn-sm btn-custom-secondary' + this.chosenPalette"
               (click)="back()"
@@ -96,7 +102,7 @@
             </button>
           </span>
 
-          <div *ngIf="this.myCollection !== coll">
+          <div *ngIf="this.collToView !== coll">
             <button
               [ngClass]="
                 'btn btn-sm mr-2 btn-custom-primary' + this.chosenPalette
@@ -122,7 +128,7 @@
               Edit
             </button>
           </div>
-          <div *ngIf="underConstructionMessage && this.myCollection === coll">
+          <div *ngIf="underConstructionMessage && this.collToView === coll">
             This feature is under construction!
           </div>
         </div>

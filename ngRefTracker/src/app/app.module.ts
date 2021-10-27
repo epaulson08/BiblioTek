@@ -12,6 +12,7 @@ import { AmaCitationComponent } from './components/citation/ama/ama-citation.com
 import { ApaCitationComponent } from './components/citation/apa/apa-citation.component';
 import { AppComponent } from './app.component';
 import { CitationStyleSwitchComponent } from './components/citation/citation-style-switch/citation-style-switch.component';
+import { CiteAllUiComponent } from './components/citation/cite-all-ui/cite-all-ui.component';
 import { CreateComponent } from './components/create/create.component';
 import { DisplayArticleComponent } from './components/display-article/display-article.component';
 import { DisplayAllArticlesComponent } from './components/display-all-articles/display-all-articles.component';
@@ -72,6 +73,7 @@ import { JournalArticleService } from './services/journal-article.service';
     ChicagoAuthorPipe,
     ChicagoAuthorsPipe,
     CitationStyleSwitchComponent,
+    CiteAllUiComponent,
     CreateComponent,
     DisplayArticleComponent,
     DisplayAllArticlesComponent,
