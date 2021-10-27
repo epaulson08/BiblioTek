@@ -39,16 +39,10 @@ import { ApaCitationsDocxPipe } from './pipes/apa/docx-builder/apa-citations-doc
 import { AmaDocxPipe } from './pipes/ama/docx-builder/ama-docx.pipe';
 import { ApaDocxPipe } from './pipes/apa/docx-builder/apa-docx.pipe';
 import { AuthorFormatPipe } from './pipes/author-format.pipe';
-import { ChicagoAuthorPipe } from './pipes/chicago/chicago-author.pipe';
-import { ChicagoAuthorsPipe } from './pipes/chicago/chicago-authors.pipe';
 import { IeeeHtmlPipe } from './pipes/ieee/ieee-html.pipe';
-import { FullMlaPipe } from './pipes/mla/full-mla.pipe';
 import { FullNlmPipe } from './pipes/nlm/full-nlm.pipe';
-import { FullChicagoPipe } from './pipes/chicago/full-chicago.pipe';
 import { IeeeAuthorHtmlPipe } from './pipes/ieee/html-builder/ieee-author-html.pipe';
 import { IeeeAuthorsHtmlPipe } from './pipes/ieee/html-builder/ieee-authors-html.pipe';
-import { MlaAuthorPipe } from './pipes/mla/mla-author.pipe';
-import { MlaAuthorsPipe } from './pipes/mla/mla-authors.pipe';
 import { NlmAuthorPipe } from './pipes/nlm/nlm-author.pipe';
 import { NlmAuthorsPipe } from './pipes/nlm/nlm-authors.pipe';
 import { TitleValidatorPipe } from './pipes/validator/title-validator.pipe';
@@ -70,8 +64,6 @@ import { JournalArticleService } from './services/journal-article.service';
     ApaDocxPipe,
     AppComponent,
     AuthorFormatPipe,
-    ChicagoAuthorPipe,
-    ChicagoAuthorsPipe,
     CitationStyleSwitchComponent,
     CiteAllUiComponent,
     CreateComponent,
@@ -79,15 +71,11 @@ import { JournalArticleService } from './services/journal-article.service';
     DisplayAllArticlesComponent,
     DisplayArticlesComponent,
     DownloadDocxComponent,
-    FullChicagoPipe,
-    FullMlaPipe,
     FullNlmPipe,
     HomeComponent,
     IeeeAuthorHtmlPipe,
     IeeeAuthorsHtmlPipe,
     IeeeHtmlPipe,
-    MlaAuthorPipe,
-    MlaAuthorsPipe,
     MyCollectionComponent,
     MyCollectionsComponent,
     NaviComponent,
