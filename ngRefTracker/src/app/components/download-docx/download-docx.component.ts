@@ -5,7 +5,7 @@ import { CitationStyle } from 'src/app/models/citation-style';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { AmaDocxPipe } from 'src/app/pipes/ama/docx-builder/ama-docx.pipe';
 import { ApaDocxPipe } from 'src/app/pipes/apa/docx-builder/apa-docx.pipe';
-import { IeeeDocxPipe } from 'src/app/pipes/ieee/ieee-docx.pipe';
+import { IeeeDocxPipe } from 'src/app/pipes/ieee/docx-builder/ieee-docx.pipe';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

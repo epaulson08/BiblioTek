@@ -9,16 +9,10 @@
     <app-apa-citation [ja]="this.jaToCite"></app-apa-citation>
   </div>
 
-  <!-- Chicago -->
-  <div *ngSwitchCase="'Chicago'">
-    Chicago citation style is coming soon!
-  </div>
-
   <!-- IEEE -->
-  <div *ngSwitchCase="'IEEE'">IEEE citation style is coming soon!</div>
-
-  <!-- MLA -->
-  <div *ngSwitchCase="'MLA'">MLA citation style is coming soon!</div>
+  <div *ngSwitchCase="'IEEE'">
+    <app-ieee-citation [ja]="this.jaToCite"></app-ieee-citation>
+  </div>
 
   <!-- NLM -->
   <div *ngSwitchCase="'NLM'">NLM citation style is coming soon!</div>

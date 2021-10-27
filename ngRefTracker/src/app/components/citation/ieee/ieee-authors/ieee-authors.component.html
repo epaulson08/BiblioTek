@@ -1,0 +1,22 @@
+<!-- // http://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE-Reference-Guide-Online-v.04-20-2021.pdf
+  // https://libraryguides.vu.edu.au/ieeereferencing/journals -->
+
+<span *ngIf="this.authors.length === 1">{{ authors[0] | ieeeAuthor }}</span>
+<span *ngIf="this.authors.length === 2"
+  >{{ authors[0] | ieeeAuthor }}&nbsp;and&nbsp;{{
+    authors[1] | ieeeAuthor
+  }}</span
+>
+<span *ngIf="this.authors.length === 3 && authors.length <= 6">
+  <span *ngFor="let author of authors; let i = index">
+    <span *ngIf="i !== authors.length - 1"
+      >{{ author | ieeeAuthor }},&nbsp;</span
+    >
+    <span *ngIf="i === authors.length - 1"
+      >and&nbsp;{{ author | ieeeAuthor }}</span
+    >
+  </span>
+</span>
+<span *ngIf="this.authors.length > 6">
+  {{ authors[0] | ieeeAuthor }}&nbsp;<em>et al.</em>
+</span>

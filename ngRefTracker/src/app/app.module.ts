@@ -52,6 +52,8 @@ import { JournalArticleService } from './services/journal-article.service';
 import { IeeeCitationComponent } from './components/citation/ieee/ieee-citation.component';
 import { IeeeAuthorPipe } from './pipes/ieee/author-builder/ieee-author.pipe';
 import { IeeeAuthorsPipe } from './pipes/ieee/author-builder/ieee-authors.pipe';
+import { TitleIeeeAdjusterPipe } from './pipes/validator/title-ieee-adjuster.pipe';
+import { IeeeAuthorsComponent } from './components/citation/ieee/ieee-authors/ieee-authors.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,8 @@ import { IeeeAuthorsPipe } from './pipes/ieee/author-builder/ieee-authors.pipe';
     IeeeCitationComponent,
     IeeeAuthorPipe,
     IeeeAuthorsPipe,
+    TitleIeeeAdjusterPipe,
+    IeeeAuthorsComponent,
   ],
   imports: [
     AppRoutingModule,
