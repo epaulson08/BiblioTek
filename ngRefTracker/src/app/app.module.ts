@@ -50,6 +50,8 @@ import { TitleValidatorPipe } from './pipes/validator/title-validator.pipe';
 import { AuthService } from './services/auth.service';
 import { JournalArticleService } from './services/journal-article.service';
 import { IeeeCitationComponent } from './components/citation/ieee/ieee-citation.component';
+import { IeeeAuthorPipe } from './pipes/ieee/author-builder/ieee-author.pipe';
+import { IeeeAuthorsPipe } from './pipes/ieee/author-builder/ieee-authors.pipe';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,8 @@ import { IeeeCitationComponent } from './components/citation/ieee/ieee-citation.
     TitleValidatorPipe,
     UserDashboardComponent,
     IeeeCitationComponent,
+    IeeeAuthorPipe,
+    IeeeAuthorsPipe,
   ],
   imports: [
     AppRoutingModule,
