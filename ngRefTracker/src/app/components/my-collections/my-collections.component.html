@@ -51,43 +51,8 @@
             <app-cite-all-ui
               [chosenPalette]="this.chosenPalette"
               [citationStyles]="this.citationStyles"
-              [collToCiteAll]="coll"
+              [collToCiteAll]="this.coll"
             ></app-cite-all-ui>
-
-            <!-- <h5 [ngClass]="'mb-2 header-palette' + this.chosenPalette">
-              Cite All
-            </h5> -->
-            <!-- user is prompted to choose a CitationStyle -->
-            <!-- Choose a style: -->
-            <!-- <div *ngIf="this.citationStyles" class="my-2">
-              <button
-                [ngClass]="
-                  'btn mr-2 mb-2 btn-sm btn-custom-primary' + this.chosenPalette
-                "
-                *ngFor="let cs of this.citationStyles"
-                (click)="chooseCitationStyle(cs)"
-              >
-                {{ cs.abbreviation }}
-              </button> -->
-
-            <!-- user has chosen a CitationStyle -->
-            <!-- <span *ngIf="this.clickedChooseStyle">
-                <span *ngFor="let ja of this.collToCiteAll.articles"> -->
-            <!-- show JournalArticle citations -->
-            <!-- <app-citation-style-switch
-                    [jaToCite]="ja"
-                    [chosenCitationStyle]="this.chosenCitationStyle"
-                    [showHeader]="false"
-                  ></app-citation-style-switch>
-                  <hr />
-                </span> -->
-            <!-- button to download as docx -->
-            <!-- <app-download-docx
-                  [articlesToCite]="this.coll.articles"
-                  [docxCitationStyle]="this.chosenCitationStyle"
-                ></app-download-docx> -->
-            <!-- button end -->
-            <!-- </span> -->
           </div>
         </div>
 
