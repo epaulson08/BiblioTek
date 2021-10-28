@@ -15,5 +15,7 @@
   </div>
 
   <!-- NLM -->
-  <div *ngSwitchCase="'NLM'">NLM citation style is coming soon!</div>
+  <div *ngSwitchCase="'NLM'">
+    <app-nlm-citation [ja]="this.jaToCite"></app-nlm-citation>
+  </div>
 </div>

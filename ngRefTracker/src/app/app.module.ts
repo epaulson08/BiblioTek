@@ -40,11 +40,10 @@ import { AmaDocxPipe } from './pipes/ama/docx-builder/ama-docx.pipe';
 import { ApaDocxPipe } from './pipes/apa/docx-builder/apa-docx.pipe';
 import { AuthorFormatPipe } from './pipes/author-format.pipe';
 import { IeeeHtmlPipe } from './pipes/ieee/ieee-html.pipe';
-import { FullNlmPipe } from './pipes/nlm/full-nlm.pipe';
 import { IeeeAuthorHtmlPipe } from './pipes/ieee/html-builder/ieee-author-html.pipe';
 import { IeeeAuthorsHtmlPipe } from './pipes/ieee/html-builder/ieee-authors-html.pipe';
-import { NlmAuthorPipe } from './pipes/nlm/nlm-author.pipe';
-import { NlmAuthorsPipe } from './pipes/nlm/nlm-authors.pipe';
+import { NlmAuthorPipe } from './pipes/nlm/author-builder/nlm-author.pipe';
+import { NlmAuthorsPipe } from './pipes/nlm/author-builder/nlm-authors.pipe';
 import { TitleValidatorPipe } from './pipes/validator/title-validator.pipe';
 // services
 import { AuthService } from './services/auth.service';
@@ -54,7 +53,7 @@ import { IeeeAuthorPipe } from './pipes/ieee/author-builder/ieee-author.pipe';
 import { IeeeAuthorsPipe } from './pipes/ieee/author-builder/ieee-authors.pipe';
 import { TitleIeeeAdjusterPipe } from './pipes/validator/title-ieee-adjuster.pipe';
 import { IeeeAuthorsComponent } from './components/citation/ieee/ieee-authors/ieee-authors.component';
-import { NlmCitationComponent } from './components/citation/nlm/nlm-citation/nlm-citation.component';
+import { NlmCitationComponent } from './components/citation/nlm/nlm-citation.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +76,6 @@ import { NlmCitationComponent } from './components/citation/nlm/nlm-citation/nlm
     DisplayAllArticlesComponent,
     DisplayArticlesComponent,
     DownloadDocxComponent,
-    FullNlmPipe,
     HomeComponent,
     IeeeAuthorHtmlPipe,
     IeeeAuthorsHtmlPipe,
