@@ -1,0 +1,13 @@
+<!-- Note that ieeeAuthors requires styling,
+which will be handled here instead of in a pipe.
+--><app-ieee-authors [authors]="ja.authors"></app-ieee-authors>,&nbsp;"{{
+  ja.title | titleIeeeAdjuster
+}}," <em>{{ ja.journal.name }}</em
+>,&nbsp;<span *ngIf="ja.volumeNum">vol.&nbsp;{{ ja.volumeNum }},&nbsp;</span
+><span *ngIf="ja.pages && ja.pages.includes('-')">pp.&nbsp;</span
+><span *ngIf="ja.pages && !ja.pages.includes('-')">p.&nbsp;</span
+>{{ ja.pages }},&nbsp;{{ ja.yearPublished }}.<!--
+// TODO: actually IEEE includes "." after
+// abbreviated words in journal abbreviations
+// For now, will use full journal name. Also,
+// need to add handling for months. -->

@@ -1,0 +1,6 @@
+{{ ja.authors | amaAuthors }}
+{{ ja.title | titleValidator }}&nbsp;<em>{{ ja.journal.name }}.</em
+>&nbsp;{{ ja.yearPublished }};&nbsp;{{ ja.volumeNum
+}}<span *ngIf="ja.issueNum">{{ ja.issueNum }}</span
+><span *ngIf="ja.pages">:&nbsp;{{ ja.pages }}</span
+>.

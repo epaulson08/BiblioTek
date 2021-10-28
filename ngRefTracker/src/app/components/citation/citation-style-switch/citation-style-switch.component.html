@@ -1,0 +1,21 @@
+<div [ngSwitch]="this.chosenCitationStyle.abbreviation">
+  <!-- AMA -->
+  <div *ngSwitchCase="'AMA'">
+    <app-ama-citation [ja]="this.jaToCite"></app-ama-citation>
+  </div>
+
+  <!-- APA -->
+  <div *ngSwitchCase="'APA'">
+    <app-apa-citation [ja]="this.jaToCite"></app-apa-citation>
+  </div>
+
+  <!-- IEEE -->
+  <div *ngSwitchCase="'IEEE'">
+    <app-ieee-citation [ja]="this.jaToCite"></app-ieee-citation>
+  </div>
+
+  <!-- NLM -->
+  <div *ngSwitchCase="'NLM'">
+    <app-nlm-citation [ja]="this.jaToCite"></app-nlm-citation>
+  </div>
+</div>

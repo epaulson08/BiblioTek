@@ -1,7 +1,7 @@
 <app-navi [chosenPalette]="this.chosenPalette"></app-navi>
 <div class="container-fluid">
   <div class="row">
-    <!-- Sidebar -->
+    <!-- sidebar -->
     <div *ngIf="this.listView" [ngClass]="'col-2 d-none d-md-block sidebar sidebar-palette' + this.chosenPalette">
       <app-sidebar [chosenPalette]="this.chosenPalette"></app-sidebar>
     </div>
@@ -12,12 +12,12 @@
       <app-sidebar [chosenPalette]="this.chosenPalette"></app-sidebar>
     </div>
 
-    <!-- Main content -->
+    <!-- main content -->
     <div class="col">
-      <!-- Name and description -->
+      <!-- MyCollection metadata -->
       <div class="row">
         <div class="col">
-          <!-- Non-edit mode -->
+          <!-- non-edit mode -->
           <span *ngIf="!this.editView">
             <h4 [ngClass]="'my-3 page-header header-palette' + this.chosenPalette">
               <span [ngClass]="'header-highlighter-palette' + this.chosenPalette">&nbsp;</span>&nbsp;
@@ -43,7 +43,7 @@
               </div>
             </div>
             <h5>
-              <button [ngClass]="'btn btn-sm mr-2 btn-custom-primary' + this.chosenPalette">
+              <button (click)="this.citeAll()" [ngClass]="'btn btn-sm mr-2 btn-custom-primary' + this.chosenPalette">
                 Cite All
               </button>
               <button
@@ -75,7 +75,7 @@
           </span>
         </div>
       </div>
-      <!-- ^ Close row: header -->
+      <!-- ^ close MyCollection metadata -->
 
       <div class="my-2"></div>
 
@@ -105,6 +105,16 @@
               [articlesToDisplay]="coll.articles"
               [myCollectionView]="true"
             ></app-display-articles>
+          </span>
+
+          <!-- Cite All View -->
+          <span *ngIf="this.showCiteAllUi">
+                      <hr />
+                      <app-cite-all-ui
+                        [chosenPalette]="this.chosenPalette"
+                        [citationStyles]="this.citationStyles"
+                        [collToCiteAll]="coll"
+                      ></app-cite-all-ui>
           </span>
         </div>
       </div>

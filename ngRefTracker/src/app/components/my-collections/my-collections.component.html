@@ -1,7 +1,10 @@
+<!-- nav -->
 <app-navi [chosenPalette]="this.chosenPalette"></app-navi>
+<!-- end nav -->
 
 <div class="container-fluid">
   <div class="row">
+    <!-- sidebar -->
     <div
       [ngClass]="
         'col-3 col-xl-2 d-none d-md-block sidebar sidebar-palette' +
@@ -10,17 +13,24 @@
     >
       <app-sidebar [chosenPalette]="this.chosenPalette"></app-sidebar>
     </div>
+    <!-- end sidebar -->
+
     <div class="col">
+      <!-- page title -->
       <h4 [ngClass]="'my-3 page-header header-palette' + this.chosenPalette">
         <span [ngClass]="'header-highlighter-palette' + this.chosenPalette"
           >&nbsp;</span
         >&nbsp;My Collections
       </h4>
+      <!-- end page title -->
+
+      <!-- for each MyCollection... -->
       <div
         class="card mb-3"
         style="max-width: 500px"
         *ngFor="let coll of this.allCollections"
       >
+        <!-- card showing a MyCollection -->
         <div class="container">
           <div class="card-title mt-2">
             <a
@@ -34,40 +44,21 @@
           <div class="card-text mb-2">
             {{ coll.description }}
           </div>
-          <div *ngIf="this.myCollection === coll">
+
+          <!-- user clicked Cite All -->
+          <div *ngIf="this.collToCiteAll === coll">
             <hr />
-            <h5 [ngClass]="'mb-2 header-palette' + this.chosenPalette">
-              Cite All
-            </h5>
-            Choose a style:
-            <div *ngIf="this.citationStyles" class="my-2">
-              <button
-                [ngClass]="
-                  'btn mr-2 mb-2 btn-sm btn-custom-primary' + this.chosenPalette
-                "
-                *ngFor="let cs of this.citationStyles"
-                (click)="chooseStyle(cs)"
-              >
-                {{ cs.abbreviation }}
-              </button>
-              <span *ngIf="this.clickedChooseStyle">
-                <span *ngIf="this.switch"
-                  ><span [outerHTML]="this.citationOutput" class="my-2"></span
-                ></span>
-                <span *ngIf="!this.switch"
-                  ><span [outerHTML]="this.citationOutput" class="my-2"></span
-                ></span>
-                <app-download-docx
-                  [articlesToCite]="this.coll.articles"
-                  [docxCitationStyle]="this.chosenStyle"
-                ></app-download-docx>
-              </span>
-            </div>
+            <app-cite-all-ui
+              [chosenPalette]="this.chosenPalette"
+              [citationStyles]="this.citationStyles"
+              [collToCiteAll]="this.coll"
+            ></app-cite-all-ui>
           </div>
         </div>
 
+        <!-- card footer -->
         <div class="card-footer">
-          <span *ngIf="this.myCollection === coll">
+          <span *ngIf="this.collToView === coll">
             <button
               [ngClass]="'btn btn-sm btn-custom-secondary' + this.chosenPalette"
               (click)="back()"
@@ -76,7 +67,7 @@
             </button>
           </span>
 
-          <div *ngIf="this.myCollection !== coll">
+          <div *ngIf="this.collToView !== coll">
             <button
               [ngClass]="
                 'btn btn-sm mr-2 btn-custom-primary' + this.chosenPalette
@@ -102,7 +93,7 @@
               Edit
             </button>
           </div>
-          <div *ngIf="underConstructionMessage && this.myCollection === coll">
+          <div *ngIf="underConstructionMessage && this.collToView === coll">
             This feature is under construction!
           </div>
         </div>

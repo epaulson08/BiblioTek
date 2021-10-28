@@ -100,46 +100,12 @@
       >
         {{ cs.abbreviation }}
       </button>
-
-      <div *ngIf="citationOutput">
-        <h6 class="mt-2">{{ this.chosenStyle.abbreviation }} citation:</h6>
-
-        <div *ngIf="this.switch">
-          <span [outerHTML]="this.citationOutput"></span>
-        </div>
-        <div *ngIf="!this.switch">
-          <span [outerHTML]="this.citationOutput"></span>
-        </div>
-        <br />
-        <button
-          [ngClass]="'btn btn-sm mb-3 btn-custom-primary' + this.chosenPalette"
-          (click)="toggleMoreInfo()"
-        >
-          More Info ▼
-        </button>
-        <div *ngIf="moreInfo">
-          <h6>
-            {{ chosenStyle.name }} ({{ chosenStyle.abbreviation }}) format
-          </h6>
-          <em>Authoritative Source:</em>
-          <br />
-          {{ chosenStyle.definitiveReference }}
-          <br />
-          <a [href]="chosenStyle.definitiveReferenceUrl">{{
-            chosenStyle.definitiveReferenceUrl
-          }}</a>
-          <br />
-          <br />
-          <em>Links:</em>
-          <br />
-          <div *ngFor="let link of chosenStyle.links">
-            <a [href]="link.url" class="wrap-urls">{{ link.url }}</a
-            ><br />
-            {{ link.comment }}
-            <br />
-            <br />
-          </div>
-        </div>
+      <div *ngIf="chosenStyle">
+        <app-citation-style-switch
+          [chosenCitationStyle]="this.chosenStyle"
+          [jaToCite]="this.selected"
+          [showHeader]="true"
+        ></app-citation-style-switch>
       </div>
     </div>
     <!-- ^^^ end citations view -->
@@ -337,11 +303,17 @@
               </button></span
             >
           </div>
-          <button [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette" (click)="setEdit()">
+          <button
+            [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+            (click)="setEdit()"
+          >
             Edit
           </button>
 
-          <button [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette" (click)="resetCite()">
+          <button
+            [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
+            (click)="resetCite()"
+          >
             Back
           </button>
           <div

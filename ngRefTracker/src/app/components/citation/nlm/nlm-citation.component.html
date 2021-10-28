@@ -1,0 +1,8 @@
+{{ ja.authors | nlmAuthors }}&nbsp;{{ ja.title | titleValidator }}&nbsp;<span
+  *ngIf="ja.journal.abbreviation"
+  >{{ ja.journal.abbreviation }}</span
+><span *ngIf="!ja.journal.abbreviation">{{ ja.journal.name }}</span
+>.&nbsp;{{ ja.yearPublished }};{{ ja.volumeNum
+}}<span *ngIf="ja.issueNum">({{ ja.issueNum }})</span
+><span *ngIf="ja.pages">:{{ ja.pages }}</span
+>.
