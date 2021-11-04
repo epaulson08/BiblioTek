@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-display-all-articles',
   templateUrl: './display-all-articles.component.html',
-  styleUrls: ['./display-all-articles.component.css']
+  styleUrls: ['./display-all-articles.component.scss']
 })
 export class DisplayAllArticlesComponent implements OnInit {
 

@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
 

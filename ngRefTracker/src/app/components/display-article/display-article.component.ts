@@ -14,7 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-display-article',
   templateUrl: './display-article.component.html',
-  styleUrls: ['./display-article.component.css']
+  styleUrls: ['./display-article.component.scss']
 })
 export class DisplayArticleComponent implements OnInit {
 

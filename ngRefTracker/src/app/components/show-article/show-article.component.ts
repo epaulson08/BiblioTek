@@ -6,7 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-show-article',
   templateUrl: './show-article.component.html',
-  styleUrls: ['./show-article.component.css']
+  styleUrls: ['./show-article.component.scss']
 })
 export class ShowArticleComponent implements OnInit {
 

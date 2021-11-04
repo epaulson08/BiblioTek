@@ -5,7 +5,7 @@ import { IeeeAuthorPipe } from 'src/app/pipes/ieee/author-builder/ieee-author.pi
 @Component({
   selector: 'app-ieee-authors',
   templateUrl: './ieee-authors.component.html',
-  styleUrls: ['./ieee-authors.component.css'],
+  styleUrls: ['./ieee-authors.component.scss'],
 })
 export class IeeeAuthorsComponent implements OnInit {
   @Input() authors: Author[];

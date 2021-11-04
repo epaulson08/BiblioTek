@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-download-docx',
   templateUrl: './download-docx.component.html',
-  styleUrls: ['./download-docx.component.css']
+  styleUrls: ['./download-docx.component.scss']
 })
 
 // thanks to https://github.com/dolanmiu/docx/tree/master/demo
