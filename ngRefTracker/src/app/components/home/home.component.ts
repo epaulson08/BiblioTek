@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
   loadPalette(): string {
     this.userServ.findPalette().subscribe(
       success => {
-        localStorage.setItem("chosenPalette", "-" + success);
+        localStorage.setItem("chosenPalette", success);
         this.router.navigateByUrl("/user-dashboard");
         return success;
       },

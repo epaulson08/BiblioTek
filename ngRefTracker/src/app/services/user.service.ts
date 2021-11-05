@@ -6,24 +6,25 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
   private baseUrl: string = environment.baseUrl;
 
-  constructor(private auth: AuthService, private http: HttpClient) { }
+  constructor(private auth: AuthService, private http: HttpClient) {}
 
   loadPalette(): string {
-    let chosenPalette: string = localStorage.getItem("chosenPalette");
+    let chosenPalette: string = localStorage.getItem('chosenPalette');
     if (!chosenPalette) chosenPalette = '-A';
     return chosenPalette;
   }
 
   findUserId(username: string): Observable<number> {
-    return this.http.get<number>(
-      this.baseUrl + `api/users/getId/${username}`,
-      this.auth.generateHttpHeader())
+    return this.http
+      .get<number>(
+        this.baseUrl + `api/users/getId/${username}`,
+        this.auth.generateHttpHeader()
+      )
       .pipe(
         catchError((err: any) => {
           return throwError(err);
@@ -32,26 +33,29 @@ export class UserService {
   }
 
   findPalette(): Observable<string> {
-    return this.http.get<string>(
-      this.baseUrl + `users/palette`,
-      this.auth.generateHttpHeader())
+    return this.http
+      .get<string>(
+        this.baseUrl + `users/palette`,
+        this.auth.generateHttpHeader()
+      )
       .pipe(
         catchError((err: any) => {
           return throwError(err);
         })
-        );
+      );
   }
 
   savePalette(paletteToSave: string): Observable<string> {
-    return this.http.put<string>(
-      this.baseUrl + `users/palette/${paletteToSave}`,
-      null,
-      this.auth.generateHttpHeader())
-        .pipe(
-          catchError((err: any) => {
-            return throwError(err);
-          })
-        )
+    return this.http
+      .put<string>(
+        this.baseUrl + `users/palette/${paletteToSave}`,
+        null,
+        this.auth.generateHttpHeader()
+      )
+      .pipe(
+        catchError((err: any) => {
+          return throwError(err);
+        })
+      );
   }
-
 }
