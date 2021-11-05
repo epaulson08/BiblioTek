@@ -37,512 +37,222 @@
   font-family: Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-html, body { height: 100%; }
-
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .no-wrap {
   flex-wrap: nowrap;
 }
 
-
 /* Palettes */
-
-/* Palette A: */
-/* Thanks to colormind.io */
-
-$light-blue-A: #4CC0CD;
-$light-blue-darkened-A: #359ca7;
-
-$dark-teal-A: #287286;
-$dark-teal-darkened-A: #1e5868;
-
-$tan-A: #c19a6b;
-$tan-darkened-A: #a7855c;
-
-$red-A: #B24251;
-$red-darkened-A: #8f3642;
-
-$primary-A: $light-blue-A;
-$primary-dark-A: $light-blue-darkened-A;
-
-$secondary-A: $dark-teal-A;
-$secondary-dark-A: $dark-teal-darkened-A;
-
-$warning-A: $tan-A;
-$warning-dark-A: $tan-darkened-A;
-
-$danger-A: $red-A;
-$danger-dark-A: $red-darkened-A;
-
-/* nav, sidebar, header (A) */
-.navbar-palette-A {
-  background-color: $secondary-A;
-}
-
-.sidebar-palette-A {
-  background-color: $warning-A;
-}
-
-.header-palette-A {
-  color: $secondary-A;
-}
-
-.header-highlighter-palette-A {
-  background-color: $primary-A;
-}
-
-/* btn-custom-primary (A) */
-.btn-custom-primary-A {
-  background-color: $primary-A;
-  border-color: $primary-A;
-  color: white;
-}
-
-.btn-custom-primary-A:hover {
-  background-color: $primary-dark-A;
-  border-color: $primary-dark-A;
-  color: white;
-}
-
-/* btn-custom-secondary (A) */
-.btn-custom-secondary-A {
-  background-color: $secondary-A;
-  border-color: $secondary-A;
-  color: white;
-}
-
-.btn-custom-secondary-A:hover {
-  background-color: $secondary-dark-A;
-  border-color: $secondary-dark-A;
-  color: white;
-}
-
-.btn-custom-secondary-white-A {
-  background-color: $secondary-A;
-  border-color: white;
-  color: white;
-}
-
-.btn-custom-secondary-white-A:hover {
-  background-color: $secondary-dark-A;
-  border-color: white;
-  color: white;
-}
-
-/* button-custom-warning (A) */
-.btn-custom-warning-A {
-  background-color: $warning-A;
-  border-color: $warning-A;
-  color: white;
-}
-
-.btn-custom-warning-A:hover {
-  background-color: $warning-dark-A;
-  border-color: $warning-dark-A;
-  color: white;
-}
-
-.btn-custom-warning-white-A {
-  background-color: $warning-A;
-  border-color: white;
-  color: white;
-}
-
-.btn-custom-warning-white-A:hover {
-  background-color: $warning-dark-A;
-  border-color: white;
-  color: white;
-}
-
-/* btn-custom-danger (A) */
-
-.btn-custom-danger-A {
-  background-color: $danger-A;
-  border-color: $danger-A;
-  color: white;
-}
-
-.btn-custom-danger-A:hover {
-  background-color: $danger-dark-A;
-  border-color: $danger-dark-A;
-  color: white;
-}
-
-.btn-custom-danger-white-A {
-  background-color: $danger-A;
-  border-color: white;
-  color: white;
-}
-
-.btn-custom-danger-white-A:hover {
-  background-color: $danger-dark-A;
-  border-color: white;
-  color: white;
-}
-
-
-/* Palette B:
-B primary: #9A7156;
-B secondary: #57382F;
-B warning: #A39684;
-B danger: #948D53;
-
-Thanks to colormind.io
-*/
-
-.sidebar-palette-B {
-  background-color: #A39684;
-}
-
-.navbar-palette-B {
-  background-color: #57382F;
-}
-
-.header-palette-B {
-  color: #57382F;
-}
-
-.header-highlighter-palette-B {
-  background-color: #9A7156;
-}
-
-/* btn-custom-primary (B) */
-.btn-custom-primary-B {
-  background-color: #9A7156;
-  border-color: #9A7156;
-  color: white;
-}
-
-.btn-custom-primary-B:hover {
-  background-color: #825f49;
-  border-color: #825f49;
-  color: white;
-}
-
-.btn-custom-primary-white-B {
-  background-color: #9A7156;
-  border-color: white;
-  color: white;
-}
-
-.btn-custom-primary-white-B:hover {
-  background-color: #825f49;
-  border-color: white;
-  color: white;
-}
-
-/* btn-custom-secondary (B) */
-.btn-custom-secondary-B {
-  background-color: #57382F;
-  border-color: #57382F;
-  color: white;
-}
-
-.btn-custom-secondary-B:hover {
-  background-color: #7d4c41;
-  border-color: #7d4c41;
-  color: white;
-}
-
-.btn-custom-secondary-white-B {
-  background-color: #57382F;
-  border-color: white;
-  color: white;
-}
-
-.btn-custom-secondary-white-B:hover {
-  background-color: #7d4c41;
-  border-color: white;
-  color: white;
-}
-
-/* btn-custom-warning (B) */
-.btn-custom-warning-B {
-  background-color: #A39684;
-  border-color: #A39684;
-  color: white;
-}
-
-.btn-custom-warning-B:hover {
-  background-color: #918678;
-  border-color: #918678;
-  color: white;
-}
-
-.btn-custom-warning-white-B {
-  background-color: #A39684;
-  border-color: white;
-  color: white;
-}
-
-.btn-custom-warning-white-B:hover {
-  background-color: #918678;
-  border-color: white;
-  color: white;
-}
-
-/* btn-custom-danger (B) */
-.btn-custom-danger-B {
-  background-color: #948D53;
-  border-color: #948D53;
-  color: white;
-}
-
-.btn-custom-danger-B:hover {
-  background-color: #bbb25f;
-  border-color: #bbb25f;
-  color: white;
-}
-
-.btn-custom-danger-white-B {
-  background-color: #948D53;;
-  border-color: white;
-  color: white;
-}
-
-.btn-custom-danger-white-B:hover {
-  background-color: #bbb25f;
-  border-color: white;
-  color: white;
-}
-
-
-/* Palette Y (for testing only):
-Y primary: yellow
-Y secondary: brown
-Y warning: orange
-Y danger:red
-*/
-
-.sidebar-palette-Y {
-  background-color: orange;
-}
-
-.navbar-palette-Y {
-  background-color: brown;
-}
-
-/* btn-custom-primary (Y) */
-.btn-custom-primary-Y {
-  background-color: yellow;
-  border-color: yellow;
-  color: black;
-}
-
-.btn-custom-primary-Y:hover {
-  background-color: yellow;
-  border-color: yellow;
-  color: black;
-}
-
-.btn-custom-primary-white-Y {
-  background-color: yellow;
-  border-color: white;
-  color: white;
-}
-
-.btn-custom-primary-white-Y:hover {
-  background-color: yellow;
-  border-color: white;
-  color: white;
-}
-
-/* btn-custom-secondary (Y) */
-.btn-custom-secondary-Y {
-  background-color: brown;
-  border-color: brown;
-  color: white;
-}
-
-.btn-custom-secondary-Y:hover {
-  background-color: brown;
-  border-color: brown;
-  color: white;
-}
-
-.btn-custom-secondary-white-Y {
-  background-color: brown;
-  border-color: white;
-  color: white;
-}
-
-.btn-custom-secondary-white-Y:hover {
-  background-color: brown;
-  border-color: white;
-  color: white;
-}
-
-/* btn-custom-warning (Y) */
-.btn-custom-warning-Y {
-  background-color: orange;
-  border-color: orange;
-  color: white;
-}
-
-.btn-custom-warning-Y:hover {
-  background-color: orange;
-  border-color: orange;
-  color: white;
-}
-
-.btn-custom-warning-white-Y {
-  background-color: orange;
-  border-color: white;
-  color: white;
-}
-
-.btn-custom-warning-white-Y:hover {
-  background-color: orange;
-  border-color: white;
-  color: white;
-}
-
-/* btn-custom-danger (Y) */
-.btn-custom-danger-Y {
-  background-color: red;
-  border-color: red;
-  color: white;
-}
-
-.btn-custom-danger-Y:hover {
-  background-color: red;
-  border-color: red;
-  color: white;
-}
-
-.btn-custom-danger-white-Y {
-  background-color: red;
-  border-color: white;
-  color: white;
-}
-
-.btn-custom-danger-white-Y:hover {
-  background-color: red;
-  border-color: white;
-  color: white;
-}
-
-
-/* Palette Z:
-Z primary: purple;
-Z secondary: navy;
-Z warning: grey;
-Z danger: pink;
-*/
-
-.navbar-palette-Z {
-  background-color: navy;
-}
-
-.header-palette-Z {
-  color: navy;
-}
-
-.header-highlighter-palette-Z {
-  background-color: pink;
-}
-
-.sidebar-palette-Z {
-  background-color: grey !important;
-}
-
-/* btn-primary (Z) */
-.btn-custom-primary-Z {
-  background-color: purple;
-  border-color: purple;
-  color: white;
-}
-
-.btn-custom-primary-Z:hover {
-  background-color: rgb(165, 1, 165);
-  border-color:  rgb(165, 1, 165);
-  color: white;
-}
-
-.btn-custom-primary-white-Z {
-  background-color: purple;
-  border-color: white;
-  color: white;
-}
-
-.btn-custom-primary-white-Z:hover {
-  background-color: rgb(165, 1, 165);
-  border-color: white;
-  color: white;
-}
-
-/* btn-secondary (Z) */
-.btn-custom-secondary-Z {
-  background-color: navy;
-  border-color: navy;
-  color: white;
-}
-
-.btn-custom-secondary-Z:hover {
-  background-color: rgb(8, 8, 213);
-  border-color: rgb(8, 8, 213);
-  color: white;
-}
-
-.btn-custom-secondary-white-Z {
-  background-color: navy;
-  border-color: white;
-  color: white;
-}
-
-.btn-custom-secondary-white-Z:hover {
-  background-color: rgb(8, 8, 213);
-  border-color: white;
-  color: white;
-}
-
-/* btn-custom-warning (Z) */
-.btn-custom-warning-Z {
-  background-color: gray;
-  border-color: gray;
-  color: white;
-}
-
-.btn-custom-warning-Z:hover {
-  background-color: rgb(171, 171, 171);
-  border-color: rgb(171, 171, 171);
-  color: white;
-}
-
-.btn-custom-warning-white-Z {
-  background-color: gray;
-  border-color: white;
-  color: white;
-}
-
-.btn-custom-warning-white-Z:hover {
-  background-color: rgb(171, 171, 171);
-  border-color: white;
-  color: white;
-}
-
-/* btn-custom-danger (Z) */
-.btn-custom-danger-Z {
-  background-color: pink;
-  border-color: pink;
-  color: white;
-}
-
-.btn-custom-danger-Z:hover {
-  background-color: rgb(252, 157, 173);
-  border-color: rgb(252, 157, 173);
-  color: white;
-}
-
-.btn-custom-danger-white-Z {
-  background-color: pink;
-  border-color: white;
-  color: white;
-}
-
-.btn-custom-danger-white-Z:hover {
-  background-color: rgb(252, 157, 173);
-  border-color: white;
-  color: white;
+/* Thanks to colormind.io for inspiration of palettes A, B, and C */
+
+$palette-A-colors: (
+  // bright light blue
+  "primary": #4cc0cd,
+  "primary-dark": #359ca7,
+  // mellow teal
+  "secondary": #287286,
+  "secondary-dark": #1e5868,
+  // tan
+  "warning": #c19a6b,
+  "warning-dark": #a7855c,
+  // red
+  "danger": #b24251,
+  "danger-dark": #8f3642
+);
+
+$palette-B-colors: (
+  // lighter brown
+  "primary": #9a7156,
+  "primary-dark": #825f49,
+  // darker brown
+  "secondary": #57382f,
+  "secondary-dark": #7d4c41,
+  // beige
+  "warning": #a39684,
+  "warning-dark": #918678,
+  // yellower brown
+  "danger": #948d53,
+  "danger-dark": #bbb25f
+);
+
+$palette-C-colors: (
+  // mellow purple
+  "primary": #38373f,
+  // grey
+  "secondary": #5f5c59,
+  // pale yellow
+  "warning": #e6dda6,
+  // orange
+  "danger": #da8d31
+);
+
+// needs edits for low contrast, not currently using: FIXME
+$palette-D-colors: (
+  // darker green
+  "primary": #649f8b,
+  // lighter green
+  "secondary": #80b49e,
+  // light blue
+  "warning": #95c6c3,
+  // navy blue
+  "danger": #2f4156
+);
+
+$palette-Y-colors: (
+  // For testing only (ugly)
+  "primary": yellow,
+  "secondary": brown,
+  "warning": orange,
+  "danger": red
+);
+
+$palette-Z-colors: (
+  "primary": purple,
+  "primary-dark": rgb(165, 1, 165),
+  "secondary": navy,
+  "secondary-dark": rgb(8, 8, 213),
+  "warning": grey,
+  "warning-dark": rgb(171, 171, 171),
+  "danger": pink,
+  "danger-dark": rgb(252, 157, 173),
+);
+
+$palettes: (
+  "A": $palette-A-colors,
+  "B": $palette-B-colors,
+  "C": $palette-C-colors,
+  "D": $palette-D-colors,
+  "Y": $palette-Y-colors,
+  "Z": $palette-Z-colors,
+);
+
+@mixin button-hover() {
+  &:hover,
+  &:active,
+  &:focus {
+    @content;
+  }
+}
+
+@each $key, $palette in $palettes {
+  /* nav, sidebar, header */
+  .navbar-palette-#{$key} {
+    background-color: map-get($palette, "secondary");
+  }
+
+  .sidebar-palette-#{$key} {
+    background-color: map-get($palette, "warning");
+  }
+
+  .header-palette-#{$key} {
+    color: map-get($palette, "secondary");
+  }
+
+  .header-highlighter-palette-#{$key} {
+    background-color: map-get($palette, "primary");
+  }
+
+  /* buttons */
+  .btn-custom-primary-#{$key} {
+    background-color: map-get($palette, "primary");
+    border-color: map-get($palette, "primary");
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "primary-dark");
+      border-color: map-get($palette, "primary-dark");
+      color: white;
+    }
+  }
+
+  .btn-custom-primary-white-#{$key} {
+    background-color: map-get($palette, "primary");
+    border-color: white;
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "primary-dark");
+      border-color: map-get($palette, "primary-dark");
+      color: white;
+    }
+  }
+
+  .btn-custom-secondary-#{$key} {
+    background-color: map-get($palette, "secondary");
+    border-color: map-get($palette, "secondary");
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "secondary-dark");
+      border-color: map-get($palette, "secondary-dark");
+      color: white;
+    }
+  }
+
+  .btn-custom-secondary-white-#{$key} {
+    background-color: map-get($palette, "secondary");
+    border-color: white;
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "secondary-dark");
+      border-color: white;
+    }
+  }
+
+  .btn-custom-warning-#{$key} {
+    background-color: map-get($palette, "warning");
+    border-color: map-get($palette, "warning");
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "warning-dark");
+      border-color: map-get($palette, "warning-dark");
+      color: white;
+    }
+  }
+
+  .btn-custom-warning-white-#{$key} {
+    background-color: map-get($palette, "warning");
+    border-color: white;
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "warning-dark");
+      border-color: white;
+      color: white;
+    }
+  }
+
+  .btn-custom-danger-#{$key} {
+    background-color: map-get($palette, "danger");
+    border-color: map-get($palette, "danger");
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "danger-dark");
+      border-color: map-get($palette, "danger-dark");
+      color: white;
+    }
+  }
+
+  .btn-custom-danger-white-#{$key} {
+    background-color: map-get($palette, "danger");
+    border-color: white;
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "danger-dark");
+      border-color: white;
+      color: white;
+    }
+  }
+
+  .text-custom-primary-#{$key} {
+    color: map-get($palette, "primary");
+  }
 }

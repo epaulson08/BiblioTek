@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -10,9 +9,11 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserDashboardComponent implements OnInit {
 
+  savedPalette: string;
   chosenPalette: string;
   username: string = localStorage.getItem("username");
   clickedCite: boolean = false;
+  palettesToDisplay: string[];
 
   constructor(
     private authServ: AuthService,
@@ -21,13 +22,18 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.authServ.guardRoute();
-    this.chosenPalette = this.userServ.loadPalette();
+    this.savedPalette = this.userServ.loadPalette();
+    this.chosenPalette = this.savedPalette;
+
+    // hardcoded temporarily. Should obtain from DB // FIXME
+    this.palettesToDisplay = ["-A", "-B", "-C", "-Z"];
   }
 
   savePalette(choice: string): string {
-    this.chosenPalette = "-" + choice;
+    this.chosenPalette = choice;
     localStorage.setItem("chosenPalette", this.chosenPalette);
     this.userServ.savePalette(choice).subscribe(success => {
+      this.savedPalette = choice;
       return success;
     },
     failure => {
@@ -37,7 +43,7 @@ export class UserDashboardComponent implements OnInit {
   }
 
   previewPalette(choice: string) {
-    this.chosenPalette = "-" + choice;
+    this.chosenPalette = choice;
   }
 
   clickCiteButton() {
