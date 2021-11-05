@@ -5,7 +5,7 @@ import { MyCollection } from 'src/app/models/my-collection.model';
 @Component({
   selector: 'app-cite-all-ui',
   templateUrl: './cite-all-ui.component.html',
-  styleUrls: ['./cite-all-ui.component.css'],
+  styleUrls: ['./cite-all-ui.component.scss'],
 })
 export class CiteAllUiComponent implements OnInit {
   @Input() chosenPalette: string;

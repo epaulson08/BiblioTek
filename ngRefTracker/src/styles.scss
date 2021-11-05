@@ -1,0 +1,258 @@
+/* Global */
+
+.wrap-urls {
+  word-break: break-all;
+}
+
+.btn-full-width {
+  width: 100%;
+}
+
+.link-sidebar {
+  color: white;
+}
+
+.link-sidebar:hover {
+  color: white;
+}
+
+.link-white {
+  color: white;
+}
+
+.link-white:hover {
+  color: white;
+}
+
+.select-journal {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar {
+  min-height: 100vh;
+}
+
+.page-header {
+  font-family: Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.no-wrap {
+  flex-wrap: nowrap;
+}
+
+/* Palettes */
+/* Thanks to colormind.io for inspiration of palettes A, B, and C */
+
+$palette-A-colors: (
+  // bright light blue
+  "primary": #4cc0cd,
+  "primary-dark": #359ca7,
+  // mellow teal
+  "secondary": #287286,
+  "secondary-dark": #1e5868,
+  // tan
+  "warning": #c19a6b,
+  "warning-dark": #a7855c,
+  // red
+  "danger": #b24251,
+  "danger-dark": #8f3642
+);
+
+$palette-B-colors: (
+  // lighter brown
+  "primary": #9a7156,
+  "primary-dark": #825f49,
+  // darker brown
+  "secondary": #57382f,
+  "secondary-dark": #7d4c41,
+  // beige
+  "warning": #a39684,
+  "warning-dark": #918678,
+  // yellower brown
+  "danger": #948d53,
+  "danger-dark": #bbb25f
+);
+
+$palette-C-colors: (
+  // mellow purple
+  "primary": #38373f,
+  // grey
+  "secondary": #5f5c59,
+  // pale yellow
+  "warning": #e6dda6,
+  // orange
+  "danger": #da8d31
+);
+
+// needs edits for low contrast, not currently using: FIXME
+$palette-D-colors: (
+  // darker green
+  "primary": #649f8b,
+  // lighter green
+  "secondary": #80b49e,
+  // light blue
+  "warning": #95c6c3,
+  // navy blue
+  "danger": #2f4156
+);
+
+$palette-Y-colors: (
+  // For testing only (ugly)
+  "primary": yellow,
+  "secondary": brown,
+  "warning": orange,
+  "danger": red
+);
+
+$palette-Z-colors: (
+  "primary": purple,
+  "primary-dark": rgb(165, 1, 165),
+  "secondary": navy,
+  "secondary-dark": rgb(8, 8, 213),
+  "warning": grey,
+  "warning-dark": rgb(171, 171, 171),
+  "danger": pink,
+  "danger-dark": rgb(252, 157, 173),
+);
+
+$palettes: (
+  "A": $palette-A-colors,
+  "B": $palette-B-colors,
+  "C": $palette-C-colors,
+  "D": $palette-D-colors,
+  "Y": $palette-Y-colors,
+  "Z": $palette-Z-colors,
+);
+
+@mixin button-hover() {
+  &:hover,
+  &:active,
+  &:focus {
+    @content;
+  }
+}
+
+@each $key, $palette in $palettes {
+  /* nav, sidebar, header */
+  .navbar-palette-#{$key} {
+    background-color: map-get($palette, "secondary");
+  }
+
+  .sidebar-palette-#{$key} {
+    background-color: map-get($palette, "warning");
+  }
+
+  .header-palette-#{$key} {
+    color: map-get($palette, "secondary");
+  }
+
+  .header-highlighter-palette-#{$key} {
+    background-color: map-get($palette, "primary");
+  }
+
+  /* buttons */
+  .btn-custom-primary-#{$key} {
+    background-color: map-get($palette, "primary");
+    border-color: map-get($palette, "primary");
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "primary-dark");
+      border-color: map-get($palette, "primary-dark");
+      color: white;
+    }
+  }
+
+  .btn-custom-primary-white-#{$key} {
+    background-color: map-get($palette, "primary");
+    border-color: white;
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "primary-dark");
+      border-color: map-get($palette, "primary-dark");
+      color: white;
+    }
+  }
+
+  .btn-custom-secondary-#{$key} {
+    background-color: map-get($palette, "secondary");
+    border-color: map-get($palette, "secondary");
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "secondary-dark");
+      border-color: map-get($palette, "secondary-dark");
+      color: white;
+    }
+  }
+
+  .btn-custom-secondary-white-#{$key} {
+    background-color: map-get($palette, "secondary");
+    border-color: white;
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "secondary-dark");
+      border-color: white;
+    }
+  }
+
+  .btn-custom-warning-#{$key} {
+    background-color: map-get($palette, "warning");
+    border-color: map-get($palette, "warning");
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "warning-dark");
+      border-color: map-get($palette, "warning-dark");
+      color: white;
+    }
+  }
+
+  .btn-custom-warning-white-#{$key} {
+    background-color: map-get($palette, "warning");
+    border-color: white;
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "warning-dark");
+      border-color: white;
+      color: white;
+    }
+  }
+
+  .btn-custom-danger-#{$key} {
+    background-color: map-get($palette, "danger");
+    border-color: map-get($palette, "danger");
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "danger-dark");
+      border-color: map-get($palette, "danger-dark");
+      color: white;
+    }
+  }
+
+  .btn-custom-danger-white-#{$key} {
+    background-color: map-get($palette, "danger");
+    border-color: white;
+    color: white;
+
+    @include button-hover() {
+      background-color: map-get($palette, "danger-dark");
+      border-color: white;
+      color: white;
+    }
+  }
+
+  .text-custom-primary-#{$key} {
+    color: map-get($palette, "primary");
+  }
+}

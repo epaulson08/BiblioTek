@@ -5,7 +5,7 @@ import { JournalArticle } from 'src/app/models/journal-article';
 @Component({
   selector: 'app-citation-style-switch',
   templateUrl: './citation-style-switch.component.html',
-  styleUrls: ['./citation-style-switch.component.css'],
+  styleUrls: ['./citation-style-switch.component.scss'],
 })
 export class CitationStyleSwitchComponent implements OnInit {
   @Input() chosenCitationStyle: CitationStyle;

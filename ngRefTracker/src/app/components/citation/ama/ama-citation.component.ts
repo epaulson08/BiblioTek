@@ -4,7 +4,7 @@ import { JournalArticle } from 'src/app/models/journal-article';
 @Component({
   selector: 'app-ama-citation',
   templateUrl: './ama-citation.component.html',
-  styleUrls: ['./ama-citation.component.css']
+  styleUrls: ['./ama-citation.component.scss']
 })
 export class AmaCitationComponent implements OnInit {
 

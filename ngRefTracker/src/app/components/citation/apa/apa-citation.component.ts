@@ -4,7 +4,7 @@ import { JournalArticle } from 'src/app/models/journal-article';
 @Component({
   selector: 'app-apa-citation',
   templateUrl: './apa-citation.component.html',
-  styleUrls: ['./apa-citation.component.css']
+  styleUrls: ['./apa-citation.component.scss']
 })
 export class ApaCitationComponent implements OnInit {
 

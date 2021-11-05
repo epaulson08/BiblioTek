@@ -7,7 +7,7 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-display-articles',
   templateUrl: './display-articles.component.html',
-  styleUrls: ['./display-articles.component.css']
+  styleUrls: ['./display-articles.component.scss']
 })
 export class DisplayArticlesComponent implements OnInit {
   @Input() articlesToDisplay: JournalArticle[];

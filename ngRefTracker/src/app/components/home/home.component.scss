@@ -1,5 +1,16 @@
 .background-image {
-  background-image: url('src/assets/images/library.jpg');
+  background-image: url('../../../assets/images/library.jpg');
+/*
+src/
+├── app/
+│   └── components/
+│       └── home/
+│           └── home.component.scss
+└── assets/
+    └── images/
+        └── library.jpg
+*/
+
   background-size: 100%;
   background-repeat: no-repeat;
   width: 100%;
@@ -34,16 +45,6 @@
   background-color: #b24251;
   color: white;
 }
-
-
-/*
-Palette A:
-F6F6F7  White
-E0BB8E  Muted tan
-Mod: Muted tan darkened for contrast with white text: #c19a6b;
-B24251  Muted red
-4CC0CD  Bright light blue
-287286  Muted teal */
 
 #demo-button {
   margin-top: 40px;

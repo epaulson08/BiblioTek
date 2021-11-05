@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-my-collection',
   templateUrl: './my-collection.component.html',
-  styleUrls: ['./my-collection.component.css'],
+  styleUrls: ['./my-collection.component.scss'],
 })
 export class MyCollectionComponent implements OnInit {
   /////////
