@@ -85,7 +85,7 @@ $palette-C-colors: (
   // grey
   "secondary": #5f5c59,
   // pale yellow
-  "warning": #e6dda6,
+  "warning": darken(#e6dda6, 15%),
   // orange
   "danger": #da8d31
 );
