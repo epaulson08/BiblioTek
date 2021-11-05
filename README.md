@@ -9,6 +9,11 @@ enables the user to manage references for academic papers. The user can enter bi
 ## How to Access
 Navigate to http://apps.ericpaulsondev.com:8080/BiblioTek.
 
+## Purpose
+I am using this project as a prototype to practice full stack web development in a language- and framework-agnostic fashion. Academic citations lend themselves well to the create, read, update, delete (CRUD) operations that underlie most software. 
+
+I have designed a REST API ([specification here](REST-API/REST-endpoints.md)), which will allow me to swap out different back and front end implementations as I learn new technologies.
+
 ## Features 
 
 ### Citation Formatting
@@ -80,24 +85,19 @@ $palettes: (
 
 In the Angular templates, I used the `[ngClass]` directive to dynamically bind the palette keys, e.g.:
 ```html
-<div [ngClass]="'col-2 d-none d-md-block sidebar sidebar-palette' + this.chosenPalette">
+<div [ngClass]="'sidebar-palette' + this.chosenPalette">
 ```
 
 Based on the `chosenPalette` variable I created in the component, Angular evaluates this expression to 
 ```html
-<div class="col-2 d-none d-md-block sidebar sidebar-palette-A">
+<div class="sidebar-palette-A">
 ```
 
 ### Responsive Web Design
 
 #### Documentation coming soon.
 
-## Purpose
-I am using this project as a prototype to practice full stack web development in a language- and framework-agnostic fashion. Academic citations lend themselves well to the create, read, update, delete (CRUD) operations that underlie most software. 
-
-I have designed a REST API ([specification here](REST-API/REST-endpoints.md)), which will allow me to swap out different back and front end implementations as I learn new technologies.
-
-### Implemented Technologies:
+## Implemented Technologies:
 * Testing: JUnit, Jasmine, Postman
 * Database: MySQL
 * Object-relational mapping (ORM): Java Persistence API (JPA) implemented with Hibernate
