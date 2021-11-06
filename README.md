@@ -19,6 +19,8 @@ I have designed a REST API ([specification here](REST-API/REST-endpoints.md)), w
 ### Citation Formatting
 For each journal article in a user's account, BiblioTek can generate citations based on rules for various citation standards:
 
+[(Notes on implementation)](./docs/coming-soon.md)
+
 ![](./docs/images/demo-citation.png)
 
 ![](./docs/images/demo-citation-apa.png)
@@ -27,19 +29,25 @@ For each journal article in a user's account, BiblioTek can generate citations b
 
 ![](./docs/images/demo-citation-nlm.png)
 
-### My Collections
-#### A user can organize subsets of their journal article collection by theme:
-![](docs/images/demo-my-collection.png)
 
+### My Collections
+A user can organize subsets of their journal article collection by theme.
+
+[(Notes on implementation)](./docs/coming-soon.md)
+
+![](docs/images/demo-my-collections.png)
 
 ### Customized Palettes
-#### A user can choose a color theme for their UI.
-![](./docs/images/palette-settings-demo.png)
+A user can choose a color theme for their UI.
+
+[(Notes on implementation)](./docs/impl-notes/color-palettes.md)
+
+![](./docs/images/demo-palette-settings.png)
 
 #### Based on their selection, the site could look like:
-![](./docs/images/palette-demo-A.png)
-![](./docs/images/palette-demo-C.png)
-![](./docs/images/palette-demo-Y.png)
+![](./docs/images/demo-palette-A.png)
+![](./docs/images/demo-palette-C.png)
+![](./docs/images/demo-palette-Y.png)
 
 #### Notes on implementation:
 I used Sass to create palettes as maps of semantic descriptions and color selections, e.g. 
