@@ -19,27 +19,27 @@ I have designed a REST API ([specification here](REST-API/REST-endpoints.md)), w
 ### Citation Formatting
 For each journal article in a user's account, BiblioTek can generate citations based on rules for various citation standards:
 
-![](./ngRefTracker/src/assets/images/citation-card-demo.png)
+![](./docs/images/demo-citation.png)
 
-![](./ngRefTracker/src/assets/images/citation-ama-demo.png)
+![](./docs/images/demo-citation-apa.png)
 
-![](./ngRefTracker/src/assets/images/citation-apa-demo.png)
+![](./docs/images/demo-citation-ieee.png)
 
-![](./ngRefTracker/src/assets/images/citation-ieee-demo.png)
+![](./docs/images/demo-citation-nlm.png)
 
 ### My Collections
 #### A user can organize subsets of their journal article collection by theme:
-![](./ngRefTracker/src/assets/images/my-collections-demo.png)
-![](./ngRefTracker/src/assets/images/my-collection-demo.png)
+![](docs/images/demo-my-collection.png)
+
 
 ### Customized Palettes
 #### A user can choose a color theme for their UI.
-![](./ngRefTracker/src/assets/images/palette-settings-demo.png)
+![](./docs/images/palette-settings-demo.png)
 
 #### Based on their selection, the site could look like:
-![](./ngRefTracker/src/assets/images/palette-demo-A.png)
-![](./ngRefTracker/src/assets/images/palette-demo-C.png)
-![](./ngRefTracker/src/assets/images/palette-demo-Y.png)
+![](./docs/images/palette-demo-A.png)
+![](./docs/images/palette-demo-C.png)
+![](./docs/images/palette-demo-Y.png)
 
 #### Notes on implementation:
 I used Sass to create palettes as maps of semantic descriptions and color selections, e.g. 
@@ -113,7 +113,7 @@ Based on the `chosenPalette` variable I created in the component, Angular evalua
 The database is implemented with MySQL, and developed with MySQL Workbench.
 
 ### Schema:
-![](./ngRefTracker/src/assets/images/db-schema.png)
+![](./docs/images/db-schema.png)
 
 ## REST API Endpoints
 Described in detail [here](REST-API/REST-endpoints.md).
