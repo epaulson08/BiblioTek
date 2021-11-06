@@ -1,6 +1,6 @@
 # BiblioTek
 
-![](./docs/images/landing-page-demo.png)
+![](./docs/images/demo-landing-page.png)
 
 ## Description
 BiblioTek, in the vein of [Mendeley](https://www.mendeley.com/guides/desktop) or [EndNote](https://endnote.com/),
