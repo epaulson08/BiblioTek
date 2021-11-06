@@ -9,11 +9,6 @@ enables the user to manage references for academic papers. The user can enter bi
 ## How to Access
 Navigate to http://apps.ericpaulsondev.com:8080/BiblioTek.
 
-## Purpose
-I am using this project as a prototype to practice full stack web development in a language- and framework-agnostic fashion. Academic citations lend themselves well to the create, read, update, delete (CRUD) operations that underlie most software. 
-
-I have designed a REST API ([specification here](REST-API/REST-endpoints.md)), which will allow me to swap out different back and front end implementations as I learn new technologies.
-
 ## Features 
 
 ### Citation Formatting
@@ -49,63 +44,13 @@ A user can choose a color theme for their UI.
 ![](./docs/images/demo-palette-C.png)
 ![](./docs/images/demo-palette-Y.png)
 
-#### Notes on implementation:
-I used Sass to create palettes as maps of semantic descriptions and color selections, e.g. 
+## Purpose
+I am using this project as a prototype to practice full stack web development in a language- and framework-agnostic fashion. Academic citations lend themselves well to the create, read, update, delete (CRUD) operations that underlie most software. 
 
-```scss
-$palette-A-colors: (
-  "primary": #4cc0cd,
-  "primary-dark": #359ca7,
-  "secondary": #287286,
-  "secondary-dark": #1e5868,
-  "warning": #c19a6b,
-  "warning-dark": #a7855c,
-  "danger": #b24251,
-  "danger-dark": #8f3642
-);
-```
-Then, I was able to iterate through a map of palettes:
+I have designed a REST API ([specification here](REST-API/REST-endpoints.md)), which will allow me to swap out different back and front end implementations as I learn new technologies.
 
-```scss
-$palettes: (
-  "A": $palette-A-colors,
-  "B": $palette-B-colors,
-  "C": $palette-C-colors,
-  "D": $palette-D-colors,
-  "Y": $palette-Y-colors,
-  "Z": $palette-Z-colors,
-);
-```
-
-```scss
-@each $key, $palette in $palettes {
-  .navbar-palette-#{$key} {
-
-    background-color: map-get($palette, "secondary");
-  }
-
-  .sidebar-palette-#{$key} {
-    background-color: map-get($palette, "warning");
-  }
-
-// ...
-```
-
-In the Angular templates, I used the `[ngClass]` directive to dynamically bind the palette keys, e.g.:
-```html
-<div [ngClass]="'sidebar-palette' + this.chosenPalette">
-```
-
-Based on the `chosenPalette` variable I created in the component, Angular evaluates this expression to 
-```html
-<div class="sidebar-palette-A">
-```
-
-### Responsive Web Design
-
-#### Documentation coming soon.
-
-## Implemented Technologies:
+## Project Architecture
+### Implemented Technologies:
 * Testing: JUnit, Jasmine, Postman
 * Database: MySQL
 * Object-relational mapping (ORM): Java Persistence API (JPA) implemented with Hibernate
@@ -113,21 +58,17 @@ Based on the `chosenPalette` variable I created in the component, Angular evalua
 * Front end: TypeScript/Angular
 * Styling: Bootstrap, Sass
 
-### Coming Soon:
-* Replace back end with Node.js
-* Replace front end with React, jQuery, JSPs
-
-## Database Layer
+### Database Layer
 The database is implemented with MySQL, and developed with MySQL Workbench.
 
-### Schema:
+#### Schema:
 ![](./docs/images/db-schema.png)
 
-## REST API Endpoints
+### REST API Endpoints
 Described in detail [here](REST-API/REST-endpoints.md).
 
-## Testing Frameworks
-I have implemented testing with JUnit, Jasmine, and Postman. I'm planning on blogging about some lessons learned.
+### Testing Frameworks
+I have implemented testing with JUnit, Jasmine, and Postman. Documentation is coming soon about some lessons learned.
 
 ## In Progress
 ### Features In Progress
