@@ -1,6 +1,6 @@
 # BiblioTek
 
-![](./ngRefTracker/src/assets/images/landing-page-demo.png)
+![](./docs/images/landing-page-demo.png)
 
 ## Description
 BiblioTek, in the vein of [Mendeley](https://www.mendeley.com/guides/desktop) or [EndNote](https://endnote.com/),
