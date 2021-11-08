@@ -54,6 +54,8 @@ import { IeeeAuthorsPipe } from './pipes/ieee/author-builder/ieee-authors.pipe';
 import { TitleIeeeAdjusterPipe } from './pipes/validator/title-ieee-adjuster.pipe';
 import { IeeeAuthorsComponent } from './components/citation/ieee/ieee-authors/ieee-authors.component';
 import { NlmCitationComponent } from './components/citation/nlm/nlm-citation.component';
+import { ArticleCardBodyComponent } from './components/display-article/article-card-body/article-card-body.component';
+import { ArticleCardFooterComponent } from './components/display-article/article-card-footer/article-card-footer.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +100,8 @@ import { NlmCitationComponent } from './components/citation/nlm/nlm-citation.com
     TitleIeeeAdjusterPipe,
     IeeeAuthorsComponent,
     NlmCitationComponent,
+    ArticleCardBodyComponent,
+    ArticleCardFooterComponent,
   ],
   imports: [
     AppRoutingModule,
