@@ -1,1 +1,123 @@
-<p>article-card-footer works!</p>
+<div *ngIf="!this.viewCite">
+  <div class="card-footer d-flex">
+    <div *ngIf="!deleted && !editJa">
+      <button
+        [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+        (click)="cite()"
+      >
+        Cite
+      </button>
+      <div ngbDropdown class="d-inline-block">
+        <button
+          [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+          id="dropdownAddToColl"
+          ngbDropdownToggle
+        >
+          Add to Collection
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownAddToColl">
+          <span *ngFor="let coll of this.myCollections"
+            ><button
+              ngbDropdownItem
+              (click)="
+                addToCollection(coll.id, coll.name, this.selected.id)
+              "
+            >
+              {{ coll.name }}
+            </button></span
+          >
+        </div>
+      </div>
+      <button
+        [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+        (click)="setEdit()"
+      >
+        Edit
+      </button>
+      <button
+        [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
+        (click)="goBack()"
+      >
+        Back
+      </button>
+      <div *ngIf="!deleted && editJa">
+        <button
+          [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+          (click)="update(editJa)"
+        >
+          Submit</button
+        ><button
+          [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+          (click)="cancelEdit()"
+        >
+          Cancel
+        </button>
+      </div>
+      <span *ngIf="!deleted">
+        <button
+          [ngClass]="'btn btn-custom-danger' + this.chosenPalette"
+          (click)="delete(selected.id)"
+        >
+          Delete
+        </button>
+      </span>
+      <div *ngIf="this.addedMessage">
+        <h5 class="my-auto">Added to {{ this.addedMessage }}.</h5>
+      </div>
+      <div
+        class="ml-3"
+        style="color: orange"
+        *ngIf="this.underConstructionMessage"
+      >
+        {{ this.underConstructionMessage }}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Citation view selected: -->
+<div *ngIf="viewCite">
+  <div class="card-footer d-flex">
+    <div ngbDropdown class="d-inline-block">
+      <button
+        [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+        id="dropdownAddToColl"
+        ngbDropdownToggle
+      >
+        Add to Collection
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownAddToColl">
+        <span *ngFor="let coll of this.myCollections"
+          ><button
+            ngbDropdownItem
+            (click)="addToCollection(coll.id, coll.name, this.selected.id)"
+          >
+            {{ coll.name }}
+          </button></span
+        >
+      </div>
+      <button
+        [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+        (click)="setEdit()"
+      >
+        Edit
+      </button>
+
+      <button
+        [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
+        (click)="resetCite()"
+      >
+        Back
+      </button>
+      <div
+        class="float-center"
+        style="color: orange"
+        *ngIf="this.underConstructionMessage"
+      >
+        {{ this.underConstructionMessage }}
+      </div>
+    </div>
+    <div *ngIf="this.addedMessage">
+      <h5 class="my-auto">Added to {{ this.addedMessage }}.</h5>
+    </div>
+  </div>
+</div>

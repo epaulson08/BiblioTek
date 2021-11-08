@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { CitationStyle } from 'src/app/models/citation-style';
+import { JournalArticle } from 'src/app/models/journal-article';
 
 @Component({
   selector: 'app-article-card-body',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticleCardBodyComponent implements OnInit {
 
+  @Input() ja: JournalArticle;
+  editJa: JournalArticle;
+  @Input() viewCite: boolean;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  chooseStyle(cs: CitationStyle) {
+
   }
 
 }

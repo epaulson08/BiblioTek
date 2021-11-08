@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-article-card-footer',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./article-card-footer.component.css']
 })
 export class ArticleCardFooterComponent implements OnInit {
+
+  @Input() viewCite: boolean;
 
   constructor() { }
 

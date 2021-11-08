@@ -1,1 +1,104 @@
-<p>article-card-body works!</p>
+<table class="m-3">
+  <tr>
+    <th scope="row">Title:</th>
+    <td *ngIf="ja !== editJa">{{ ja.title }}</td>
+    <td *ngIf="ja === editJa">
+      <textarea
+        class="form-control"
+        rows="5"
+        name="fred"
+        [(ngModel)]="editJa.title"
+      ></textarea>
+    </td>
+  </tr>
+  <tr>
+    <th scope="row">Authors:</th>
+    <td>
+      {{ ja.authors | authorFormat }}
+    </td>
+  </tr>
+  <tr>
+    <th scope="row">Journal:</th>
+    <td *ngIf="ja !== editJa">{{ ja.journal.name }}</td>
+
+    <td *ngIf="ja === editJa">
+      <select
+        class="form-control"
+        [(ngModel)]="editJournal"
+        name="editJournal"
+      >
+        <option [ngValue]="editJournal" ja>
+          {{ editJournal.name }}
+        </option>
+        <option *ngFor="let j of allJournals" [ngValue]="j">
+          {{ j.name }}
+        </option>
+      </select>
+    </td>
+  </tr>
+
+  <!-- Volume -->
+  <tr>
+    <th scope="row">Volume:</th>
+    <td *ngIf="ja !== editJa">{{ ja.volumeNum }}</td>
+    <td *ngIf="ja === editJa">
+      <input
+        type="text"
+        class="form-control"
+        name="editVol"
+        [(ngModel)]="editJa.volumeNum"
+      />
+    </td>
+  </tr>
+
+  <!-- Year -->
+  <tr>
+    <th scope="row">Year:</th>
+    <td *ngIf="ja !== editJa">{{ ja.yearPublished }}</td>
+    <td *ngIf="ja === editJa">
+      <input
+        type="text"
+        class="form-control"
+        name="editVol"
+        [(ngModel)]="editJa.yearPublished"
+      />
+    </td>
+  </tr>
+
+  <!-- DOI -->
+  <tr>
+    <th scope="row">DOI:</th>
+    <td *ngIf="ja !== editJa">{{ ja.doi }}</td>
+    <td
+      *ngIf="ja === editJa"
+      style="max-width: 150px; word-wrap: 'break-word;'"
+    >
+      <input
+        type="text"
+        class="form-control"
+        name="editDoi"
+        [(ngModel)]="editJa.doi"
+      />
+    </td>
+  </tr>
+</table>
+
+<!-- USER CLICKS ON CITE -->
+<div *ngIf="viewCite">
+  <hr />
+  <button
+    [ngClass]="'btn mr-2 mb-2 btn-custom-primary' + this.chosenPalette"
+    *ngFor="let cs of this.citationStyles"
+    (click)="chooseStyle(cs)"
+  >
+    {{ cs.abbreviation }}
+  </button>
+  <div *ngIf="chosenStyle">
+    <app-citation-style-switch
+      [chosenCitationStyle]="this.chosenStyle"
+      [jaToCite]="this.ja"
+      [showHeader]="true"
+    ></app-citation-style-switch>
+  </div>
+</div>
+<!-- ^^^ end citations view -->
