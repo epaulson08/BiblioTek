@@ -3,9 +3,7 @@ import { Router } from '@angular/router';
 import { CitationStyle } from 'src/app/models/citation-style';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
-import { MyCollection } from 'src/app/models/my-collection.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { CitationStyleService } from 'src/app/services/citation-style.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
 import { JournalService } from 'src/app/services/journal.service';
 import { MyCollectionService } from 'src/app/services/my-collection.service';
@@ -63,6 +61,7 @@ export class DisplayArticleComponent implements OnInit {
     return null;
   }
 
+  // need Journals if editing JournalArticle
   loadJournals(): Journal[] {
     this.journalServ.index().subscribe(
       success => {
@@ -107,7 +106,6 @@ export class DisplayArticleComponent implements OnInit {
     );
   }
 
-
   setEdit(): void {
     this.editJa = this.selected;
     this.editJournal = this.selected.journal;
@@ -118,19 +116,6 @@ export class DisplayArticleComponent implements OnInit {
     this.editJa = null;
     this.editJournal = null;
     this.viewCite = false;
-  }
-
-  cite() {
-    this.viewCite = true;
-  }
-
-  resetCite() {
-    this.viewCite = false;
-  }
-
-  chooseStyle(citationStyle: CitationStyle) {
-    this.moreInfo = false;
-    this.chosenStyle = citationStyle;
   }
 
   toggleMoreInfo(): void {

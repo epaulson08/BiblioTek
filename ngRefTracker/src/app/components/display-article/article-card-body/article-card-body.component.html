@@ -22,11 +22,7 @@
     <td *ngIf="ja !== editJa">{{ ja.journal.name }}</td>
 
     <td *ngIf="ja === editJa">
-      <select
-        class="form-control"
-        [(ngModel)]="editJournal"
-        name="editJournal"
-      >
+      <select class="form-control" [(ngModel)]="editJournal" name="editJournal">
         <option [ngValue]="editJournal" ja>
           {{ editJournal.name }}
         </option>
@@ -99,6 +95,11 @@
       [jaToCite]="this.ja"
       [showHeader]="true"
     ></app-citation-style-switch>
+    <button
+      [ngClass]="'btn btn-sm mt-2 btn-custom-secondary' + this.chosenPalette"
+    >
+      More Info
+    </button>
   </div>
 </div>
 <!-- ^^^ end citations view -->

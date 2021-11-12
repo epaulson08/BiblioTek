@@ -14,6 +14,8 @@ export class ArticleCardBodyComponent implements OnInit {
   @Input() viewCite: boolean;
   citationStyles: CitationStyle[];
   @Input() chosenPalette: string;
+  chosenStyle: CitationStyle;
+  moreInfo: boolean = false;
 
   constructor(private csServ: CitationStyleService) {}
 
@@ -38,5 +40,8 @@ export class ArticleCardBodyComponent implements OnInit {
     return null;
   }
 
-  chooseStyle(cs: CitationStyle) {}
+  chooseStyle(citationStyle: CitationStyle) {
+    this.moreInfo = false;
+    this.chosenStyle = citationStyle;
+  }
 }
