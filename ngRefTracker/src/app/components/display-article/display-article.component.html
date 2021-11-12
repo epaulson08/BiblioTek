@@ -13,14 +13,17 @@
     <app-article-card-footer
       [(viewCite)]="this.viewCite"
       [chosenPalette]="this.chosenPalette"
+      [myCollectionView]="false"
     ></app-article-card-footer>
   </div>
 
   <!-- Footer/buttons: MyCollection version -->
   <div *ngIf="myCollectionView">
-    <app-article-card-footer-my-coll
-      [viewCite]="false"
-    ></app-article-card-footer-my-coll>
+    <app-article-card-footer
+      [(viewCite)]="this.viewCite"
+      [chosenPalette]="this.chosenPalette"
+      [myCollectionView]="true"
+    ></app-article-card-footer>
   </div>
 
   <!-- Messages saying article removed from collection or deleted -->

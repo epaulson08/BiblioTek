@@ -13,6 +13,7 @@ export class ArticleCardFooterComponent implements OnInit {
   @Input() viewCite: boolean;
   @Output() viewCiteChange = new EventEmitter<boolean>();
   @Input() chosenPalette: string;
+  @Input() myCollectionView: boolean;
   myCollections: MyCollection[];
 
   constructor(private collServ: MyCollectionService, private router: Router) {}

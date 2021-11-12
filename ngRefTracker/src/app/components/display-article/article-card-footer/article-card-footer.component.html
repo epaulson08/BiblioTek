@@ -1,3 +1,16 @@
+<!-- Modes:
+  View info without citations
+  View info with citations
+  Editing article
+  Article successfully edited
+  Article unsuccessfully edited
+  Article deleted
+  Article could not be deleted
+  Article removed from collection
+  Article could not be removed from collection
+-->
+
+<!-- View info without citations -->
 <div *ngIf="!this.viewCite">
   <div class="card-footer d-flex">
     <div *ngIf="!deleted && !editJa">
@@ -8,7 +21,10 @@
         Cite
       </button>
       <div ngbDropdown class="d-inline-block">
+        <!-- do not show "Add to Collection" option if
+            already viewing from within a collection  -->
         <button
+          *ngIf="!this.myCollectionView"
           [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
           id="dropdownAddToColl"
           ngbDropdownToggle
@@ -19,9 +35,7 @@
           <span *ngFor="let coll of this.myCollections"
             ><button
               ngbDropdownItem
-              (click)="
-                addToCollection(coll.id, coll.name, this.selected.id)
-              "
+              (click)="addToCollection(coll.id, coll.name, this.selected.id)"
             >
               {{ coll.name }}
             </button></span
@@ -74,11 +88,13 @@
     </div>
   </div>
 </div>
-<!-- Citation view selected: -->
+
+<!-- View info with citations -->
 <div *ngIf="viewCite">
   <div class="card-footer d-flex">
     <div ngbDropdown class="d-inline-block">
       <button
+        *ngIf="!this.myCollectionView"
         [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
         id="dropdownAddToColl"
         ngbDropdownToggle
