@@ -107,18 +107,6 @@ export class DisplayArticleComponent implements OnInit {
     );
   }
 
-  goBack(): void {
-    let whereLast: string = localStorage.getItem("lastPage");
-    if (whereLast === "search") {
-      this.router.navigateByUrl("search");
-    }
-    else if (whereLast === "display-all-articles") {
-      this.router.navigateByUrl("display-all-articles");
-    }
-    else {
-      this.router.navigateByUrl("display-all-articles");
-    }
-  }
 
   setEdit(): void {
     this.editJa = this.selected;
