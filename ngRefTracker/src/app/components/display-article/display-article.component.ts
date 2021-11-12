@@ -33,14 +33,12 @@ export class DisplayArticleComponent implements OnInit {
   moreInfo: boolean = false;
   underConstructionMessage: string;
   articleRemoved: boolean = false;
-  myCollections: MyCollection[];
   addedMessage: string;
   chosenPalette: string;
 
   constructor(
     private auth: AuthService,
     private collServ: MyCollectionService,
-    private csServ: CitationStyleService,
     private jaServ: JournalArticleService,
     private journalServ: JournalService,
     private router: Router,
@@ -51,7 +49,6 @@ export class DisplayArticleComponent implements OnInit {
     this.auth.guardRoute();
     this.chosenPalette = this.userServ.loadPalette();
     this.loadArticle();
-    this.loadMyCollections();
   }
 
   loadArticle() {
@@ -64,16 +61,6 @@ export class DisplayArticleComponent implements OnInit {
         console.error(failure);
       });
     return null;
-  }
-
-  loadMyCollections() {
-    this.collServ.findAllAsUser().subscribe(
-      success => {
-        this.myCollections = success;
-      },
-      failure => {
-        console.error(failure);
-      });
   }
 
   loadJournals(): Journal[] {
