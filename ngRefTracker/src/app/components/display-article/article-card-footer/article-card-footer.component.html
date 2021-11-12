@@ -27,6 +27,8 @@
 </ng-template>
 
 <!-- Add to Collection button -->
+<!-- do not show if already viewing from within a
+  collection (logic is handled here) -->
 <ng-template #addToCollButton>
   <div ngbDropdown class="d-inline-block">
     <button
@@ -55,6 +57,15 @@
   <button
     [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
     (click)="goBack()"
+  >
+    Back
+  </button>
+</ng-template>
+
+<ng-template #backToNoCitationViewButton>
+  <button
+    [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
+    (click)="resetCite()"
   >
     Back
   </button>
@@ -101,7 +112,7 @@
 </ng-template>
 
 <!-- Delete button -->
-<ng-template #deletebutton>
+<ng-template #deleteButton>
   <button
     [ngClass]="'btn btn-custom-danger' + this.chosenPalette"
     (click)="delete(selected.id)"
@@ -110,82 +121,45 @@
   </button>
 </ng-template>
 
-<!-- MODES: -->
-<!-- View info without citations -->
-<div *ngIf="!this.viewCite">
-  <div class="card-footer d-flex">
-    <div *ngTemplateOutlet="citeButton"></div>
-    <div *ngIf="!deleted && !editJa">
-      <!-- do not show "Add to Collection" option if
-        already viewing from within a collection  -->
-      <div *ngTemplateOutlet="addToCollButton"></div>
-      <div *ngTemplateOutlet="editButton"></div>
-      <div *ngTemplateOutlet="backButton"></div>
-      <div *ngIf="!deleted && editJa">
-        <div *ngTemplateOutlet="submitButton"></div>
-      </div>
-      <span *ngIf="!deleted">
-        <div *ngTemplateOutlet="deleteButton"></div>
-      </span>
-      <!-- <div *ngIf="this.addedMessage">
-        <h5 class="my-auto">Added to {{ this.addedMessage }}.</h5>
-      </div>
-      <div
-        class="ml-3"
-        style="color: orange"
-        *ngIf="this.underConstructionMessage"
-      >
-        {{ this.underConstructionMessage }}
-      </div> -->
-    </div>
-  </div>
-</div>
+<div class="card-footer d-flex">
+  <!-- MODES: -->
+  <!-- View article info without citations -->
+  <ngContainer *ngIf="!this.deleted">
+    <ngContainer *ngIf="!this.viewCite">
+      <ngContainer *ngIf="!editJa">
+        <span *ngTemplateOutlet="citeButton"></span>
+        <span *ngTemplateOutlet="addToCollButton"></span>
+        <span *ngTemplateOutlet="editButton"></span>
+        <span *ngTemplateOutlet="backButton"></span>
+        <span *ngTemplateOutlet="deleteButton"></span>
+      </ngContainer>
+      <!-- Editing mode -->
+      <ngContainer *ngIf="editJa">
+        <span *ngTemplateOutlet="backButton"></span>
+        <span *ngTemplateOutlet="submitButton"></span>
+      </ngContainer>
+    </ngContainer>
+    <!-- View article info with citations -->
+    <ngContainer *ngIf="viewCite">
+      <span *ngTemplateOutlet="addToCollButton"></span>
+      <span *ngTemplateOutlet="editButton"></span>
+      <span *ngTemplateOutlet="backToNoCitationViewButton"></span>
+    </ngContainer>
+  </ngContainer>
 
-<!-- View info with citations -->
-<div *ngIf="viewCite">
-  <div class="card-footer d-flex">
-    <div ngbDropdown class="d-inline-block">
-      <button
-        *ngIf="!this.myCollectionView"
-        [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
-        id="dropdownAddToColl"
-        ngbDropdownToggle
-      >
-        Add to Collection
-      </button>
-      <div ngbDropdownMenu aria-labelledby="dropdownAddToColl">
-        <span *ngFor="let coll of this.myCollections"
-          ><button
-            ngbDropdownItem
-            (click)="addToCollection(coll.id, coll.name, this.selected.id)"
-          >
-            {{ coll.name }}
-          </button></span
-        >
-      </div>
-      <button
-        [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
-        (click)="setEdit()"
-      >
-        Edit
-      </button>
+  <!-- Show confirmation that article was deleted -->
+  <ngContainer *ngIf="this.deleted"><h2>Deleted.</h2></ngContainer>
 
-      <button
-        [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
-        (click)="resetCite()"
-      >
-        Back
-      </button>
-      <div
-        class="float-center"
-        style="color: orange"
-        *ngIf="this.underConstructionMessage"
-      >
-        {{ this.underConstructionMessage }}
-      </div>
-    </div>
-    <div *ngIf="this.addedMessage">
-      <h5 class="my-auto">Added to {{ this.addedMessage }}.</h5>
-    </div>
-  </div>
+  <!-- Show confirmation that article was added to a collection -->
+  <ngContainer *ngIf="this.addedMessage">
+    <h5 class="my-auto">Added to {{ this.addedMessage }}.</h5>
+  </ngContainer>
+
+  <!-- Show "under construction" message -->
+  <ngContainer *ngIf="this.showUnderConstruction">
+    <h3 class="ml-3" style="color: orange">
+      {{ this.underConstructionMessage }}
+    </h3>
+  </ngContainer>
 </div>
+<!-- ^^^ close footer div -->

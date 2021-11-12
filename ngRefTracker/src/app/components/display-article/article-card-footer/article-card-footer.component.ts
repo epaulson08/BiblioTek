@@ -17,6 +17,10 @@ export class ArticleCardFooterComponent implements OnInit {
   @Input() myCollectionView: boolean;
   myCollections: MyCollection[];
   articleRemoved: boolean = false;
+  deleted: boolean = false;
+  addedMessage: boolean = false;
+  underConstructionMessage: string = "This feature is under construction!";
+  showUnderConstruction: boolean = false;
 
   constructor(private collServ: MyCollectionService, private router: Router) {}
 
