@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { JournalArticle } from 'src/app/models/journal-article';
 import { MyCollection } from 'src/app/models/my-collection.model';
 import { MyCollectionService } from 'src/app/services/my-collection.service';
 
@@ -15,6 +16,7 @@ export class ArticleCardFooterComponent implements OnInit {
   @Input() chosenPalette: string;
   @Input() myCollectionView: boolean;
   myCollections: MyCollection[];
+  articleRemoved: boolean = false;
 
   constructor(private collServ: MyCollectionService, private router: Router) {}
 
@@ -52,5 +54,20 @@ export class ArticleCardFooterComponent implements OnInit {
     } else {
       this.router.navigateByUrl('display-all-articles');
     }
+  }
+
+  update(): void {
+    // FIXME: method stub
+  }
+
+  removeFromCollection(myCollectionId: number, journalArticleId): void {
+    this.collServ.removeArticle(myCollectionId, journalArticleId).subscribe(
+      (success) => {
+        this.articleRemoved = true;
+      },
+      (failure) => {
+        console.error(failure);
+      }
+    );
   }
 }

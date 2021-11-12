@@ -1,6 +1,6 @@
 <!-- Modes:
-  View info without citations
-  View info with citations
+  View article info without citations
+  View article info with citations
   Editing article
   Article successfully edited
   Article unsuccessfully edited
@@ -8,74 +8,126 @@
   Article could not be deleted
   Article removed from collection
   Article could not be removed from collection
+
+  Differences if viewing footer from within MyCollectionComponent
+  versus ShowArticleComponent:
+  MyCollectionComponent hides "Add to Collection" button
+  and shows "Remove" button (to remove from collection)
 -->
 
+<!-- BUTTON TEMPLATES: -->
+<!-- Cite button -->
+<ng-template #citeButton>
+  <button
+    [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+    (click)="clickCite()"
+  >
+    Cite
+  </button>
+</ng-template>
+
+<!-- Add to Collection button -->
+<ng-template #addToCollButton>
+  <div ngbDropdown class="d-inline-block">
+    <button
+      *ngIf="!this.myCollectionView"
+      [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+      id="dropdownAddToColl"
+      ngbDropdownToggle
+    >
+      Add to Collection
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownAddToColl">
+      <span *ngFor="let coll of this.myCollections"
+        ><button
+          ngbDropdownItem
+          (click)="addToCollection(coll.id, coll.name, this.selected.id)"
+        >
+          {{ coll.name }}
+        </button></span
+      >
+    </div>
+  </div></ng-template
+>
+
+<!-- Back button -->
+<ng-template #backButton>
+  <button
+    [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
+    (click)="goBack()"
+  >
+    Back
+  </button>
+</ng-template>
+
+<!-- Edit button -->
+<ng-template #editButton>
+  <button
+    [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+    (click)="setEdit()"
+  >
+    Edit
+  </button></ng-template
+>
+
+<!-- Submit button -->
+<ng-template #submitButton>
+  <button
+    [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+    (click)="update()"
+  >
+    Submit
+  </button>
+</ng-template>
+
+<!-- Cancel button -->
+<ng-template #cancelButton
+  ><button
+    [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+    (click)="cancelEdit()"
+  >
+    Cancel
+  </button>
+</ng-template>
+
+<!-- Remove button -->
+<ng-template #removeButton>
+  <button
+    [ngClass]="'btn mr-2 btn-custom-danger' + this.chosenPalette"
+    (click)="removeFromCollection(this.collId, this.articleId)"
+  >
+    Remove
+  </button>
+</ng-template>
+
+<!-- Delete button -->
+<ng-template #deletebutton>
+  <button
+    [ngClass]="'btn btn-custom-danger' + this.chosenPalette"
+    (click)="delete(selected.id)"
+  >
+    Delete
+  </button>
+</ng-template>
+
+<!-- MODES: -->
 <!-- View info without citations -->
 <div *ngIf="!this.viewCite">
   <div class="card-footer d-flex">
+    <div *ngTemplateOutlet="citeButton"></div>
     <div *ngIf="!deleted && !editJa">
-      <button
-        [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
-        (click)="clickCite()"
-      >
-        Cite
-      </button>
-      <div ngbDropdown class="d-inline-block">
-        <!-- do not show "Add to Collection" option if
-            already viewing from within a collection  -->
-        <button
-          *ngIf="!this.myCollectionView"
-          [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
-          id="dropdownAddToColl"
-          ngbDropdownToggle
-        >
-          Add to Collection
-        </button>
-        <div ngbDropdownMenu aria-labelledby="dropdownAddToColl">
-          <span *ngFor="let coll of this.myCollections"
-            ><button
-              ngbDropdownItem
-              (click)="addToCollection(coll.id, coll.name, this.selected.id)"
-            >
-              {{ coll.name }}
-            </button></span
-          >
-        </div>
-      </div>
-      <button
-        [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
-        (click)="setEdit()"
-      >
-        Edit
-      </button>
-      <button
-        [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
-        (click)="goBack()"
-      >
-        Back
-      </button>
+      <!-- do not show "Add to Collection" option if
+        already viewing from within a collection  -->
+      <div *ngTemplateOutlet="addToCollButton"></div>
+      <div *ngTemplateOutlet="editButton"></div>
+      <div *ngTemplateOutlet="backButton"></div>
       <div *ngIf="!deleted && editJa">
-        <button
-          [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
-          (click)="update(editJa)"
-        >
-          Submit</button
-        ><button
-          [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
-          (click)="cancelEdit()"
-        >
-          Cancel
-        </button>
+        <div *ngTemplateOutlet="submitButton"></div>
       </div>
       <span *ngIf="!deleted">
-        <button
-          [ngClass]="'btn btn-custom-danger' + this.chosenPalette"
-          (click)="delete(selected.id)"
-        >
-          Delete
-        </button>
+        <div *ngTemplateOutlet="deleteButton"></div>
       </span>
-      <div *ngIf="this.addedMessage">
+      <!-- <div *ngIf="this.addedMessage">
         <h5 class="my-auto">Added to {{ this.addedMessage }}.</h5>
       </div>
       <div
@@ -84,7 +136,7 @@
         *ngIf="this.underConstructionMessage"
       >
         {{ this.underConstructionMessage }}
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
