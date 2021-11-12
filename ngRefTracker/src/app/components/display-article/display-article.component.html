@@ -1,12 +1,19 @@
 <div *ngIf="!this.articleRemoved && !this.deleted" class="card m-3">
   <!-- Card Body -->
   <div class="card-body">
-    <app-article-card-body [ja]="this.selected"></app-article-card-body>
+    <app-article-card-body
+      [chosenPalette]="this.chosenPalette"
+      [viewCite]="this.viewCite"
+      [ja]="this.selected"
+    ></app-article-card-body>
   </div>
 
   <!-- Footer/buttons: DisplayAllArticles version -->
   <div *ngIf="!this.myCollectionView">
-    <app-article-card-footer [viewCite]="false"></app-article-card-footer>
+    <app-article-card-footer
+      [(viewCite)]="this.viewCite"
+      [chosenPalette]="this.chosenPalette"
+    ></app-article-card-footer>
   </div>
 
   <!-- Footer/buttons: MyCollection version -->

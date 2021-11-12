@@ -51,7 +51,6 @@ export class DisplayArticleComponent implements OnInit {
     this.auth.guardRoute();
     this.chosenPalette = this.userServ.loadPalette();
     this.loadArticle();
-    this.loadCitationStyles();
     this.loadMyCollections();
   }
 
@@ -59,20 +58,6 @@ export class DisplayArticleComponent implements OnInit {
     this.jaServ.show(this.articleId).subscribe(
       success => {
         this.selected = success;
-        return success;
-      },
-      failure => {
-        console.error(failure);
-      });
-    return null;
-  }
-
-  loadCitationStyles() {
-    this.csServ.findAll().subscribe(
-      success => {
-        this.citationStyles = success;
-        // alphabetize by abbreviation:
-        this.citationStyles.sort((a, b) => a.abbreviation.localeCompare(b.abbreviation));
         return success;
       },
       failure => {

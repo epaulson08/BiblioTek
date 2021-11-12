@@ -1,1 +1,83 @@
-<p>article-card-footer-my-coll works!</p>
+<div *ngIf="!viewCite">
+  <div class="card-footer d-flex">
+    <div *ngIf="!deleted && !editJa">
+      <button
+        [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+        (click)="cite()"
+      >
+        Cite
+      </button>
+      <button
+        [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+        (click)="setEdit()"
+      >
+        Edit
+      </button>
+      <button
+        [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
+        (click)="goBack()"
+      >
+        Back
+      </button>
+    </div>
+    <div *ngIf="!deleted && editJa">
+      <button
+        [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+        (click)="update(editJa)"
+      >
+        Submit</button
+      ><button
+        [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+        (click)="cancelEdit()"
+      >
+        Cancel
+      </button>
+    </div>
+    <div *ngIf="!deleted">
+      <button
+        [ngClass]="'btn mr-2 btn-custom-danger' + this.chosenPalette"
+        (click)="removeFromCollection(this.collId, this.articleId)"
+      >
+        Remove
+      </button>
+      <button
+        [ngClass]="'btn mr-2 btn-custom-danger' + this.chosenPalette"
+        (click)="delete(selected.id)"
+      >
+        Delete
+      </button>
+    </div>
+    <div
+      class="ml-3"
+      style="color: orange"
+      *ngIf="this.underConstructionMessage"
+    >
+      {{ this.underConstructionMessage }}
+    </div>
+  </div>
+</div>
+
+<!-- Citation view selected: -->
+<div *ngIf="viewCite">
+  <div class="card-footer d-flex">
+    <button
+      [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+      (click)="setEdit()"
+    >
+      Edit
+    </button>
+    <button
+      [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
+      (click)="resetCite()"
+    >
+      Back
+    </button>
+    <div
+      class="float-center"
+      style="color: orange"
+      *ngIf="this.underConstructionMessage"
+    >
+      {{ this.underConstructionMessage }}
+    </div>
+  </div>
+</div>
