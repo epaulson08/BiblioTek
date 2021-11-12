@@ -18,4 +18,32 @@
   <div *ngSwitchCase="'NLM'">
     <app-nlm-citation [ja]="this.jaToCite"></app-nlm-citation>
   </div>
+
+  <button
+    [ngClass]="'btn btn-sm my-3 btn-custom-secondary' + this.chosenPalette"
+    (click)="toggleMoreInfo()"
+  >
+    More Info ▼
+  </button>
+  <div *ngIf="this.showMoreInfo">
+    <h6>{{ chosenCitationStyle.name }} ({{ chosenCitationStyle.abbreviation }}) format</h6>
+    <em>Authoritative Source:</em>
+    <br />
+    {{ chosenCitationStyle.definitiveReference }}
+    <br />
+    <a [href]="chosenCitationStyle.definitiveReferenceUrl">{{
+      chosenCitationStyle.definitiveReferenceUrl
+    }}</a>
+    <br />
+    <br />
+    <em>Links:</em>
+    <br />
+    <div *ngFor="let link of chosenCitationStyle.links">
+      <a [href]="link.url">{{ link.url }}</a
+      ><br />
+      {{ link.comment }}
+      <br />
+      <br />
+    </div>
+  </div>
 </div>

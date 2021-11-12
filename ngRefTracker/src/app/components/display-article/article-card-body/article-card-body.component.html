@@ -89,17 +89,13 @@
   >
     {{ cs.abbreviation }}
   </button>
-  <div *ngIf="chosenStyle">
+  <div *ngIf="chosenStyle" class="my-3">
     <app-citation-style-switch
       [chosenCitationStyle]="this.chosenStyle"
       [jaToCite]="this.ja"
       [showHeader]="true"
+      [chosenPalette]="this.chosenPalette"
     ></app-citation-style-switch>
-    <button
-      [ngClass]="'btn btn-sm mt-2 btn-custom-secondary' + this.chosenPalette"
-    >
-      More Info
-    </button>
   </div>
 </div>
 <!-- ^^^ end citations view -->
