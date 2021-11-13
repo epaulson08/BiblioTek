@@ -7,7 +7,7 @@ import { MyCollectionService } from 'src/app/services/my-collection.service';
 @Component({
   selector: 'app-article-card-footer',
   templateUrl: './article-card-footer.component.html',
-  styleUrls: ['./article-card-footer.component.css'],
+  styleUrls: ['./article-card-footer.component.scss'],
 })
 export class ArticleCardFooterComponent implements OnInit {
   @Input() viewCite: boolean;
