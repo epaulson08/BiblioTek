@@ -11,6 +11,7 @@ export class CitationStyleSwitchComponent implements OnInit {
   @Input() chosenCitationStyle: CitationStyle;
   @Input() jaToCite: JournalArticle;
   @Input() chosenPalette: string;
+  @Input() showMoreInfoButton: boolean;
   showMoreInfo: boolean;
 
   constructor() {}

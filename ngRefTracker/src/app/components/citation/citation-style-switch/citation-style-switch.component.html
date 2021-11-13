@@ -19,7 +19,7 @@
     <app-nlm-citation [ja]="this.jaToCite"></app-nlm-citation>
   </div>
 
-  <button
+  <button *ngIf="this.showMoreInfoButton"
     [ngClass]="'btn btn-sm my-3 btn-custom-secondary' + this.chosenPalette"
     (click)="toggleMoreInfo()"
   >
