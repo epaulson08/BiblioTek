@@ -115,7 +115,7 @@
 <ng-template #deleteButton>
   <button
     [ngClass]="'btn btn-custom-danger' + this.chosenPalette"
-    (click)="delete(selected.id)"
+    (click)="deleteJa()"
   >
     Delete
   </button>
@@ -124,7 +124,7 @@
 <div class="card-footer d-flex">
   <!-- MODES: -->
   <!-- View article info without citations -->
-  <ngContainer *ngIf="!this.deleted">
+  <ngContainer *ngIf="!this.jaDeleted">
     <ngContainer *ngIf="!this.viewCite">
       <ngContainer *ngIf="!editJa">
         <span *ngTemplateOutlet="citeButton"></span>
@@ -147,8 +147,9 @@
     </ngContainer>
   </ngContainer>
 
-  <!-- Show confirmation that article was deleted -->
-  <ngContainer *ngIf="this.deleted"><h2>Deleted.</h2></ngContainer>
+  <ngContainer *ngIf="this.jaDeleted">
+    <span *ngTemplateOutlet="backButton"></span>
+  </ngContainer>
 
   <!-- Show confirmation that article was added to a collection -->
   <ngContainer *ngIf="this.addedMessage">

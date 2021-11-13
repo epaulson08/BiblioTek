@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { CitationStyle } from 'src/app/models/citation-style';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
@@ -32,13 +31,13 @@ export class DisplayArticleComponent implements OnInit {
   articleRemoved: boolean = false;
   addedMessage: string;
   chosenPalette: string;
+  jaDeleted: boolean = false;
 
   constructor(
     private auth: AuthService,
     private collServ: MyCollectionService,
     private jaServ: JournalArticleService,
     private journalServ: JournalService,
-    private router: Router,
     private userServ: UserService
   ) {}
 
@@ -99,6 +98,7 @@ export class DisplayArticleComponent implements OnInit {
       (data) => {
         this.loadArticle();
         this.loadJournals();
+        this.jaDeleted = true;
         this.editJa = null;
         this.editJournal = null;
         this.deleted = true;

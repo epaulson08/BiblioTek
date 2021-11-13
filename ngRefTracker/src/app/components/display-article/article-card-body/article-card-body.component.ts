@@ -6,7 +6,7 @@ import { CitationStyleService } from 'src/app/services/citation-style.service';
 @Component({
   selector: 'app-article-card-body',
   templateUrl: './article-card-body.component.html',
-  styleUrls: ['./article-card-body.component.css'],
+  styleUrls: ['./article-card-body.component.scss'],
 })
 export class ArticleCardBodyComponent implements OnInit {
   @Input() ja: JournalArticle;
@@ -16,6 +16,7 @@ export class ArticleCardBodyComponent implements OnInit {
   @Input() chosenPalette: string;
   chosenStyle: CitationStyle;
   moreInfo: boolean = false;
+  @Input() jaDeleted: boolean = false;
 
   constructor(private csServ: CitationStyleService) {}
 

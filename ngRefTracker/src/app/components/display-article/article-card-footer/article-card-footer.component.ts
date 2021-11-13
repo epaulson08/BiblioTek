@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { JournalArticle } from 'src/app/models/journal-article';
 import { MyCollection } from 'src/app/models/my-collection.model';
 import { MyCollectionService } from 'src/app/services/my-collection.service';
 
@@ -17,9 +16,11 @@ export class ArticleCardFooterComponent implements OnInit {
   @Input() myCollectionView: boolean;
   myCollections: MyCollection[];
   articleRemoved: boolean = false;
-  deleted: boolean = false;
+  @Input() jaDeleted: boolean = false;
+  @Output() jaDeletedChange = new EventEmitter<boolean>();
+
   addedMessage: boolean = false;
-  underConstructionMessage: string = "This feature is under construction!";
+  underConstructionMessage: string = 'This feature is under construction!';
   showUnderConstruction: boolean = false;
 
   constructor(private collServ: MyCollectionService, private router: Router) {}
@@ -58,6 +59,11 @@ export class ArticleCardFooterComponent implements OnInit {
     } else {
       this.router.navigateByUrl('display-all-articles');
     }
+  }
+
+  deleteJa() {
+    this.jaDeleted = true;
+    this.jaDeletedChange.emit(true);
   }
 
   update(): void {

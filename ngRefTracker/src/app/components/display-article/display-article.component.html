@@ -1,10 +1,11 @@
-<div *ngIf="!this.articleRemoved && !this.deleted" class="card m-3">
+<div class="card m-3">
   <!-- Card Body -->
   <div class="card-body">
     <app-article-card-body
       [chosenPalette]="this.chosenPalette"
       [viewCite]="this.viewCite"
       [ja]="this.selected"
+      [(jaDeleted)]="this.jaDeleted"
     ></app-article-card-body>
   </div>
 
@@ -12,6 +13,7 @@
   <div *ngIf="!this.myCollectionView">
     <app-article-card-footer
       [(viewCite)]="this.viewCite"
+      [(jaDeleted)]="this.jaDeleted"
       [chosenPalette]="this.chosenPalette"
       [myCollectionView]="false"
     ></app-article-card-footer>
@@ -25,13 +27,8 @@
       [myCollectionView]="true"
     ></app-article-card-footer>
   </div>
-
-  <!-- Messages saying article removed from collection or deleted -->
-  <div *ngIf="this.articleRemoved" class="card m-3">
-    <div class="card-body"><h5>Removed.</h5></div>
-  </div>
-
-  <div *ngIf="deleted" class="card m-3">
-    <div class="card-body"><h5>Deleted.</h5></div>
-  </div>
+</div>
+<!-- Messages saying article removed from collection or deleted -->
+<div *ngIf="this.articleRemoved" class="card m-3">
+  <div class="card-body"><h5>Removed.</h5></div>
 </div>
