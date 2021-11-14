@@ -1,341 +1,38 @@
-<div *ngIf="!this.articleRemoved && !this.deleted" class="card m-3">
-  <!-- *****************************
-  DISPLAY JOURNALARTICLE INFORMATION
-  ********************************** -->
+<div class="card m-3">
+  <!-- Card Body -->
   <div class="card-body">
-    <table class="m-3">
-      <tr>
-        <th scope="row">Title:</th>
-        <td *ngIf="selected !== editJa">{{ selected.title }}</td>
-        <td *ngIf="selected === editJa">
-          <textarea
-            class="form-control"
-            rows="5"
-            name="fred"
-            [(ngModel)]="editJa.title"
-          ></textarea>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">Authors:</th>
-        <td>
-          {{ selected.authors | authorFormat }}
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">Journal:</th>
-        <td *ngIf="selected !== editJa">{{ selected.journal.name }}</td>
-
-        <td *ngIf="selected === editJa">
-          <select
-            class="form-control"
-            [(ngModel)]="editJournal"
-            name="editJournal"
-          >
-            <option [ngValue]="editJournal" selected>
-              {{ editJournal.name }}
-            </option>
-            <option *ngFor="let j of allJournals" [ngValue]="j">
-              {{ j.name }}
-            </option>
-          </select>
-        </td>
-      </tr>
-
-      <!-- Volume -->
-      <tr>
-        <th scope="row">Volume:</th>
-        <td *ngIf="selected !== editJa">{{ selected.volumeNum }}</td>
-        <td *ngIf="selected === editJa">
-          <input
-            type="text"
-            class="form-control"
-            name="editVol"
-            [(ngModel)]="editJa.volumeNum"
-          />
-        </td>
-      </tr>
-
-      <!-- Year -->
-      <tr>
-        <th scope="row">Year:</th>
-        <td *ngIf="selected !== editJa">{{ selected.yearPublished }}</td>
-        <td *ngIf="selected === editJa">
-          <input
-            type="text"
-            class="form-control"
-            name="editVol"
-            [(ngModel)]="editJa.yearPublished"
-          />
-        </td>
-      </tr>
-
-      <!-- DOI -->
-      <tr>
-        <th scope="row">DOI:</th>
-        <td *ngIf="selected !== editJa">{{ selected.doi }}</td>
-        <td
-          *ngIf="selected === editJa"
-          style="max-width: 150px; word-wrap: 'break-word;'"
-        >
-          <input
-            type="text"
-            class="form-control"
-            name="editDoi"
-            [(ngModel)]="editJa.doi"
-          />
-        </td>
-      </tr>
-    </table>
-
-    <!-- **************
-    USER CLICKS ON CITE
-    ******************* -->
-    <div *ngIf="viewCite">
-      <hr />
-      <button
-        [ngClass]="'btn mr-2 mb-2 btn-custom-primary' + this.chosenPalette"
-        *ngFor="let cs of this.citationStyles"
-        (click)="chooseStyle(cs)"
-      >
-        {{ cs.abbreviation }}
-      </button>
-      <div *ngIf="chosenStyle">
-        <app-citation-style-switch
-          [chosenCitationStyle]="this.chosenStyle"
-          [jaToCite]="this.selected"
-          [showHeader]="true"
-        ></app-citation-style-switch>
-      </div>
-    </div>
-    <!-- ^^^ end citations view -->
-  </div>
-  <!-- ^^^ end card body -->
-
-  <!-- *******************************
-  BUTTONS/FOOTER: MYCOLLECTION VERSION
-  ************************************ -->
-  <div *ngIf="myCollectionView">
-    <div *ngIf="!viewCite">
-      <div class="card-footer d-flex">
-        <div *ngIf="!deleted && !editJa">
-          <button
-            [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
-            (click)="cite()"
-          >
-            Cite
-          </button>
-          <button
-            [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
-            (click)="setEdit()"
-          >
-            Edit
-          </button>
-          <button
-            [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
-            (click)="goBack()"
-          >
-            Back
-          </button>
-        </div>
-        <div *ngIf="!deleted && editJa">
-          <button
-            [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
-            (click)="update(editJa)"
-          >
-            Submit</button
-          ><button
-            [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
-            (click)="cancelEdit()"
-          >
-            Cancel
-          </button>
-        </div>
-        <div *ngIf="!deleted">
-          <button
-            [ngClass]="'btn mr-2 btn-custom-danger' + this.chosenPalette"
-            (click)="removeFromCollection(this.collId, this.articleId)"
-          >
-            Remove
-          </button>
-          <button
-            [ngClass]="'btn mr-2 btn-custom-danger' + this.chosenPalette"
-            (click)="delete(selected.id)"
-          >
-            Delete
-          </button>
-        </div>
-        <div
-          class="ml-3"
-          style="color: orange"
-          *ngIf="this.underConstructionMessage"
-        >
-          {{ this.underConstructionMessage }}
-        </div>
-      </div>
-    </div>
-
-    <!-- Citation view selected: -->
-    <div *ngIf="viewCite">
-      <div class="card-footer d-flex">
-        <button
-          [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
-          (click)="setEdit()"
-        >
-          Edit
-        </button>
-        <button
-          [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
-          (click)="resetCite()"
-        >
-          Back
-        </button>
-        <div
-          class="float-center"
-          style="color: orange"
-          *ngIf="this.underConstructionMessage"
-        >
-          {{ this.underConstructionMessage }}
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- ^^^ end MyCollections version -->
-
-  <!-- ***************************************
-  BUTTONS/FOOTER: DISPLAY-ALL-ARTICLES VERSION
-  ******************************************** -->
-  <div *ngIf="!this.myCollectionView">
-    <div *ngIf="!this.viewCite">
-      <div class="card-footer d-flex">
-        <div *ngIf="!deleted && !editJa">
-          <button
-            [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
-            (click)="cite()"
-          >
-            Cite
-          </button>
-          <div ngbDropdown class="d-inline-block">
-            <button
-              [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
-              id="dropdownAddToColl"
-              ngbDropdownToggle
-            >
-              Add to Collection
-            </button>
-            <div ngbDropdownMenu aria-labelledby="dropdownAddToColl">
-              <span *ngFor="let coll of this.myCollections"
-                ><button
-                  ngbDropdownItem
-                  (click)="
-                    addToCollection(coll.id, coll.name, this.selected.id)
-                  "
-                >
-                  {{ coll.name }}
-                </button></span
-              >
-            </div>
-          </div>
-          <button
-            [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
-            (click)="setEdit()"
-          >
-            Edit
-          </button>
-          <button
-            [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
-            (click)="goBack()"
-          >
-            Back
-          </button>
-          <div *ngIf="!deleted && editJa">
-            <button
-              [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
-              (click)="update(editJa)"
-            >
-              Submit</button
-            ><button
-              [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
-              (click)="cancelEdit()"
-            >
-              Cancel
-            </button>
-          </div>
-          <span *ngIf="!deleted">
-            <button
-              [ngClass]="'btn btn-custom-danger' + this.chosenPalette"
-              (click)="delete(selected.id)"
-            >
-              Delete
-            </button>
-          </span>
-          <div *ngIf="this.addedMessage">
-            <h5 class="my-auto">Added to {{ this.addedMessage }}.</h5>
-          </div>
-          <div
-            class="ml-3"
-            style="color: orange"
-            *ngIf="this.underConstructionMessage"
-          >
-            {{ this.underConstructionMessage }}
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Citation view selected: -->
-    <div *ngIf="viewCite">
-      <div class="card-footer d-flex">
-        <div ngbDropdown class="d-inline-block">
-          <button
-            [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
-            id="dropdownAddToColl"
-            ngbDropdownToggle
-          >
-            Add to Collection
-          </button>
-          <div ngbDropdownMenu aria-labelledby="dropdownAddToColl">
-            <span *ngFor="let coll of this.myCollections"
-              ><button
-                ngbDropdownItem
-                (click)="addToCollection(coll.id, coll.name, this.selected.id)"
-              >
-                {{ coll.name }}
-              </button></span
-            >
-          </div>
-          <button
-            [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
-            (click)="setEdit()"
-          >
-            Edit
-          </button>
-
-          <button
-            [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
-            (click)="resetCite()"
-          >
-            Back
-          </button>
-          <div
-            class="float-center"
-            style="color: orange"
-            *ngIf="this.underConstructionMessage"
-          >
-            {{ this.underConstructionMessage }}
-          </div>
-        </div>
-        <div *ngIf="this.addedMessage">
-          <h5 class="my-auto">Added to {{ this.addedMessage }}.</h5>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Messages saying article removed from collection or deleted -->
-  <div *ngIf="this.articleRemoved" class="card m-3">
-    <div class="card-body"><h5>Removed.</h5></div>
+    <app-article-card-body
+      [chosenPalette]="this.chosenPalette"
+      [viewCite]="this.viewCite"
+      [ja]="this.selected"
+      [(jaDeleted)]="this.jaDeleted"
+      [(articleRemoved)]="this.articleRemoved"
+    ></app-article-card-body>
   </div>
 
-  <div *ngIf="deleted" class="card m-3">
-    <div class="card-body"><h5>Deleted.</h5></div>
-  </div>
+  <ngContainer *ngIf="!this.articleRemoved">
+    <!-- Footer/buttons: DisplayAllArticles version -->
+    <div *ngIf="!this.myCollectionView">
+      <app-article-card-footer
+        [(viewCite)]="this.viewCite"
+        [(jaDeleted)]="this.jaDeleted"
+        (jaDeletedChange)="this.deleteJa($event)"
+        [chosenPalette]="this.chosenPalette"
+        [myCollectionView]="false"
+      ></app-article-card-footer>
+    </div>
+
+    <!-- Footer/buttons: MyCollection version -->
+    <div *ngIf="myCollectionView">
+      <app-article-card-footer
+        [(viewCite)]="this.viewCite"
+        [(jaDeleted)]="this.jaDeleted"
+        (jaDeletedChange)="this.deleteJa($event)"
+        [chosenPalette]="this.chosenPalette"
+        [myCollectionView]="true"
+        [(articleRemoved)]="this.articleRemoved"
+        (articleRemovedChange)="this.removeJa()"
+      ></app-article-card-footer>
+    </div>
+  </ngContainer>
 </div>

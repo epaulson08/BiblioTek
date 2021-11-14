@@ -13,8 +13,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./my-collection.component.scss'],
 })
 export class MyCollectionComponent implements OnInit {
-  /////////
-  // FIELDS
 
   // initialization
   collId: number;
@@ -30,9 +28,6 @@ export class MyCollectionComponent implements OnInit {
 
   // CRUD
   editedMyCollection: MyCollection;
-
-  //////////
-  // METHODS
 
   // initialization
   constructor(

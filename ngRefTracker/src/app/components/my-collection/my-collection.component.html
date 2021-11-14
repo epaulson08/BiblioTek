@@ -2,12 +2,20 @@
 <div class="container-fluid">
   <div class="row">
     <!-- sidebar -->
-    <div *ngIf="this.listView" [ngClass]="'col-2 d-none d-md-block sidebar sidebar-palette' + this.chosenPalette">
+    <div
+      *ngIf="this.listView"
+      [ngClass]="
+        'col-2 d-none d-md-block sidebar sidebar-palette' + this.chosenPalette
+      "
+    >
       <app-sidebar [chosenPalette]="this.chosenPalette"></app-sidebar>
     </div>
     <div
       *ngIf="!this.listView"
-      [ngClass]="'col-3 col-xl-2 d-none d-md-block sidebar sidebar-palette' + this.chosenPalette"
+      [ngClass]="
+        'col-3 col-xl-2 d-none d-md-block sidebar sidebar-palette' +
+        this.chosenPalette
+      "
     >
       <app-sidebar [chosenPalette]="this.chosenPalette"></app-sidebar>
     </div>
@@ -19,17 +27,28 @@
         <div class="col">
           <!-- non-edit mode -->
           <span *ngIf="!this.editView">
-            <h4 [ngClass]="'my-3 page-header header-palette' + this.chosenPalette">
-              <span [ngClass]="'header-highlighter-palette' + this.chosenPalette">&nbsp;</span>&nbsp;
-              {{ coll.name }}
+            <h4
+              [ngClass]="'my-3 page-header header-palette' + this.chosenPalette"
+            >
+              <span
+                [ngClass]="'header-highlighter-palette' + this.chosenPalette"
+                >&nbsp;</span
+              >&nbsp;
+              {{ coll?.name }}
               <button
-                [ngClass]="'float-right btn btn-sm btn-custom-warning' + this.chosenPalette"
+                [ngClass]="
+                  'float-right btn btn-sm btn-custom-warning' +
+                  this.chosenPalette
+                "
                 (click)="setExpandedView()"
               >
                 Expanded View
               </button>
               <button
-                [ngClass]="'float-right btn btn-sm mr-2 btn-custom-warning' + this.chosenPalette"
+                [ngClass]="
+                  'float-right btn btn-sm mr-2 btn-custom-warning' +
+                  this.chosenPalette
+                "
                 (click)="setListView()"
               >
                 List View
@@ -38,16 +57,23 @@
             <div class="row">
               <div class="col-8">
                 <h5 [ngClass]="'mt-2 header-palette' + this.chosenPalette">
-                  {{ coll.description }}
+                  {{ coll?.description }}
                 </h5>
               </div>
             </div>
             <h5>
-              <button (click)="this.citeAll()" [ngClass]="'btn btn-sm mr-2 btn-custom-primary' + this.chosenPalette">
+              <button
+                (click)="this.citeAll()"
+                [ngClass]="
+                  'btn btn-sm mr-2 btn-custom-primary' + this.chosenPalette
+                "
+              >
                 Cite All
               </button>
               <button
-                [ngClass]="'btn btn-sm mr-2 btn-custom-secondary' + this.chosenPalette"
+                [ngClass]="
+                  'btn btn-sm mr-2 btn-custom-secondary' + this.chosenPalette
+                "
                 (click)="showEditView()"
               >
                 Edit
@@ -86,7 +112,7 @@
           <span *ngIf="this.expandedView">
             <div class="card-deck">
               <span
-                *ngFor="let article of coll.articles"
+                *ngFor="let article of coll?.articles"
                 style="min-width: 100%"
               >
                 <app-display-article
@@ -109,12 +135,13 @@
 
           <!-- Cite All View -->
           <span *ngIf="this.showCiteAllUi">
-                      <hr />
-                      <app-cite-all-ui
-                        [chosenPalette]="this.chosenPalette"
-                        [citationStyles]="this.citationStyles"
-                        [collToCiteAll]="coll"
-                      ></app-cite-all-ui>
+            <hr />
+            <app-cite-all-ui
+              [chosenPalette]="this.chosenPalette"
+              [citationStyles]="this.citationStyles"
+              [collToCiteAll]="coll"
+              [showMoreInfoButton]="false"
+            ></app-cite-all-ui>
           </span>
         </div>
       </div>

@@ -1,0 +1,157 @@
+<!-- Modes:
+  View article info without citations
+  View article info with citations
+  Editing article
+  Article successfully edited
+  Article unsuccessfully edited
+  Article deleted
+  Article could not be deleted
+  Article removed from collection
+  Article could not be removed from collection
+
+  Differences if viewing footer from within MyCollectionComponent
+  versus ShowArticleComponent:
+  MyCollectionComponent hides "Add to Collection" button
+  and shows "Remove" button (to remove from collection)
+-->
+
+<!-- BUTTON TEMPLATES: -->
+<!-- Cite button -->
+<ng-template #citeButton>
+  <button
+    [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+    (click)="clickCite()"
+  >
+    Cite
+  </button>
+</ng-template>
+
+<!-- Add to Collection button -->
+<!-- do not show if already viewing from within a
+  collection (logic is handled here) -->
+<ng-template #addToCollButton>
+  <div ngbDropdown class="d-inline-block">
+    <button
+      *ngIf="!this.myCollectionView"
+      [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+      id="dropdownAddToColl"
+      ngbDropdownToggle
+    >
+      Add to Collection
+    </button>
+    <div ngbDropdownMenu aria-labelledby="dropdownAddToColl">
+      <span *ngFor="let coll of this.myCollections"
+        ><button
+          ngbDropdownItem
+          (click)="addToCollection(coll.id, coll.name, this.selected.id)"
+        >
+          {{ coll.name }}
+        </button></span
+      >
+    </div>
+  </div></ng-template
+>
+
+<!-- Back button -->
+<ng-template #backButton>
+  <button
+    [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
+    (click)="goBack()"
+  >
+    Back
+  </button>
+</ng-template>
+
+<ng-template #backToNoCitationViewButton>
+  <button
+    [ngClass]="'btn mr-2 btn-custom-warning' + this.chosenPalette"
+    (click)="resetCite()"
+  >
+    Back
+  </button>
+</ng-template>
+
+<!-- Edit button -->
+<ng-template #editButton>
+  <button
+    [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+    (click)="setEdit()"
+  >
+    Edit
+  </button></ng-template
+>
+
+<!-- Submit button -->
+<ng-template #submitButton>
+  <button
+    [ngClass]="'btn mr-2 btn-custom-primary' + this.chosenPalette"
+    (click)="update()"
+  >
+    Submit
+  </button>
+</ng-template>
+
+<!-- Cancel button -->
+<ng-template #cancelButton
+  ><button
+    [ngClass]="'btn mr-2 btn-custom-secondary' + this.chosenPalette"
+    (click)="cancelEdit()"
+  >
+    Cancel
+  </button>
+</ng-template>
+
+<!-- Remove button -->
+<ng-template #removeButton>
+  <button
+    [ngClass]="'btn mr-2 btn-custom-danger' + this.chosenPalette"
+    (click)="removeFromCollection()"
+  >
+    Remove
+  </button>
+</ng-template>
+
+<!-- Delete button -->
+<ng-template #deleteButton>
+  <button
+    [ngClass]="'btn btn-custom-danger' + this.chosenPalette"
+    (click)="deleteJa()"
+  >
+    Delete
+  </button>
+</ng-template>
+
+<div class="card-footer d-flex">
+  <!-- MODES: -->
+  <!-- View article info without citations -->
+  <ngContainer *ngIf="!this.jaDeleted && !this.articleRemoved">
+    <ngContainer *ngIf="!this.viewCite">
+      <ngContainer *ngIf="!editJa">
+        <span *ngTemplateOutlet="citeButton"></span>
+        <span *ngTemplateOutlet="addToCollButton"></span>
+        <span *ngTemplateOutlet="editButton"></span>
+        <span *ngTemplateOutlet="backButton"></span>
+        <ngContainer *ngIf="this.myCollectionView">
+          <span *ngTemplateOutlet="removeButton"></span>
+        </ngContainer>
+        <span *ngTemplateOutlet="deleteButton"></span>
+      </ngContainer>
+      <!-- Editing mode -->
+      <ngContainer *ngIf="editJa">
+        <span *ngTemplateOutlet="backButton"></span>
+        <span *ngTemplateOutlet="submitButton"></span>
+      </ngContainer>
+    </ngContainer>
+    <!-- View article info with citations -->
+    <ngContainer *ngIf="viewCite">
+      <span *ngTemplateOutlet="addToCollButton"></span>
+      <span *ngTemplateOutlet="editButton"></span>
+      <span *ngTemplateOutlet="backToNoCitationViewButton"></span>
+    </ngContainer>
+  </ngContainer>
+
+  <ngContainer *ngIf="this.jaDeleted">
+    <span *ngTemplateOutlet="backButton"></span>
+  </ngContainer>
+</div>
+<!-- ^^^ close footer div -->

@@ -10,8 +10,15 @@ import { JournalArticle } from 'src/app/models/journal-article';
 export class CitationStyleSwitchComponent implements OnInit {
   @Input() chosenCitationStyle: CitationStyle;
   @Input() jaToCite: JournalArticle;
+  @Input() chosenPalette: string;
+  @Input() showMoreInfoButton: boolean;
+  showMoreInfo: boolean;
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  toggleMoreInfo() {
+    this.showMoreInfo = !this.showMoreInfo;
+  }
 }
