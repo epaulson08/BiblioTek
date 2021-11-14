@@ -47,6 +47,10 @@ export class DisplayArticleComponent implements OnInit {
     this.loadArticle();
   }
 
+  deleteJa($event): void{
+    this.delete(this.articleId);
+  }
+
   loadArticle() {
     this.jaServ.show(this.articleId).subscribe(
       (success) => {

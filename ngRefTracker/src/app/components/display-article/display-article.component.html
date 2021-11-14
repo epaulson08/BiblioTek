@@ -14,6 +14,7 @@
     <app-article-card-footer
       [(viewCite)]="this.viewCite"
       [(jaDeleted)]="this.jaDeleted"
+      (jaDeletedChange)="this.deleteJa($event)"
       [chosenPalette]="this.chosenPalette"
       [myCollectionView]="false"
     ></app-article-card-footer>
