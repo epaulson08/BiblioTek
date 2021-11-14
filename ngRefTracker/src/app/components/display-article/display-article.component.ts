@@ -47,8 +47,12 @@ export class DisplayArticleComponent implements OnInit {
     this.loadArticle();
   }
 
-  deleteJa($event): void{
+  deleteJa($event): void {
     this.delete(this.articleId);
+  }
+
+  removeJa($event): void {
+    this.removeFromCollection(this.collId, this.articleId);
   }
 
   loadArticle() {
@@ -137,6 +141,17 @@ export class DisplayArticleComponent implements OnInit {
     this.collServ.addArticle(myCollectionId, journalArticleId).subscribe(
       (success) => {
         this.addedMessage = myCollectionName;
+      },
+      (failure) => {
+        console.error(failure);
+      }
+    );
+  }
+
+  removeFromCollection(myCollectionId: number, journalArticleId): void {
+    this.collServ.removeArticle(myCollectionId, journalArticleId).subscribe(
+      (success) => {
+        this.articleRemoved = true;
       },
       (failure) => {
         console.error(failure);

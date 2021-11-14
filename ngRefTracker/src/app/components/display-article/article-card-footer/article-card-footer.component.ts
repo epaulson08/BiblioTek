@@ -12,13 +12,18 @@ import { MyCollectionService } from 'src/app/services/my-collection.service';
 export class ArticleCardFooterComponent implements OnInit {
   @Input() viewCite: boolean;
   @Output() viewCiteChange = new EventEmitter<boolean>();
-  @Input() chosenPalette: string;
-  @Input() myCollectionView: boolean;
-  myCollections: MyCollection[];
-  articleRemoved: boolean = false;
+
   @Input() jaDeleted: boolean = false;
   @Output() jaDeletedChange = new EventEmitter<boolean>();
 
+  @Input() articleRemoved: boolean = false;
+  @Output() articleRemovedChange = new EventEmitter<boolean>();
+
+  @Input() chosenPalette: string;
+
+  @Input() myCollectionView: boolean;
+
+  myCollections: MyCollection[];
   addedMessage: boolean = false;
   underConstructionMessage: string = 'This feature is under construction!';
   showUnderConstruction: boolean = false;
@@ -70,14 +75,9 @@ export class ArticleCardFooterComponent implements OnInit {
     // FIXME: method stub
   }
 
-  removeFromCollection(myCollectionId: number, journalArticleId): void {
-    this.collServ.removeArticle(myCollectionId, journalArticleId).subscribe(
-      (success) => {
-        this.articleRemoved = true;
-      },
-      (failure) => {
-        console.error(failure);
-      }
-    );
+  removeFromCollection() {
+    this.articleRemoved = true;
+    this.articleRemovedChange.emit(true);
   }
+
 }

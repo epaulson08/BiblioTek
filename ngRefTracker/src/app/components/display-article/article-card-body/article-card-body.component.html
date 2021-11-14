@@ -1,3 +1,9 @@
+<h3
+  *ngIf="this.articleRemoved"
+  [ngClass]="'mt-3 text-custom-warning' + this.chosenPalette"
+>
+  Removed.
+</h3>
 <table class="m-3">
   <ngContainer *ngIf="this.jaDeleted">
     <tr>
@@ -9,7 +15,10 @@
       <td>&nbsp;</td>
     </tr>
   </ngContainer>
-  <span [ngClass]="{ 'strike-through': this.jaDeleted }">
+  <span
+    [ngClass]="{ 'strike-through': this.jaDeleted }"
+    *ngIf="!this.articleRemoved"
+  >
     <tr>
       <th scope="row">Title:</th>
       <td *ngIf="ja !== editJa">{{ ja.title }}</td>

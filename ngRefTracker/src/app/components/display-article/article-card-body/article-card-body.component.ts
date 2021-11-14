@@ -17,6 +17,7 @@ export class ArticleCardBodyComponent implements OnInit {
   chosenStyle: CitationStyle;
   moreInfo: boolean = false;
   @Input() jaDeleted: boolean = false;
+  @Input() articleRemoved: boolean = false;
 
   constructor(private csServ: CitationStyleService) {}
 

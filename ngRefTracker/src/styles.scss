@@ -256,6 +256,10 @@ $palettes: (
     color: map-get($palette, "primary");
   }
 
+  .text-custom-warning-#{$key} {
+    color: map-get($palette, "warning");
+  }
+
   .text-custom-danger-#{$key} {
     color: map-get($palette, "danger");
   }

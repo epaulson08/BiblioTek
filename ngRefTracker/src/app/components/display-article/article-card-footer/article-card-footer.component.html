@@ -105,7 +105,7 @@
 <ng-template #removeButton>
   <button
     [ngClass]="'btn mr-2 btn-custom-danger' + this.chosenPalette"
-    (click)="removeFromCollection(this.collId, this.articleId)"
+    (click)="removeFromCollection()"
   >
     Remove
   </button>
@@ -124,7 +124,7 @@
 <div class="card-footer d-flex">
   <!-- MODES: -->
   <!-- View article info without citations -->
-  <ngContainer *ngIf="!this.jaDeleted">
+  <ngContainer *ngIf="!this.jaDeleted && !this.articleRemoved">
     <ngContainer *ngIf="!this.viewCite">
       <ngContainer *ngIf="!editJa">
         <span *ngTemplateOutlet="citeButton"></span>
@@ -152,18 +152,6 @@
 
   <ngContainer *ngIf="this.jaDeleted">
     <span *ngTemplateOutlet="backButton"></span>
-  </ngContainer>
-
-  <!-- Show confirmation that article was added to a collection -->
-  <ngContainer *ngIf="this.addedMessage">
-    <h5 class="my-auto">Added to {{ this.addedMessage }}.</h5>
-  </ngContainer>
-
-  <!-- Show "under construction" message -->
-  <ngContainer *ngIf="this.showUnderConstruction">
-    <h3 class="ml-3" style="color: orange">
-      {{ this.underConstructionMessage }}
-    </h3>
   </ngContainer>
 </div>
 <!-- ^^^ close footer div -->
