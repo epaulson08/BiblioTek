@@ -30,7 +30,7 @@
     </tr>
     <tr>
       <th scope="row">Journal:</th>
-      <td *ngIf="ja !== editJa">{{ ja.journal.name }}</td>
+      <td *ngIf="ja !== editJa">{{ ja.journal?.name }}</td>
 
       <td *ngIf="ja === editJa">
         <select
