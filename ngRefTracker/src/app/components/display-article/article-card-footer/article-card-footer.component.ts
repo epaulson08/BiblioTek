@@ -26,7 +26,7 @@ export class ArticleCardFooterComponent implements OnInit {
   constructor(private collServ: MyCollectionService, private router: Router) {}
 
   ngOnInit(): void {
-    this.loadMyCollections();
+    if (!this.myCollectionView) this.loadMyCollections();
   }
 
   clickCite(): void {
