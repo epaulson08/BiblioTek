@@ -131,6 +131,9 @@
         <span *ngTemplateOutlet="addToCollButton"></span>
         <span *ngTemplateOutlet="editButton"></span>
         <span *ngTemplateOutlet="backButton"></span>
+        <ngContainer *ngIf="this.myCollectionView">
+          <span *ngTemplateOutlet="removeButton"></span>
+        </ngContainer>
         <span *ngTemplateOutlet="deleteButton"></span>
       </ngContainer>
       <!-- Editing mode -->
