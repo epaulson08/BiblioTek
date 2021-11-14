@@ -56,7 +56,6 @@ import { IeeeAuthorsComponent } from './components/citation/ieee/ieee-authors/ie
 import { NlmCitationComponent } from './components/citation/nlm/nlm-citation.component';
 import { ArticleCardBodyComponent } from './components/display-article/article-card-body/article-card-body.component';
 import { ArticleCardFooterComponent } from './components/display-article/article-card-footer/article-card-footer.component';
-import { ArticleCardFooterMyCollComponent } from './components/display-article/article-card-footer-my-coll/article-card-footer-my-coll.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +102,6 @@ import { ArticleCardFooterMyCollComponent } from './components/display-article/a
     NlmCitationComponent,
     ArticleCardBodyComponent,
     ArticleCardFooterComponent,
-    ArticleCardFooterMyCollComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -112,11 +110,8 @@ import { ArticleCardFooterMyCollComponent } from './components/display-article/a
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
-    ],
-  providers: [
-    AuthService,
-    JournalArticleService
   ],
-  bootstrap: [AppComponent]
+  providers: [AuthService, JournalArticleService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
