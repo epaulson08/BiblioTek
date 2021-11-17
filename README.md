@@ -85,13 +85,14 @@ I have implemented testing with JUnit, Jasmine, and Postman. Documentation is co
 * Admins can access a separate admin dashboard.
 * Improve existing color palette choices and add more.
 
-### Fixes In Progress
-* Fix UI for "edit" functionality.
-* Improve confirmation messages for "create" and "edit" functionality.
-* Deploy with HTTPS rather than HTTP.
+### Pending Fixes
 * Find and fix bugs in citation formatting.
+* Fix Edit button on `#/my-collections` page.
+* Prettify UI on `#/my-collection/{collId}` page.
+* When editing a `JournalArticle`, allow the user to add and remove authors.
 * Improve test coverage throughout.
 
 ### Planned Refactors
 * Remove all references to old name ("RefTracker")
 * Break down and modularize excessively long Angular components (e.g. `DisplayArticleComponent`'s template currently weighs in at 342 lines).
+    * This refactor may have been misguided. It creates complexity through two-way bindings in parent/child components (`DisplayArticle`, `ArticleCardBody`, and `ArticleCardFooter`). It might make sense to "defactor" back into one large component, but improve variable naming to show which variables reflect UI actions, and which reflect changes to models.
