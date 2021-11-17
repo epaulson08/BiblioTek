@@ -4,9 +4,12 @@
     <app-article-card-body
       [chosenPalette]="this.chosenPalette"
       [viewCite]="this.viewCite"
-      [ja]="this.selected"
+      [ja]="this.selectedJa"
       [(jaDeleted)]="this.jaDeleted"
       [(articleRemoved)]="this.articleRemoved"
+      [editMode]="this.editMode"
+      [(editedJa)]="this.editedJa"
+      [submittedEditMessage]="this.submittedEditMessage"
     ></app-article-card-body>
   </div>
 
@@ -19,6 +22,10 @@
         (jaDeletedChange)="this.deleteJa($event)"
         [chosenPalette]="this.chosenPalette"
         [myCollectionView]="false"
+        [(editMode)]="this.editMode"
+        (editModeChange)="this.setEditMode()"
+        [(submitEdit)]="this.submitEdit"
+        (submitEditChange)="this.update()"
       ></app-article-card-footer>
     </div>
 

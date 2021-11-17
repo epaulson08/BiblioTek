@@ -1,10 +1,9 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CitationStyle } from 'src/app/models/citation-style';
 import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { AuthService } from 'src/app/services/auth.service';
 import { JournalArticleService } from 'src/app/services/journal-article.service';
-import { JournalService } from 'src/app/services/journal.service';
 import { MyCollectionService } from 'src/app/services/my-collection.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -17,27 +16,30 @@ export class DisplayArticleComponent implements OnInit {
   @Input() collId: number;
   @Input() articleId: number;
   @Input() myCollectionView: boolean;
-  selected: JournalArticle = new JournalArticle();
-  editJa: JournalArticle;
-  editJournal: Journal;
-  deleted: boolean = false;
-  allJournals: Journal[];
-  viewCite: boolean = false;
+
+  selectedJa: JournalArticle = new JournalArticle();
+  editedJa: JournalArticle;
+
+  // data to load on init
   citationStyles: CitationStyle[];
+  allJournals: Journal[];
+  chosenPalette: string;
+
+  // ui
+  viewCite: boolean = false;
   chosenStyle: CitationStyle;
-  citationOutput: string;
   moreInfo: boolean = false;
-  underConstructionMessage: string;
   articleRemoved: boolean = false;
   addedMessage: string;
-  chosenPalette: string;
   jaDeleted: boolean = false;
+  editMode: boolean = false;
+  submitEdit: boolean = false;
+  submittedEditMessage: string = null;
 
   constructor(
     private auth: AuthService,
     private collServ: MyCollectionService,
     private jaServ: JournalArticleService,
-    private journalServ: JournalService,
     private userServ: UserService
   ) {}
 
@@ -58,7 +60,7 @@ export class DisplayArticleComponent implements OnInit {
   loadArticle() {
     this.jaServ.show(this.articleId).subscribe(
       (success) => {
-        this.selected = success;
+        this.selectedJa = success;
         return success;
       },
       (failure) => {
@@ -68,29 +70,14 @@ export class DisplayArticleComponent implements OnInit {
     return null;
   }
 
-  // need Journals if editing JournalArticle
-  loadJournals(): Journal[] {
-    this.journalServ.index().subscribe(
-      (success) => {
-        this.allJournals = success;
-        return success;
-      },
-      (failure) => {
-        console.error(failure);
-      }
-    );
-    return null;
-  }
-
-  update(ja: JournalArticle) {
-    ja.journal = this.editJournal;
-    if (ja != null && ja.journal != null) {
-      this.jaServ.update(ja).subscribe(
+  update() {
+    if (this.editedJa != null && this.editedJa.journal != null) {
+      this.jaServ.update(this.editedJa).subscribe(
         (data) => {
           this.loadArticle();
-          this.loadJournals();
-          this.editJa = null;
-          this.editJournal = null;
+          this.editedJa = null;
+          this.submittedEditMessage = "Article updated.";
+          this.editMode = false;
         },
         (err) => {
           console.error('Observer got an error: ' + err);
@@ -105,11 +92,8 @@ export class DisplayArticleComponent implements OnInit {
     this.jaServ.delete(id).subscribe(
       (data) => {
         this.loadArticle();
-        this.loadJournals();
         this.jaDeleted = true;
-        this.editJa = null;
-        this.editJournal = null;
-        this.deleted = true;
+        this.editedJa = null;
       },
       (err) => {
         console.error('Observer got an error: ' + err);
@@ -117,15 +101,14 @@ export class DisplayArticleComponent implements OnInit {
     );
   }
 
-  setEdit(): void {
-    this.editJa = this.selected;
-    this.editJournal = this.selected.journal;
+  setEditMode(): void {
+    this.editedJa = this.selectedJa;
     this.viewCite = false;
+    this.submittedEditMessage = null;
   }
 
   cancelEdit(): void {
-    this.editJa = null;
-    this.editJournal = null;
+    this.editedJa = null;
     this.viewCite = false;
   }
 
