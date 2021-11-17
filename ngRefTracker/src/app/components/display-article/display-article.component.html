@@ -4,35 +4,29 @@
     <app-article-card-body
       [chosenPalette]="this.chosenPalette"
       [viewCite]="this.viewCite"
-      [ja]="this.selected"
+      [ja]="this.selectedJa"
       [(jaDeleted)]="this.jaDeleted"
       [(articleRemoved)]="this.articleRemoved"
+      [editMode]="this.editMode"
+      [(editedJa)]="this.editedJa"
+      [submittedEditMessage]="this.submittedEditMessage"
     ></app-article-card-body>
   </div>
 
-  <ngContainer *ngIf="!this.articleRemoved">
-    <!-- Footer/buttons: DisplayAllArticles version -->
-    <div *ngIf="!this.myCollectionView">
-      <app-article-card-footer
-        [(viewCite)]="this.viewCite"
-        [(jaDeleted)]="this.jaDeleted"
-        (jaDeletedChange)="this.deleteJa($event)"
-        [chosenPalette]="this.chosenPalette"
-        [myCollectionView]="false"
-      ></app-article-card-footer>
-    </div>
-
-    <!-- Footer/buttons: MyCollection version -->
-    <div *ngIf="myCollectionView">
-      <app-article-card-footer
-        [(viewCite)]="this.viewCite"
-        [(jaDeleted)]="this.jaDeleted"
-        (jaDeletedChange)="this.deleteJa($event)"
-        [chosenPalette]="this.chosenPalette"
-        [myCollectionView]="true"
-        [(articleRemoved)]="this.articleRemoved"
-        (articleRemovedChange)="this.removeJa()"
-      ></app-article-card-footer>
-    </div>
-  </ngContainer>
+  <!-- Footer/Buttons -->
+  <div class="card-footer d-flex" *ngIf="!this.articleRemoved">
+    <app-article-card-footer
+      [(viewCite)]="this.viewCite"
+      [(jaDeleted)]="this.jaDeleted"
+      (jaDeletedChange)="this.deleteJa($event)"
+      [chosenPalette]="this.chosenPalette"
+      [myCollectionView]="this.myCollectionView"
+      [(editMode)]="this.editMode"
+      (editModeChange)="this.setEditMode()"
+      [(submitEdit)]="this.submitEdit"
+      (submitEditChange)="this.update()"
+      [(articleRemoved)]="this.articleRemoved"
+      (articleRemovedChange)="this.removeJa($event)"
+    ></app-article-card-footer>
+  </div>
 </div>

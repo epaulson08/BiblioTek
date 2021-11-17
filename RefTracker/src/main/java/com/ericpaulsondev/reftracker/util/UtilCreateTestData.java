@@ -42,10 +42,9 @@ public class UtilCreateTestData {
 
 	@PostMapping("create-test-data")
 	public String createTestData(HttpServletResponse resp) {
-		String toReturn = "";
-		toReturn += createTestUser();
-		toReturn += "\n\n";
-		toReturn += createTestAdmin();
+		String toReturn = createTestUser();
+//		toReturn += "\n\n";
+//		toReturn += createTestAdmin();
 		resp.setStatus(200);
 		return toReturn;
 	}
@@ -61,7 +60,7 @@ public class UtilCreateTestData {
 			testUser.setUsername("demo");
 			testUser.setPassword("demo");
 			testUser.setRole("user");
-			testUser.setPalette("Z");
+			testUser.setPalette("A");
 			
 			// add JournalArticles to this user
 			for (int i = 1; i <= 14; i++) {

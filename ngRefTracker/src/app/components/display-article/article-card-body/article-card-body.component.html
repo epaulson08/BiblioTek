@@ -15,19 +15,29 @@
       <td>&nbsp;</td>
     </tr>
   </ngContainer>
+  <ngContainer *ngIf="this.submittedEditMessage">
+    <tr>
+      <td>
+        <h3 [ngClass]="'text-custom-primary' + this.chosenPalette">{{this.submittedEditMessage}}</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+    </tr>
+  </ngContainer>
   <span
     [ngClass]="{ 'strike-through': this.jaDeleted }"
     *ngIf="!this.articleRemoved"
   >
     <tr>
       <th scope="row">Title:</th>
-      <td *ngIf="ja !== editJa">{{ ja.title }}</td>
-      <td *ngIf="ja === editJa">
+      <td *ngIf="!this.editMode">{{ ja.title }}</td>
+      <td *ngIf="this.editMode">
         <textarea
           class="form-control"
           rows="5"
           name="fred"
-          [(ngModel)]="editJa.title"
+          [(ngModel)]="ja.title"
         ></textarea>
       </td>
     </tr>
@@ -39,19 +49,14 @@
     </tr>
     <tr>
       <th scope="row">Journal:</th>
-      <td *ngIf="ja !== editJa">{{ ja.journal?.name }}</td>
-
-      <td *ngIf="ja === editJa">
-        <select
-          class="form-control"
-          [(ngModel)]="editJournal"
-          name="editJournal"
-        >
-          <option [ngValue]="editJournal" ja>
-            {{ editJournal.name }}
+      <td *ngIf="!editMode">{{ ja.journal?.name }}</td>
+      <td *ngIf="editMode">
+        <select class="form-control" [(ngModel)]="ja.journal" name="jaJournal">
+          <option [ngValue]="ja.journal" ja>
+            {{ ja.journal?.name }}
           </option>
           <option *ngFor="let j of allJournals" [ngValue]="j">
-            {{ j.name }}
+            {{ j?.name }}
           </option>
         </select>
       </td>
@@ -60,13 +65,13 @@
     <!-- Volume -->
     <tr>
       <th scope="row">Volume:</th>
-      <td *ngIf="ja !== editJa">{{ ja.volumeNum }}</td>
-      <td *ngIf="ja === editJa">
+      <td *ngIf="!this.editMode">{{ ja.volumeNum }}</td>
+      <td *ngIf="this.editMode">
         <input
           type="text"
           class="form-control"
           name="editVol"
-          [(ngModel)]="editJa.volumeNum"
+          [(ngModel)]="ja.volumeNum"
         />
       </td>
     </tr>
@@ -74,13 +79,13 @@
     <!-- Year -->
     <tr>
       <th scope="row">Year:</th>
-      <td *ngIf="ja !== editJa">{{ ja.yearPublished }}</td>
-      <td *ngIf="ja === editJa">
+      <td *ngIf="!this.editMode">{{ ja.yearPublished }}</td>
+      <td *ngIf="this.editMode">
         <input
           type="text"
           class="form-control"
           name="editVol"
-          [(ngModel)]="editJa.yearPublished"
+          [(ngModel)]="ja.yearPublished"
         />
       </td>
     </tr>
@@ -88,16 +93,16 @@
     <!-- DOI -->
     <tr>
       <th scope="row">DOI:</th>
-      <td *ngIf="ja !== editJa">{{ ja.doi }}</td>
+      <td *ngIf="!this.editMode">{{ ja.doi }}</td>
       <td
-        *ngIf="ja === editJa"
+        *ngIf="this.editMode"
         style="max-width: 150px; word-wrap: 'break-word;'"
       >
         <input
           type="text"
           class="form-control"
           name="editDoi"
-          [(ngModel)]="editJa.doi"
+          [(ngModel)]="ja.doi"
         />
       </td>
     </tr>

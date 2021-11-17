@@ -16,8 +16,14 @@ export class ArticleCardFooterComponent implements OnInit {
   @Input() jaDeleted: boolean = false;
   @Output() jaDeletedChange = new EventEmitter<boolean>();
 
+  @Input() editMode: boolean = false;
+  @Output() editModeChange = new EventEmitter<boolean>();
+
   @Input() articleRemoved: boolean = false;
   @Output() articleRemovedChange = new EventEmitter<boolean>();
+
+  @Input() submitEdit: boolean = false;
+  @Output() submitEditChange = new EventEmitter<boolean>();
 
   @Input() chosenPalette: string;
 
@@ -25,8 +31,6 @@ export class ArticleCardFooterComponent implements OnInit {
 
   myCollections: MyCollection[];
   addedMessage: boolean = false;
-  underConstructionMessage: string = 'This feature is under construction!';
-  showUnderConstruction: boolean = false;
 
   constructor(private collServ: MyCollectionService, private router: Router) {}
 
@@ -66,18 +70,24 @@ export class ArticleCardFooterComponent implements OnInit {
     }
   }
 
+  setEditMode(isOn : boolean) {
+    this.editMode = isOn;
+    this.editModeChange.emit(isOn);
+  }
+
   deleteJa() {
     this.jaDeleted = true;
     this.jaDeletedChange.emit(true);
   }
 
-  update(): void {
-    // FIXME: method stub
-  }
-
   removeFromCollection() {
     this.articleRemoved = true;
     this.articleRemovedChange.emit(true);
+  }
+
+  clickedSubmit() {
+    this.submitEdit = true;
+    this.submitEditChange.emit(true);
   }
 
 }

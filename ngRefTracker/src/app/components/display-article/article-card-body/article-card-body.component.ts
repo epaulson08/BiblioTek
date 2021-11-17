@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CitationStyle } from 'src/app/models/citation-style';
+import { Journal } from 'src/app/models/journal';
 import { JournalArticle } from 'src/app/models/journal-article';
 import { CitationStyleService } from 'src/app/services/citation-style.service';
+import { JournalService } from 'src/app/services/journal.service';
 
 @Component({
   selector: 'app-article-card-body',
@@ -10,19 +12,27 @@ import { CitationStyleService } from 'src/app/services/citation-style.service';
 })
 export class ArticleCardBodyComponent implements OnInit {
   @Input() ja: JournalArticle;
-  editJa: JournalArticle;
   @Input() viewCite: boolean;
   citationStyles: CitationStyle[];
   @Input() chosenPalette: string;
   chosenStyle: CitationStyle;
   moreInfo: boolean = false;
   @Input() jaDeleted: boolean = false;
-  @Input() articleRemoved: boolean = false;
+  @Input() articleRemoved: boolean;
+  @Input() editMode: boolean;
+  allJournals: Journal[];
+  chosenJournal: Journal;
+  @Input() editedJa: JournalArticle;
+  @Input() submittedEditMessage: string;
 
-  constructor(private csServ: CitationStyleService) {}
+  constructor(
+    private csServ: CitationStyleService,
+    private journalServ: JournalService
+  ) {}
 
   ngOnInit(): void {
     this.loadCitationStyles();
+    this.loadJournals();
   }
 
   loadCitationStyles() {
@@ -33,6 +43,20 @@ export class ArticleCardBodyComponent implements OnInit {
         this.citationStyles.sort((a, b) =>
           a.abbreviation.localeCompare(b.abbreviation)
         );
+        return success;
+      },
+      (failure) => {
+        console.error(failure);
+      }
+    );
+    return null;
+  }
+
+  // need Journals if editing JournalArticle
+  loadJournals(): Journal[] {
+    this.journalServ.index().subscribe(
+      (success) => {
+        this.allJournals = success;
         return success;
       },
       (failure) => {
