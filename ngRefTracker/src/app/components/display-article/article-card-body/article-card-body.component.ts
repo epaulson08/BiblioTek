@@ -18,7 +18,7 @@ export class ArticleCardBodyComponent implements OnInit {
   chosenStyle: CitationStyle;
   moreInfo: boolean = false;
   @Input() jaDeleted: boolean = false;
-  @Input() articleRemoved: boolean = false;
+  @Input() articleRemoved: boolean;
   @Input() editMode: boolean;
   allJournals: Journal[];
   chosenJournal: Journal;

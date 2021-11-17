@@ -130,37 +130,34 @@
   </button>
 </ng-template>
 
-<div class="card-footer d-flex">
-  <!-- MODES: -->
-  <!-- View article info without citations -->
-  <ngContainer *ngIf="!this.jaDeleted && !this.articleRemoved">
-    <ngContainer *ngIf="!this.viewCite">
-      <ngContainer *ngIf="!editMode">
-        <span *ngTemplateOutlet="citeButton"></span>
-        <span *ngTemplateOutlet="addToCollButton"></span>
-        <span *ngTemplateOutlet="editButton"></span>
-        <span *ngTemplateOutlet="backButton"></span>
-        <ngContainer *ngIf="this.myCollectionView">
-          <span *ngTemplateOutlet="removeButton"></span>
-        </ngContainer>
-        <span *ngTemplateOutlet="deleteButton"></span>
-      </ngContainer>
-      <!-- Editing mode -->
-      <ngContainer *ngIf="editMode">
-        <span *ngTemplateOutlet="backToNotEditingButton"></span>
-        <span *ngTemplateOutlet="submitButton"></span>
-      </ngContainer>
-    </ngContainer>
-    <!-- View article info with citations -->
-    <ngContainer *ngIf="viewCite">
+<!-- MODES: -->
+<!-- View article info without citations -->
+<ngContainer *ngIf="!this.jaDeleted && !this.articleRemoved">
+  <ngContainer *ngIf="!this.viewCite">
+    <ngContainer *ngIf="!editMode">
+      <span *ngTemplateOutlet="citeButton"></span>
       <span *ngTemplateOutlet="addToCollButton"></span>
       <span *ngTemplateOutlet="editButton"></span>
-      <span *ngTemplateOutlet="backToNoCitationViewButton"></span>
+      <span *ngTemplateOutlet="backButton"></span>
+      <ngContainer *ngIf="this.myCollectionView">
+        <span *ngTemplateOutlet="removeButton"></span>
+      </ngContainer>
+      <span *ngTemplateOutlet="deleteButton"></span>
+    </ngContainer>
+    <!-- Editing mode -->
+    <ngContainer *ngIf="editMode">
+      <span *ngTemplateOutlet="backToNotEditingButton"></span>
+      <span *ngTemplateOutlet="submitButton"></span>
     </ngContainer>
   </ngContainer>
-
-  <ngContainer *ngIf="this.jaDeleted">
-    <span *ngTemplateOutlet="backButton"></span>
+  <!-- View article info with citations -->
+  <ngContainer *ngIf="viewCite">
+    <span *ngTemplateOutlet="addToCollButton"></span>
+    <span *ngTemplateOutlet="editButton"></span>
+    <span *ngTemplateOutlet="backToNoCitationViewButton"></span>
   </ngContainer>
-</div>
-<!-- ^^^ close footer div -->
+</ngContainer>
+
+<ngContainer *ngIf="this.jaDeleted">
+  <span *ngTemplateOutlet="backButton"></span>
+</ngContainer>
