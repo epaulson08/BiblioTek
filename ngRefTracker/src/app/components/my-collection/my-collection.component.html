@@ -26,7 +26,7 @@
       <div class="row">
         <div class="col">
           <!-- non-edit mode -->
-          <span *ngIf="!this.editView">
+          <span *ngIf="!this.editMode">
             <h4
               [ngClass]="'my-3 page-header header-palette' + this.chosenPalette"
             >
@@ -74,7 +74,7 @@
                 [ngClass]="
                   'btn btn-sm mr-2 btn-custom-secondary' + this.chosenPalette
                 "
-                (click)="showEditView()"
+                (click)="setEditMode(true)"
               >
                 Edit
               </button>
@@ -82,23 +82,51 @@
           </span>
 
           <!-- Edit mode -->
-          <span *ngIf="this.editView">
-            <h4>
-              <input [(ngModel)]="this.editedMyCollection.name" class="col-6" />
-            </h4>
-            <h5>
+          <ngContainer *ngIf="this.editMode">
+            <form #editForm>
+              <h4
+                [ngClass]="
+                  'my-3 page-header header-palette' + this.chosenPalette
+                "
+              >
+                <span
+                  [ngClass]="
+                    'form-group header-highlighter-palette' + this.chosenPalette
+                  "
+                  >&nbsp;</span
+                >&nbsp;
+                <label for="collection-title">Collection Title:</label>
+                <input
+                  [(ngModel)]="this.editedColl.name"
+                  name="collection-name"
+                  class="col-6 mt-3 form-control form-control-lg"
+                />
+              </h4>
+              <h5 [ngClass]="'header-palette' + this.chosenPalette">
+                <label for="collection-description">Description:</label>
+              </h5>
               <textarea
-                [(ngModel)]="this.editedMyCollection.description"
-                class="col-6"
+                [(ngModel)]="this.editedColl.description"
+                name="collection-description"
+                class="form-control col-6"
               ></textarea>
-            </h5>
-            <button
-              [ngClass]="'btn btn-custom-success' + this.chosenPalette"
-              (click)="this.updateMyCollection(this.editedMyCollection)"
-            >
-              Save Changes
-            </button>
-          </span>
+              <button
+                [ngClass]="'btn mr-2 my-3 btn-custom-secondary' + this.chosenPalette"
+                (click)="this.setEditMode(false)"
+              >
+                Cancel
+              </button>
+              <button
+                [ngClass]="
+                  'btn my-3 mr-2 btn-custom-primary' + this.chosenPalette
+                "
+                (click)="this.updateMyCollection(this.editedColl)"
+              >
+                Save Changes
+              </button>
+              <hr />
+            </form>
+          </ngContainer>
         </div>
       </div>
       <!-- ^ close MyCollection metadata -->

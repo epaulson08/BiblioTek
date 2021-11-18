@@ -13,23 +13,21 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./my-collection.component.scss'],
 })
 export class MyCollectionComponent implements OnInit {
-  // initialization
+  // init
   collId: number;
   coll: MyCollection;
+  editedColl: MyCollection;
   chosenPalette: string;
   citationStyles: CitationStyle[];
-  editMode: boolean = false;
 
-  // UI
+  // ui
+  editMode: boolean = false;
   listView: boolean = false;
   expandedView: boolean = true;
-  editView: boolean = false;
   showCiteAllUi: boolean = false;
 
-  // CRUD
-  editedMyCollection: MyCollection;
-
-  // initialization
+  // methods
+  // init
   constructor(
     private auth: AuthService,
     private route: ActivatedRoute,
@@ -52,7 +50,7 @@ export class MyCollectionComponent implements OnInit {
     this.collServ.findByIdAsUser(this.collId).subscribe(
       (success) => {
         this.coll = success;
-        this.editedMyCollection = success;
+        this.editedColl = this.coll;
         return success;
       },
       (failure) => {
@@ -86,7 +84,7 @@ export class MyCollectionComponent implements OnInit {
     });
   }
 
-  // UI
+  // ui
   setListView(): void {
     this.listView = true;
     this.expandedView = false;
@@ -99,8 +97,8 @@ export class MyCollectionComponent implements OnInit {
     this.showCiteAllUi = false;
   }
 
-  showEditView(): void {
-    this.editView = true;
+  setEditMode(setting: boolean): void {
+    this.editMode = setting;
   }
 
   citeAll(): void {
@@ -114,6 +112,7 @@ export class MyCollectionComponent implements OnInit {
     this.collServ.update(this.collId, updatedVersion).subscribe(
       (success) => {
         this.coll = success;
+        this.editMode = false;
       },
       (failure) => {
         console.error(failure);
