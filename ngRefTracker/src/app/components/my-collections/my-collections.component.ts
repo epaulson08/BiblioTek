@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CitationStyle } from 'src/app/models/citation-style';
-import { JournalArticle } from 'src/app/models/journal-article';
 import { MyCollection } from 'src/app/models/my-collection.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CitationStyleService } from 'src/app/services/citation-style.service';
@@ -13,16 +12,13 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./my-collections.component.scss'],
 })
 export class MyCollectionsComponent implements OnInit {
-  /////////
-  // FIELDS
-
-  // initialization
-  allCollections: MyCollection[];
+  // init
+  allMyCollections: MyCollection[];
+  allCitationStyles: CitationStyle[];
   userId: number;
-  myCollectionView: boolean = true;
   chosenPalette: string;
 
-  // UI
+  // ui
   collToCiteAll: MyCollection;
   collToEdit: MyCollection;
   collToView: MyCollection;
@@ -31,13 +27,8 @@ export class MyCollectionsComponent implements OnInit {
   clickedChooseStyle: boolean = false;
   underConstructionMessage: string;
 
-  // CRUD
-  citationStyles: CitationStyle[];
-
-  //////////
-  // METHODS
-
-  // initialization
+  // methods
+  // init
   constructor(
     private collServ: MyCollectionService,
     private csServ: CitationStyleService,
@@ -55,7 +46,7 @@ export class MyCollectionsComponent implements OnInit {
   loadMyCollections(): void {
     this.collServ.findAllAsUser().subscribe(
       (success) => {
-        this.allCollections = success;
+        this.allMyCollections = success;
         return success;
       },
       (failure) => {
@@ -65,26 +56,12 @@ export class MyCollectionsComponent implements OnInit {
     return null;
   }
 
-  // UI
-  viewMyCollection(coll: MyCollection): void {
-    this.collToView = coll;
-  }
-
-  editCollection(coll: MyCollection): void {
-    this.underConstructionMessage = 'This feature is under construction.';
-    this.collToEdit = coll;
-  }
-
-  citeAll(coll: MyCollection): void {
-    this.collToCiteAll = coll;
-  }
-
   loadCitationStyles() {
     this.csServ.findAll().subscribe(
       (success) => {
-        this.citationStyles = success;
+        this.allCitationStyles = success;
         // alphabetize by abbreviation:
-        this.citationStyles.sort((a, b) =>
+        this.allCitationStyles.sort((a, b) =>
           a.abbreviation.localeCompare(b.abbreviation)
         );
         return success;
@@ -94,6 +71,16 @@ export class MyCollectionsComponent implements OnInit {
       }
     );
     return null;
+  }
+
+  // ui
+  editCollection(coll: MyCollection): void {
+    this.underConstructionMessage = 'This feature is under construction.';
+    this.collToEdit = coll;
+  }
+
+  citeAll(coll: MyCollection): void {
+    this.collToCiteAll = coll;
   }
 
   back(): void {
