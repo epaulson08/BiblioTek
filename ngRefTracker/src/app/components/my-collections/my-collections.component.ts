@@ -84,6 +84,8 @@ export class MyCollectionsComponent implements OnInit {
   }
 
   editCollection(coll: MyCollection) {
-    this.router.navigateByUrl(`my-collection/${coll.id}`);
+    this.router.navigate([`my-collection/${coll.id}`], {
+      queryParams: { toEdit: 'true' },
+    });
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CitationStyle } from 'src/app/models/citation-style';
 import { MyCollection } from 'src/app/models/my-collection.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,12 +13,12 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./my-collection.component.scss'],
 })
 export class MyCollectionComponent implements OnInit {
-
   // initialization
   collId: number;
   coll: MyCollection;
   chosenPalette: string;
   citationStyles: CitationStyle[];
+  editMode: boolean = false;
 
   // UI
   listView: boolean = false;
@@ -35,7 +35,7 @@ export class MyCollectionComponent implements OnInit {
     private route: ActivatedRoute,
     private collServ: MyCollectionService,
     private userServ: UserService,
-    private csServ: CitationStyleService,
+    private csServ: CitationStyleService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +45,7 @@ export class MyCollectionComponent implements OnInit {
     this.collId = +this.route.snapshot.paramMap.get('collId');
     this.loadColl();
     this.loadCitationStyles();
+    this.getEditRouteParam();
   }
 
   loadColl(): MyCollection {
@@ -76,6 +77,13 @@ export class MyCollectionComponent implements OnInit {
       }
     );
     return null;
+  }
+
+  getEditRouteParam() {
+    this.route.queryParamMap.pipe().subscribe((param) => {
+      if (param.get('toEdit') === 'true') this.editMode = true;
+      else this.editMode = false;
+    });
   }
 
   // UI
