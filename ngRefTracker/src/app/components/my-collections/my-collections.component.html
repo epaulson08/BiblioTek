@@ -58,44 +58,30 @@
 
         <!-- card footer -->
         <div class="card-footer">
-          <span *ngIf="this.collToView === coll">
-            <button
-              [ngClass]="'btn btn-sm btn-custom-secondary' + this.chosenPalette"
-              (click)="back()"
-            >
-              Back
-            </button>
-          </span>
-
-          <div *ngIf="this.collToView !== coll">
-            <button
-              [ngClass]="
-                'btn btn-sm mr-2 btn-custom-primary' + this.chosenPalette
-              "
-              [routerLink]="['/my-collection/' + coll.id]"
-            >
-              View
-            </button>
-            <button
-              [ngClass]="
-                'btn btn-sm mr-2 btn-custom-primary' + this.chosenPalette
-              "
-              (click)="citeAll(coll)"
-            >
-              Cite All
-            </button>
-            <button
-              [ngClass]="
-                'btn btn-sm mr-2 btn-custom-secondary' + this.chosenPalette
-              "
-              (click)="editCollection(coll)"
-            >
-              Edit
-            </button>
-          </div>
-          <div *ngIf="underConstructionMessage && this.collToView === coll">
-            This feature is under construction!
-          </div>
+          <button
+            [ngClass]="
+              'btn btn-sm mr-2 btn-custom-primary' + this.chosenPalette
+            "
+            [routerLink]="['/my-collection/' + coll.id]"
+          >
+            View
+          </button>
+          <button
+            [ngClass]="
+              'btn btn-sm mr-2 btn-custom-primary' + this.chosenPalette
+            "
+            (click)="citeAll(coll)"
+          >
+            Cite All
+          </button>
+          <button
+            [ngClass]="
+              'btn btn-sm mr-2 btn-custom-secondary' + this.chosenPalette
+            "
+            (click)="editCollection(coll)"
+          >
+            Edit
+          </button>
         </div>
       </div>
       <br />

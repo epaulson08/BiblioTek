@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CitationStyle } from 'src/app/models/citation-style';
 import { MyCollection } from 'src/app/models/my-collection.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -20,12 +21,9 @@ export class MyCollectionsComponent implements OnInit {
 
   // ui
   collToCiteAll: MyCollection;
-  collToEdit: MyCollection;
-  collToView: MyCollection;
   moreInfo: boolean = false;
   chosenCitationStyle: CitationStyle;
   clickedChooseStyle: boolean = false;
-  underConstructionMessage: string;
 
   // methods
   // init
@@ -33,7 +31,8 @@ export class MyCollectionsComponent implements OnInit {
     private collServ: MyCollectionService,
     private csServ: CitationStyleService,
     private userServ: UserService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -74,24 +73,17 @@ export class MyCollectionsComponent implements OnInit {
   }
 
   // ui
-  editCollection(coll: MyCollection): void {
-    this.underConstructionMessage = 'This feature is under construction.';
-    this.collToEdit = coll;
-  }
-
   citeAll(coll: MyCollection): void {
     this.collToCiteAll = coll;
-  }
-
-  back(): void {
-    this.collToEdit = null;
-    this.collToView = null;
-    this.collToCiteAll = null;
   }
 
   chooseCitationStyle(cs: CitationStyle) {
     this.moreInfo = false;
     this.chosenCitationStyle = cs;
     this.clickedChooseStyle = true;
+  }
+
+  editCollection(coll: MyCollection) {
+    this.router.navigateByUrl(`my-collection/${coll.id}`);
   }
 }
